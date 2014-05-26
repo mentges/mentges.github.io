@@ -1,0 +1,6 @@
+Blog Mentges Informática
+
+Usa a gem Jekyll, e o rvm gemset blog.
+
+ * rvm gemset use blog
+ * jekyll serve (serve o site em localhost:4000)
