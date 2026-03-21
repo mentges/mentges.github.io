@@ -1,20 +1,142 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentges - Enablement de Inteligência Artificial para a Indústria</title>
+    <meta name="description" content="Capacitando a Indústria com Inteligência Artificial. Soluções para Óleo e Gás e Engenharia Civil com Foco em Soberania de Dados.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Efeitos de Fundo (Glow/Glassmorphism) -->
+    <div class="background-effects">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+    </div>
 
-<div class="home">
+    <!-- Navegação -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Mentges<span>.AI</span></a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#solucoes">Soluções</a></li>
+                <li><a href="#industrias">Indústrias</a></li>
+                <li><a href="#soberania">Soberania</a></li>
+                <li><a href="#contato" class="btn btn-primary">Fale Conosco</a></li>
+            </ul>
+        </div>
+    </nav>
 
-  <h1>Posts</h1>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge fade-in-up">O Futuro da Indústria</span>
+                <h1 class="hero-title fade-in-up" style="animation-delay: 0.1s">Capacitando a Indústria com <span class="text-gradient">Inteligência Artificial</span></h1>
+                <p class="hero-subtitle fade-in-up" style="animation-delay: 0.2s">Transforme dados complexos em vantagens competitivas imbatíveis para setores de alta criticidade.</p>
+                <div class="hero-actions fade-in-up" style="animation-delay: 0.3s">
+                    <a href="#industrias" class="btn btn-primary">Descubra as Soluções</a>
+                    <a href="#soberania" class="btn btn-secondary">Entenda nossa Soberania</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+    <!-- Indústrias Section -->
+    <section id="industrias" class="section">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <h2>Especialistas na <span class="text-gradient">Sua Indústria</span></h2>
+                <p>Nossas soluções de IA são desenhadas para lidar com a complexidade e a escala dos setores industriais mais exigentes do mundo.</p>
+            </div>
+            
+            <div class="grid cards-grid">
+                <!-- Oil & Gas Card -->
+                <div class="card glass-panel fade-in-up">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3>Óleo & Gás</h3>
+                    <p>Otimização da perfuração, manutenção preditiva de equipamentos críticos e análise avançada de reservatórios utilizando modelos de aprendizado profundo.</p>
+                    <ul class="feature-list">
+                        <li>Manutenção Preditiva Otimizada</li>
+                        <li>Análise de Risco Operacional</li>
+                        <li>Automação de Relatórios em Tempo Real</li>
+                    </ul>
+                </div>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+                <!-- Civil Engineering Card -->
+                <div class="card glass-panel fade-in-up" style="transition-delay: 0.2s">
+                    <div class="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M13 3l8 4v14M7 11h2M7 15h2M15 11h2M15 15h2"/></svg>
+                    </div>
+                    <h3>Engenharia Civil</h3>
+                    <p>Planejamento de obras impulsionado por IA, visão computacional para segurança no canteiro e controle rigoroso da sua cadeia de suprimentos.</p>
+                    <ul class="feature-list">
+                        <li>Gestão Inteligente de Cronogramas</li>
+                        <li>Monitoramento Seguro por Visão Computacional</li>
+                        <li>Gêmeos Digitais (Digital Twins) de Estruturas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-</div>
+    <!-- Soberania Section -->
+    <section id="soberania" class="section section-dark">
+        <div class="container container-flex">
+            <div class="flex-half fade-in-left">
+                <h2>O Poder da <span class="text-accent">Soberania</span></h2>
+                <h3 class="subsection-title">Inteligência Artificial Pública e Privada</h3>
+                <p>Em ambientes de alta criticidade, quem controla os dados controla o futuro do negócio. Não dependa exclusivamente de APIs de terceiros que removem seu sigilo operacional.</p>
+                <ul class="check-list">
+                    <li><strong>IA Pública:</strong> Aproveite o estado da arte dos grandes modelos (LLMs) públicos para tarefas de pesquisa amplas e gerais.</li>
+                    <li><strong>IA Privada:</strong> Modelos locais ("on-premise") que garantem o isolamento total dos seus dados confidenciais e estratégicos.</li>
+                    <li><strong>Soberania Tecnológica:</strong> Sua propriedade intelectual permanece sob seu comando. Sem vazamento de dados, controle absoluto sobre a arquitetura.</li>
+                </ul>
+            </div>
+            <div class="flex-half flex-center fade-in-right">
+                <div class="glow-box">
+                    <div class="shield-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h4>Segurança Total</h4>
+                    <p>Modelos ajustados especificamente para o seu domínio e operando nos seus próprios servidores isolados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="footer glass-panel">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand fade-in-up">
+                    <a href="#" class="logo">Mentges<span>.AI</span></a>
+                    <p>Impulsionando indústrias críticas com soluções de Inteligência Artificial avançadas, éticas e soberanas em todo o Brasil.</p>
+                </div>
+                <div class="footer-links fade-in-up" style="transition-delay: 0.1s">
+                    <h4>Contato e Parcerias</h4>
+                    <p>contato@mentges.com.br</p>
+                    <p>Operações Baseadas no Brasil</p>
+                </div>
+            </div>
+            <div class="footer-bottom fade-in-up" style="transition-delay: 0.2s">
+                <p>&copy; 2026 Mentges AI Enablement. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
