@@ -220,6 +220,50 @@ h1, h2, h3, h4 {
     flex-wrap: wrap;
 }
 
+/* Impact Section */
+.impact-section {
+    padding: 0 0 4rem 0;
+    margin-top: -3rem;
+    position: relative;
+    z-index: 10;
+}
+.impact-image-wrapper {
+    position: relative;
+    padding: 0.8rem;
+    border-radius: 32px;
+}
+.impact-img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+    border-radius: 24px;
+    display: block;
+}
+.image-overlay-text {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 4rem;
+    background: rgba(6, 8, 11, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 1.5rem 2.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 225, 255, 0.25);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+.image-overlay-text h4 {
+    color: #fff;
+    margin-bottom: 0.3rem;
+    font-size: 1.6rem;
+}
+.image-overlay-text p {
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
 /* Grid & Cards */
 .section-header {
     margin-bottom: 4rem;
@@ -498,6 +542,15 @@ h1, h2, h3, h4 {
     }
     .footer-grid {
         grid-template-columns: 1fr;
+    }
+    .image-overlay-text {
+        bottom: 2rem;
+        left: 2rem;
+        right: 2rem;
+        padding: 1.2rem;
+    }
+    .image-overlay-text h4 {
+        font-size: 1.3rem;
     }
 }
 
