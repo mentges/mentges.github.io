@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Integrating AI Agents Into Data Engineering — Bruno Mentges / Mentges.AI</title>
+    <meta name="description"
+        content="How I pioneered integrating AI agents, MCP, and agentic workflows into production data engineering at a major B2B data platform.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">About</a></li>
+                <li><a href="../#services">Services</a></li>
+                <li><a href="../#credibility">Track Record</a></li>
+                <li><a href="../blog/">Writing</a></li>
+                <li><a href="../#contact" class="btn btn-primary btn-sm">Book a Call</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Case Study Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="../#credibility" class="back-link">&larr; Back to Track Record</a>
+            <div class="case-meta">
+                <span class="case-tag">Case Study</span>
+                <span class="case-tag">AI Integration</span>
+            </div>
+            <h1>Integrating AI Agents Into Production Data Engineering</h1>
+            <p class="page-subtitle">How I pioneered the use of AI agents, Model Context Protocol (MCP), and agentic workflows inside a real data engineering team — moving beyond demos to daily production use.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Industry</span>
+                    <span class="quick-value">B2B Data / SaaS</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Role</span>
+                    <span class="quick-value">Senior Data Engineer</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Duration</span>
+                    <span class="quick-value">2 years (2024 &ndash; 2026)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Focus</span>
+                    <span class="quick-value">AI-augmented data workflows</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Case Study Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <h2>The Challenge</h2>
+                <p>This company is a major B2B data intelligence platform with massive data infrastructure — terabytes of Sales and Finance data flowing through pipelines daily across multiple cloud providers. The data engineering team maintained hundreds of pipelines, models, and data products.</p>
+                <p>Like every data team in 2024-2025, we were being asked: <em>"How do we use AI?"</em> But the question underneath was more specific:</p>
+                <ul>
+                    <li><strong>How do you integrate AI into existing data engineering workflows</strong> without breaking reliability?</li>
+                    <li><strong>How do you move beyond "ChatGPT for code completion"</strong> to AI that actually participates in the engineering process?</li>
+                    <li><strong>How do you build guardrails</strong> so AI agents can help without introducing risk into production systems?</li>
+                    <li><strong>How do you get a team of senior engineers to actually adopt AI tools</strong> — not as a toy, but as a core part of how they work?</li>
+                </ul>
+                <p>Most teams were stuck at the "individual developers using ChatGPT" stage. I wanted to push further — to AI as a <em>team-level engineering tool</em> with real integration into our workflows.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>My Role & Approach</h2>
+                <p>I was the first on the team to systematically integrate AI into our data engineering practice. This wasn't a mandated initiative — it was bottom-up innovation that I drove and then evangelized across the team.</p>
+
+                <h3>LLM Agents With Guardrails</h3>
+                <p>I built and configured LLM-powered agents tailored to our specific engineering context — not generic coding assistants, but agents that understood our codebase, our conventions, our data models, and our deployment patterns. Key elements:</p>
+                <ul>
+                    <li><strong>Custom skills</strong> — agents trained on our specific pipeline patterns, naming conventions, and testing requirements</li>
+                    <li><strong>Guardrails</strong> — explicit boundaries on what agents could and couldn't do: read production data but not modify it, suggest pipeline changes but require human review, generate tests but not skip them</li>
+                    <li><strong>Context management</strong> — using MCP (Model Context Protocol) to give agents access to relevant documentation, schema definitions, and pipeline metadata without overwhelming context windows</li>
+                </ul>
+
+                <h3>Agentic Development Workflows</h3>
+                <p>The real value wasn't in one-off code generation — it was in integrating AI into the <em>workflow</em>:</p>
+                <ul>
+                    <li><strong>Pipeline development</strong> — agents that could scaffold new pipelines following our patterns, generate boilerplate, and pre-populate configurations</li>
+                    <li><strong>Code review assistance</strong> — agents that reviewed PRs for common data engineering pitfalls: missing null handling, schema drift risks, partition strategy issues</li>
+                    <li><strong>Incident response</strong> — agents with context about our monitoring setup that could help diagnose pipeline failures faster</li>
+                    <li><strong>Documentation generation</strong> — agents that kept pipeline documentation in sync with actual code changes</li>
+                </ul>
+
+                <h3>Model Context Protocol (MCP)</h3>
+                <p>MCP was the key enabler. Instead of dumping entire codebases into prompts, I set up MCP servers that gave agents structured access to exactly the context they needed — DAG definitions, transformation model metadata, warehouse schema information, and pipeline run histories. This made agents dramatically more useful because they could reason about our specific infrastructure, not just generic patterns.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">First</span>
+                        <span class="result-label">Team member to ship AI-augmented data workflows to production</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">TB/day</span>
+                        <span class="result-label">Pipelines maintained with AI-assisted development</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">Team-wide</span>
+                        <span class="result-label">Adoption of AI tools across the engineering team</span>
+                    </div>
+                </div>
+                <p>The impact went beyond personal productivity. By demonstrating real, production-grade AI integration (not just demos), I helped shift the team's relationship with AI tools from curiosity to daily use. The patterns I established — guardrails, MCP context management, workflow integration — became the template for how the broader team adopted AI.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Tech Stack</h2>
+                <div class="tech-stack-grid">
+                    <div class="tech-item"><strong>AI</strong>: LLM agents with custom skills and guardrails</div>
+                    <div class="tech-item"><strong>Protocol</strong>: Model Context Protocol (MCP)</div>
+                    <div class="tech-item"><strong>Pipelines</strong>: Workflow orchestration, transformation framework, Python</div>
+                    <div class="tech-item"><strong>Warehouse</strong>: Cloud analytical warehouse</div>
+                    <div class="tech-item"><strong>Cloud</strong>: Multi-cloud (3 providers, IaC-managed)</div>
+                    <div class="tech-item"><strong>Monitoring</strong>: Data observability platform + incident management</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Key Takeaway</h2>
+                <p>AI integration in data engineering is not about replacing engineers — it's about <strong>amplifying their judgment</strong>. The teams that will get the most value from AI are the ones that treat it as a tool within a structured workflow, not a magic box.</p>
+                <p>The three things that made this work:</p>
+                <ol>
+                    <li><strong>Guardrails first</strong> — define what the AI <em>can't</em> do before expanding what it can</li>
+                    <li><strong>Context is everything</strong> — an AI agent without your specific codebase context is just a generic autocomplete. MCP changes the game.</li>
+                    <li><strong>Workflow integration, not feature addition</strong> — the AI has to fit into how engineers already work, not require a new process</li>
+                </ol>
+                <p>This is the intersection I specialize in now: the practical, production-grade integration of AI into data engineering — not as a demo, but as infrastructure.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Want to integrate AI into your data workflows?</h3>
+                <p>I've done it at scale, in production, with real guardrails. Let me help your team do the same.</p>
+                <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Senior Data & AI Engineer. Building production systems since 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navigate</h4>
+                        <a href="../#about">About</a>
+                        <a href="../#services">Services</a>
+                        <a href="../#credibility">Track Record</a>
+                        <a href="../blog/">Writing</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">Email</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

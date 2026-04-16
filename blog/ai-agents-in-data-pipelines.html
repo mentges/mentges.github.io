@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked. — Bruno Mentges</title>
+    <meta name="description"
+        content="Lessons from bringing agentic AI into production data engineering workflows — what shipped, what didn't, and what I'd do differently. From real experience, not theory.">
+    <meta name="author" content="Bruno Mentges">
+
+    <meta property="og:title" content="I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.">
+    <meta property="og:description" content="Lessons from bringing agentic AI into production data engineering — what shipped, what didn't, and what I'd do differently.">
+    <meta property="og:type" content="article">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">About</a></li>
+                <li><a href="../#services">Services</a></li>
+                <li><a href="../#credibility">Track Record</a></li>
+                <li><a href="./">Writing</a></li>
+                <li><a href="../#contact" class="btn btn-primary btn-sm">Book a Call</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="./" class="back-link">&larr; Back to Writing</a>
+            <div class="case-meta">
+                <span class="case-tag">AI + Data Engineering</span>
+            </div>
+            <h1>I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.</h1>
+            <p class="page-subtitle">Lessons from bringing agentic AI into production data engineering at a major B2B platform — what shipped, what didn't, and what I'd do differently.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Author</span>
+                    <span class="quick-value">Bruno Mentges</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Published</span>
+                    <span class="quick-value">April 2026</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Reading time</span>
+                    <span class="quick-value">12 min</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <p>There's a gap between "we use AI" and "AI is part of how we engineer." Most data teams I talk to are somewhere in the first camp — individual engineers using chat interfaces for code generation, maybe a copilot plugin, occasionally pasting error logs into a prompt. That's useful, but it's not integration. It's augmentation at the individual level, with no team-wide impact on how work gets done.</p>
+                <p>Over the past two years, I pushed further at a major B2B data platform. I integrated LLM-powered agents directly into our data engineering workflows — not as a side tool, but as a core part of how we built, maintained, and operated pipelines processing terabytes daily. Some of it worked remarkably well. Some of it failed in instructive ways.</p>
+                <p>This is the honest account.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>The starting point: what we had</h2>
+                <p>The data engineering team maintained hundreds of pipelines across multiple cloud providers, orchestrated by a standard workflow engine, with a transformation framework handling the modeling layer, and a cloud analytical warehouse as the serving layer. Terabytes of Sales and Finance data flowed through daily. Monitoring was handled by a data observability platform and incident management tooling.</p>
+                <p>The team was strong — senior engineers who knew the codebase well. But like every data team, we had the same recurring pain points:</p>
+                <ul>
+                    <li><strong>Boilerplate fatigue</strong> — new pipelines required scaffolding that followed the same patterns every time, but with enough variation that you couldn't just copy-paste</li>
+                    <li><strong>Context switching on incidents</strong> — when a pipeline failed at 3 AM, the on-call engineer had to reconstruct context about a pipeline they might not have touched in months</li>
+                    <li><strong>Documentation drift</strong> — pipeline docs were always slightly behind the code, because updating docs is the thing that gets cut when you're shipping under pressure</li>
+                    <li><strong>Code review bottlenecks</strong> — senior engineers spent significant time reviewing PRs for the same categories of issues: missing null handling, partition strategy mistakes, schema drift risks</li>
+                </ul>
+                <p>These aren't exotic problems. Every data team has them. The question was whether AI agents could address them at the workflow level, not just the individual prompt level.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>What I built</h2>
+                <p>I didn't start with a grand plan. I started with the pain points above and worked backward to what an agent would need to be useful for each one. The key insight came early: <strong>a generic LLM is almost useless for data engineering work. A context-rich agent is transformative.</strong></p>
+
+                <h3>1. Model Context Protocol changed everything</h3>
+                <p>The single biggest lever was MCP — Model Context Protocol. Before MCP, using an AI for our specific codebase meant either dumping thousands of lines into a prompt (expensive, noisy, often exceeding context limits) or accepting generic advice that didn't account for our patterns.</p>
+                <p>MCP let me set up structured context servers that gave agents access to exactly what they needed:</p>
+                <ul>
+                    <li><strong>Pipeline metadata</strong> — DAG definitions, schedule configurations, dependency graphs, recent run histories</li>
+                    <li><strong>Schema information</strong> — warehouse table schemas, column types, freshness metadata, lineage</li>
+                    <li><strong>Transformation model definitions</strong> — model SQL, documentation, test definitions, upstream/downstream dependencies</li>
+                    <li><strong>Team conventions</strong> — naming patterns, partition strategies, testing requirements, PR checklist</li>
+                </ul>
+                <p>With this context, agents stopped giving generic Python advice and started giving answers grounded in <em>our</em> infrastructure. "The upstream model refreshes at 06:00 UTC, so your dependency should wait until 06:30 to account for the 15-minute SLA buffer we use" — that kind of specificity.</p>
+
+                <h3>2. Pipeline scaffolding agents</h3>
+                <p>The first agent I shipped was the simplest: a pipeline scaffolder. You describe what data you need to move and where, and the agent generates a pipeline following our exact patterns — correct naming conventions, proper partition strategy, standard monitoring hooks, tests pre-populated.</p>
+                <p>This sounds trivial, but the compound time savings were significant. A new pipeline that took 45-60 minutes to scaffold correctly (including looking up conventions you half-remember, copying from a similar pipeline, adjusting the parts that are different) now took 5 minutes of describing what you want plus 10 minutes of review and adjustment.</p>
+                <p><strong>What worked:</strong> Boilerplate generation, naming convention enforcement, test scaffolding. The agent was faster and more consistent than copying from an existing pipeline.</p>
+                <p><strong>What didn't:</strong> Complex orchestration logic. When pipelines had non-standard dependency patterns or conditional execution paths, the agent would generate something plausible-looking but subtly wrong. We learned to treat scaffolded pipelines as a starting point, not a finished product — which is exactly the right mental model.</p>
+
+                <h3>3. Code review assistants</h3>
+                <p>The second agent ran as a pre-review step before human code review. It checked PRs for the categories of issues our senior engineers spent the most time catching:</p>
+                <ul>
+                    <li>Missing null/empty handling on columns that historically had nulls</li>
+                    <li>Partition strategies that would cause skew at our data volumes</li>
+                    <li>Schema changes that could break downstream consumers</li>
+                    <li>Missing or insufficient test coverage for new logic</li>
+                    <li>Deviation from team naming conventions</li>
+                </ul>
+                <p><strong>What worked:</strong> Catching mechanical issues. The agent was excellent at "you added a new column but didn't add a null check, and this source historically has 3.2% null rate" — factual, specific, actionable. Senior engineers reported spending less time on mechanical review and more time on architectural feedback.</p>
+                <p><strong>What didn't:</strong> Architectural judgment. The agent couldn't evaluate whether a pipeline's overall design was right for the problem. It could catch that you forgot a null check but not that you should be using an incremental model instead of a full refresh. Human review remained essential for design-level feedback.</p>
+
+                <h3>4. Incident response context</h3>
+                <p>This was the most impactful agent for on-call quality of life. When a pipeline failed, the agent could immediately pull together:</p>
+                <ul>
+                    <li>The pipeline's recent run history (was this a first-time failure or recurring?)</li>
+                    <li>Upstream pipeline status (did a dependency fail first?)</li>
+                    <li>Recent code changes to the pipeline (did someone just modify it?)</li>
+                    <li>Historical failure patterns (has this pipeline failed with similar errors before, and how was it resolved?)</li>
+                </ul>
+                <p>Instead of the on-call engineer spending 15-20 minutes reconstructing context at 3 AM, the agent assembled a briefing in seconds. The engineer's job shifted from "figure out what's going on" to "confirm the diagnosis and act."</p>
+                <p><strong>What worked:</strong> Context assembly. The agent's ability to pull together information from multiple systems (orchestrator, warehouse, version control, observability platform) into a coherent briefing was genuinely transformative for incident response time.</p>
+                <p><strong>What didn't:</strong> Root cause analysis for novel failures. For patterns it had seen before, the agent was excellent. For genuinely new failure modes, it would sometimes suggest fixes that addressed symptoms rather than root causes. We added a confidence score to agent suggestions and trained the team to be skeptical of low-confidence recommendations.</p>
+
+                <h3>5. Documentation generation</h3>
+                <p>The documentation agent was a partial success. It could generate accurate descriptions of what a pipeline does by reading the code, and it kept docs in sync when code changed. But the valuable documentation — <em>why</em> a pipeline exists, what business decisions it supports, what the gotchas are — still required human input.</p>
+                <p>We settled on a hybrid: the agent generates and maintains the "what" (schema descriptions, data flow, schedule, dependencies), and humans write the "why" (business context, known issues, operational notes). This eliminated the most tedious part of documentation while preserving the most valuable part.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>The three principles that made it work</h2>
+                <p>Looking back, the difference between the agents that shipped and stayed versus the ones we abandoned came down to three principles:</p>
+
+                <h3>1. Guardrails first, capabilities second</h3>
+                <p>Before expanding what an agent <em>could</em> do, I defined what it <em>couldn't</em> do. Agents could read production data but not modify it. They could suggest pipeline changes but not deploy them. They could generate code but not merge it. Every capability had an explicit boundary.</p>
+                <p>This sounds limiting, but it's what made adoption possible. Engineers trusted the agents because the blast radius of a bad suggestion was zero — the worst case was wasted time reading a bad recommendation, not a production incident caused by an autonomous agent.</p>
+
+                <h3>2. Context beats intelligence</h3>
+                <p>A less capable model with rich, specific context consistently outperformed a more capable model with generic context. The MCP servers I built were more important than the choice of LLM. When the agent knew our specific schemas, conventions, and history, even simple reasoning produced useful output. Without that context, even sophisticated reasoning produced generic advice.</p>
+                <p>If you're investing in AI for your data team and you're debating which model to use, stop. Invest in the context layer instead. That's where the value is.</p>
+
+                <h3>3. Workflow integration, not feature addition</h3>
+                <p>The agents that stuck were the ones that fit into how engineers already worked. The pipeline scaffolder produced code in the same format engineers were already writing. The code review assistant showed up in the same PR interface engineers were already reviewing. The incident responder appeared in the same alerting channel engineers were already monitoring.</p>
+                <p>The agents that failed were the ones that required a new workflow. An early experiment with a "data exploration agent" that engineers could query in a separate interface got almost zero adoption — not because it was bad, but because it required engineers to leave their normal flow.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>What I'd do differently</h2>
+                <p>If I were starting this from scratch today:</p>
+                <ol>
+                    <li><strong>Start with incident response, not code generation.</strong> The incident context agent had the highest impact-to-effort ratio and the fastest team buy-in. Code generation is where everyone starts, but incident response is where the pain is worst.</li>
+                    <li><strong>Build the context layer before the agent layer.</strong> I spent the first month building MCP servers and context infrastructure before writing a single agent. That felt slow at the time, but every agent built on top of that context was immediately useful. Teams that skip this step end up with agents that give generic advice.</li>
+                    <li><strong>Measure adoption, not capability.</strong> The most impressive agent demo doesn't matter if no one uses it. I should have instrumented adoption metrics earlier. The agents that looked best in demos (data exploration) had the lowest actual usage. The boring ones (scaffolding, documentation) had the highest.</li>
+                    <li><strong>Set explicit expectations about what agents can't do.</strong> The biggest source of disillusionment was when engineers expected agents to handle architectural decisions. Setting the frame early — "this is a power tool, not an architect" — would have prevented some early frustration.</li>
+                </ol>
+            </section>
+
+            <section class="content-section">
+                <h2>The bottom line</h2>
+                <p>AI agents in data engineering are real and production-ready — but only if you treat them as <strong>structured tools within a workflow</strong>, not as magic boxes. The value comes from three things: rich context (MCP), clear guardrails (what the agent can't do), and seamless integration (agents meet engineers where they already work).</p>
+                <p>The teams that will get the most from AI aren't the ones with the most advanced models. They're the ones that invest in the context infrastructure and workflow integration that makes AI useful for their specific environment.</p>
+                <p>AI doesn't replace data engineers. It amplifies their judgment. And the difference between "we use AI" and "AI is part of how we engineer" is whether you've built the infrastructure to make that amplification systematic.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Want to discuss this?</h2>
+                <p>If you're thinking about integrating AI into your data engineering workflows, I'm happy to talk about what would and wouldn't work for your specific situation. I've done this in production, not just in demos.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Working on AI integration for your data team?</h3>
+                <p>I help teams design and implement AI-augmented data engineering workflows — with real guardrails, not just demos.</p>
+                <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Senior Data & AI Engineer. Building production systems since 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navigate</h4>
+                        <a href="../#about">About</a>
+                        <a href="../#services">Services</a>
+                        <a href="../#credibility">Track Record</a>
+                        <a href="./">Writing</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">Email</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

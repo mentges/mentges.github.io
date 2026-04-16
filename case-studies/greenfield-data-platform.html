@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Building a Data Platform From Zero — Bruno Mentges / Mentges.AI</title>
+    <meta name="description"
+        content="How I designed and built a complete data platform from scratch — lake, warehouse, orchestration, and analytics — for a growing logistics company.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">About</a></li>
+                <li><a href="../#services">Services</a></li>
+                <li><a href="../#credibility">Track Record</a></li>
+                <li><a href="../blog/">Writing</a></li>
+                <li><a href="../#contact" class="btn btn-primary btn-sm">Book a Call</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Case Study Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="../#credibility" class="back-link">&larr; Back to Track Record</a>
+            <div class="case-meta">
+                <span class="case-tag">Case Study</span>
+                <span class="case-tag">Platform Architecture</span>
+            </div>
+            <h1>Building a Complete Data Platform From Zero</h1>
+            <p class="page-subtitle">How I designed and built the entire data governance architecture — Data Lake, Data Warehouse, orchestration, and analytics — enabling data-driven decisions for a growing logistics company.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Industry</span>
+                    <span class="quick-value">Logistics (Brazil)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Role</span>
+                    <span class="quick-value">Tech Leader / Senior Developer</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Duration</span>
+                    <span class="quick-value">15 months (2023 &ndash; 2024)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Scope</span>
+                    <span class="quick-value">Greenfield data platform</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Case Study Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <h2>The Challenge</h2>
+                <p>This fast-growing logistics company in Brazil had scaled significantly but was making decisions almost entirely on intuition. Data was scattered across multiple systems — a relational database, object storage, a document database, and a legacy cloud warehouse — but there was no way to bring it together, analyze it, or act on it.</p>
+                <p>The problems were cascading:</p>
+                <ul>
+                    <li><strong>No single source of truth</strong> — operational data lived in silos with no integration layer</li>
+                    <li><strong>No analytics capability</strong> — business teams couldn't answer basic questions about operations, costs, or performance without asking engineering</li>
+                    <li><strong>No data team</strong> — there was literally no one in the company whose job was data</li>
+                    <li><strong>Multiple source systems</strong> — a relational database, a document store, file storage, and a half-used cloud warehouse — each with different access patterns and data models</li>
+                    <li><strong>Growing fast</strong> — the company needed data infrastructure that could scale with the business, not a quick hack that would need replacing in 6 months</li>
+                </ul>
+                <p>The mandate was clear: design and build the entire data platform from scratch, and build the team to run it.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>My Role & Approach</h2>
+                <p>I came in as Tech Leader with a dual mandate: architect the platform and build the team. Here's how I approached it.</p>
+
+                <h3>Architecture Design</h3>
+                <p>I designed a layered architecture on a major cloud platform, choosing it for cost efficiency and serverless analytical power:</p>
+                <ul>
+                    <li><strong>Data Lake</strong> — cloud object storage as the raw ingestion layer, immutable copies of all source data, partitioned by date</li>
+                    <li><strong>Data Warehouse</strong> — serverless analytical warehouse with dimensional tables, business logic, and aggregations</li>
+                    <li><strong>Orchestration</strong> — Python-based workflow orchestration for pipeline scheduling, dependency management, monitoring, and alerting</li>
+                    <li><strong>Analytics</strong> — open-source BI tool for self-service dashboards and reports for business teams</li>
+                </ul>
+
+                <h3>Migration Pipelines</h3>
+                <p>The hardest part wasn't building new infrastructure — it was migrating data from four different source systems into a unified platform without disrupting operations:</p>
+                <ul>
+                    <li><strong>Relational DB &rarr; Warehouse</strong> — incremental extraction with change data capture, schema mapping, and data type transformations</li>
+                    <li><strong>Document DB &rarr; Warehouse</strong> — denormalization of document structures into relational models suitable for analytics</li>
+                    <li><strong>File storage &rarr; Lake &rarr; Warehouse</strong> — file format standardization and ingestion automation</li>
+                    <li><strong>Legacy warehouse &rarr; New warehouse</strong> — migration of existing materialized views and historical data</li>
+                </ul>
+                <p>All pipelines were built in Python with workflow orchestration, designed for idempotent re-runs and automated failure recovery.</p>
+
+                <h3>Team Building</h3>
+                <p>I hired and onboarded the company's first Data Team — defining roles, setting up development workflows, establishing code review practices, and creating documentation so the team could operate independently after my engagement.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">4 &rarr; 1</span>
+                        <span class="result-label">Data silos consolidated into a unified platform</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">Zero &rarr; Full</span>
+                        <span class="result-label">From no data capability to self-service analytics</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">New Team</span>
+                        <span class="result-label">Built the company's first Data Team from scratch</span>
+                    </div>
+                </div>
+                <p>Within months, business teams went from "ask engineering and wait" to pulling their own reports. The data platform became the foundation for operational decision-making across the company — route optimization, cost analysis, performance tracking, and customer insights all became self-service.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Tech Stack</h2>
+                <div class="tech-stack-grid">
+                    <div class="tech-item"><strong>Cloud</strong>: Major cloud platform (serverless-first)</div>
+                    <div class="tech-item"><strong>Warehouse</strong>: Serverless analytical warehouse</div>
+                    <div class="tech-item"><strong>Lake</strong>: Cloud object storage</div>
+                    <div class="tech-item"><strong>Orchestration</strong>: Python-based workflow orchestration</div>
+                    <div class="tech-item"><strong>Analytics</strong>: Open-source BI platform</div>
+                    <div class="tech-item"><strong>Sources</strong>: 4 heterogeneous systems (relational, document, file, warehouse)</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Key Takeaway</h2>
+                <p>Building a data platform from zero is as much an organizational challenge as a technical one. The technology choices matter less than the architecture principles: <strong>keep it simple, make it reliable, design for the team that will maintain it</strong> (not the one that built it).</p>
+                <p>The biggest mistake I see in greenfield data platforms is over-engineering for hypothetical scale. This company needed a platform that could grow with the business — not a system designed for Google-scale traffic on day one. The right architecture is the simplest one that meets current needs and has clear extension points for the future.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Need a data platform built from scratch?</h3>
+                <p>I've done it multiple times — from architecture to implementation to team handoff. Let's talk about your situation.</p>
+                <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Senior Data & AI Engineer. Building production systems since 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navigate</h4>
+                        <a href="../#about">About</a>
+                        <a href="../#services">Services</a>
+                        <a href="../#credibility">Track Record</a>
+                        <a href="../blog/">Writing</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">Email</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

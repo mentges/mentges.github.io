@@ -1,42 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentges - Enablement de Inteligência Artificial para a Indústria</title>
+    <title>Bruno Mentges — Senior Data & AI Engineer | Mentges.AI</title>
     <meta name="description"
-        content="Capacitando a Indústria com Inteligência Artificial. Soluções para Óleo e Gás e Engenharia Civil com Foco em Soberania de Dados.">
+        content="28 years building production data systems. Now helping international teams integrate AI into their data workflows — with the depth of someone who's shipped it, not just demoed it.">
+    <meta name="author" content="Bruno Mentges de Carvalho">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bruno Mentges — Senior Data & AI Engineer">
+    <meta property="og:description"
+        content="28 years building production data systems at global-scale companies. Fractional Data & AI architecture for international teams.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mentgesinformatica.com.br">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- Efeitos de Fundo (Glow/Glassmorphism) -->
-    <div class="background-effects">
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
-    </div>
-
-    <!-- Navegação -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">Mentges<span>.AI</span></a>
+            <a href="#" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
             <div class="mobile-menu-toggle" id="mobileMenuBtn">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#solucoes">Soluções</a></li>
-                <li><a href="#industrias">Indústrias</a></li>
-                <li><a href="#soberania">Soberania</a></li>
-                <li><a href="#contato" class="btn btn-primary">Fale Conosco</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#credibility">Track Record</a></li>
+                <li><a href="#blog">Writing</a></li>
+                <li><a href="#contact" class="btn btn-primary btn-sm">Book a Call</a></li>
             </ul>
         </div>
     </nav>
@@ -44,132 +52,414 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            <div class="hero-content">
-                <span class="badge fade-in-up">O Futuro da Indústria</span>
-                <h1 class="hero-title fade-in-up" style="animation-delay: 0.1s">Capacitando a Indústria com <span
-                        class="text-gradient">Inteligência Artificial</span></h1>
-                <p class="hero-subtitle fade-in-up" style="animation-delay: 0.2s">Transforme dados complexos em
-                    vantagens competitivas imbatíveis para setores de alta criticidade.</p>
-                <div class="hero-actions fade-in-up" style="animation-delay: 0.3s">
-                    <a href="#industrias" class="btn btn-primary">Descubra as Soluções</a>
-                    <a href="#soberania" class="btn btn-secondary">Entenda nossa Soberania</a>
+            <div class="hero-layout">
+                <div class="hero-content">
+                    <span class="badge fade-in-up">Data Engineering + AI, in Production</span>
+                    <h1 class="hero-title fade-in-up" style="animation-delay: 0.1s">
+                        I help teams build <span class="text-accent">data systems</span> that actually work with <span class="text-accent">AI</span>.
+                    </h1>
+                    <p class="hero-subtitle fade-in-up" style="animation-delay: 0.2s">
+                        28 years of production engineering at global-scale companies — from ad tech and travel to
+                        B2B SaaS and logistics. Now available as a fractional architect for international teams that
+                        need senior Data & AI expertise without a full-time hire.
+                    </p>
+                    <div class="hero-actions fade-in-up" style="animation-delay: 0.3s">
+                        <a href="#services" class="btn btn-primary">See How I Can Help</a>
+                        <a href="#about" class="btn btn-secondary">Read My Story</a>
+                    </div>
+                    <div class="hero-proof fade-in-up" style="animation-delay: 0.4s">
+                        <div class="proof-item">
+                            <span class="proof-number">28+</span>
+                            <span class="proof-label">Years Engineering</span>
+                        </div>
+                        <div class="proof-divider"></div>
+                        <div class="proof-item">
+                            <span class="proof-number">1.5B</span>
+                            <span class="proof-label">Records/Day at Scale</span>
+                        </div>
+                        <div class="proof-divider"></div>
+                        <div class="proof-item">
+                            <span class="proof-number">6</span>
+                            <span class="proof-label">World-Class Companies</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Impact Image Section -->
-    <section class="impact-section fade-in-up">
+    <!-- Company Logos / Social Proof -->
+    <section class="logos-section fade-in-up">
         <div class="container">
-            <div class="impact-image-wrapper glass-panel">
-                <img src="assets/img/bacalhau_fpso.jpg" alt="Plataforma de Petróleo Bacalhau FPSO" class="impact-img">
-                <div class="image-overlay-text">
-                    <h4>Operações Críticas Offshore</h4>
-                    <p>Embarque, desembarque, gestão de contratos e licenças inteligentes.</p>
+            <p class="logos-label">Industries I've built data systems in</p>
+            <div class="logos-grid">
+                <span class="logo-text">B2B SaaS</span>
+                <span class="logo-text">Ad Tech</span>
+                <span class="logo-text">Travel & Hospitality</span>
+                <span class="logo-text">Web Services</span>
+                <span class="logo-text">Media</span>
+                <span class="logo-text">Logistics</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-content fade-in-up">
+                    <span class="section-label">About</span>
+                    <h2>Engineer first. <br>Consultant second.</h2>
+                    <p class="about-lead">
+                        I'm Bruno Mentges — a Senior Data & AI Engineer based in Rio de Janeiro, Brazil. I've spent
+                        nearly three decades building production systems, from fintech payment processors to
+                        petabyte-scale ad platforms.
+                    </p>
+                    <p>
+                        At <strong>a top-10 global ad tech platform</strong>, I worked on data pipelines processing 1.5 billion
+                        records per day at petabyte scale. At <strong>a leading travel platform</strong>, I built the data lake
+                        that unblocked the ML team. At <strong>a logistics startup</strong>, I designed the entire data platform
+                        from zero — lake, warehouse, orchestration, analytics. At <strong>a major B2B data platform</strong>,
+                        I pioneered integrating AI agents directly into data engineering workflows.
+                    </p>
+                    <p>
+                        I'm not an "AI consultant" who appeared in 2023. I'm a systems engineer who's been building
+                        at scale for decades and now applies that depth to the AI integration challenge — because
+                        AI without solid data engineering is just an expensive demo.
+                    </p>
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <span>Rio de Janeiro, Brazil (GMT-3)</span>
+                        </div>
+                        <div class="detail-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                            </svg>
+                            <span>Bilingual: English & Portuguese</span>
+                        </div>
+                        <div class="detail-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                                <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg>
+                            <span>8+ years remote with US teams</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-skills fade-in-up" style="transition-delay: 0.15s">
+                    <div class="skill-card">
+                        <h4>Data Engineering</h4>
+                        <p>Pipelines at petabyte scale. Snowflake, BigQuery, Redshift, Airflow, Prefect, dbt. From ingestion to serving.</p>
+                        <div class="skill-tags">
+                            <span>Spark</span><span>Airflow</span><span>dbt</span><span>Snowflake</span><span>BigQuery</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <h4>AI Integration</h4>
+                        <p>LLM agents in production workflows. Claude, MCP, agentic pipelines with guardrails. Not demos — shipped systems.</p>
+                        <div class="skill-tags">
+                            <span>Claude Agents</span><span>MCP</span><span>LLM Ops</span><span>Guardrails</span>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <h4>Platform Architecture</h4>
+                        <p>End-to-end data platforms built from zero. Cloud-native on AWS, GCP, Azure. Kubernetes, CI/CD, IaC.</p>
+                        <div class="skill-tags">
+                            <span>AWS</span><span>GCP</span><span>Terraform</span><span>K8s</span><span>Docker</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Indústrias Section -->
-    <section id="industrias" class="section">
+    <!-- Services Section -->
+    <section id="services" class="section section-alt">
         <div class="container">
             <div class="section-header fade-in-up">
-                <h2>Especialistas na <span class="text-gradient">Sua Indústria</span></h2>
-                <p>Nossas soluções de IA são desenhadas para lidar com a complexidade e a escala dos setores industriais
-                    mais exigentes do mundo.</p>
+                <span class="section-label">Services</span>
+                <h2>How I work with teams</h2>
+                <p>Three engagement models, all designed for international remote collaboration. You get senior-level depth without the overhead of a full-time hire.</p>
             </div>
 
-            <div class="grid cards-grid">
-                <!-- Oil & Gas Card -->
-                <div class="card glass-panel fade-in-up">
-                    <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            <div class="services-grid">
+                <!-- Advisory -->
+                <div class="service-card fade-in-up">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
                         </svg>
                     </div>
-                    <h3>Óleo & Gás</h3>
-                    <p>Manutenção preditiva de equipamentos críticos e análise avançada de reservatórios utilizando
-                        modelos de aprendizado profundo.</p>
-                    <ul class="feature-list">
-                        <li>Sistema de Embarque Seguro em Plataformas</li>
-                        <li>Análise de Risco Operacional</li>
-                        <li>Automação de Relatórios em Tempo Real</li>
+                    <div class="service-tier">Advisory</div>
+                    <h3>Architecture Reviews & Strategy</h3>
+                    <p>A senior second opinion on your data architecture, AI integration plans, or platform decisions. I review what you have, identify risks, and recommend a path forward.</p>
+                    <ul class="service-includes">
+                        <li>Data architecture audits</li>
+                        <li>AI integration strategy</li>
+                        <li>Pipeline performance reviews</li>
+                        <li>Technology selection guidance</li>
                     </ul>
+                    <div class="service-details">
+                        <span class="service-commitment">2 &ndash; 5 hours / week</span>
+                    </div>
                 </div>
 
-                <!-- Civil Engineering Card -->
-                <div class="card glass-panel fade-in-up" style="transition-delay: 0.2s">
-                    <div class="card-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <!-- Fractional -->
+                <div class="service-card service-card-featured fade-in-up" style="transition-delay: 0.1s">
+                    <div class="service-popular">Most Common</div>
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 21h18M5 21V7l8-4v18M13 3l8 4v14M7 11h2M7 15h2M15 11h2M15 15h2" />
+                            <polyline points="16 18 22 12 16 6" />
+                            <polyline points="8 6 2 12 8 18" />
                         </svg>
                     </div>
-                    <h3>Engenharia Civil</h3>
-                    <p>Planejamento de obras impulsionado por IA, visão computacional para segurança no canteiro e
-                        controle rigoroso da sua cadeia de suprimentos.</p>
-                    <ul class="feature-list">
-                        <li>Gestão Inteligente de Cronogramas</li>
-                        <li>Monitoramento Seguro por Visão Computacional</li>
-                        <li>Gêmeos Digitais (Digital Twins) de Estruturas</li>
+                    <div class="service-tier">Fractional</div>
+                    <h3>Embedded Data & AI Engineer</h3>
+                    <p>I join your team part-time as a senior engineer. I design systems, write code, review PRs, mentor your team, and ship production work alongside your people.</p>
+                    <ul class="service-includes">
+                        <li>Hands-on pipeline development</li>
+                        <li>AI workflow implementation</li>
+                        <li>Code reviews & mentoring</li>
+                        <li>Data platform buildout</li>
                     </ul>
+                    <div class="service-details">
+                        <span class="service-commitment">10 &ndash; 20 hours / week</span>
+                    </div>
+                </div>
+
+                <!-- Build -->
+                <div class="service-card fade-in-up" style="transition-delay: 0.2s">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16" />
+                        </svg>
+                    </div>
+                    <div class="service-tier">Build</div>
+                    <h3>End-to-End Platform Delivery</h3>
+                    <p>A scoped, fixed-deliverable engagement. I design and build your data platform or AI integration from the ground up — lake, warehouse, orchestration, serving, monitoring.</p>
+                    <ul class="service-includes">
+                        <li>Full data platform architecture</li>
+                        <li>Implementation & deployment</li>
+                        <li>Documentation & handoff</li>
+                        <li>Team training & onboarding</li>
+                    </ul>
+                    <div class="service-details">
+                        <span class="service-commitment">Scoped project</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Soberania Section -->
-    <section id="soberania" class="section section-dark">
-        <div class="container container-flex">
-            <div class="flex-half fade-in-left">
-                <h2>O Poder da <span class="text-accent">Soberania</span></h2>
-                <h3 class="subsection-title">Inteligência Artificial Pública e Privada</h3>
-                <p>Em ambientes de alta criticidade, quem controla os dados controla o futuro do negócio. Não dependa
-                    exclusivamente de APIs de terceiros que removem seu sigilo operacional.</p>
-                <ul class="check-list">
-                    <li><strong>IA Pública:</strong> Aproveite o estado da arte dos grandes modelos (LLMs) públicos para
-                        tarefas de pesquisa amplas e gerais.</li>
-                    <li><strong>IA Privada:</strong> Modelos locais ("on-premise") que garantem o isolamento total dos
-                        seus dados confidenciais e estratégicos.</li>
-                    <li><strong>Soberania Tecnológica:</strong> Sua propriedade intelectual permanece sob seu comando.
-                        Sem vazamento de dados, controle absoluto sobre a arquitetura.</li>
-                </ul>
+    <!-- Credibility Section -->
+    <section id="credibility" class="section">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-label">Track Record</span>
+                <h2>What I've actually built</h2>
+                <p>Not hypothetical. Not a demo. These are production systems I designed and shipped.</p>
             </div>
-            <div class="flex-half flex-center fade-in-right">
-                <div class="glow-box">
-                    <div class="shield-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                        </svg>
+
+            <div class="track-record-grid">
+                <a href="case-studies/enterprise-ai-integration.html" class="track-card fade-in-up">
+                    <div class="track-company">Major B2B Data Platform</div>
+                    <div class="track-role">Senior Data Engineer &middot; 2024 &ndash; 2026</div>
+                    <p>Pioneered AI integration into data engineering workflows — LLM agents with guardrails, MCP, and agentic development pipelines. Built and maintained critical Sales and Finance pipelines processing terabytes daily.</p>
+                    <div class="track-tags">
+                        <span>AI Agents</span><span>MCP</span><span>Orchestration</span><span>Transformation</span><span>Cloud Warehouse</span>
                     </div>
-                    <h4>Segurança Total</h4>
-                    <p>Modelos ajustados especificamente para o seu domínio e operando nos seus próprios servidores
-                        isolados.</p>
+                    <span class="track-link">Read the full story &rarr;</span>
+                </a>
+
+                <a href="case-studies/petabyte-ad-platform.html" class="track-card fade-in-up" style="transition-delay: 0.1s">
+                    <div class="track-company">Top-10 Global Ad Tech Platform</div>
+                    <div class="track-role">Data Software Engineer &middot; 2017 &ndash; 2021</div>
+                    <p>Part of the Data Team at one of the world's largest ad platforms. 1.5 billion records per day at petabyte scale. Built pipelines and services powering real-time ad optimization for thousands of businesses.</p>
+                    <div class="track-tags">
+                        <span>Petabyte Scale</span><span>Spark</span><span>Hadoop</span><span>AWS EMR</span><span>1.5B rec/day</span>
+                    </div>
+                    <span class="track-link">Read the full story &rarr;</span>
+                </a>
+
+                <a href="case-studies/greenfield-data-platform.html" class="track-card fade-in-up" style="transition-delay: 0.2s">
+                    <div class="track-company">Fast-Growing Logistics Startup</div>
+                    <div class="track-role">Tech Leader &middot; 2023 &ndash; 2024</div>
+                    <p>Designed the entire data governance architecture from scratch — Data Lake, Data Warehouse, orchestration, analytics. Built the Data Team. Migrated 4 heterogeneous source systems into a unified analytical platform.</p>
+                    <div class="track-tags">
+                        <span>From Zero</span><span>Cloud Platform</span><span>Data Lake</span><span>Warehouse</span><span>BI</span>
+                    </div>
+                    <span class="track-link">Read the full story &rarr;</span>
+                </a>
+
+                <div class="track-card fade-in-up" style="transition-delay: 0.3s">
+                    <div class="track-company">Leading Global Travel Platform</div>
+                    <div class="track-role">Senior Software Engineer &middot; 2021 &ndash; 2022</div>
+                    <p>Built the company's new data pipeline and data lake on AWS — S3, EMR, Glue, Redshift, Lambda. Unblocked the ML team by giving them access to near real-time company data without impacting production.</p>
+                    <div class="track-tags">
+                        <span>AWS</span><span>Data Lake</span><span>EMR</span><span>Redshift</span><span>Lambda</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="track-earlier fade-in-up">
+                <p>Earlier: <strong>a major web services provider</strong> (systems migration, GDPR compliance), <strong>a Brazilian e-commerce marketplace</strong> (Kubernetes CD system, 70% bug squash hackathon), <strong>a fintech payments company</strong> (payment processing systems), <strong>a major Brazilian media conglomerate</strong> (5+ years, large-scale web engineering), <strong>a telecom software company in Germany</strong> (international experience).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Sovereignty Section -->
+    <section class="section section-sovereignty">
+        <div class="container">
+            <div class="sovereignty-layout fade-in-up">
+                <div class="sovereignty-content">
+                    <span class="section-label">Philosophy</span>
+                    <h2>Your Data. Your Models. <br>Your Control.</h2>
+                    <p class="sovereignty-lead">
+                        In a world rushing to plug everything into third-party APIs, I help teams think clearly about
+                        what should be public, what should be private, and what should stay on-premise.
+                    </p>
+                    <div class="sovereignty-points">
+                        <div class="sov-point">
+                            <strong>Public AI</strong>
+                            <p>Leverage the best LLMs for research, prototyping, and general tasks where data sensitivity isn't a concern.</p>
+                        </div>
+                        <div class="sov-point">
+                            <strong>Private AI</strong>
+                            <p>On-premise or VPC-isolated models for confidential data. Your IP stays under your roof.</p>
+                        </div>
+                        <div class="sov-point">
+                            <strong>Hybrid Architecture</strong>
+                            <p>The pragmatic middle ground — route each workload to the right layer based on sensitivity, cost, and performance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="sovereignty-visual">
+                    <div class="sov-diagram">
+                        <div class="sov-layer sov-public">
+                            <span class="sov-layer-label">Public AI</span>
+                            <span class="sov-layer-desc">General tasks</span>
+                        </div>
+                        <div class="sov-layer sov-hybrid">
+                            <span class="sov-layer-label">Hybrid Layer</span>
+                            <span class="sov-layer-desc">Smart routing</span>
+                        </div>
+                        <div class="sov-layer sov-private">
+                            <span class="sov-layer-label">Private AI</span>
+                            <span class="sov-layer-desc">Your data, your models</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog / Writing Section -->
+    <section id="blog" class="section section-alt">
+        <div class="container">
+            <div class="section-header fade-in-up">
+                <span class="section-label">Writing</span>
+                <h2>Thinking in public</h2>
+                <p>Technical articles on Data Engineering, AI integration, and building systems at scale. Coming from real experience, not theory.</p>
+            </div>
+
+            <div class="blog-grid">
+                <a href="blog/ai-agents-in-data-pipelines.html" class="blog-card fade-in-up">
+                    <span class="blog-tag">AI + Data Engineering</span>
+                    <h3>I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.</h3>
+                    <p>Lessons from bringing agentic AI into production data workflows at a major B2B platform — what shipped, what didn't, and what I'd do differently.</p>
+                    <span class="blog-date">April 2026 &middot; 12 min read</span>
+                </a>
+                <div class="blog-card blog-card-coming fade-in-up" style="transition-delay: 0.1s">
+                    <span class="blog-tag">Data Architecture</span>
+                    <h3>Building a Data Platform From Zero</h3>
+                    <p>A practical field guide to designing and building a complete data platform for a growing company — from first table to production analytics.</p>
+                    <span class="blog-status">Coming soon</span>
+                </div>
+                <a href="blog/knowledge-base-as-agentic-memory.html" class="blog-card fade-in-up" style="transition-delay: 0.2s">
+                    <span class="blog-tag">Agentic AI &middot; Open Source</span>
+                    <h3>The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds</h3>
+                    <p>Why AI agents produce better plans with a structured wiki about your architecture — and an open-source template to build one.</p>
+                    <span class="blog-date">April 2026 &middot; 14 min read</span>
+                </a>
+            </div>
+
+            <div class="blog-see-all fade-in-up">
+                <a href="blog/" class="btn btn-secondary">See all upcoming articles &rarr;</a>
+            </div>
+
+            <div class="blog-newsletter fade-in-up">
+                <h3>Get notified when I publish</h3>
+                <p>No spam. One email when a new article drops.</p>
+                <div class="newsletter-placeholder">
+                    <span>Newsletter signup coming soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / CTA Section -->
+    <section id="contact" class="section section-cta">
+        <div class="container">
+            <div class="cta-layout fade-in-up">
+                <h2>Let's talk about your data.</h2>
+                <p>Whether you need an architecture review, a fractional engineer, or someone to build your data platform from scratch — I'd like to hear what you're working on.</p>
+                <div class="cta-actions">
+                    <a href="mailto:bruno@mentgesinformatica.com.br" class="btn btn-primary btn-lg">
+                        Get in Touch
+                    </a>
+                </div>
+                <div class="cta-details">
+                    <span>bruno@mentgesinformatica.com.br</span>
+                    <span class="cta-sep">&middot;</span>
+                    <span>Rio de Janeiro, Brazil (GMT-3)</span>
+                    <span class="cta-sep">&middot;</span>
+                    <span>Available for international remote work</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contato" class="footer glass-panel">
+    <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand fade-in-up">
-                    <a href="#" class="logo">Mentges<span>.AI</span></a>
-                    <p>Impulsionando indústrias críticas com soluções de Inteligência Artificial avançadas, éticas e
-                        soberanas em todo o Brasil.</p>
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Senior Data & AI Engineer. Building production systems since 1998.</p>
                 </div>
-                <div class="footer-links fade-in-up" style="transition-delay: 0.1s">
-                    <h4>Contato e Parcerias</h4>
-                    <p>bruno@mentgesinformatica.com.br</p>
-                    <p>Operações Baseadas no Brasil</p>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navigate</h4>
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#credibility">Track Record</a>
+                        <a href="#blog">Writing</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">Email</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom fade-in-up" style="transition-delay: 0.2s">
-                <p>&copy; 2026 Mentges AI Enablement. Todos os direitos reservados.</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). All rights reserved.</p>
             </div>
         </div>
     </footer>

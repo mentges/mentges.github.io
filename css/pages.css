@@ -1,0 +1,332 @@
+/* ==========================================================================
+   Inner Pages — Case Studies, Blog Posts, Blog Index
+   Shared styles for all content pages beyond the homepage.
+   ========================================================================== */
+
+/* Page Header */
+.page-header {
+    padding: 8rem 0 3rem;
+    background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+}
+
+.back-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.back-link:hover {
+    color: var(--color-accent-dark);
+}
+
+.case-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.case-tag {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    background: var(--color-accent-subtle);
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.page-header h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+    max-width: 800px;
+}
+
+.page-subtitle {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 700px;
+    margin-bottom: 2rem;
+}
+
+/* Quick Facts Bar */
+.case-quick-facts {
+    display: flex;
+    gap: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border-light);
+    flex-wrap: wrap;
+}
+
+.quick-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.quick-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-muted);
+}
+
+.quick-value {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Page Content */
+.page-content {
+    padding: 3rem 0 4rem;
+}
+
+.content-container {
+    max-width: 740px;
+}
+
+.content-section {
+    margin-bottom: 3rem;
+}
+
+.content-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+}
+
+.content-section h3 {
+    font-size: 1.15rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+}
+
+.content-section p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+}
+
+.content-section ul,
+.content-section ol {
+    margin-bottom: 1rem;
+    padding-left: 1.25rem;
+}
+
+.content-section li {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+}
+
+.content-section li strong {
+    color: var(--color-text);
+}
+
+.content-section em {
+    font-style: italic;
+}
+
+/* Results Grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.result-card {
+    background: var(--color-accent-light);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.result-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    margin-bottom: 0.25rem;
+}
+
+.result-label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+}
+
+/* Tech Stack Grid */
+.tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.tech-item {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-light);
+}
+
+.tech-item strong {
+    color: var(--color-text);
+}
+
+/* Content CTA */
+.content-cta {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.content-cta h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.content-cta p {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   Blog Index Page
+   ========================================================================== */
+.blog-index-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 740px;
+}
+
+.blog-index-card {
+    display: block;
+    text-decoration: none;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    transition: var(--transition);
+}
+
+.blog-index-card:hover {
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.blog-index-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.blog-index-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.blog-index-date {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.blog-index-card h3 {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.blog-index-card:hover h3 {
+    color: var(--color-accent);
+}
+
+.blog-index-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.blog-index-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+/* Blog Subscribe Box */
+.blog-subscribe {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    max-width: 740px;
+}
+
+.blog-subscribe h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.blog-subscribe p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+}
+
+/* ==========================================================================
+   Responsive — Inner Pages
+   ========================================================================== */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 6.5rem 0 2rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .case-quick-facts {
+        gap: 1.5rem;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-stack-grid {
+        grid-template-columns: 1fr;
+    }
+}

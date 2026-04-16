@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds — Bruno Mentges</title>
+    <meta name="description"
+        content="Why AI coding agents produce better development plans when they have a structured wiki about your architecture, decisions, and concepts — and how to build one.">
+    <meta name="author" content="Bruno Mentges">
+
+    <meta property="og:title" content="The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds">
+    <meta property="og:description" content="Why AI coding agents produce better plans with a structured wiki about your architecture — and an open-source template to build one.">
+    <meta property="og:type" content="article">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">About</a></li>
+                <li><a href="../#services">Services</a></li>
+                <li><a href="../#credibility">Track Record</a></li>
+                <li><a href="./">Writing</a></li>
+                <li><a href="../#contact" class="btn btn-primary btn-sm">Book a Call</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="./" class="back-link">&larr; Back to Writing</a>
+            <div class="case-meta">
+                <span class="case-tag">Agentic AI</span>
+                <span class="case-tag">Open Source</span>
+            </div>
+            <h1>The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds</h1>
+            <p class="page-subtitle">Why AI coding agents produce dramatically better development plans when they have a structured wiki about your architecture, decisions, and concepts — and an open-source template to build one yourself.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Author</span>
+                    <span class="quick-value">Bruno Mentges</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Published</span>
+                    <span class="quick-value">April 2026</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Reading time</span>
+                    <span class="quick-value">14 min</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <p>Every AI coding agent has the same fundamental weakness: it has no memory of <em>your</em> system.</p>
+                <p>You can point it at your codebase. It can read your files, grep your symbols, trace your imports. But it doesn't <em>know</em> your system. It doesn't know why you chose that database, what the three failed migration attempts taught you, which module is about to be deprecated, or that the "simple" refactor the intern suggested last month actually breaks a subtle invariant in the billing pipeline.</p>
+                <p>That knowledge lives in your team's heads, scattered across old Slack threads, stale Confluence pages, and the commit messages of engineers who left two years ago. When you ask an AI agent to plan a new feature or design a migration, it's working without any of that context. And it shows — the plans are technically plausible but architecturally naive. They solve the problem the agent can see while ignoring the constraints it can't.</p>
+                <p>There's a fix for this. It's not RAG. It's not fine-tuning. It's a structured, LLM-maintained knowledge base that sits alongside your code and gives your agents a persistent, compounding memory of your architecture, decisions, and domain knowledge.</p>
+                <p>I've been building and using this pattern for the past year, and I've open-sourced a template so you can do it too: <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener"><strong>knowledge-base-template</strong></a>.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>The problem: agents without memory produce plans without wisdom</h2>
+                <p>Here's a scenario every engineering team has experienced with AI agents:</p>
+                <p>You ask the agent to plan a migration of your authentication system. The agent reads the auth module code, traces the call sites, and produces a plan. The plan is syntactically correct. It handles the obvious cases. It even includes a rollback strategy.</p>
+                <p>But the plan is wrong, because:</p>
+                <ul>
+                    <li>It doesn't know that last year's auth migration failed because of a race condition in session handling that only manifests under load — and the current code has a workaround that looks like a bug but is actually critical</li>
+                    <li>It doesn't know that the billing service has an undocumented dependency on the auth token format that isn't visible in the import graph</li>
+                    <li>It doesn't know that your team decided six months ago to move toward a specific auth standard, and the plan should align with that trajectory</li>
+                    <li>It doesn't know that the senior engineer who built the auth system is on parental leave and no one else fully understands the token rotation mechanism</li>
+                </ul>
+                <p>None of this is in the code. The agent did the best it could with what it had. The problem isn't the agent's reasoning — it's the agent's <strong>context</strong>.</p>
+                <p>This is the memory gap. And throwing more code at the agent doesn't close it. You need structured knowledge about your system — the <em>why</em>, the <em>history</em>, the <em>constraints</em>, the <em>decisions</em> — not just the <em>what</em> of the current code.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>The insight: stop re-deriving, start compiling</h2>
+                <p>The core idea comes from <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">Andrej Karpathy's LLM Wiki pattern</a>: instead of having an LLM retrieve from raw documents and re-derive understanding every time (the RAG approach), have it <strong>build and maintain a persistent wiki</strong>. The LLM reads your sources, extracts the key information, and integrates it into an evolving, cross-referenced knowledge base. The knowledge compounds over time rather than being thrown away after each conversation.</p>
+                <p>I took this idea and applied it to a specific domain: <strong>engineering teams and their codebases</strong>.</p>
+                <p>The knowledge base becomes the agent's long-term memory about your system. Not a vector database you query. Not an embedding you fine-tune. A <em>wiki</em> — human-readable, version-controlled, and maintained by the same LLM agents that use it.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>How it works: the three-layer architecture</h2>
+                <p>The <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener">knowledge-base-template</a> implements a three-layer architecture:</p>
+
+                <h3>Layer 1: Raw sources (immutable)</h3>
+                <p>Your source documents. Architecture decision records. Meeting notes. Postmortem reports. RFC documents. Design docs. API contracts. Onboarding guides. Anything that contains institutional knowledge about your system. Drop them in, never modify them. This is your ground truth.</p>
+
+                <h3>Layer 2: The wiki (LLM-generated)</h3>
+                <p>This is where the magic happens. The LLM reads the raw sources and builds a structured wiki: concept pages, entity pages, decision records, project pages, tool pages — all cross-referenced with wikilinks, tagged with metadata, and scored with confidence levels. A single source document might touch 10-15 wiki pages when ingested.</p>
+                <p>The wiki isn't a dump. It's organized:</p>
+                <ul>
+                    <li><strong>Concepts</strong> — architectural patterns, design principles, domain-specific ideas used in your system</li>
+                    <li><strong>Entities</strong> — services, databases, third-party systems, teams, key people</li>
+                    <li><strong>Projects</strong> — ongoing initiatives, their status, decisions, blockers, and learnings</li>
+                    <li><strong>Sources</strong> — one summary page per ingested document, linked to all the entities and concepts it mentions</li>
+                    <li><strong>Tools</strong> — technologies in your stack, how they're configured, why they were chosen</li>
+                </ul>
+                <p>Every page has YAML frontmatter with structured metadata — type, tags, creation date, confidence score, sources. This makes the wiki queryable: "show me all architecture decisions from the last 6 months with confidence below 0.7" is a valid query.</p>
+
+                <h3>Layer 3: The schema (rules and conventions)</h3>
+                <p>A configuration file (I use <code>CLAUDE.md</code> for Claude Code, but it works with any agent) that tells the LLM how to maintain the wiki. What types of pages exist, what the naming conventions are, how to handle conflicts, when to create vs. update a page, how to maintain the index. This is the difference between a wiki that stays organized and one that devolves into chaos. The schema evolves with your team's needs.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>What goes in: the knowledge an agent needs for good plans</h2>
+                <p>Here's what I put in the knowledge base for a production codebase, and why each piece matters for agent-generated development plans:</p>
+
+                <h3>Architecture Decision Records (ADRs)</h3>
+                <p><strong>What</strong>: Documents recording why specific technical choices were made. "We chose PostgreSQL over MongoDB because..." or "We decided to keep the auth service monolithic because splitting it introduced a distributed transaction problem we weren't ready to solve."</p>
+                <p><strong>Why it matters for agents</strong>: Without ADRs, an agent will suggest whatever seems optimal in isolation. With ADRs, the agent understands the constraints that shaped the current system and avoids re-proposing solutions that were already considered and rejected. This is the single most impactful category of knowledge for plan quality.</p>
+
+                <h3>Service and system topology</h3>
+                <p><strong>What</strong>: Pages describing each service, its responsibilities, its dependencies, its data stores, its deployment characteristics. Not just the code — the operational reality.</p>
+                <p><strong>Why it matters</strong>: An agent reading code can infer the call graph. But it can't infer that Service A is latency-sensitive and runs on dedicated instances, while Service B is batch-oriented and shares compute. It can't infer that the connection pool to Database C is the bottleneck during peak traffic. These operational facts change what a "good" plan looks like.</p>
+
+                <h3>Postmortems and failure patterns</h3>
+                <p><strong>What</strong>: Summaries of past incidents. What broke, why, what was learned, what was changed.</p>
+                <p><strong>Why it matters</strong>: Postmortems are negative knowledge — things the system <em>can't</em> do or <em>shouldn't</em> try. An agent without postmortem knowledge will happily re-introduce the exact pattern that caused an outage six months ago. With postmortem knowledge, the agent's plans actively avoid known failure modes.</p>
+
+                <h3>Domain concepts and business rules</h3>
+                <p><strong>What</strong>: Definitions of domain terms, business invariants, compliance requirements. "A 'settlement' is final and can never be reversed." "All PII must be encrypted at rest and access-logged per GDPR Article 30."</p>
+                <p><strong>Why it matters</strong>: Agents default to engineering-optimal solutions. Business rules add constraints that change what "optimal" means. An agent that knows "settlements are irreversible" will design a migration plan with a validation step before the point of no return, rather than a generic rollback strategy that doesn't apply.</p>
+
+                <h3>In-flight projects and upcoming changes</h3>
+                <p><strong>What</strong>: What's being worked on right now. Which modules are about to change. What's deprecated but not yet removed.</p>
+                <p><strong>Why it matters</strong>: An agent without this context might plan a feature that builds on a module that's being removed next quarter, or design a system that duplicates work another team is already doing. Current project context turns plans from "technically correct" to "strategically aligned."</p>
+            </section>
+
+            <section class="content-section">
+                <h2>The compound effect: how agents get smarter over time</h2>
+                <p>The knowledge base doesn't just store information. It compounds it.</p>
+                <p>When you ingest a postmortem for a database migration failure, the LLM doesn't just file a summary. It updates the database's entity page with the failure pattern. It adds a warning to the migration concept page. It links the postmortem to the ongoing project page for the next planned migration. It bumps the confidence on the claim "this database doesn't handle schema changes well under load" from 0.5 (single observation) to 0.8 (confirmed by incident).</p>
+                <p>Six months later, when an agent is planning a new migration, all of this context is waiting in the wiki. The agent reads the relevant pages and produces a plan that accounts for the load sensitivity, avoids the failure pattern, and references the team's established migration approach. Not because the agent is smarter. Because the <em>knowledge base</em> is richer.</p>
+                <p>This is the compound effect. Every source you ingest, every question you ask, every postmortem you file makes every future plan slightly better. RAG doesn't do this. RAG retrieves fragments. A knowledge base builds synthesis.</p>
+
+                <h3>The knowledge lifecycle</h3>
+                <p>Not all knowledge stays equally valid forever. The <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener">knowledge-base-template</a> implements a lifecycle model:</p>
+                <ul>
+                    <li><strong>Confidence scoring</strong> — every claim carries a score (0.0-1.0) based on how many sources support it and how recently it was confirmed. Confidence decays with time and strengthens when new evidence confirms it.</li>
+                    <li><strong>Supersession</strong> — when new information contradicts an old claim, the new page explicitly supersedes the old one. The old content is preserved for history but marked stale.</li>
+                    <li><strong>Consolidation tiers</strong> — raw observations get promoted through tiers as evidence accumulates. A pattern seen once stays in a source summary. A pattern seen across three postmortems gets its own concept page. A pattern that shapes how the team works becomes procedural knowledge.</li>
+                </ul>
+                <p>This lifecycle means agents work with knowledge that's weighted by reliability. A well-sourced, recently-confirmed architectural decision carries more weight than a speculative observation from a year-old meeting note.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Practical workflow: maintaining the knowledge base</h2>
+                <p>The daily workflow has three operations:</p>
+
+                <h3>Ingest</h3>
+                <p>Drop a source document into the raw directory and tell the agent to process it. The agent reads the source, extracts entities and concepts, creates or updates wiki pages, flags contradictions with existing knowledge, and updates the index and log. A single ADR might create one source summary page and update five entity/concept pages.</p>
+                <p>I ingest sources one at a time and stay involved — I review the summaries, check the cross-references, and guide the agent on what matters. But you can also batch-ingest with less supervision if the sources are well-structured.</p>
+
+                <h3>Query</h3>
+                <p>Ask questions against the wiki. "What are the risks of migrating Service X to a new database?" The agent searches the wiki, reads relevant pages (the service's entity page, the database's tool page, related postmortems, current project status), and synthesizes an answer with citations. Substantial answers can be filed back as new wiki pages — so your explorations compound in the knowledge base just like ingested sources do.</p>
+
+                <h3>Lint</h3>
+                <p>Periodically health-check the wiki. Find orphan pages with no inbound links. Flag stale claims where confidence has decayed. Detect missing cross-references. Identify concepts that are frequently mentioned but don't have their own page yet. The agent fixes what it can automatically and flags the rest for human review.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Before and after: what changes in practice</h2>
+                <p>Here's the concrete difference I've observed in plan quality when agents work with vs. without a knowledge base:</p>
+
+                <h3>Without the knowledge base</h3>
+                <p>Agent reads the code, produces a plan that:</p>
+                <ul>
+                    <li>Solves the problem as stated, ignoring constraints that aren't visible in code</li>
+                    <li>Re-proposes approaches the team already tried and rejected</li>
+                    <li>Ignores in-flight work that affects the same modules</li>
+                    <li>Treats all components as equally modifiable (doesn't know about frozen modules, fragile invariants, or upcoming deprecations)</li>
+                    <li>Produces generic migration/rollback strategies instead of ones tailored to your system's actual failure modes</li>
+                </ul>
+
+                <h3>With the knowledge base</h3>
+                <p>Agent reads the code <em>and</em> the relevant wiki pages, produces a plan that:</p>
+                <ul>
+                    <li>References specific architecture decisions and explains how the plan aligns with them</li>
+                    <li>Avoids patterns that caused past incidents (citing the relevant postmortem)</li>
+                    <li>Accounts for in-flight projects that touch the same areas</li>
+                    <li>Treats components differently based on their operational characteristics and stability</li>
+                    <li>Includes risk mitigations tailored to your system's known failure modes</li>
+                </ul>
+                <p>The difference is the difference between a plan from a smart contractor who just read the codebase and a plan from a senior engineer who's been on the team for a year. The knowledge base provides the "been on the team for a year" context that code alone can't.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Why a wiki beats RAG for this</h2>
+                <p>The obvious question: why not just use RAG (Retrieval-Augmented Generation) — dump your docs into a vector database and let the agent retrieve relevant chunks?</p>
+                <p>RAG works for simple factual retrieval. "What's the API endpoint for the payment service?" — RAG handles this fine.</p>
+                <p>But RAG fails at exactly the thing that makes plans good: <strong>synthesis across multiple sources</strong>. When an agent needs to understand why the auth system is designed the way it is, it needs to synthesize information from an ADR, two postmortems, a design doc, and the current project status. RAG retrieves fragments. It doesn't synthesize them. Each query starts from scratch, re-deriving connections that were established last week.</p>
+                <p>A wiki pre-computes the synthesis. The auth system's page already has the design rationale, the failure history, the current constraints, and the relevant links. The agent reads one page and gets the integrated picture. The synthesis was done incrementally, each time a new source was ingested, and it's been maintained over time. RAG can't do this.</p>
+                <p>That said, the two approaches aren't mutually exclusive. RAG is great for searching across a large document corpus. A wiki is great for maintaining synthesized, structured knowledge. At scale, you want both — RAG for discovery, wiki for understanding.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Getting started</h2>
+                <p>I've open-sourced the template I use: <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener"><strong>bmentges/knowledge-base-template</strong></a></p>
+                <p>It's designed to work with any LLM coding agent (Claude Code, Codex, Cursor, Windsurf, or anything that can read/write files) and uses Obsidian as the viewer. The setup takes about 15 minutes:</p>
+                <ol>
+                    <li>Clone the template</li>
+                    <li>Open your LLM agent in the directory</li>
+                    <li>Tell it your use case and let it configure the schema</li>
+                    <li>Open the directory as an Obsidian vault</li>
+                    <li>Start ingesting your first sources</li>
+                </ol>
+                <p>The template includes Karpathy's original LLM Wiki pattern document plus a v2 extension with lifecycle management (confidence scoring, supersession, consolidation tiers) and scaling patterns for when your wiki grows past a few hundred pages.</p>
+                <p>Start with the documents that contain the most institutional knowledge: architecture decision records, postmortems, and system topology docs. Three good ADRs in the wiki will improve agent plan quality more than fifty raw code files.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>The bigger picture: agents need memory infrastructure</h2>
+                <p>We're in the early days of using AI agents for real engineering work. Most teams are focused on the agent itself — which model to use, how to prompt it, what tools to give it. That matters, but it's not the bottleneck.</p>
+                <p>The bottleneck is context. An agent without institutional memory is like a brilliant contractor on their first day — technically skilled but architecturally naive. The solution isn't a smarter contractor. It's giving them access to the team's accumulated knowledge in a form they can actually use.</p>
+                <p>A structured, LLM-maintained knowledge base is memory infrastructure for AI agents. It's the layer that turns generic intelligence into <em>your</em> team's intelligence. And unlike the agent itself, which you get from a vendor, the knowledge base is <strong>your</strong> competitive advantage — it's the accumulated wisdom of your team, organized for machine consumption.</p>
+                <p>The teams that build this infrastructure now will have agents that produce meaningfully better work than teams that don't. Not because their agents are smarter, but because their agents know more.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Want to build this for your team?</h3>
+                <p>I help teams design and implement knowledge base strategies that make their AI agents genuinely useful. From architecture to implementation to team adoption.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+                    <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener" class="btn btn-secondary">View the Template on GitHub</a>
+                </div>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Senior Data & AI Engineer. Building production systems since 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navigate</h4>
+                        <a href="../#about">About</a>
+                        <a href="../#services">Services</a>
+                        <a href="../#credibility">Track Record</a>
+                        <a href="./">Writing</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">Email</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

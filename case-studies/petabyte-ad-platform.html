@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Petabyte-Scale Ad Tech Pipelines — Bruno Mentges / Mentges.AI</title>
+    <meta name="description"
+        content="How I helped process 1.5 billion records per day at petabyte scale for a top-10 global ad tech platform.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">About</a></li>
+                <li><a href="../#services">Services</a></li>
+                <li><a href="../#credibility">Track Record</a></li>
+                <li><a href="../blog/">Writing</a></li>
+                <li><a href="../#contact" class="btn btn-primary btn-sm">Book a Call</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Case Study Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="../#credibility" class="back-link">&larr; Back to Track Record</a>
+            <div class="case-meta">
+                <span class="case-tag">Case Study</span>
+                <span class="case-tag">Data Engineering</span>
+            </div>
+            <h1>Processing 1.5 Billion Records Per Day at Petabyte Scale</h1>
+            <p class="page-subtitle">How I built and maintained data infrastructure powering real-time ad optimization for thousands of businesses at a top-10 global advertising platform.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Industry</span>
+                    <span class="quick-value">Ad Tech (Top-10 Global)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Role</span>
+                    <span class="quick-value">Data Software Engineer</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Duration</span>
+                    <span class="quick-value">3+ years (2017 &ndash; 2021)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Scale</span>
+                    <span class="quick-value">Petabyte-level, 1.5B rec/day</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Case Study Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <h2>The Challenge</h2>
+                <p>This company operates one of the world's largest independent advertising platforms, powering retargeting, prospecting, and email marketing campaigns for thousands of businesses globally.</p>
+                <p>The Data Team was responsible for the infrastructure that processed, transformed, and served the data behind all ad optimization decisions. The scale was staggering:</p>
+                <ul>
+                    <li><strong>1.5 billion records ingested per day</strong> from ad impressions, clicks, conversions, and attribution events</li>
+                    <li><strong>Petabyte-level data storage</strong> across multiple data stores and processing layers</li>
+                    <li><strong>Real-time requirements</strong> — ad optimization models needed fresh data to make bidding decisions in milliseconds</li>
+                    <li><strong>Cost sensitivity</strong> — at this scale, even small inefficiencies in processing translate to significant cloud spend</li>
+                </ul>
+                <p>The core challenge wasn't just handling the volume. It was building systems that could process data at this scale <em>reliably</em>, <em>cost-effectively</em>, and <em>fast enough</em> to power real-time business decisions.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>My Role & Approach</h2>
+                <p>I joined the Data Team as a Data Software Engineer, working primarily with Scala, Java, JavaScript, and Python across the full pipeline stack.</p>
+
+                <h3>Pipeline Architecture</h3>
+                <p>I built and maintained data pipelines across the entire data lifecycle — ingestion from ad exchange events, transformation and enrichment, aggregation for reporting, and serving to downstream consumers including the ML models that powered ad optimization.</p>
+                <p>The stack was primarily AWS-based: EMR (Hadoop/Spark) for batch processing, S3 for storage, DynamoDB for low-latency serving, RDS for relational data, and Lambda and Batch for orchestration and event-driven processing.</p>
+
+                <h3>Performance Engineering</h3>
+                <p>At petabyte scale, performance engineering isn't optional — it's survival. I worked extensively on:</p>
+                <ul>
+                    <li><strong>Shuffle optimization</strong> — partition sizing, join strategies, and broadcast optimizations to keep Spark jobs healthy and cost-effective</li>
+                    <li><strong>Memory management</strong> — diagnosing and resolving OOM errors, configuring spill-to-disk behavior, and tuning memory allocation for large joins</li>
+                    <li><strong>Cost optimization</strong> — refactoring pipelines to reduce EMR cluster runtime, optimizing S3 storage patterns, and right-sizing compute resources</li>
+                </ul>
+
+                <h3>Reliability at Scale</h3>
+                <p>When your pipelines process 1.5 billion records daily, failures have immediate business impact — stale data means suboptimal ad bids, which means lost revenue for thousands of customers. I focused on building pipelines that were not just fast, but resilient: idempotent processing, automated recovery, comprehensive monitoring, and alerting that caught issues before they cascaded.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">1.5B</span>
+                        <span class="result-label">Records processed per day, reliably</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">3+ yrs</span>
+                        <span class="result-label">Sustained operation at petabyte scale</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">1000s</span>
+                        <span class="result-label">Businesses powered by the data platform</span>
+                    </div>
+                </div>
+                <p>The data infrastructure I helped build and maintain was the foundation for the platform's entire ad optimization engine — every bidding decision, every attribution calculation, every campaign report flowed through these pipelines.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Tech Stack</h2>
+                <div class="tech-stack-grid">
+                    <div class="tech-item"><strong>Processing</strong>: Apache Spark on AWS EMR (Hadoop)</div>
+                    <div class="tech-item"><strong>Languages</strong>: Scala, Java, JavaScript, Python</div>
+                    <div class="tech-item"><strong>Storage</strong>: AWS S3 (petabyte-scale data lake)</div>
+                    <div class="tech-item"><strong>Databases</strong>: DynamoDB, RDS</div>
+                    <div class="tech-item"><strong>Compute</strong>: AWS Batch, Lambda, EC2</div>
+                    <div class="tech-item"><strong>Domain</strong>: Adtech — retargeting, prospecting, email marketing</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Key Takeaway</h2>
+                <p>Working at this scale taught me that data engineering at petabyte level is fundamentally about <strong>economics and reliability</strong>, not just technology. Every architectural decision — partition strategy, storage format, processing cadence — has a direct cost and reliability impact. The best pipeline isn't the most sophisticated one; it's the one that runs predictably, recovers gracefully, and costs what you expect it to cost.</p>
+                <p>This experience is the foundation of how I approach every data architecture engagement today: start with the constraints (scale, latency, cost, reliability), then work backward to the simplest design that meets them.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Facing similar data scale challenges?</h3>
+                <p>I help teams design and build data pipelines that work reliably at scale — without the overhead of a full-time hire.</p>
+                <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Senior Data & AI Engineer. Building production systems since 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navigate</h4>
+                        <a href="../#about">About</a>
+                        <a href="../#services">Services</a>
+                        <a href="../#credibility">Track Record</a>
+                        <a href="../blog/">Writing</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Connect</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">Email</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
