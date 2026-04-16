@@ -2,64 +2,61 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     const mobileBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
-    const links = navLinks.querySelectorAll('a');
 
-    const toggleMenu = () => {
-        mobileBtn.classList.toggle('active');
-        navLinks.classList.toggle('active');
+    if (mobileBtn && navLinks) {
+        const links = navLinks.querySelectorAll('a');
 
-        if (navLinks.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    };
+        const toggleMenu = () => {
+            mobileBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        };
 
-    mobileBtn.addEventListener('click', toggleMenu);
-
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks.classList.contains('active')) {
-                toggleMenu();
-            }
+        mobileBtn.addEventListener('click', toggleMenu);
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) toggleMenu();
+            });
         });
-    });
+    }
 
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    navbar.classList.toggle('scrolled', window.scrollY > 16);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
 
-    // Scroll-triggered fade-in animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
+    // Scroll-triggered fade-in with stagger support
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Respect any inline transition-delay for stagger
                 entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08
+    });
 
-    const elementsToAnimate = document.querySelectorAll('.fade-in-up');
-    elementsToAnimate.forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
-    // Immediately show hero elements above the fold
+    // Immediately reveal hero elements with orchestrated timing
     setTimeout(() => {
-        const heroElements = document.querySelectorAll('.hero .fade-in-up');
-        heroElements.forEach(el => {
+        document.querySelectorAll('.hero .fade-in-up').forEach(el => {
             el.classList.add('visible');
             observer.unobserve(el);
         });
-    }, 100);
+    }, 80);
 });

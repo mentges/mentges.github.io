@@ -9,9 +9,8 @@
         content="How I designed and built a complete data platform from scratch — lake, warehouse, orchestration, and analytics — for a growing logistics company.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/pages.css">
 </head>
@@ -104,6 +103,89 @@
 
                 <h3>Migration Pipelines</h3>
                 <p>The hardest part wasn't building new infrastructure — it was migrating data from four different source systems into a unified platform without disrupting operations:</p>
+
+                <div class="article-diagram">
+                    <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Migration Architecture: four heterogeneous sources converging into a unified analytical platform">
+                        <defs>
+                            <style>
+                                .mig-label { font-family: 'JetBrains Mono', monospace; fill: #0c1220; }
+                                .mig-sublabel { font-family: 'JetBrains Mono', monospace; fill: #64748b; }
+                                .mig-caption { font-family: 'JetBrains Mono', monospace; fill: #94a3b8; font-size: 11px; }
+                            </style>
+                            <marker id="mig-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                                <polygon points="0 0, 8 3, 0 6" fill="#2a3a52"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Background -->
+                        <rect width="720" height="420" rx="12" fill="#fcfcfd" stroke="#e8ecf1" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="360" y="32" text-anchor="middle" class="mig-label" font-size="13" font-weight="600">Migration Architecture</text>
+
+                        <!-- Source column — 4 source systems -->
+                        <!-- Relational DB -->
+                        <rect x="32" y="70" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="100" text-anchor="middle" class="mig-label" font-size="11" font-weight="500">Relational DB</text>
+
+                        <!-- Document DB -->
+                        <rect x="32" y="145" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="175" text-anchor="middle" class="mig-label" font-size="11" font-weight="500">Document DB</text>
+
+                        <!-- File Storage -->
+                        <rect x="32" y="220" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="250" text-anchor="middle" class="mig-label" font-size="11" font-weight="500">File Storage</text>
+
+                        <!-- Legacy Warehouse -->
+                        <rect x="32" y="295" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="318" text-anchor="middle" class="mig-label" font-size="10" font-weight="500">Legacy Warehouse</text>
+
+                        <!-- Source label -->
+                        <text x="107" y="372" text-anchor="middle" class="mig-sublabel" font-size="10">Source Systems</text>
+
+                        <!-- Converging arrows from sources to pipeline -->
+                        <line x1="182" y1="95" x2="278" y2="185" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+                        <line x1="182" y1="170" x2="278" y2="190" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+                        <line x1="182" y1="245" x2="278" y2="210" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+                        <line x1="182" y1="320" x2="278" y2="218" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Pipeline Layer (copper accent) -->
+                        <rect x="286" y="155" width="140" height="90" rx="10" fill="#c2713a" fill-opacity="0.1" stroke="#c2713a" stroke-width="2"/>
+                        <text x="356" y="195" text-anchor="middle" class="mig-label" font-size="12" font-weight="600" fill="#c2713a">Pipeline</text>
+                        <text x="356" y="215" text-anchor="middle" class="mig-label" font-size="12" font-weight="600" fill="#c2713a">Layer</text>
+                        <text x="356" y="260" text-anchor="middle" class="mig-sublabel" font-size="10">Extract, Transform, Load</text>
+
+                        <!-- Arrow: Pipeline to Data Lake -->
+                        <line x1="426" y1="180" x2="488" y2="130" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Data Lake -->
+                        <rect x="496" y="80" width="170" height="60" rx="10" fill="#2dd4bf" fill-opacity="0.1" stroke="#2dd4bf" stroke-width="1.5"/>
+                        <text x="581" y="108" text-anchor="middle" class="mig-label" font-size="12" font-weight="500">Data Lake</text>
+                        <text x="581" y="126" text-anchor="middle" class="mig-sublabel" font-size="10">Cloud Object Storage</text>
+
+                        <!-- Arrow: Pipeline to Data Warehouse -->
+                        <line x1="426" y1="215" x2="488" y2="215" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Arrow: Data Lake down to Data Warehouse -->
+                        <line x1="581" y1="140" x2="581" y2="183" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Data Warehouse -->
+                        <rect x="496" y="191" width="170" height="60" rx="10" fill="#2a3a52" fill-opacity="0.08" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="581" y="219" text-anchor="middle" class="mig-label" font-size="12" font-weight="500">Data Warehouse</text>
+                        <text x="581" y="237" text-anchor="middle" class="mig-sublabel" font-size="10">Analytical Engine</text>
+
+                        <!-- Arrow: Warehouse down to BI -->
+                        <line x1="581" y1="251" x2="581" y2="288" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- BI / Analytics -->
+                        <rect x="496" y="296" width="170" height="50" rx="10" fill="#c2713a" fill-opacity="0.06" stroke="#d4915e" stroke-width="1"/>
+                        <text x="581" y="326" text-anchor="middle" class="mig-label" font-size="12" font-weight="500">BI / Analytics</text>
+
+                        <!-- Caption -->
+                        <text x="360" y="400" text-anchor="middle" class="mig-caption">Four heterogeneous sources, one unified analytical platform</text>
+                    </svg>
+                </div>
+
                 <ul>
                     <li><strong>Relational DB &rarr; Warehouse</strong> — incremental extraction with change data capture, schema mapping, and data type transformations</li>
                     <li><strong>Document DB &rarr; Warehouse</strong> — denormalization of document structures into relational models suitable for analytics</li>

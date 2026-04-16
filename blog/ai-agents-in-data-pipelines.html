@@ -6,18 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked. — Bruno Mentges</title>
     <meta name="description"
-        content="Lessons from bringing agentic AI into production data engineering workflows — what shipped, what didn't, and what I'd do differently. From real experience, not theory.">
+        content="How a persistent knowledge base transformed AI agent performance in production data engineering — from generic tools to systems that understand your architecture.">
     <meta name="author" content="Bruno Mentges">
 
     <meta property="og:title" content="I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.">
-    <meta property="og:description" content="Lessons from bringing agentic AI into production data engineering — what shipped, what didn't, and what I'd do differently.">
+    <meta property="og:description" content="How a persistent knowledge base transformed AI agent performance in production data engineering.">
     <meta property="og:type" content="article">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/pages.css">
 </head>
@@ -54,7 +53,7 @@
                 <span class="case-tag">AI + Data Engineering</span>
             </div>
             <h1>I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.</h1>
-            <p class="page-subtitle">Lessons from bringing agentic AI into production data engineering at a major B2B platform — what shipped, what didn't, and what I'd do differently.</p>
+            <p class="page-subtitle">The agents were good. But they hit a ceiling I didn't expect — and the thing that broke through it wasn't a better model. It was a knowledge base.</p>
             <div class="case-quick-facts">
                 <div class="quick-fact">
                     <span class="quick-label">Author</span>
@@ -66,7 +65,7 @@
                 </div>
                 <div class="quick-fact">
                     <span class="quick-label">Reading time</span>
-                    <span class="quick-value">12 min</span>
+                    <span class="quick-value">14 min</span>
                 </div>
             </div>
         </div>
@@ -76,120 +75,485 @@
     <article class="page-content">
         <div class="container content-container">
 
+            <!-- ============================================================
+                 ACT 1 — The Setup
+                 ============================================================ -->
             <section class="content-section">
-                <p>There's a gap between "we use AI" and "AI is part of how we engineer." Most data teams I talk to are somewhere in the first camp — individual engineers using chat interfaces for code generation, maybe a copilot plugin, occasionally pasting error logs into a prompt. That's useful, but it's not integration. It's augmentation at the individual level, with no team-wide impact on how work gets done.</p>
-                <p>Over the past two years, I pushed further at a major B2B data platform. I integrated LLM-powered agents directly into our data engineering workflows — not as a side tool, but as a core part of how we built, maintained, and operated pipelines processing terabytes daily. Some of it worked remarkably well. Some of it failed in instructive ways.</p>
-                <p>This is the honest account.</p>
+                <p>Over the past two years, I integrated LLM-powered agents into the data engineering workflows of a major B2B data platform — not as a side tool, but as a core part of how we built, maintained, and operated pipelines processing terabytes daily.</p>
+                <p>I built five agents: pipeline scaffolding, code review, incident response, documentation generation, and code generation. I wired them together with MCP (Model Context Protocol) so they could access our live infrastructure — schemas, DAG definitions, run histories, team conventions.</p>
+                <p>They were useful. Some were genuinely transformative. But every single one hit the same ceiling, and it took me months to understand what it was.</p>
+                <p>This is the honest account — what worked, where the ceiling was, and the thing I'd now do <em>first</em> on any new engagement.</p>
             </section>
 
+            <!-- ============================================================
+                 ACT 2 — What I Built (MCP + Agents)
+                 ============================================================ -->
             <section class="content-section">
-                <h2>The starting point: what we had</h2>
-                <p>The data engineering team maintained hundreds of pipelines across multiple cloud providers, orchestrated by a standard workflow engine, with a transformation framework handling the modeling layer, and a cloud analytical warehouse as the serving layer. Terabytes of Sales and Finance data flowed through daily. Monitoring was handled by a data observability platform and incident management tooling.</p>
-                <p>The team was strong — senior engineers who knew the codebase well. But like every data team, we had the same recurring pain points:</p>
-                <ul>
-                    <li><strong>Boilerplate fatigue</strong> — new pipelines required scaffolding that followed the same patterns every time, but with enough variation that you couldn't just copy-paste</li>
-                    <li><strong>Context switching on incidents</strong> — when a pipeline failed at 3 AM, the on-call engineer had to reconstruct context about a pipeline they might not have touched in months</li>
-                    <li><strong>Documentation drift</strong> — pipeline docs were always slightly behind the code, because updating docs is the thing that gets cut when you're shipping under pressure</li>
-                    <li><strong>Code review bottlenecks</strong> — senior engineers spent significant time reviewing PRs for the same categories of issues: missing null handling, partition strategy mistakes, schema drift risks</li>
-                </ul>
-                <p>These aren't exotic problems. Every data team has them. The question was whether AI agents could address them at the workflow level, not just the individual prompt level.</p>
-            </section>
-
-            <section class="content-section">
-                <h2>What I built</h2>
-                <p>I didn't start with a grand plan. I started with the pain points above and worked backward to what an agent would need to be useful for each one. The key insight came early: <strong>a generic LLM is almost useless for data engineering work. A context-rich agent is transformative.</strong></p>
-
-                <h3>1. Model Context Protocol changed everything</h3>
-                <p>The single biggest lever was MCP — Model Context Protocol. Before MCP, using an AI for our specific codebase meant either dumping thousands of lines into a prompt (expensive, noisy, often exceeding context limits) or accepting generic advice that didn't account for our patterns.</p>
-                <p>MCP let me set up structured context servers that gave agents access to exactly what they needed:</p>
+                <h2>The foundation: MCP changed how agents see infrastructure</h2>
+                <p>The single biggest lever in the first phase was MCP. Before it, using an LLM for our specific codebase meant either dumping thousands of lines into a prompt or accepting generic advice. MCP let me build structured context servers that gave agents exactly what they needed:</p>
                 <ul>
                     <li><strong>Pipeline metadata</strong> — DAG definitions, schedule configurations, dependency graphs, recent run histories</li>
                     <li><strong>Schema information</strong> — warehouse table schemas, column types, freshness metadata, lineage</li>
-                    <li><strong>Transformation model definitions</strong> — model SQL, documentation, test definitions, upstream/downstream dependencies</li>
-                    <li><strong>Team conventions</strong> — naming patterns, partition strategies, testing requirements, PR checklist</li>
+                    <li><strong>Model definitions</strong> — transformation SQL, documentation, test definitions, upstream/downstream dependencies</li>
+                    <li><strong>Team conventions</strong> — naming patterns, partition strategies, testing requirements, PR checklists</li>
                 </ul>
-                <p>With this context, agents stopped giving generic Python advice and started giving answers grounded in <em>our</em> infrastructure. "The upstream model refreshes at 06:00 UTC, so your dependency should wait until 06:30 to account for the 15-minute SLA buffer we use" — that kind of specificity.</p>
+                <p>With this context, agents went from "here's some generic Python" to "the upstream model refreshes at 06:00 UTC, so your dependency should wait until 06:30 to account for the 15-minute SLA buffer we use." Specificity changed everything.</p>
 
-                <h3>2. Pipeline scaffolding agents</h3>
-                <p>The first agent I shipped was the simplest: a pipeline scaffolder. You describe what data you need to move and where, and the agent generates a pipeline following our exact patterns — correct naming conventions, proper partition strategy, standard monitoring hooks, tests pre-populated.</p>
-                <p>This sounds trivial, but the compound time savings were significant. A new pipeline that took 45-60 minutes to scaffold correctly (including looking up conventions you half-remember, copying from a similar pipeline, adjusting the parts that are different) now took 5 minutes of describing what you want plus 10 minutes of review and adjustment.</p>
-                <p><strong>What worked:</strong> Boilerplate generation, naming convention enforcement, test scaffolding. The agent was faster and more consistent than copying from an existing pipeline.</p>
-                <p><strong>What didn't:</strong> Complex orchestration logic. When pipelines had non-standard dependency patterns or conditional execution paths, the agent would generate something plausible-looking but subtly wrong. We learned to treat scaffolded pipelines as a starting point, not a finished product — which is exactly the right mental model.</p>
+                <!-- Diagram: MCP Context Architecture -->
+                <div class="article-diagram">
+                    <svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                .d1 { font-family: 'JetBrains Mono', monospace; }
+                                @keyframes d1flow { to { stroke-dashoffset: -16; } }
+                            </style>
+                        </defs>
+                        <rect width="740" height="300" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="298" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
-                <h3>3. Code review assistants</h3>
-                <p>The second agent ran as a pre-review step before human code review. It checked PRs for the categories of issues our senior engineers spent the most time catching:</p>
-                <ul>
-                    <li>Missing null/empty handling on columns that historically had nulls</li>
-                    <li>Partition strategies that would cause skew at our data volumes</li>
-                    <li>Schema changes that could break downstream consumers</li>
-                    <li>Missing or insufficient test coverage for new logic</li>
-                    <li>Deviation from team naming conventions</li>
-                </ul>
-                <p><strong>What worked:</strong> Catching mechanical issues. The agent was excellent at "you added a new column but didn't add a null check, and this source historically has 3.2% null rate" — factual, specific, actionable. Senior engineers reported spending less time on mechanical review and more time on architectural feedback.</p>
-                <p><strong>What didn't:</strong> Architectural judgment. The agent couldn't evaluate whether a pipeline's overall design was right for the problem. It could catch that you forgot a null check but not that you should be using an incremental model instead of a full refresh. Human review remained essential for design-level feedback.</p>
+                        <!-- Source nodes -->
+                        <rect x="30" y="35" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="61" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Pipeline Metadata</text>
+                        <rect x="30" y="90" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="116" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Schema Info</text>
+                        <rect x="30" y="145" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="171" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Model Definitions</text>
+                        <rect x="30" y="200" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="226" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Team Conventions</text>
 
-                <h3>4. Incident response context</h3>
-                <p>This was the most impactful agent for on-call quality of life. When a pipeline failed, the agent could immediately pull together:</p>
-                <ul>
-                    <li>The pipeline's recent run history (was this a first-time failure or recurring?)</li>
-                    <li>Upstream pipeline status (did a dependency fail first?)</li>
-                    <li>Recent code changes to the pipeline (did someone just modify it?)</li>
-                    <li>Historical failure patterns (has this pipeline failed with similar errors before, and how was it resolved?)</li>
-                </ul>
-                <p>Instead of the on-call engineer spending 15-20 minutes reconstructing context at 3 AM, the agent assembled a briefing in seconds. The engineer's job shifted from "figure out what's going on" to "confirm the diagnosis and act."</p>
-                <p><strong>What worked:</strong> Context assembly. The agent's ability to pull together information from multiple systems (orchestrator, warehouse, version control, observability platform) into a coherent briefing was genuinely transformative for incident response time.</p>
-                <p><strong>What didn't:</strong> Root cause analysis for novel failures. For patterns it had seen before, the agent was excellent. For genuinely new failure modes, it would sometimes suggest fixes that addressed symptoms rather than root causes. We added a confidence score to agent suggestions and trained the team to be skeptical of low-confidence recommendations.</p>
+                        <!-- Spokes -->
+                        <line x1="200" y1="56" x2="300" y2="135" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.5s linear infinite"/>
+                        <line x1="200" y1="111" x2="300" y2="140" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.6s linear infinite"/>
+                        <line x1="200" y1="166" x2="300" y2="150" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.7s linear infinite"/>
+                        <line x1="200" y1="221" x2="300" y2="158" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.8s linear infinite"/>
 
-                <h3>5. Documentation generation</h3>
-                <p>The documentation agent was a partial success. It could generate accurate descriptions of what a pipeline does by reading the code, and it kept docs in sync when code changed. But the valuable documentation — <em>why</em> a pipeline exists, what business decisions it supports, what the gotchas are — still required human input.</p>
-                <p>We settled on a hybrid: the agent generates and maintains the "what" (schema descriptions, data flow, schedule, dependencies), and humans write the "why" (business context, known issues, operational notes). This eliminated the most tedious part of documentation while preserving the most valuable part.</p>
+                        <!-- MCP Hub -->
+                        <rect x="300" y="112" width="160" height="60" rx="10" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <text x="380" y="140" text-anchor="middle" class="d1" font-size="13" font-weight="600" fill="#fcfcfd">MCP Layer</text>
+                        <text x="380" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="rgba(252,252,253,0.7)">live infrastructure</text>
+
+                        <!-- Arrow to Agent -->
+                        <line x1="460" y1="142" x2="530" y2="142" stroke="#c2713a" stroke-width="2" stroke-dasharray="6 4" style="animation: d1flow 1.2s linear infinite"/>
+                        <polygon points="526,137 536,142 526,147" fill="#c2713a"/>
+
+                        <!-- Agent -->
+                        <rect x="540" y="110" width="165" height="64" rx="10" fill="#2a3a52" stroke="#2dd4bf" stroke-width="1.8"/>
+                        <text x="622" y="140" text-anchor="middle" class="d1" font-size="12" font-weight="600" fill="#fcfcfd">LLM Agent</text>
+                        <text x="622" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="#2dd4bf">context-aware</text>
+
+                        <text x="370" y="280" text-anchor="middle" class="d1" font-size="10" fill="#64748b">MCP gives agents structured access to live infrastructure — the "what" of your system</text>
+                    </svg>
+                </div>
             </section>
 
             <section class="content-section">
-                <h2>The three principles that made it work</h2>
-                <p>Looking back, the difference between the agents that shipped and stayed versus the ones we abandoned came down to three principles:</p>
+                <h2>Five agents, real results</h2>
+                <p>On top of MCP, I built five agents, each integrated into an existing step of our engineering workflow:</p>
 
-                <h3>1. Guardrails first, capabilities second</h3>
-                <p>Before expanding what an agent <em>could</em> do, I defined what it <em>couldn't</em> do. Agents could read production data but not modify it. They could suggest pipeline changes but not deploy them. They could generate code but not merge it. Every capability had an explicit boundary.</p>
-                <p>This sounds limiting, but it's what made adoption possible. Engineers trusted the agents because the blast radius of a bad suggestion was zero — the worst case was wasted time reading a bad recommendation, not a production incident caused by an autonomous agent.</p>
+                <!-- Diagram: Five Agent Types -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d2 { font-family: 'JetBrains Mono', monospace; } @keyframes d2flow { to { stroke-dashoffset: -14; } }</style></defs>
+                        <rect width="740" height="260" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="258" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
-                <h3>2. Context beats intelligence</h3>
-                <p>A less capable model with rich, specific context consistently outperformed a more capable model with generic context. The MCP servers I built were more important than the choice of LLM. When the agent knew our specific schemas, conventions, and history, even simple reasoning produced useful output. Without that context, even sophisticated reasoning produced generic advice.</p>
-                <p>If you're investing in AI for your data team and you're debating which model to use, stop. Invest in the context layer instead. That's where the value is.</p>
+                        <!-- Lifecycle row -->
+                        <rect x="25" y="28" width="120" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="85" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Scaffold</text>
+                        <line x1="145" y1="50" x2="165" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="163,47 170,50 163,53" fill="#64748b"/>
 
-                <h3>3. Workflow integration, not feature addition</h3>
-                <p>The agents that stuck were the ones that fit into how engineers already worked. The pipeline scaffolder produced code in the same format engineers were already writing. The code review assistant showed up in the same PR interface engineers were already reviewing. The incident responder appeared in the same alerting channel engineers were already monitoring.</p>
-                <p>The agents that failed were the ones that required a new workflow. An early experiment with a "data exploration agent" that engineers could query in a separate interface got almost zero adoption — not because it was bad, but because it required engineers to leave their normal flow.</p>
+                        <rect x="170" y="28" width="100" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="220" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Code</text>
+                        <line x1="270" y1="50" x2="290" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="288,47 295,50 288,53" fill="#64748b"/>
+
+                        <rect x="295" y="28" width="105" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="347" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Review</text>
+                        <line x1="400" y1="50" x2="420" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="418,47 425,50 418,53" fill="#64748b"/>
+
+                        <rect x="425" y="28" width="110" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="480" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Operate</text>
+                        <line x1="535" y1="50" x2="555" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="553,47 560,50 553,53" fill="#64748b"/>
+
+                        <rect x="560" y="28" width="155" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="637" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Document</text>
+
+                        <!-- Agent row -->
+                        <line x1="85" y1="72" x2="85" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="20" y="95" width="130" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="85" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Scaffolder</text>
+
+                        <line x1="220" y1="72" x2="220" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="165" y="95" width="110" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="220" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Code Gen</text>
+
+                        <line x1="347" y1="72" x2="347" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="290" y="95" width="115" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="347" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Code Review</text>
+
+                        <line x1="480" y1="72" x2="480" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="420" y="95" width="120" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="480" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Incident Resp.</text>
+
+                        <line x1="637" y1="72" x2="637" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="555" y="95" width="165" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="637" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Documentation</text>
+
+                        <!-- MCP feeding all -->
+                        <rect x="280" y="175" width="180" height="45" rx="9" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <text x="370" y="203" text-anchor="middle" class="d2" font-size="12" font-weight="600" fill="#fcfcfd">MCP Context Layer</text>
+                        <line x1="85" y1="133" x2="300" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.5s linear infinite"/>
+                        <line x1="220" y1="133" x2="330" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.6s linear infinite"/>
+                        <line x1="347" y1="133" x2="370" y2="175" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.7s linear infinite"/>
+                        <line x1="480" y1="133" x2="410" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.8s linear infinite"/>
+                        <line x1="637" y1="133" x2="440" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.9s linear infinite"/>
+
+                        <text x="370" y="245" text-anchor="middle" class="d2" font-size="10" fill="#64748b">Five agents, one context layer — each integrated into an existing workflow step</text>
+                    </svg>
+                </div>
+
+                <p>Each agent produced real results:</p>
+                <ul>
+                    <li><strong>Pipeline scaffolder</strong> — cut new pipeline setup from 45-60 minutes to 15 minutes. Consistent naming, proper partitioning, tests pre-populated.</li>
+                    <li><strong>Code review assistant</strong> — caught mechanical issues (missing null checks, partition skew risks, schema drift) before human review, freeing senior engineers for architectural feedback.</li>
+                    <li><strong>Incident response</strong> — assembled context briefings in seconds instead of 15-20 minutes of manual reconstruction at 3 AM. The most impactful agent for on-call quality of life.</li>
+                    <li><strong>Documentation generator</strong> — kept the "what" in sync with code changes automatically. Humans wrote the "why."</li>
+                </ul>
+                <p>MCP made all of this possible. Without it, agents gave generic advice. With it, they gave answers grounded in <em>our</em> specific infrastructure.</p>
+                <p>But then every agent hit the same wall.</p>
             </section>
 
+            <!-- ============================================================
+                 ACT 3 — The Ceiling
+                 ============================================================ -->
             <section class="content-section">
-                <h2>What I'd do differently</h2>
-                <p>If I were starting this from scratch today:</p>
+                <h2>The ceiling: agents could see the system, but they couldn't remember the organization</h2>
+                <p>MCP gave agents access to <em>what</em> our system looked like right now — live schemas, current DAG definitions, recent run histories. That's infrastructure data. It's real-time and it's precise.</p>
+                <p>But there's an entire category of knowledge that doesn't live in infrastructure:</p>
+                <ul>
+                    <li><em>Why</em> was this pipeline designed this way? What constraints shaped the decision?</li>
+                    <li>The last three times we tried to migrate this service, what went wrong?</li>
+                    <li>This failure pattern recurs every quarter-end due to seasonal load spikes — but that's nowhere in the DAG definition</li>
+                    <li>The team decided six months ago to standardize on a specific approach — but that's in a Slack thread, not in code</li>
+                    <li>The senior engineer who built this system is on leave and no one else fully understands the token rotation mechanism</li>
+                </ul>
+                <p>This is <strong>institutional knowledge</strong> — the accumulated wisdom of the team, scattered across people's heads, old Slack threads, postmortems, and design docs that nobody maintains. MCP can't see any of it. And every agent I built was limited by its absence.</p>
+                <p>The incident response agent could pull run histories and upstream status — but it couldn't know that this exact failure pattern happened last quarter and the root cause was an upstream schema change, not the pipeline itself. The code review agent caught missing null checks — but it couldn't flag that the proposed approach contradicted an architecture decision the team made six months ago. The scaffolder generated correct pipelines — but it couldn't account for a deprecation that existed only in a team planning document.</p>
+                <p>Every agent was technically correct and architecturally naive. They could see the system. They couldn't <em>remember</em> the organization.</p>
+
+                <!-- Diagram: The ceiling — what MCP sees vs. what it misses -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 740 360" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d3 { font-family: 'JetBrains Mono', monospace; }</style></defs>
+                        <rect width="740" height="360" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="358" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Left: What MCP sees (teal) -->
+                        <text x="190" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#2dd4bf">What MCP sees</text>
+                        <text x="190" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Live infrastructure data</text>
+
+                        <rect x="40" y="62" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Table schemas, column types, lineage</text>
+                        <rect x="40" y="108" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">DAG definitions, schedules, deps</text>
+                        <rect x="40" y="154" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Run histories, recent failures</text>
+                        <rect x="40" y="200" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Model SQL, test definitions</text>
+
+                        <!-- Divider -->
+                        <line x1="370" y1="25" x2="370" y2="295" stroke="#2a3a52" stroke-width="1.5" stroke-dasharray="6 4"/>
+                        <rect x="358" y="148" width="24" height="24" rx="4" fill="#0c1220"/>
+                        <text x="370" y="165" text-anchor="middle" class="d3" font-size="10" font-weight="600" fill="#64748b">vs</text>
+
+                        <!-- Right: What agents couldn't access (copper / dim) -->
+                        <text x="550" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#c2713a">What agents couldn't access</text>
+                        <text x="550" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Institutional knowledge</text>
+
+                        <rect x="400" y="62" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Why this architecture was chosen</text>
+                        <rect x="400" y="108" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Past migration failures &amp; lessons</text>
+                        <rect x="400" y="154" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Seasonal patterns &amp; known risks</text>
+                        <rect x="400" y="200" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Team decisions, in-flight projects</text>
+
+                        <!-- Result -->
+                        <rect x="160" y="260" width="420" height="40" rx="8" fill="rgba(100,116,139,0.15)" stroke="#64748b" stroke-width="1"/>
+                        <text x="370" y="285" text-anchor="middle" class="d3" font-size="11" fill="#94a3b8">Result: technically correct plans, architecturally naive</text>
+
+                        <text x="370" y="338" text-anchor="middle" class="d3" font-size="10" fill="#64748b">MCP gives agents real-time eyes. But eyes without memory produce shallow work.</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 ACT 4 — The Breakthrough: Knowledge Base
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>The breakthrough: a knowledge base as the agent's memory</h2>
+                <p>After leaving that engagement, I built the thing I wished I'd had from the start: a structured, LLM-maintained knowledge base that captures the institutional knowledge MCP can't see.</p>
+                <p>The concept builds on <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">Andrej Karpathy's LLM Wiki pattern</a>: instead of having agents re-derive understanding every time (the RAG approach), the LLM <strong>incrementally builds and maintains a persistent wiki</strong>. You feed it source documents — architecture decision records, postmortems, design docs, meeting notes — and it creates cross-referenced wiki pages with confidence scoring, contradiction detection, and lifecycle management.</p>
+                <p>The knowledge compounds over time. Every source ingested makes every future agent interaction smarter, because the synthesis is already done and maintained.</p>
+                <p>I've open-sourced this as a reusable template: <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener"><strong>knowledge-base-template</strong></a>.</p>
+                <p>When you combine MCP (live infrastructure) with the knowledge base (institutional memory), agents get the full context picture:</p>
+
+                <!-- HERO DIAGRAM: The Full Context Layer — MCP + KB = Agent Performance -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 760 620" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                .d4 { font-family: 'JetBrains Mono', monospace; }
+                                @keyframes d4pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+                                @keyframes d4flow { to { stroke-dashoffset: -16; } }
+                            </style>
+                        </defs>
+                        <rect width="760" height="620" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="758" height="618" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="380" y="35" text-anchor="middle" class="d4" font-size="14" font-weight="600" fill="#fcfcfd">The Full Context Layer</text>
+                        <text x="380" y="52" text-anchor="middle" class="d4" font-size="10" fill="#64748b">Two systems, one agent, dramatically better output</text>
+
+                        <!-- LEFT: MCP Column -->
+                        <rect x="35" y="75" width="240" height="280" rx="12" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.2)" stroke-width="1.2"/>
+                        <text x="155" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#2dd4bf">MCP Layer</text>
+                        <text x="155" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Live infrastructure — the "what"</text>
+
+                        <rect x="55" y="138" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="159" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Schemas &amp; lineage</text>
+                        <rect x="55" y="178" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="199" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">DAG definitions</text>
+                        <rect x="55" y="218" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="239" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Run histories</text>
+                        <rect x="55" y="258" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="279" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Conventions &amp; patterns</text>
+
+                        <text x="155" y="318" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Real-time · Precise</text>
+                        <text x="155" y="336" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Infrastructure-scoped</text>
+
+                        <!-- RIGHT: Knowledge Base Column -->
+                        <rect x="485" y="75" width="240" height="280" rx="12" fill="rgba(194,113,58,0.04)" stroke="rgba(194,113,58,0.2)" stroke-width="1.2"/>
+                        <text x="605" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#c2713a">Knowledge Base</text>
+                        <text x="605" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Institutional memory — the "why"</text>
+
+                        <rect x="505" y="138" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="159" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Architecture decisions</text>
+                        <rect x="505" y="178" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="199" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Postmortems &amp; patterns</text>
+                        <rect x="505" y="218" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="239" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Domain rules &amp; context</text>
+                        <rect x="505" y="258" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="279" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">In-flight projects &amp; plans</text>
+
+                        <text x="605" y="318" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Compounding · Synthesized</text>
+                        <text x="605" y="336" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Organization-scoped</text>
+
+                        <!-- CENTER: Agent -->
+                        <rect x="310" y="170" width="140" height="80" rx="10" fill="#2a3a52" stroke="#94a3b8" stroke-width="1.5"/>
+                        <text x="380" y="205" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#fcfcfd">LLM Agent</text>
+                        <text x="380" y="225" text-anchor="middle" class="d4" font-size="9.5" fill="#94a3b8">full context</text>
+
+                        <!-- Flow: MCP → Agent -->
+                        <line x1="275" y1="210" x2="310" y2="210" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="306,206 314,210 306,214" fill="#2dd4bf"/>
+                        <text x="292" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#2dd4bf">eyes</text>
+
+                        <!-- Flow: KB → Agent -->
+                        <line x1="485" y1="210" x2="450" y2="210" stroke="#c2713a" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="454,206 446,210 454,214" fill="#c2713a"/>
+                        <text x="468" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#d4915e">memory</text>
+
+                        <!-- Animated pulse dots -->
+                        <circle cx="292" cy="210" fill="#2dd4bf">
+                            <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="468" cy="210" fill="#c2713a">
+                            <animate attributeName="r" values="2;4;2" dur="2.3s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.3s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <!-- Output arrow down from agent -->
+                        <line x1="380" y1="250" x2="380" y2="300" stroke="#94a3b8" stroke-width="1.5"/>
+                        <polygon points="375,296 380,306 385,296" fill="#94a3b8"/>
+
+                        <!-- Fork lines to the two output boxes -->
+                        <line x1="380" y1="306" x2="190" y2="380" stroke="#64748b" stroke-width="1"/>
+                        <line x1="380" y1="306" x2="570" y2="380" stroke="#c2713a" stroke-width="1.5"/>
+
+                        <!-- Output box: MCP only (left, dimmer) -->
+                        <rect x="65" y="380" width="250" height="60" rx="8" fill="rgba(100,116,139,0.1)" stroke="#64748b" stroke-width="1" stroke-dasharray="4 3"/>
+                        <text x="190" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#64748b">MCP only</text>
+                        <text x="190" y="426" text-anchor="middle" class="d4" font-size="11.5" fill="#94a3b8">Technically correct</text>
+
+                        <!-- Output box: MCP + KB (right, bright) -->
+                        <rect x="445" y="380" width="250" height="60" rx="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="570" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#c2713a">MCP + Knowledge Base</text>
+                        <text x="570" y="426" text-anchor="middle" class="d4" font-size="11.5" font-weight="600" fill="#d4915e">Architecturally informed</text>
+
+                        <!-- Impact section -->
+                        <line x1="100" y1="470" x2="660" y2="470" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="380" y="495" text-anchor="middle" class="d4" font-size="10.5" fill="#64748b">Impact on every agent:</text>
+
+                        <text x="380" y="520" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Scaffolder avoids deprecated patterns</text>
+                        <text x="380" y="540" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Reviewer flags decision contradictions</text>
+                        <text x="380" y="560" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Incident agent knows failure history</text>
+                        <text x="380" y="580" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Documentation captures the "why", not just the "what"</text>
+
+                        <!-- Caption -->
+                        <text x="380" y="608" text-anchor="middle" class="d4" font-size="10" fill="#64748b">MCP gives agents eyes. A knowledge base gives them memory. Together: the full context layer.</text>
+                    </svg>
+                </div>
+
+                <p>This isn't theoretical. Here's what each agent looks like with the knowledge base:</p>
+                <ul>
+                    <li><strong>Incident response</strong> — doesn't just show run histories. It knows this pipeline has a seasonal quarter-end load spike, that the last time it failed this way the root cause was an upstream schema change, and that the team's preferred remediation is to increase partition count rather than cluster size.</li>
+                    <li><strong>Code review</strong> — doesn't just catch null checks. It flags that the proposed approach contradicts ADR-047 (the team's decision to avoid cross-service joins), cites the architecture decision, and suggests an alternative that aligns.</li>
+                    <li><strong>Scaffolder</strong> — doesn't just follow naming conventions. It knows that Service X is being deprecated next quarter, so it routes the new pipeline through Service Y instead. That deprecation plan is in the knowledge base, not in any config file.</li>
+                    <li><strong>Documentation</strong> — doesn't just describe what a pipeline does. It links to the business decision that created it, the incident that shaped its error handling, and the design doc that explains its unusual partition strategy.</li>
+                </ul>
+                <p>Same agents. Same MCP. But with the knowledge base, they produce work that reflects a year of institutional context instead of a cold read of the codebase.</p>
+            </section>
+
+            <!-- ============================================================
+                 ACT 5 — How I'd Do It Today
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>If I were starting today: knowledge base first</h2>
+                <p>This is the key insight, and it inverts the order I followed: <strong>start with the knowledge base, then build agents on top of it.</strong></p>
+                <p>Here's the sequence I'd follow on any new engagement:</p>
                 <ol>
-                    <li><strong>Start with incident response, not code generation.</strong> The incident context agent had the highest impact-to-effort ratio and the fastest team buy-in. Code generation is where everyone starts, but incident response is where the pain is worst.</li>
-                    <li><strong>Build the context layer before the agent layer.</strong> I spent the first month building MCP servers and context infrastructure before writing a single agent. That felt slow at the time, but every agent built on top of that context was immediately useful. Teams that skip this step end up with agents that give generic advice.</li>
-                    <li><strong>Measure adoption, not capability.</strong> The most impressive agent demo doesn't matter if no one uses it. I should have instrumented adoption metrics earlier. The agents that looked best in demos (data exploration) had the lowest actual usage. The boring ones (scaffolding, documentation) had the highest.</li>
-                    <li><strong>Set explicit expectations about what agents can't do.</strong> The biggest source of disillusionment was when engineers expected agents to handle architectural decisions. Setting the frame early — "this is a power tool, not an architect" — would have prevented some early frustration.</li>
+                    <li><strong>Week 1-2: Build the knowledge base.</strong> Ingest the documents that hold institutional knowledge — ADRs, postmortems, design docs, onboarding guides. Use <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener">the template</a> to set up the three-layer architecture (raw sources, LLM-maintained wiki, schema). Three good ADRs in the wiki will improve agent output more than fifty raw code files.</li>
+                    <li><strong>Week 2-3: Set up MCP.</strong> Connect agents to live infrastructure — schemas, orchestrator metadata, run histories. This is the "eyes" layer.</li>
+                    <li><strong>Week 3-4: Build the first agent (incident response).</strong> It has the highest impact-to-effort ratio and the fastest team buy-in. With the knowledge base already in place, it's immediately useful — not just assembling context, but <em>understanding</em> it.</li>
+                    <li><strong>Week 4+: Add agents incrementally.</strong> Code review, scaffolding, documentation. Each one benefits from the knowledge base that's been compounding since week 1.</li>
                 </ol>
+
+                <!-- Diagram: The recommended sequence -->
+                <div class="article-diagram">
+                    <svg viewBox="0 0 740 280" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d5 { font-family: 'JetBrains Mono', monospace; } @keyframes d5flow { to { stroke-dashoffset: -14; } }</style></defs>
+                        <rect width="740" height="280" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="278" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <text x="370" y="32" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#fcfcfd">Recommended Sequence</text>
+
+                        <!-- Phase 1: Knowledge Base -->
+                        <rect x="30" y="55" width="155" height="90" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="107" y="78" text-anchor="middle" class="d5" font-size="10" fill="#c2713a">WEEK 1-2</text>
+                        <text x="107" y="98" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Knowledge</text>
+                        <text x="107" y="115" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Base</text>
+                        <text x="107" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">ADRs, postmortems</text>
+
+                        <line x1="185" y1="100" x2="215" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="212,96 220,100 212,104" fill="#64748b"/>
+
+                        <!-- Phase 2: MCP -->
+                        <rect x="220" y="55" width="135" height="90" rx="9" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="287" y="78" text-anchor="middle" class="d5" font-size="10" fill="#2dd4bf">WEEK 2-3</text>
+                        <text x="287" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">MCP</text>
+                        <text x="287" y="117" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">Layer</text>
+                        <text x="287" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Schemas, DAGs, runs</text>
+
+                        <line x1="355" y1="100" x2="385" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="382,96 390,100 382,104" fill="#64748b"/>
+
+                        <!-- Phase 3: First Agent -->
+                        <rect x="390" y="55" width="145" height="90" rx="9" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.2"/>
+                        <text x="462" y="78" text-anchor="middle" class="d5" font-size="10" fill="#94a3b8">WEEK 3-4</text>
+                        <text x="462" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#e8ecf1">First Agent</text>
+                        <text x="462" y="117" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Incident response</text>
+                        <text x="462" y="133" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">highest impact</text>
+
+                        <line x1="535" y1="100" x2="565" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="562,96 570,100 562,104" fill="#64748b"/>
+
+                        <!-- Phase 4: More Agents -->
+                        <rect x="570" y="55" width="140" height="90" rx="9" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.2"/>
+                        <text x="640" y="78" text-anchor="middle" class="d5" font-size="10" fill="#94a3b8">WEEK 4+</text>
+                        <text x="640" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#e8ecf1">More Agents</text>
+                        <text x="640" y="117" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Review, scaffold,</text>
+                        <text x="640" y="133" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">documentation</text>
+
+                        <!-- Knowledge Base compounding arrow underneath -->
+                        <line x1="107" y1="155" x2="107" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="30" y="185" width="680" height="40" rx="7" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="370" y="210" text-anchor="middle" class="d5" font-size="11" fill="#d4915e">Knowledge base compounds from week 1 — every agent built on top benefits immediately</text>
+                        <line x1="107" y1="185" x2="680" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="4 4" style="animation: d5flow 3s linear infinite"/>
+
+                        <text x="370" y="255" text-anchor="middle" class="d5" font-size="10" fill="#64748b">Start with memory, add eyes, then build agents. Inverts the usual order — and produces better results.</text>
+                    </svg>
+                </div>
+
+                <p>The key difference: when I started in 2024, I built agents first and wished I'd had a knowledge base. If you start with the knowledge base, every agent you build later is immediately better — because the institutional memory is already there, compounding from day one.</p>
             </section>
 
+            <!-- ============================================================
+                 ACT 6 — Principles
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>The principles that held up</h2>
+                <p>Across two years and five agents, three principles consistently separated what shipped from what got abandoned:</p>
+
+                <!-- Diagram: Three Principles -->
+                <div class="article-diagram">
+                    <svg viewBox="0 0 740 220" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d6 { font-family: 'JetBrains Mono', monospace; }</style></defs>
+                        <rect width="740" height="220" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="218" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Col 1 -->
+                        <rect x="25" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="135" y="65" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Guardrails First</text>
+                        <line x1="75" y1="78" x2="195" y2="78" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="135" y="100" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Define what agents</text>
+                        <text x="135" y="116" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">cannot do before what</text>
+                        <text x="135" y="132" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">they can. Zero blast</text>
+                        <text x="135" y="148" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">radius = team trust.</text>
+
+                        <!-- Col 2 -->
+                        <rect x="260" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="370" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Memory Before</text>
+                        <text x="370" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Intelligence</text>
+                        <line x1="310" y1="82" x2="430" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="370" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">A knowledge base +</text>
+                        <text x="370" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">MCP matters more than</text>
+                        <text x="370" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">which model you pick.</text>
+                        <text x="370" y="152" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Context is the moat.</text>
+
+                        <!-- Col 3 -->
+                        <rect x="495" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="605" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Workflow</text>
+                        <text x="605" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Integration</text>
+                        <line x1="545" y1="82" x2="665" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="605" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Agents must meet</text>
+                        <text x="605" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">engineers where they</text>
+                        <text x="605" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">already work. New</text>
+                        <text x="605" y="152" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">interfaces get ignored.</text>
+
+                        <text x="370" y="208" text-anchor="middle" class="d6" font-size="10" fill="#64748b">The principles that separate agents that ship from agents that get abandoned</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 ACT 7 — Bottom Line
+                 ============================================================ -->
             <section class="content-section">
                 <h2>The bottom line</h2>
-                <p>AI agents in data engineering are real and production-ready — but only if you treat them as <strong>structured tools within a workflow</strong>, not as magic boxes. The value comes from three things: rich context (MCP), clear guardrails (what the agent can't do), and seamless integration (agents meet engineers where they already work).</p>
-                <p>The teams that will get the most from AI aren't the ones with the most advanced models. They're the ones that invest in the context infrastructure and workflow integration that makes AI useful for their specific environment.</p>
-                <p>AI doesn't replace data engineers. It amplifies their judgment. And the difference between "we use AI" and "AI is part of how we engineer" is whether you've built the infrastructure to make that amplification systematic.</p>
-            </section>
-
-            <section class="content-section">
-                <h2>Want to discuss this?</h2>
-                <p>If you're thinking about integrating AI into your data engineering workflows, I'm happy to talk about what would and wouldn't work for your specific situation. I've done this in production, not just in demos.</p>
+                <p>AI agents in data engineering are production-ready. But their value is determined entirely by the context infrastructure underneath them.</p>
+                <p>MCP gives agents eyes into your live infrastructure — the <em>what</em>. A knowledge base gives them memory of your organization — the <em>why</em>. Together, they're the full context layer that turns generic AI into your team's AI.</p>
+                <p>If I were starting a new AI integration engagement today, I'd start with the knowledge base. Not the agents. Not the MCP servers. The knowledge base — because it compounds from day one, and every agent you build on top of it is immediately better for it.</p>
+                <p>The teams that will win with AI agents aren't the ones with the best models. They're the ones that build the memory infrastructure to make those models genuinely understand their system.</p>
+                <p>I've written about the knowledge base strategy in depth: <a href="knowledge-base-as-agentic-memory.html"><strong>The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds</strong></a>. And I've open-sourced the template: <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener"><strong>knowledge-base-template</strong></a>.</p>
             </section>
 
             <!-- CTA -->
             <section class="content-cta">
-                <h3>Working on AI integration for your data team?</h3>
-                <p>I help teams design and implement AI-augmented data engineering workflows — with real guardrails, not just demos.</p>
-                <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+                <h3>Want to build this for your data team?</h3>
+                <p>I help teams design and implement the full context layer — knowledge base, MCP integration, and agents — so AI actually understands your system.</p>
+                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; position: relative;">
+                    <a href="../#contact" class="btn btn-primary">Let's Talk</a>
+                    <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener" class="btn btn-secondary">View the Template</a>
+                </div>
             </section>
 
         </div>
