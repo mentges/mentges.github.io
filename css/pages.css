@@ -332,6 +332,41 @@
 /* ==========================================================================
    Blog Index Page
    ========================================================================== */
+
+/* Category headings */
+.blog-category {
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.blog-category:first-of-type {
+    margin-top: 2.5rem;
+}
+
+.blog-category-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+}
+
+.blog-category-desc {
+    font-size: 0.95rem;
+    color: var(--steel);
+    line-height: 1.6;
+}
+
+/* Card grid within categories */
+.blog-index-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+/* Legacy single-column grid (kept for compat) */
 .blog-index-grid {
     display: grid;
     grid-template-columns: 1fr;

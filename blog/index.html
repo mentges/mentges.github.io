@@ -44,99 +44,128 @@
         <div class="container">
             <a href="../" class="back-link">&larr; Back to Home</a>
             <span class="section-label">Writing</span>
-            <h1>Thinking in public</h1>
-            <p class="page-subtitle">Technical articles on Data Engineering, AI integration, and building systems at scale. Written from 28 years of production experience — not theory, not tutorials, not hype.</p>
+            <h1>Technical articles from 28 years of building</h1>
+            <p class="page-subtitle">Data engineering, AI integration, and systems at scale. Written from production experience — not theory, not tutorials, not hype. 8 articles, 35+ diagrams.</p>
         </div>
     </header>
 
     <!-- Blog Listing -->
     <section class="page-content">
         <div class="container">
-            <div class="blog-index-grid">
 
-                <a href="knowledge-base-as-agentic-memory.html" class="blog-index-card">
-                    <div class="blog-index-meta">
-                        <span class="blog-index-tag">Agentic AI</span>
-                        <span class="blog-index-tag" style="background: rgba(45,212,191,0.08); color: #2dd4bf;">Open Source</span>
-                        <span class="blog-index-date">April 2026</span>
+            <!-- Featured: Knowledge Base (flagship article + OSS) -->
+            <a href="knowledge-base-as-agentic-memory.html" class="blog-featured fade-in-up">
+                <div class="blog-featured-content">
+                    <div class="blog-featured-badge">
+                        <span class="blog-featured-label">Featured</span>
+                        <span class="blog-featured-oss">Open Source</span>
                     </div>
                     <h3>The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds</h3>
-                    <p>Why AI coding agents produce dramatically better development plans when they have a structured wiki about your architecture — and an open-source template to build one.</p>
-                </a>
+                    <p>Why AI coding agents produce dramatically better development plans when they have a structured wiki about your architecture, decisions, and concepts — and an open-source template to build one yourself.</p>
+                    <div class="blog-featured-meta">
+                        <span class="blog-date">April 2026 &middot; 14 min read</span>
+                        <span class="blog-featured-cta">Read article &rarr;</span>
+                    </div>
+                </div>
+                <div class="blog-featured-visual">
+                    <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="280" height="200" rx="8" fill="#0c1220"/>
+                        <rect x="1" y="1" width="278" height="198" rx="7" fill="none" stroke="#2a3a52" stroke-width="1"/>
+                        <rect x="30" y="130" width="220" height="36" rx="5" fill="rgba(42,58,82,0.6)" stroke="#64748b" stroke-width="0.8"/>
+                        <text x="140" y="153" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Raw Sources</text>
+                        <rect x="30" y="80" width="220" height="36" rx="5" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1"/>
+                        <text x="140" y="103" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#d4915e">LLM Wiki</text>
+                        <rect x="30" y="30" width="220" height="36" rx="5" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="0.8"/>
+                        <text x="140" y="53" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2dd4bf">Schema</text>
+                        <line x1="140" y1="130" x2="140" y2="120" stroke="#64748b" stroke-width="1" stroke-dasharray="3 2"/>
+                        <line x1="140" y1="80" x2="140" y2="70" stroke="#c2713a" stroke-width="1" stroke-dasharray="3 2"/>
+                    </svg>
+                </div>
+            </a>
 
+            <!-- Category: Agentic AI -->
+            <div class="blog-category fade-in-up">
+                <h2 class="blog-category-title">Agentic AI</h2>
+                <p class="blog-category-desc">How to integrate AI agents into real engineering workflows — from MCP to guardrails to the knowledge base that makes it all work.</p>
+            </div>
+
+            <div class="blog-index-cards fade-in-up">
                 <a href="ai-agents-in-data-pipelines.html" class="blog-index-card">
                     <div class="blog-index-meta">
                         <span class="blog-index-tag">AI + Data Engineering</span>
-                        <span class="blog-index-date">April 2026</span>
+                        <span class="blog-index-date">April 2026 &middot; 14 min</span>
                     </div>
                     <h3>I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.</h3>
-                    <p>Lessons from bringing agentic AI into production data workflows at a major B2B platform — what shipped, what didn't, and what I'd do differently.</p>
+                    <p>The agents were good. But they hit a ceiling — and the thing that broke through it wasn't a better model.</p>
                 </a>
-
-                <a href="building-data-platform-from-zero.html" class="blog-index-card">
-                    <div class="blog-index-meta">
-                        <span class="blog-index-tag">Data Architecture</span>
-                        <span class="blog-index-date">April 2026</span>
-                    </div>
-                    <h3>Building a Data Platform From Zero: A Field Guide</h3>
-                    <p>What I learned designing and building a complete data platform for a growing company — the decisions that matter, the order that works, and the mistakes everyone makes.</p>
-                </a>
-
                 <a href="mcp-agentic-workflows-guardrails.html" class="blog-index-card">
                     <div class="blog-index-meta">
                         <span class="blog-index-tag">Agentic AI</span>
-                        <span class="blog-index-date">April 2026</span>
+                        <span class="blog-index-date">April 2026 &middot; 15 min</span>
                     </div>
                     <h3>MCP, Agentic Workflows, and Guardrails: A Production Field Guide</h3>
-                    <p>What Model Context Protocol actually looks like in a real engineering workflow — how to set up context servers, build guardrails, and integrate agents where they matter.</p>
+                    <p>What Model Context Protocol actually looks like in a real engineering workflow — context servers, guardrails, and integration patterns.</p>
                 </a>
+            </div>
 
+            <!-- Category: Data Architecture & Engineering -->
+            <div class="blog-category fade-in-up">
+                <h2 class="blog-category-title">Data Architecture &amp; Engineering</h2>
+                <p class="blog-category-desc">Building data platforms, optimizing pipelines, and the architecture patterns that actually hold up in production.</p>
+            </div>
+
+            <div class="blog-index-cards fade-in-up">
+                <a href="building-data-platform-from-zero.html" class="blog-index-card">
+                    <div class="blog-index-meta">
+                        <span class="blog-index-tag">Data Architecture</span>
+                        <span class="blog-index-date">April 2026 &middot; 16 min</span>
+                    </div>
+                    <h3>Building a Data Platform From Zero: A Field Guide</h3>
+                    <p>The decisions that matter, the order that works, and the mistakes everyone makes.</p>
+                </a>
                 <a href="medallion-architecture-misunderstood.html" class="blog-index-card">
                     <div class="blog-index-meta">
                         <span class="blog-index-tag">Data Architecture</span>
-                        <span class="blog-index-date">April 2026</span>
+                        <span class="blog-index-date">April 2026 &middot; 14 min</span>
                     </div>
                     <h3>The Medallion Architecture Is Not What You Think It Is</h3>
-                    <p>Everyone talks about bronze/silver/gold layers. Most implementations miss the point entirely. Here's what the pattern is actually for — and when to break the rules.</p>
+                    <p>Bronze/silver/gold layers — most implementations miss the point entirely.</p>
                 </a>
-
                 <a href="petabyte-pipeline-cost-optimization.html" class="blog-index-card">
                     <div class="blog-index-meta">
                         <span class="blog-index-tag">Data Engineering</span>
-                        <span class="blog-index-date">April 2026</span>
+                        <span class="blog-index-date">April 2026 &middot; 13 min</span>
                     </div>
                     <h3>How I Reduced a Petabyte Pipeline's Cost by 40%</h3>
-                    <p>Performance engineering at scale isn't about clever tricks — it's about understanding economics. Spark optimization, partition strategy, and thinking in dollars.</p>
+                    <p>Performance engineering at scale is about economics, not clever tricks.</p>
                 </a>
+            </div>
 
+            <!-- Category: Leadership & Career -->
+            <div class="blog-category fade-in-up">
+                <h2 class="blog-category-title">Leadership &amp; Career</h2>
+                <p class="blog-category-desc">The human side of engineering — team building, tech debt, and lessons from 28 years in the industry.</p>
+            </div>
+
+            <div class="blog-index-cards fade-in-up">
                 <a href="hackathon-tech-debt-bug-squash.html" class="blog-index-card">
                     <div class="blog-index-meta">
                         <span class="blog-index-tag">Leadership</span>
-                        <span class="blog-index-date">April 2026</span>
+                        <span class="blog-index-date">April 2026 &middot; 11 min</span>
                     </div>
                     <h3>The 70% Bug Squash: What One Hackathon Taught Me About Tech Debt</h3>
-                    <p>How a 2-day hackathon squashed 70% of outstanding bugs and improved uptime from 92% to 99%. The real lesson isn't about hackathons — it's about permission.</p>
+                    <p>The real lesson isn't about hackathons — it's about permission.</p>
                 </a>
-
                 <a href="28-year-engineering-arc.html" class="blog-index-card">
                     <div class="blog-index-meta">
                         <span class="blog-index-tag">Career</span>
-                        <span class="blog-index-date">April 2026</span>
+                        <span class="blog-index-date">April 2026 &middot; 15 min</span>
                     </div>
-                    <h3>From 1.5 Billion Records/Day to AI Agents: My 28-Year Engineering Arc</h3>
-                    <p>From telecoms in 1998 to AI-augmented data engineering in 2026. What stayed the same, what changed completely, and what I wish I'd known earlier.</p>
+                    <h3>From 1.5 Billion Records/Day to AI Agents: My 28-Year Arc</h3>
+                    <p>What stayed the same, what changed completely, and what I wish I'd known.</p>
                 </a>
-
             </div>
 
-            <!-- Subscribe -->
-            <div class="blog-subscribe">
-                <h3>Get notified when I publish</h3>
-                <p>No spam, no fluff. One email when a new article drops.</p>
-                <div class="newsletter-placeholder">
-                    <span>Newsletter signup coming soon</span>
-                </div>
-            </div>
         </div>
     </section>
 
