@@ -1639,3 +1639,36 @@ a.blog-card:hover h3 {
         padding: 0.4rem 0.8rem;
     }
 }
+
+/* ==========================================================================
+   Language Switcher (EN / PT)
+   ========================================================================== */
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.lang-switcher .lang-active {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.lang-switcher .lang-sep {
+    color: var(--mist);
+    user-select: none;
+}
+
+.lang-switcher a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.lang-switcher a:hover {
+    color: var(--color-accent);
+}

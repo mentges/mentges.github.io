@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo de Caso: Construindo uma Plataforma de Dados do Zero — Bruno Mentges / Mentges.AI</title>
+    <meta name="description"
+        content="Como projetei e construí uma plataforma de dados completa do zero — lake, warehouse, orquestração e análise — para uma empresa de logística em crescimento.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+
+    <!-- Alternate language -->
+    <link rel="alternate" hreflang="en" href="https://mentgesinformatica.com.br/case-studies/greenfield-data-platform.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://mentgesinformatica.com.br/pt_br/case-studies/plataforma-de-dados-greenfield.html">
+    <link rel="alternate" hreflang="x-default" href="https://mentgesinformatica.com.br/case-studies/greenfield-data-platform.html">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../#services">Serviços</a></li>
+                <li><a href="../#credibility">Histórico</a></li>
+                <li><a href="../blog/">Artigos</a></li>
+                <li class="lang-switcher"><a href="../../case-studies/greenfield-data-platform.html" hreflang="en">EN</a><span class="lang-sep">/</span><span class="lang-active">PT</span></li>
+                <li><a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Agendar Conversa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Case Study Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="../#credibility" class="back-link">&larr; Voltar ao Histórico</a>
+            <div class="case-meta">
+                <span class="case-tag">Estudo de Caso</span>
+                <span class="case-tag">Arquitetura de Plataforma</span>
+            </div>
+            <h1>Construindo uma Plataforma de Dados Completa do Zero</h1>
+            <p class="page-subtitle">Como projetei e construí toda a arquitetura de governança de dados — Data Lake, Data Warehouse, orquestração e análise — viabilizando decisões orientadas por dados para uma empresa de logística em crescimento.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Indústria</span>
+                    <span class="quick-value">Logística (Brasil)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Função</span>
+                    <span class="quick-value">Tech Leader / Desenvolvedor Sênior</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Duração</span>
+                    <span class="quick-value">15 meses (2023 &ndash; 2024)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Escopo</span>
+                    <span class="quick-value">Plataforma de dados greenfield</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Case Study Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <h2>O Desafio</h2>
+                <p>Esta empresa de logística brasileira em rápido crescimento havia escalado significativamente, mas tomava decisões quase inteiramente por intuição. Os dados estavam espalhados por múltiplos sistemas — um banco de dados relacional, armazenamento de objetos, um banco de dados de documentos e um warehouse legado na nuvem — mas não havia como uni-los, analisá-los ou agir sobre eles.</p>
+                <p>Os problemas se acumulavam em cascata:</p>
+                <ul>
+                    <li><strong>Nenhuma fonte única de verdade</strong> — dados operacionais viviam em silos sem camada de integração</li>
+                    <li><strong>Nenhuma capacidade analítica</strong> — times de negócio não conseguiam responder perguntas básicas sobre operações, custos ou desempenho sem pedir à engenharia</li>
+                    <li><strong>Nenhum time de dados</strong> — literalmente não havia ninguém na empresa cujo trabalho fosse dados</li>
+                    <li><strong>Múltiplos sistemas-fonte</strong> — um banco relacional, um banco de documentos, armazenamento de arquivos e um warehouse na nuvem parcialmente usado — cada um com padrões de acesso e modelos de dados diferentes</li>
+                    <li><strong>Crescimento acelerado</strong> — a empresa precisava de infraestrutura de dados que escalasse com o negócio, não de uma solução improvisada que precisaria ser substituída em 6 meses</li>
+                </ul>
+                <p>O mandato era claro: projetar e construir toda a plataforma de dados do zero, e formar o time para operá-la.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Minha Função & Abordagem</h2>
+                <p>Entrei como Tech Leader com um mandato duplo: arquitetar a plataforma e construir o time. Veja como abordei isso.</p>
+
+                <h3>Projeto de Arquitetura</h3>
+                <p>Projetei uma arquitetura em camadas sobre uma grande plataforma de nuvem, escolhida pela eficiência de custo e pelo poder analítico serverless:</p>
+                <ul>
+                    <li><strong>Data Lake</strong> — armazenamento de objetos na nuvem como camada de ingestão bruta, cópias imutáveis de todos os dados de origem, particionadas por data</li>
+                    <li><strong>Data Warehouse</strong> — warehouse analítico serverless com tabelas dimensionais, lógica de negócio e agregações</li>
+                    <li><strong>Orquestração</strong> — orquestração de workflows baseada em Python para agendamento de pipelines, gestão de dependências, monitoramento e alertas</li>
+                    <li><strong>Análise</strong> — ferramenta de BI open-source para dashboards e relatórios self-service para os times de negócio</li>
+                </ul>
+
+                <h3>Pipelines de Migração</h3>
+                <p>A parte mais difícil não foi construir a nova infraestrutura — foi migrar dados de quatro sistemas-fonte diferentes para uma plataforma unificada sem interromper as operações:</p>
+
+                <div class="article-diagram">
+                    <svg viewBox="0 0 720 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitetura de Migração: quatro fontes heterogêneas convergindo em uma plataforma analítica unificada">
+                        <defs>
+                            <style>
+                                .mig-label { font-family: 'JetBrains Mono', monospace; fill: #0c1220; }
+                                .mig-sublabel { font-family: 'JetBrains Mono', monospace; fill: #64748b; }
+                                .mig-caption { font-family: 'JetBrains Mono', monospace; fill: #94a3b8; font-size: 11px; }
+                            </style>
+                            <marker id="mig-arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                                <polygon points="0 0, 8 3, 0 6" fill="#2a3a52"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Background -->
+                        <rect width="720" height="420" rx="12" fill="#fcfcfd" stroke="#e8ecf1" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="360" y="32" text-anchor="middle" class="mig-label" font-size="13" font-weight="600">Arquitetura de Migração</text>
+
+                        <!-- Source column — 4 source systems -->
+                        <!-- Relational DB -->
+                        <rect x="32" y="70" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="100" text-anchor="middle" class="mig-label" font-size="11" font-weight="500">BD Relacional</text>
+
+                        <!-- Document DB -->
+                        <rect x="32" y="145" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="175" text-anchor="middle" class="mig-label" font-size="11" font-weight="500">BD de Documentos</text>
+
+                        <!-- File Storage -->
+                        <rect x="32" y="220" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="250" text-anchor="middle" class="mig-label" font-size="11" font-weight="500">Armazenamento de Arquivos</text>
+
+                        <!-- Legacy Warehouse -->
+                        <rect x="32" y="295" width="150" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="107" y="318" text-anchor="middle" class="mig-label" font-size="10" font-weight="500">Warehouse Legado</text>
+
+                        <!-- Source label -->
+                        <text x="107" y="372" text-anchor="middle" class="mig-sublabel" font-size="10">Sistemas-Fonte</text>
+
+                        <!-- Converging arrows from sources to pipeline -->
+                        <line x1="182" y1="95" x2="278" y2="185" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+                        <line x1="182" y1="170" x2="278" y2="190" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+                        <line x1="182" y1="245" x2="278" y2="210" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+                        <line x1="182" y1="320" x2="278" y2="218" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Pipeline Layer (copper accent) -->
+                        <rect x="286" y="155" width="140" height="90" rx="10" fill="#c2713a" fill-opacity="0.1" stroke="#c2713a" stroke-width="2"/>
+                        <text x="356" y="195" text-anchor="middle" class="mig-label" font-size="12" font-weight="600" fill="#c2713a">Camada de</text>
+                        <text x="356" y="215" text-anchor="middle" class="mig-label" font-size="12" font-weight="600" fill="#c2713a">Pipeline</text>
+                        <text x="356" y="260" text-anchor="middle" class="mig-sublabel" font-size="10">Extrair, Transformar, Carregar</text>
+
+                        <!-- Arrow: Pipeline to Data Lake -->
+                        <line x1="426" y1="180" x2="488" y2="130" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Data Lake -->
+                        <rect x="496" y="80" width="170" height="60" rx="10" fill="#2dd4bf" fill-opacity="0.1" stroke="#2dd4bf" stroke-width="1.5"/>
+                        <text x="581" y="108" text-anchor="middle" class="mig-label" font-size="12" font-weight="500">Data Lake</text>
+                        <text x="581" y="126" text-anchor="middle" class="mig-sublabel" font-size="10">Armazenamento de Objetos na Nuvem</text>
+
+                        <!-- Arrow: Pipeline to Data Warehouse -->
+                        <line x1="426" y1="215" x2="488" y2="215" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Arrow: Data Lake down to Data Warehouse -->
+                        <line x1="581" y1="140" x2="581" y2="183" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- Data Warehouse -->
+                        <rect x="496" y="191" width="170" height="60" rx="10" fill="#2a3a52" fill-opacity="0.08" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="581" y="219" text-anchor="middle" class="mig-label" font-size="12" font-weight="500">Data Warehouse</text>
+                        <text x="581" y="237" text-anchor="middle" class="mig-sublabel" font-size="10">Motor Analítico</text>
+
+                        <!-- Arrow: Warehouse down to BI -->
+                        <line x1="581" y1="251" x2="581" y2="288" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#mig-arrow)"/>
+
+                        <!-- BI / Analytics -->
+                        <rect x="496" y="296" width="170" height="50" rx="10" fill="#c2713a" fill-opacity="0.06" stroke="#d4915e" stroke-width="1"/>
+                        <text x="581" y="326" text-anchor="middle" class="mig-label" font-size="12" font-weight="500">BI / Análise</text>
+
+                        <!-- Caption -->
+                        <text x="360" y="400" text-anchor="middle" class="mig-caption">Quatro fontes heterogêneas, uma plataforma analítica unificada</text>
+                    </svg>
+                </div>
+
+                <ul>
+                    <li><strong>BD Relacional &rarr; Warehouse</strong> — extração incremental com Change Data Capture, mapeamento de esquema e transformações de tipos de dados</li>
+                    <li><strong>BD de Documentos &rarr; Warehouse</strong> — desnormalização de estruturas de documentos em modelos relacionais adequados para análise</li>
+                    <li><strong>Armazenamento de arquivos &rarr; Lake &rarr; Warehouse</strong> — padronização de formatos de arquivo e automação da ingestão</li>
+                    <li><strong>Warehouse legado &rarr; Novo warehouse</strong> — migração de visões materializadas existentes e dados históricos</li>
+                </ul>
+                <p>Todos os pipelines foram construídos em Python com orquestração de workflows, projetados para re-execuções idempotentes e recuperação automatizada de falhas.</p>
+
+                <h3>Construção de Time</h3>
+                <p>Contratei e integrei o primeiro Time de Dados da empresa — definindo funções, estabelecendo fluxos de desenvolvimento, criando práticas de code review e documentação para que o time pudesse operar de forma independente após o meu engajamento.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Resultados</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">4 &rarr; 1</span>
+                        <span class="result-label">Silos de dados consolidados em uma plataforma unificada</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">Zero &rarr; Total</span>
+                        <span class="result-label">De nenhuma capacidade de dados para análise self-service</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">Novo Time</span>
+                        <span class="result-label">Formei o primeiro Time de Dados da empresa do zero</span>
+                    </div>
+                </div>
+                <p>Em poucos meses, os times de negócio passaram de "pedir à engenharia e esperar" para extrair seus próprios relatórios. A plataforma de dados se tornou a base para a tomada de decisões operacionais em toda a empresa — otimização de rotas, análise de custos, acompanhamento de desempenho e insights sobre clientes passaram a ser self-service.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Stack Técnica</h2>
+                <div class="tech-stack-grid">
+                    <div class="tech-item"><strong>Nuvem</strong>: Grande plataforma de nuvem (serverless-first)</div>
+                    <div class="tech-item"><strong>Warehouse</strong>: Warehouse analítico serverless</div>
+                    <div class="tech-item"><strong>Lake</strong>: Armazenamento de objetos na nuvem</div>
+                    <div class="tech-item"><strong>Orquestração</strong>: Orquestração de workflows baseada em Python</div>
+                    <div class="tech-item"><strong>Análise</strong>: Plataforma de BI open-source</div>
+                    <div class="tech-item"><strong>Fontes</strong>: 4 sistemas heterogêneos (relacional, documento, arquivo, warehouse)</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Conclusão Principal</h2>
+                <p>Construir uma plataforma de dados do zero é tanto um desafio organizacional quanto técnico. As escolhas de tecnologia importam menos do que os princípios de arquitetura: <strong>mantenha simples, torne confiável, projete para o time que vai manter</strong> (não para o que construiu).</p>
+                <p>O maior erro que vejo em plataformas de dados greenfield é o excesso de engenharia para uma escala hipotética. Esta empresa precisava de uma plataforma que pudesse crescer com o negócio — não de um sistema projetado para tráfego em escala Google desde o primeiro dia. A arquitetura certa é a mais simples que atende às necessidades atuais e tem pontos claros de extensão para o futuro.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Precisa de uma plataforma de dados construída do zero?</h3>
+                <p>Já fiz isso várias vezes — da arquitetura à implementação e à transição para o time interno. Vamos conversar sobre a sua situação.</p>
+                <a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary">Agendar uma Conversa Inicial</a>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navegação</h4>
+                        <a href="../#about">Sobre</a>
+                        <a href="../#services">Serviços</a>
+                        <a href="../#credibility">Histórico</a>
+                        <a href="../blog/">Artigos</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Conexões</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2ef3ffda-e77e-4fbe-aff4-5d2c196cd01a"></script>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

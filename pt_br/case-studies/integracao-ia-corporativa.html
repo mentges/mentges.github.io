@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo de Caso: Integrando Agentes de IA em Engenharia de Dados — Bruno Mentges / Mentges.AI</title>
+    <meta name="description"
+        content="Como fui pioneiro na integração de agentes de IA, MCP e fluxos agênticos em engenharia de dados de produção em uma grande plataforma de dados B2B.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+
+    <!-- Alternate language -->
+    <link rel="alternate" hreflang="en" href="https://mentgesinformatica.com.br/case-studies/enterprise-ai-integration.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://mentgesinformatica.com.br/pt_br/case-studies/integracao-ia-corporativa.html">
+    <link rel="alternate" hreflang="x-default" href="https://mentgesinformatica.com.br/case-studies/enterprise-ai-integration.html">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../#services">Serviços</a></li>
+                <li><a href="../#credibility">Histórico</a></li>
+                <li><a href="../blog/">Artigos</a></li>
+                <li class="lang-switcher"><a href="../../case-studies/enterprise-ai-integration.html" hreflang="en">EN</a><span class="lang-sep">/</span><span class="lang-active">PT</span></li>
+                <li><a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Agendar Conversa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Case Study Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="../#credibility" class="back-link">&larr; Voltar ao Histórico</a>
+            <div class="case-meta">
+                <span class="case-tag">Estudo de Caso</span>
+                <span class="case-tag">Integração de IA</span>
+            </div>
+            <h1>Integrando Agentes de IA em Engenharia de Dados em Produção</h1>
+            <p class="page-subtitle">Como fui pioneiro no uso de agentes de IA, Model Context Protocol (MCP) e fluxos agênticos dentro de um time real de engenharia de dados — indo além de demos para uso diário em produção.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Indústria</span>
+                    <span class="quick-value">Dados B2B / SaaS</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Função</span>
+                    <span class="quick-value">Engenheiro Sênior de Dados</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Duração</span>
+                    <span class="quick-value">2 anos (2024 &ndash; 2026)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Escopo</span>
+                    <span class="quick-value">Fluxos de dados aumentados por IA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Case Study Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <h2>O Desafio</h2>
+                <p>Esta empresa é uma grande plataforma de inteligência de dados B2B com infraestrutura de dados massiva — terabytes de dados de Vendas e Finanças fluindo por pipelines diariamente através de múltiplos provedores de nuvem. O time de engenharia de dados mantinha centenas de pipelines, modelos e produtos de dados.</p>
+                <p>Como todo time de dados em 2024-2025, nos perguntavam: <em>"Como usamos IA?"</em> Mas a pergunta por trás disso era mais específica:</p>
+                <ul>
+                    <li><strong>Como integrar IA em fluxos de engenharia de dados existentes</strong> sem quebrar a confiabilidade?</li>
+                    <li><strong>Como ir além de "ChatGPT para autocompletar código"</strong> para uma IA que realmente participa do processo de engenharia?</li>
+                    <li><strong>Como construir guardrails</strong> para que agentes de IA possam ajudar sem introduzir risco em sistemas de produção?</li>
+                    <li><strong>Como fazer um time de engenheiros seniores realmente adotar ferramentas de IA</strong> — não como brinquedo, mas como parte central da forma como trabalham?</li>
+                </ul>
+                <p>A maioria dos times estava presa no estágio "desenvolvedores individuais usando ChatGPT". Eu queria ir além — para IA como uma <em>ferramenta de engenharia em nível de time</em> com integração real aos nossos fluxos.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Minha Função & Abordagem</h2>
+                <p>Fui o primeiro do time a integrar IA sistematicamente à nossa prática de engenharia de dados. Isso não foi uma iniciativa imposta — foi inovação de baixo para cima que eu conduzi e depois evangelizei por todo o time.</p>
+
+                <h3>Agentes LLM Com Guardrails</h3>
+                <p>Construí e configurei agentes potencializados por LLM feitos sob medida para nosso contexto específico de engenharia — não assistentes genéricos de código, mas agentes que entendiam nosso codebase, nossas convenções, nossos modelos de dados e nossos padrões de deploy. Elementos-chave:</p>
+                <ul>
+                    <li><strong>Skills customizadas</strong> — agentes treinados em nossos padrões específicos de pipeline, convenções de nomenclatura e requisitos de teste</li>
+                    <li><strong>Guardrails</strong> — limites explícitos sobre o que os agentes podiam e não podiam fazer: ler dados de produção mas não modificá-los, sugerir mudanças em pipelines mas exigir revisão humana, gerar testes mas não pulá-los</li>
+                    <li><strong>Gerenciamento de contexto</strong> — usando MCP (Model Context Protocol) para dar aos agentes acesso a documentação relevante, definições de schema e metadados de pipeline sem sobrecarregar as janelas de contexto</li>
+                </ul>
+
+                <div class="article-diagram">
+                    <svg viewBox="0 0 620 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Framework de Guardrails de Agentes: zonas concêntricas de capacidade para agentes LLM">
+                        <defs>
+                            <style>
+                                .diagram-label { font-family: 'JetBrains Mono', monospace; fill: #0c1220; }
+                                .diagram-label-light { font-family: 'JetBrains Mono', monospace; fill: #64748b; }
+                                .diagram-caption { font-family: 'JetBrains Mono', monospace; fill: #94a3b8; font-size: 11px; }
+                            </style>
+                        </defs>
+
+                        <!-- Background -->
+                        <rect width="620" height="480" rx="12" fill="#fcfcfd" stroke="#e8ecf1" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="310" y="36" text-anchor="middle" class="diagram-label" font-size="13" font-weight="600">Framework de Guardrails de Agentes</text>
+
+                        <!-- Outer zone — PODE FAZER (teal tint) -->
+                        <ellipse cx="310" cy="235" rx="270" ry="185" fill="#2dd4bf" fill-opacity="0.1" stroke="#2dd4bf" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="310" y="72" text-anchor="middle" class="diagram-label" font-size="12" font-weight="600" fill="#2dd4bf">PODE FAZER</text>
+
+                        <!-- PODE FAZER items -->
+                        <rect x="50" y="100" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <text x="120" y="121" text-anchor="middle" class="diagram-label" font-size="10">Ler dados prod</text>
+
+                        <rect x="430" y="100" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <text x="500" y="121" text-anchor="middle" class="diagram-label" font-size="10">Sugerir mudanças</text>
+
+                        <rect x="50" y="365" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <text x="120" y="386" text-anchor="middle" class="diagram-label" font-size="10">Gerar código</text>
+
+                        <rect x="430" y="365" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <text x="500" y="386" text-anchor="middle" class="diagram-label" font-size="10">Revisar PRs</text>
+
+                        <!-- Middle zone — COM REVISÃO (copper tint) -->
+                        <ellipse cx="310" cy="235" rx="180" ry="125" fill="#c2713a" fill-opacity="0.08" stroke="#c2713a" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="310" y="128" text-anchor="middle" class="diagram-label" font-size="12" font-weight="600" fill="#c2713a">COM REVISÃO</text>
+
+                        <!-- COM REVISÃO items -->
+                        <rect x="130" y="155" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#d4915e" stroke-width="1"/>
+                        <text x="205" y="176" text-anchor="middle" class="diagram-label" font-size="10">Sugestões de deploy</text>
+
+                        <rect x="340" y="155" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#d4915e" stroke-width="1"/>
+                        <text x="415" y="176" text-anchor="middle" class="diagram-label" font-size="10">Modificar configs</text>
+
+                        <rect x="235" y="325" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#d4915e" stroke-width="1"/>
+                        <text x="310" y="346" text-anchor="middle" class="diagram-label" font-size="10">Atualizar docs</text>
+
+                        <!-- Inner zone — NÃO PODE (subtle steel) -->
+                        <ellipse cx="310" cy="235" rx="100" ry="70" fill="#94a3b8" fill-opacity="0.12" stroke="#64748b" stroke-width="1.5" stroke-opacity="0.6"/>
+                        <text x="310" y="186" text-anchor="middle" class="diagram-label" font-size="12" font-weight="600" fill="#64748b">NÃO PODE</text>
+
+                        <!-- NÃO PODE items -->
+                        <rect x="238" y="196" width="144" height="26" rx="5" fill="#fcfcfd" stroke="#64748b" stroke-width="1"/>
+                        <text x="310" y="214" text-anchor="middle" class="diagram-label" font-size="10">Modificar dados prod</text>
+
+                        <rect x="238" y="228" width="144" height="26" rx="5" fill="#fcfcfd" stroke="#64748b" stroke-width="1"/>
+                        <text x="310" y="246" text-anchor="middle" class="diagram-label" font-size="10">Fazer merge de código</text>
+
+                        <rect x="238" y="260" width="144" height="26" rx="5" fill="#fcfcfd" stroke="#64748b" stroke-width="1"/>
+                        <text x="310" y="278" text-anchor="middle" class="diagram-label" font-size="10">Pular testes</text>
+
+                        <!-- Caption -->
+                        <text x="310" y="450" text-anchor="middle" class="diagram-caption">Zonas de capacidade do agente — toda ação tem um limite explícito</text>
+                    </svg>
+                </div>
+
+                <h3>Fluxos de Desenvolvimento Agêntico</h3>
+                <p>O valor real não estava na geração pontual de código — estava em integrar a IA ao <em>fluxo de trabalho</em>:</p>
+                <ul>
+                    <li><strong>Desenvolvimento de pipelines</strong> — agentes capazes de estruturar novos pipelines seguindo nossos padrões, gerar boilerplate e pré-popular configurações</li>
+                    <li><strong>Assistência em revisão de código</strong> — agentes que revisavam PRs em busca de armadilhas comuns de engenharia de dados: falta de tratamento de nulos, riscos de schema drift, problemas de estratégia de particionamento</li>
+                    <li><strong>Resposta a incidentes</strong> — agentes com contexto sobre nosso setup de monitoramento que ajudavam a diagnosticar falhas de pipeline mais rapidamente</li>
+                    <li><strong>Geração de documentação</strong> — agentes que mantinham a documentação de pipelines sincronizada com as mudanças reais de código</li>
+                </ul>
+
+                <h3>Model Context Protocol (MCP)</h3>
+                <p>O MCP foi o viabilizador-chave. Em vez de despejar codebases inteiros nos prompts, configurei servidores MCP que davam aos agentes acesso estruturado exatamente ao contexto que precisavam — definições de DAG, metadados de modelos de transformação, informações de schema do warehouse e históricos de execução de pipelines. Isso tornou os agentes dramaticamente mais úteis porque conseguiam raciocinar sobre nossa infraestrutura específica, não apenas padrões genéricos.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Resultados</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">Primeiro</span>
+                        <span class="result-label">Membro do time a colocar fluxos de dados aumentados por IA em produção</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">TB/dia</span>
+                        <span class="result-label">Pipelines mantidos com desenvolvimento assistido por IA</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">Todo o time</span>
+                        <span class="result-label">Adoção de ferramentas de IA por todo o time de engenharia</span>
+                    </div>
+                </div>
+                <p>O impacto foi além da produtividade individual. Ao demonstrar integração real de IA em nível de produção (não apenas demos), ajudei a mudar a relação do time com ferramentas de IA — de curiosidade para uso diário. Os padrões que estabeleci — guardrails, gerenciamento de contexto via MCP, integração ao fluxo — se tornaram o modelo de como o time mais amplo adotou IA.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Stack Técnica</h2>
+                <div class="tech-stack-grid">
+                    <div class="tech-item"><strong>IA</strong>: agentes LLM com skills customizadas e guardrails</div>
+                    <div class="tech-item"><strong>Protocolo</strong>: Model Context Protocol (MCP)</div>
+                    <div class="tech-item"><strong>Pipelines</strong>: orquestração de workflows, framework de transformação, Python</div>
+                    <div class="tech-item"><strong>Warehouse</strong>: warehouse analítico em nuvem</div>
+                    <div class="tech-item"><strong>Nuvem</strong>: Multi-cloud (3 provedores, gerenciado via IaC)</div>
+                    <div class="tech-item"><strong>Monitoramento</strong>: plataforma de observabilidade de dados + gestão de incidentes</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Conclusão Principal</h2>
+                <p>Integração de IA em engenharia de dados não é sobre substituir engenheiros — é sobre <strong>amplificar o julgamento deles</strong>. Os times que vão extrair mais valor da IA são aqueles que a tratam como ferramenta dentro de um fluxo estruturado, não como caixa mágica.</p>
+                <p>As três coisas que fizeram isso funcionar:</p>
+                <ol>
+                    <li><strong>Guardrails primeiro</strong> — defina o que a IA <em>não pode</em> fazer antes de expandir o que ela pode</li>
+                    <li><strong>Contexto é tudo</strong> — um agente de IA sem o contexto do seu codebase específico é apenas um autocompletar genérico. O MCP muda o jogo.</li>
+                    <li><strong>Integração ao fluxo, não adição de feature</strong> — a IA tem que se encaixar na forma como os engenheiros já trabalham, não exigir um novo processo</li>
+                </ol>
+                <p>Esta é a interseção em que me especializo agora: a integração prática e em nível de produção de IA em engenharia de dados — não como demo, mas como infraestrutura.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Precisa de integrar IA aos seus fluxos de dados?</h3>
+                <p>Já fiz isso em escala, em produção, com guardrails reais. Deixe-me ajudar seu time a fazer o mesmo.</p>
+                <a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary">Agendar uma Conversa Inicial</a>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navegação</h4>
+                        <a href="../#about">Sobre</a>
+                        <a href="../#services">Serviços</a>
+                        <a href="../#credibility">Histórico</a>
+                        <a href="../blog/">Artigos</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Conexões</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2ef3ffda-e77e-4fbe-aff4-5d2c196cd01a"></script>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

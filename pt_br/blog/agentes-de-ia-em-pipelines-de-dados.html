@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrei Agentes de IA em Nossos Pipelines de Dados. Aqui Está o Que de Fato Funcionou. — Bruno Mentges</title>
+    <meta name="description"
+        content="Como uma base de conhecimento persistente transformou a performance de agentes de IA em engenharia de dados em produção — de ferramentas genéricas a sistemas que entendem sua arquitetura.">
+    <meta name="author" content="Bruno Mentges">
+
+    <meta property="og:title" content="Integrei Agentes de IA em Nossos Pipelines de Dados. Aqui Está o Que de Fato Funcionou.">
+    <meta property="og:description" content="Como uma base de conhecimento persistente transformou a performance de agentes de IA em engenharia de dados em produção.">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="pt_BR">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+
+    <!-- Alternate language -->
+    <link rel="alternate" hreflang="en" href="https://mentgesinformatica.com.br/blog/ai-agents-in-data-pipelines.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://mentgesinformatica.com.br/pt_br/blog/agentes-de-ia-em-pipelines-de-dados.html">
+    <link rel="alternate" hreflang="x-default" href="https://mentgesinformatica.com.br/blog/ai-agents-in-data-pipelines.html">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../#services">Serviços</a></li>
+                <li><a href="../#credibility">Histórico</a></li>
+                <li><a href="./">Artigos</a></li>
+                <li class="lang-switcher"><a href="../../blog/ai-agents-in-data-pipelines.html" hreflang="en">EN</a><span class="lang-sep">/</span><span class="lang-active">PT</span></li>
+                <li><a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Agendar Conversa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="./" class="back-link">&larr; Voltar aos Artigos</a>
+            <div class="case-meta">
+                <span class="case-tag">IA + Engenharia de Dados</span>
+            </div>
+            <h1>Integrei Agentes de IA em Nossos Pipelines de Dados. Aqui Está o Que de Fato Funcionou.</h1>
+            <p class="page-subtitle">Os agentes eram bons. Mas bateram em um teto que eu não esperava — e o que rompeu esse teto não foi um modelo melhor. Foi uma base de conhecimento.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Autor</span>
+                    <span class="quick-value">Bruno Mentges</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Publicado</span>
+                    <span class="quick-value">Abril de 2026</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Tempo de leitura</span>
+                    <span class="quick-value">14 min de leitura</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <!-- ============================================================
+                 ACT 1 — The Setup
+                 ============================================================ -->
+            <section class="content-section">
+                <p>Nos últimos dois anos, integrei agentes baseados em LLM aos fluxos de engenharia de dados de uma grande plataforma de dados B2B — não como ferramenta paralela, mas como parte central de como construíamos, mantínhamos e operávamos pipelines processando terabytes diariamente.</p>
+                <p>Construí cinco agentes: scaffolding de pipeline, code review, resposta a incidentes, geração de documentação e geração de código. Conectei todos via MCP (Model Context Protocol) para que pudessem acessar nossa infraestrutura viva — esquemas, definições de DAGs, históricos de execução, convenções do time.</p>
+                <p>Eles eram úteis. Alguns foram genuinamente transformadores. Mas cada um bateu no mesmo teto, e levei meses para entender qual era esse teto.</p>
+                <p>Este é o relato honesto — o que funcionou, onde estava o teto, e o que eu faria <em>primeiro</em> em qualquer novo engajamento hoje.</p>
+            </section>
+
+            <!-- ============================================================
+                 ACT 2 — What I Built (MCP + Agents)
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>A base: MCP mudou como os agentes enxergam infraestrutura</h2>
+                <p>A maior alavanca na primeira fase foi o MCP. Antes dele, usar um LLM para nossa base de código específica significava despejar milhares de linhas em um prompt ou aceitar conselhos genéricos. O MCP me permitiu construir servidores de contexto estruturado que davam aos agentes exatamente o que eles precisavam:</p>
+                <ul>
+                    <li><strong>Metadados de pipeline</strong> — definições de DAGs, configurações de agendamento, grafos de dependência, históricos recentes de execução</li>
+                    <li><strong>Informações de esquema</strong> — esquemas de tabelas do warehouse, tipos de colunas, metadados de frescor, lineage</li>
+                    <li><strong>Definições de modelos</strong> — SQL de transformação, documentação, definições de testes, dependências upstream/downstream</li>
+                    <li><strong>Convenções do time</strong> — padrões de nomenclatura, estratégias de particionamento, requisitos de testes, checklists de PR</li>
+                </ul>
+                <p>Com esse contexto, os agentes passaram de "aqui está um Python genérico" para "o modelo upstream atualiza às 06:00 UTC, então sua dependência deve esperar até 06:30 para acomodar o buffer de SLA de 15 minutos que usamos". Especificidade mudou tudo.</p>
+
+                <!-- Diagram: MCP Context Architecture -->
+                <div class="article-diagram">
+                    <svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                .d1 { font-family: 'JetBrains Mono', monospace; }
+                                @keyframes d1flow { to { stroke-dashoffset: -16; } }
+                            </style>
+                        </defs>
+                        <rect width="740" height="300" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="298" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Source nodes -->
+                        <rect x="30" y="35" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="61" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Metadados de Pipeline</text>
+                        <rect x="30" y="90" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="116" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Info de Esquema</text>
+                        <rect x="30" y="145" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="171" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Definições de Modelos</text>
+                        <rect x="30" y="200" width="170" height="42" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="115" y="226" text-anchor="middle" class="d1" font-size="11" fill="#e8ecf1">Convenções do Time</text>
+
+                        <!-- Spokes -->
+                        <line x1="200" y1="56" x2="300" y2="135" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.5s linear infinite"/>
+                        <line x1="200" y1="111" x2="300" y2="140" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.6s linear infinite"/>
+                        <line x1="200" y1="166" x2="300" y2="150" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.7s linear infinite"/>
+                        <line x1="200" y1="221" x2="300" y2="158" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.8s linear infinite"/>
+
+                        <!-- MCP Hub -->
+                        <rect x="300" y="112" width="160" height="60" rx="10" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <text x="380" y="140" text-anchor="middle" class="d1" font-size="13" font-weight="600" fill="#fcfcfd">Camada MCP</text>
+                        <text x="380" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="rgba(252,252,253,0.7)">infraestrutura viva</text>
+
+                        <!-- Arrow to Agent -->
+                        <line x1="460" y1="142" x2="530" y2="142" stroke="#c2713a" stroke-width="2" stroke-dasharray="6 4" style="animation: d1flow 1.2s linear infinite"/>
+                        <polygon points="526,137 536,142 526,147" fill="#c2713a"/>
+
+                        <!-- Agent -->
+                        <rect x="540" y="110" width="165" height="64" rx="10" fill="#2a3a52" stroke="#2dd4bf" stroke-width="1.8"/>
+                        <text x="622" y="140" text-anchor="middle" class="d1" font-size="12" font-weight="600" fill="#fcfcfd">Agente LLM</text>
+                        <text x="622" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="#2dd4bf">ciente de contexto</text>
+
+                        <text x="370" y="280" text-anchor="middle" class="d1" font-size="10" fill="#64748b">MCP dá aos agentes acesso estruturado à infraestrutura viva — o "o quê" do seu sistema</text>
+                    </svg>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Cinco agentes, resultados reais</h2>
+                <p>Sobre o MCP, construí cinco agentes, cada um integrado a uma etapa existente do nosso fluxo de engenharia:</p>
+
+                <!-- Diagram: Five Agent Types -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d2 { font-family: 'JetBrains Mono', monospace; } @keyframes d2flow { to { stroke-dashoffset: -14; } }</style></defs>
+                        <rect width="740" height="260" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="258" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Lifecycle row -->
+                        <rect x="25" y="28" width="120" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="85" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Scaffold</text>
+                        <line x1="145" y1="50" x2="165" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="163,47 170,50 163,53" fill="#64748b"/>
+
+                        <rect x="170" y="28" width="100" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="220" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Código</text>
+                        <line x1="270" y1="50" x2="290" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="288,47 295,50 288,53" fill="#64748b"/>
+
+                        <rect x="295" y="28" width="105" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="347" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Revisão</text>
+                        <line x1="400" y1="50" x2="420" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="418,47 425,50 418,53" fill="#64748b"/>
+
+                        <rect x="425" y="28" width="110" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="480" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Operar</text>
+                        <line x1="535" y1="50" x2="555" y2="50" stroke="#64748b" stroke-width="1.2"/><polygon points="553,47 560,50 553,53" fill="#64748b"/>
+
+                        <rect x="560" y="28" width="155" height="44" rx="7" fill="#2a3a52" stroke="#64748b" stroke-width="1"/>
+                        <text x="637" y="55" text-anchor="middle" class="d2" font-size="11" font-weight="600" fill="#e8ecf1">Documentar</text>
+
+                        <!-- Agent row -->
+                        <line x1="85" y1="72" x2="85" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="20" y="95" width="130" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="85" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Scaffolder</text>
+
+                        <line x1="220" y1="72" x2="220" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="165" y="95" width="110" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="220" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Gerador de Código</text>
+
+                        <line x1="347" y1="72" x2="347" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="290" y="95" width="115" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="347" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Revisor de Código</text>
+
+                        <line x1="480" y1="72" x2="480" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="420" y="95" width="120" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="480" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Resp. Incidente</text>
+
+                        <line x1="637" y1="72" x2="637" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="555" y="95" width="165" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="637" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Documentação</text>
+
+                        <!-- MCP feeding all -->
+                        <rect x="280" y="175" width="180" height="45" rx="9" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <text x="370" y="203" text-anchor="middle" class="d2" font-size="12" font-weight="600" fill="#fcfcfd">Camada de Contexto MCP</text>
+                        <line x1="85" y1="133" x2="300" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.5s linear infinite"/>
+                        <line x1="220" y1="133" x2="330" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.6s linear infinite"/>
+                        <line x1="347" y1="133" x2="370" y2="175" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.7s linear infinite"/>
+                        <line x1="480" y1="133" x2="410" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.8s linear infinite"/>
+                        <line x1="637" y1="133" x2="440" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.9s linear infinite"/>
+
+                        <text x="370" y="245" text-anchor="middle" class="d2" font-size="10" fill="#64748b">Cinco agentes, uma camada de contexto — cada um integrado a uma etapa de fluxo existente</text>
+                    </svg>
+                </div>
+
+                <p>Cada agente produziu resultados reais:</p>
+                <ul>
+                    <li><strong>Scaffolder de pipeline</strong> — reduziu o setup de novos pipelines de 45-60 minutos para 15 minutos. Nomenclatura consistente, particionamento correto, testes pré-populados.</li>
+                    <li><strong>Assistente de code review</strong> — capturou questões mecânicas (checagens de null ausentes, riscos de skew de partição, schema drift) antes da revisão humana, liberando engenheiros sêniores para feedback arquitetural.</li>
+                    <li><strong>Resposta a incidentes</strong> — montava briefings de contexto em segundos em vez de 15-20 minutos de reconstrução manual às 3 da manhã. O agente de maior impacto na qualidade de vida do plantão.</li>
+                    <li><strong>Gerador de documentação</strong> — mantinha o "o quê" em sincronia com mudanças de código automaticamente. Humanos escreviam o "porquê".</li>
+                </ul>
+                <p>MCP tornou tudo isso possível. Sem ele, os agentes davam conselhos genéricos. Com ele, davam respostas fundamentadas na <em>nossa</em> infraestrutura específica.</p>
+                <p>Mas aí cada agente bateu na mesma parede.</p>
+            </section>
+
+            <!-- ============================================================
+                 ACT 3 — The Ceiling
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>O teto: os agentes enxergavam o sistema, mas não conseguiam lembrar da organização</h2>
+                <p>O MCP dava aos agentes acesso a <em>como</em> nosso sistema era naquele momento — esquemas vivos, definições atuais de DAG, históricos recentes de execução. Isso é dado de infraestrutura. É tempo real e é preciso.</p>
+                <p>Mas existe uma categoria inteira de conhecimento que não vive na infraestrutura:</p>
+                <ul>
+                    <li><em>Por que</em> este pipeline foi desenhado dessa forma? Que restrições moldaram a decisão?</li>
+                    <li>Nas últimas três vezes em que tentamos migrar este serviço, o que deu errado?</li>
+                    <li>Este padrão de falha recorre a cada fim de trimestre por causa de picos sazonais de carga — mas isso não está em lugar algum na definição do DAG</li>
+                    <li>O time decidiu há seis meses padronizar uma abordagem específica — mas isso está em uma thread do Slack, não no código</li>
+                    <li>O engenheiro sênior que construiu este sistema está de licença e ninguém mais entende completamente o mecanismo de rotação de tokens</li>
+                </ul>
+                <p>Isto é <strong>conhecimento institucional</strong> — a sabedoria acumulada do time, espalhada pela cabeça das pessoas, threads antigas do Slack, postmortems e design docs que ninguém mantém. MCP não consegue ver nada disso. E todo agente que construí estava limitado pela sua ausência.</p>
+                <p>O agente de resposta a incidentes conseguia puxar históricos de execução e status de upstream — mas não sabia que esse padrão exato de falha aconteceu no trimestre passado e que a causa raiz foi uma mudança de esquema upstream, não o pipeline em si. O agente de code review pegava checagens de null ausentes — mas não conseguia sinalizar que a abordagem proposta contradizia uma decisão de arquitetura que o time tomou seis meses atrás. O scaffolder gerava pipelines corretos — mas não conseguia levar em conta uma depreciação que existia só em um documento de planejamento do time.</p>
+                <p>Cada agente era tecnicamente correto e arquiteturalmente ingênuo. Conseguiam ver o sistema. Não conseguiam <em>lembrar</em> da organização.</p>
+
+                <!-- Diagram: The ceiling — what MCP sees vs. what it misses -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 740 360" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d3 { font-family: 'JetBrains Mono', monospace; }</style></defs>
+                        <rect width="740" height="360" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="358" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Left: What MCP sees (teal) -->
+                        <text x="190" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#2dd4bf">O que o MCP enxerga</text>
+                        <text x="190" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Dados de infraestrutura viva</text>
+
+                        <rect x="40" y="62" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Esquemas de tabelas, tipos, lineage</text>
+                        <rect x="40" y="108" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Definições de DAGs, agendamentos, deps</text>
+                        <rect x="40" y="154" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Históricos, falhas recentes</text>
+                        <rect x="40" y="200" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="190" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">SQL de modelos, definições de testes</text>
+
+                        <!-- Divider -->
+                        <line x1="370" y1="25" x2="370" y2="295" stroke="#2a3a52" stroke-width="1.5" stroke-dasharray="6 4"/>
+                        <rect x="358" y="148" width="24" height="24" rx="4" fill="#0c1220"/>
+                        <text x="370" y="165" text-anchor="middle" class="d3" font-size="10" font-weight="600" fill="#64748b">vs</text>
+
+                        <!-- Right: What agents couldn't access (copper / dim) -->
+                        <text x="550" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#c2713a">O que os agentes não acessavam</text>
+                        <text x="550" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Conhecimento institucional</text>
+
+                        <rect x="400" y="62" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Por que esta arquitetura foi escolhida</text>
+                        <rect x="400" y="108" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Falhas &amp; lições de migrações passadas</text>
+                        <rect x="400" y="154" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Padrões sazonais &amp; riscos conhecidos</text>
+                        <rect x="400" y="200" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="550" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Decisões do time, projetos em andamento</text>
+
+                        <!-- Result -->
+                        <rect x="160" y="260" width="420" height="40" rx="8" fill="rgba(100,116,139,0.15)" stroke="#64748b" stroke-width="1"/>
+                        <text x="370" y="285" text-anchor="middle" class="d3" font-size="11" fill="#94a3b8">Resultado: planos tecnicamente corretos, arquiteturalmente ingênuos</text>
+
+                        <text x="370" y="338" text-anchor="middle" class="d3" font-size="10" fill="#64748b">MCP dá olhos em tempo real aos agentes. Mas olhos sem memória produzem trabalho raso.</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 ACT 4 — The Breakthrough: Knowledge Base
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>A virada: uma base de conhecimento como memória do agente</h2>
+                <p>Depois de deixar aquele engajamento, construí o que gostaria de ter tido desde o início: uma base de conhecimento estruturada e mantida por LLM que captura o conhecimento institucional que o MCP não consegue ver.</p>
+                <p>O conceito se apoia no <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">padrão LLM Wiki do Andrej Karpathy</a>: em vez de fazer os agentes rederivarem entendimento toda vez (a abordagem RAG), o LLM <strong>constrói e mantém incrementalmente um wiki persistente</strong>. Você alimenta com documentos-fonte — architecture decision records, postmortems, design docs, notas de reunião — e ele cria páginas wiki cruzadas com pontuação de confiança, detecção de contradições e gerenciamento de ciclo de vida.</p>
+                <p>O conhecimento se acumula ao longo do tempo. Cada fonte ingerida torna toda interação futura de agente mais inteligente, porque a síntese já está feita e mantida.</p>
+                <p>Disponibilizei isso como um template reutilizável open source: <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener"><strong>knowledge-base-template</strong></a>.</p>
+                <p>Quando você combina MCP (infraestrutura viva) com a base de conhecimento (memória institucional), os agentes ganham o quadro completo de contexto:</p>
+
+                <!-- HERO DIAGRAM: The Full Context Layer — MCP + KB = Agent Performance -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 760 620" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                .d4 { font-family: 'JetBrains Mono', monospace; }
+                                @keyframes d4pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+                                @keyframes d4flow { to { stroke-dashoffset: -16; } }
+                            </style>
+                        </defs>
+                        <rect width="760" height="620" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="758" height="618" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="380" y="35" text-anchor="middle" class="d4" font-size="14" font-weight="600" fill="#fcfcfd">A Camada de Contexto Completa</text>
+                        <text x="380" y="52" text-anchor="middle" class="d4" font-size="10" fill="#64748b">Dois sistemas, um agente, saída dramaticamente melhor</text>
+
+                        <!-- LEFT: MCP Column -->
+                        <rect x="35" y="75" width="240" height="280" rx="12" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.2)" stroke-width="1.2"/>
+                        <text x="155" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#2dd4bf">Camada MCP</text>
+                        <text x="155" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Infraestrutura viva — o "o quê"</text>
+
+                        <rect x="55" y="138" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="159" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Esquemas &amp; lineage</text>
+                        <rect x="55" y="178" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="199" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Definições de DAGs</text>
+                        <rect x="55" y="218" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="239" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Históricos de execução</text>
+                        <rect x="55" y="258" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
+                        <text x="155" y="279" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Convenções &amp; padrões</text>
+
+                        <text x="155" y="318" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Tempo real · Preciso</text>
+                        <text x="155" y="336" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Escopo de infraestrutura</text>
+
+                        <!-- RIGHT: Knowledge Base Column -->
+                        <rect x="485" y="75" width="240" height="280" rx="12" fill="rgba(194,113,58,0.04)" stroke="rgba(194,113,58,0.2)" stroke-width="1.2"/>
+                        <text x="605" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#c2713a">Base de Conhecimento</text>
+                        <text x="605" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Memória institucional — o "porquê"</text>
+
+                        <rect x="505" y="138" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="159" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Decisões de arquitetura</text>
+                        <rect x="505" y="178" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="199" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Postmortems &amp; padrões</text>
+                        <rect x="505" y="218" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="239" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Regras de domínio &amp; contexto</text>
+                        <rect x="505" y="258" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
+                        <text x="605" y="279" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Projetos em andamento &amp; planos</text>
+
+                        <text x="605" y="318" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Acumulativa · Sintetizada</text>
+                        <text x="605" y="336" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Escopo da organização</text>
+
+                        <!-- CENTER: Agent -->
+                        <rect x="310" y="170" width="140" height="80" rx="10" fill="#2a3a52" stroke="#94a3b8" stroke-width="1.5"/>
+                        <text x="380" y="205" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#fcfcfd">Agente LLM</text>
+                        <text x="380" y="225" text-anchor="middle" class="d4" font-size="9.5" fill="#94a3b8">contexto completo</text>
+
+                        <!-- Flow: MCP → Agent -->
+                        <line x1="275" y1="210" x2="310" y2="210" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="306,206 314,210 306,214" fill="#2dd4bf"/>
+                        <text x="292" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#2dd4bf">olhos</text>
+
+                        <!-- Flow: KB → Agent -->
+                        <line x1="485" y1="210" x2="450" y2="210" stroke="#c2713a" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="454,206 446,210 454,214" fill="#c2713a"/>
+                        <text x="468" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#d4915e">memória</text>
+
+                        <!-- Animated pulse dots -->
+                        <circle cx="292" cy="210" fill="#2dd4bf">
+                            <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="468" cy="210" fill="#c2713a">
+                            <animate attributeName="r" values="2;4;2" dur="2.3s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.3s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <!-- Output arrow down from agent -->
+                        <line x1="380" y1="250" x2="380" y2="300" stroke="#94a3b8" stroke-width="1.5"/>
+                        <polygon points="375,296 380,306 385,296" fill="#94a3b8"/>
+
+                        <!-- Fork lines to the two output boxes -->
+                        <line x1="380" y1="306" x2="190" y2="380" stroke="#64748b" stroke-width="1"/>
+                        <line x1="380" y1="306" x2="570" y2="380" stroke="#c2713a" stroke-width="1.5"/>
+
+                        <!-- Output box: MCP only (left, dimmer) -->
+                        <rect x="65" y="380" width="250" height="60" rx="8" fill="rgba(100,116,139,0.1)" stroke="#64748b" stroke-width="1" stroke-dasharray="4 3"/>
+                        <text x="190" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#64748b">Apenas MCP</text>
+                        <text x="190" y="426" text-anchor="middle" class="d4" font-size="11.5" fill="#94a3b8">Tecnicamente correto</text>
+
+                        <!-- Output box: MCP + KB (right, bright) -->
+                        <rect x="445" y="380" width="250" height="60" rx="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="570" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#c2713a">MCP + Base de Conhecimento</text>
+                        <text x="570" y="426" text-anchor="middle" class="d4" font-size="11.5" font-weight="600" fill="#d4915e">Arquiteturalmente informado</text>
+
+                        <!-- Impact section -->
+                        <line x1="100" y1="470" x2="660" y2="470" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="380" y="495" text-anchor="middle" class="d4" font-size="10.5" fill="#64748b">Impacto em cada agente:</text>
+
+                        <text x="380" y="520" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Scaffolder evita padrões depreciados</text>
+                        <text x="380" y="540" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Revisor sinaliza contradições com decisões</text>
+                        <text x="380" y="560" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Agente de incidente conhece histórico de falhas</text>
+                        <text x="380" y="580" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Documentação captura o "porquê", não só o "o quê"</text>
+
+                        <!-- Caption -->
+                        <text x="380" y="608" text-anchor="middle" class="d4" font-size="10" fill="#64748b">MCP dá olhos aos agentes. Uma base de conhecimento dá memória. Juntos: a camada de contexto completa.</text>
+                    </svg>
+                </div>
+
+                <p>Isso não é teórico. Veja como cada agente fica com a base de conhecimento:</p>
+                <ul>
+                    <li><strong>Resposta a incidentes</strong> — não só mostra históricos de execução. Sabe que este pipeline tem um pico sazonal de carga de fim de trimestre, que da última vez que falhou dessa forma a causa raiz foi uma mudança de esquema upstream, e que a remediação preferida do time é aumentar a contagem de partições em vez do tamanho do cluster.</li>
+                    <li><strong>Code review</strong> — não só pega checagens de null. Sinaliza que a abordagem proposta contradiz o ADR-047 (a decisão do time de evitar joins cross-service), cita a decisão de arquitetura e sugere uma alternativa que se alinha.</li>
+                    <li><strong>Scaffolder</strong> — não só segue convenções de nomenclatura. Sabe que o Serviço X está sendo depreciado no próximo trimestre, então roteia o novo pipeline pelo Serviço Y. Esse plano de depreciação está na base de conhecimento, não em nenhum arquivo de config.</li>
+                    <li><strong>Documentação</strong> — não só descreve o que um pipeline faz. Aponta para a decisão de negócio que o criou, o incidente que moldou seu tratamento de erros e o design doc que explica sua estratégia incomum de particionamento.</li>
+                </ul>
+                <p>Mesmos agentes. Mesmo MCP. Mas com a base de conhecimento, eles produzem trabalho que reflete um ano de contexto institucional em vez de uma leitura fria da base de código.</p>
+            </section>
+
+            <!-- ============================================================
+                 ACT 5 — How I'd Do It Today
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>Se eu estivesse começando hoje: base de conhecimento primeiro</h2>
+                <p>Este é o insight-chave, e ele inverte a ordem que segui: <strong>comece pela base de conhecimento, depois construa os agentes em cima dela.</strong></p>
+                <p>Esta é a sequência que eu seguiria em qualquer novo engajamento:</p>
+                <ol>
+                    <li><strong>Semanas 1-2: Construa a base de conhecimento.</strong> Ingira os documentos que guardam o conhecimento institucional — ADRs, postmortems, design docs, guias de onboarding. Use <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener">o template</a> para montar a arquitetura de três camadas (fontes brutas, wiki mantido por LLM, esquema). Três bons ADRs no wiki vão melhorar a saída dos agentes mais do que cinquenta arquivos de código brutos.</li>
+                    <li><strong>Semanas 2-3: Configure o MCP.</strong> Conecte os agentes à infraestrutura viva — esquemas, metadados do orquestrador, históricos de execução. Esta é a camada dos "olhos".</li>
+                    <li><strong>Semanas 3-4: Construa o primeiro agente (resposta a incidentes).</strong> É o de maior razão impacto-por-esforço e o de adesão mais rápida do time. Com a base de conhecimento já no lugar, ele é imediatamente útil — não só montando contexto, mas <em>entendendo</em>-o.</li>
+                    <li><strong>Semana 4+: Adicione agentes incrementalmente.</strong> Code review, scaffolding, documentação. Cada um se beneficia da base de conhecimento que vem se acumulando desde a semana 1.</li>
+                </ol>
+
+                <!-- Diagram: The recommended sequence -->
+                <div class="article-diagram">
+                    <svg viewBox="0 0 740 280" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d5 { font-family: 'JetBrains Mono', monospace; } @keyframes d5flow { to { stroke-dashoffset: -14; } }</style></defs>
+                        <rect width="740" height="280" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="278" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <text x="370" y="32" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#fcfcfd">Sequência Recomendada</text>
+
+                        <!-- Phase 1: Knowledge Base -->
+                        <rect x="30" y="55" width="155" height="90" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="107" y="78" text-anchor="middle" class="d5" font-size="10" fill="#c2713a">SEMANAS 1-2</text>
+                        <text x="107" y="98" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Base de</text>
+                        <text x="107" y="115" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Conhecimento</text>
+                        <text x="107" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">ADRs, postmortems</text>
+
+                        <line x1="185" y1="100" x2="215" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="212,96 220,100 212,104" fill="#64748b"/>
+
+                        <!-- Phase 2: MCP -->
+                        <rect x="220" y="55" width="135" height="90" rx="9" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <text x="287" y="78" text-anchor="middle" class="d5" font-size="10" fill="#2dd4bf">SEMANAS 2-3</text>
+                        <text x="287" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">Camada</text>
+                        <text x="287" y="117" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">MCP</text>
+                        <text x="287" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Esquemas, DAGs, runs</text>
+
+                        <line x1="355" y1="100" x2="385" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="382,96 390,100 382,104" fill="#64748b"/>
+
+                        <!-- Phase 3: First Agent -->
+                        <rect x="390" y="55" width="145" height="90" rx="9" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.2"/>
+                        <text x="462" y="78" text-anchor="middle" class="d5" font-size="10" fill="#94a3b8">SEMANAS 3-4</text>
+                        <text x="462" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#e8ecf1">Primeiro Agente</text>
+                        <text x="462" y="117" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Resposta a incidentes</text>
+                        <text x="462" y="133" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">maior impacto</text>
+
+                        <line x1="535" y1="100" x2="565" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="562,96 570,100 562,104" fill="#64748b"/>
+
+                        <!-- Phase 4: More Agents -->
+                        <rect x="570" y="55" width="140" height="90" rx="9" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.2"/>
+                        <text x="640" y="78" text-anchor="middle" class="d5" font-size="10" fill="#94a3b8">SEMANA 4+</text>
+                        <text x="640" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#e8ecf1">Mais Agentes</text>
+                        <text x="640" y="117" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Revisão, scaffold,</text>
+                        <text x="640" y="133" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">documentação</text>
+
+                        <!-- Knowledge Base compounding arrow underneath -->
+                        <line x1="107" y1="155" x2="107" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="30" y="185" width="680" height="40" rx="7" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="370" y="210" text-anchor="middle" class="d5" font-size="11" fill="#d4915e">Base de conhecimento se acumula desde a semana 1 — cada agente construído em cima se beneficia imediatamente</text>
+                        <line x1="107" y1="185" x2="680" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="4 4" style="animation: d5flow 3s linear infinite"/>
+
+                        <text x="370" y="255" text-anchor="middle" class="d5" font-size="10" fill="#64748b">Comece com memória, adicione olhos, depois construa agentes. Inverte a ordem usual — e produz melhores resultados.</text>
+                    </svg>
+                </div>
+
+                <p>A diferença-chave: quando comecei em 2024, construí os agentes primeiro e gostaria de ter tido uma base de conhecimento. Se você começa pela base de conhecimento, cada agente que construir depois é imediatamente melhor — porque a memória institucional já está lá, acumulando desde o primeiro dia.</p>
+            </section>
+
+            <!-- ============================================================
+                 ACT 6 — Principles
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>Os princípios que se sustentaram</h2>
+                <p>Ao longo de dois anos e cinco agentes, três princípios separaram consistentemente o que foi entregue do que foi abandonado:</p>
+
+                <!-- Diagram: Three Principles -->
+                <div class="article-diagram">
+                    <svg viewBox="0 0 740 220" xmlns="http://www.w3.org/2000/svg">
+                        <defs><style>.d6 { font-family: 'JetBrains Mono', monospace; }</style></defs>
+                        <rect width="740" height="220" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="738" height="218" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Col 1 -->
+                        <rect x="25" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="135" y="65" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Guardrails Primeiro</text>
+                        <line x1="75" y1="78" x2="195" y2="78" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="135" y="100" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Defina o que os agentes</text>
+                        <text x="135" y="116" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">não podem fazer antes do</text>
+                        <text x="135" y="132" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">que podem. Raio de dano</text>
+                        <text x="135" y="148" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">zero = confiança do time.</text>
+
+                        <!-- Col 2 -->
+                        <rect x="260" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="370" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Memória Antes da</text>
+                        <text x="370" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Inteligência</text>
+                        <line x1="310" y1="82" x2="430" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="370" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Uma base de conhecimento</text>
+                        <text x="370" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">+ MCP importa mais do que</text>
+                        <text x="370" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">qual modelo você escolhe.</text>
+                        <text x="370" y="152" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Contexto é o moat.</text>
+
+                        <!-- Col 3 -->
+                        <rect x="495" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="605" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Integração ao</text>
+                        <text x="605" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Fluxo</text>
+                        <line x1="545" y1="82" x2="665" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="605" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Agentes devem encontrar</text>
+                        <text x="605" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">engenheiros onde eles já</text>
+                        <text x="605" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">trabalham. Novas interfaces</text>
+                        <text x="605" y="152" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">são ignoradas.</text>
+
+                        <text x="370" y="208" text-anchor="middle" class="d6" font-size="10" fill="#64748b">Os princípios que separam agentes que entregam de agentes que são abandonados</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 ACT 7 — Bottom Line
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>A conclusão</h2>
+                <p>Agentes de IA em engenharia de dados estão prontos para produção. Mas seu valor é determinado inteiramente pela infraestrutura de contexto por baixo.</p>
+                <p>MCP dá aos agentes olhos sobre sua infraestrutura viva — o <em>o quê</em>. Uma base de conhecimento dá memória sobre sua organização — o <em>porquê</em>. Juntos, são a camada de contexto completa que transforma IA genérica na IA do seu time.</p>
+                <p>Se eu estivesse começando um novo engajamento de integração de IA hoje, começaria pela base de conhecimento. Não pelos agentes. Não pelos servidores MCP. A base de conhecimento — porque ela se acumula desde o primeiro dia, e cada agente que você construir em cima dela será imediatamente melhor por isso.</p>
+                <p>Os times que vão vencer com agentes de IA não são os com os melhores modelos. São os que constroem a infraestrutura de memória para fazer esses modelos realmente entenderem seu sistema.</p>
+                <p>Escrevi em profundidade sobre a estratégia de base de conhecimento: <a href="base-de-conhecimento-como-memoria-agentica.html"><strong>A Estratégia de Base de Conhecimento: Dando aos Agentes de IA uma Memória Que Se Acumula</strong></a>. E disponibilizei o template open source: <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener"><strong>knowledge-base-template</strong></a>.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Quer construir isto para o seu time de dados?</h3>
+                <p>Ajudo times a desenhar e implementar a camada de contexto completa — base de conhecimento, integração MCP e agentes — para que a IA entenda de fato o seu sistema.</p>
+                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; position: relative;">
+                    <a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary">Agendar uma Conversa Inicial</a>
+                    <a href="https://github.com/bmentges/knowledge-base-template" target="_blank" rel="noopener" class="btn btn-secondary">Ver o Template</a>
+                </div>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navegação</h4>
+                        <a href="../#about">Sobre</a>
+                        <a href="../#services">Serviços</a>
+                        <a href="../#credibility">Histórico</a>
+                        <a href="./">Artigos</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Conexões</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2ef3ffda-e77e-4fbe-aff4-5d2c196cd01a"></script>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

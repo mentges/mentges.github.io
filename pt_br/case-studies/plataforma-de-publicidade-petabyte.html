@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo de Caso: Pipelines de Ad Tech em Escala de Petabyte — Bruno Mentges / Mentges.AI</title>
+    <meta name="description"
+        content="Como ajudei a processar 1,5 bilhão de registros por dia em escala de petabyte para uma das 10 maiores plataformas globais de Ad Tech.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+
+    <!-- Alternate language -->
+    <link rel="alternate" hreflang="en" href="https://mentgesinformatica.com.br/case-studies/petabyte-ad-platform.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://mentgesinformatica.com.br/pt_br/case-studies/plataforma-de-publicidade-petabyte.html">
+    <link rel="alternate" hreflang="x-default" href="https://mentgesinformatica.com.br/case-studies/petabyte-ad-platform.html">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../#services">Serviços</a></li>
+                <li><a href="../#credibility">Histórico</a></li>
+                <li><a href="../blog/">Artigos</a></li>
+                <li class="lang-switcher"><a href="../../case-studies/petabyte-ad-platform.html" hreflang="en">EN</a><span class="lang-sep">/</span><span class="lang-active">PT</span></li>
+                <li><a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Agendar Conversa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Case Study Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="../#credibility" class="back-link">&larr; Voltar ao Histórico</a>
+            <div class="case-meta">
+                <span class="case-tag">Estudo de Caso</span>
+                <span class="case-tag">Engenharia de Dados</span>
+            </div>
+            <h1>Processando 1,5 Bilhão de Registros por Dia em Escala de Petabyte</h1>
+            <p class="page-subtitle">Como construí e mantive a infraestrutura de dados que alimentava a otimização de publicidade em tempo real para milhares de empresas em uma das 10 maiores plataformas globais de publicidade.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Indústria</span>
+                    <span class="quick-value">Ad Tech (Top-10 Global)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Função</span>
+                    <span class="quick-value">Engenheiro de Software de Dados</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Duração</span>
+                    <span class="quick-value">3+ anos (2017 &ndash; 2021)</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Escopo</span>
+                    <span class="quick-value">Escala de petabyte, 1,5B reg/dia</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Case Study Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <section class="content-section">
+                <h2>O Desafio</h2>
+                <p>Esta empresa opera uma das maiores plataformas independentes de publicidade do mundo, alimentando campanhas de retargeting, prospecção e e-mail marketing para milhares de empresas globalmente.</p>
+                <p>O Time de Dados era responsável pela infraestrutura que processava, transformava e servia os dados por trás de todas as decisões de otimização de publicidade. A escala era impressionante:</p>
+                <ul>
+                    <li><strong>1,5 bilhão de registros ingeridos por dia</strong> provenientes de impressões de anúncios, cliques, conversões e eventos de atribuição</li>
+                    <li><strong>Armazenamento de dados em nível de petabyte</strong> distribuído em múltiplos data stores e camadas de processamento</li>
+                    <li><strong>Requisitos de tempo real</strong> — os modelos de otimização de publicidade precisavam de dados atualizados para tomar decisões de lance em milissegundos</li>
+                    <li><strong>Sensibilidade a custo</strong> — nessa escala, até pequenas ineficiências no processamento se traduzem em gastos significativos em nuvem</li>
+                </ul>
+                <p>O desafio principal não era apenas lidar com o volume. Era construir sistemas que pudessem processar dados nessa escala de forma <em>confiável</em>, <em>com bom custo-benefício</em> e <em>rápido o suficiente</em> para alimentar decisões de negócio em tempo real.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Minha Função & Abordagem</h2>
+                <p>Entrei no Time de Dados como Engenheiro de Software de Dados, trabalhando principalmente com Scala, Java, JavaScript e Python em toda a stack de pipelines.</p>
+
+                <h3>Arquitetura de Pipeline</h3>
+                <p>Construí e mantive pipelines de dados ao longo de todo o ciclo de vida do dado — ingestão de eventos de ad exchange, transformação e enriquecimento, agregação para relatórios e entrega para consumidores downstream, incluindo os modelos de ML que alimentavam a otimização de publicidade.</p>
+                <p>A stack era majoritariamente baseada em AWS: EMR (Hadoop/Spark) para processamento em lote, S3 para armazenamento, DynamoDB para entrega de baixa latência, RDS para dados relacionais e Lambda e Batch para orquestração e processamento orientado a eventos.</p>
+
+                <div class="article-diagram">
+                    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitetura de Pipeline em Escala: fluxo de dados de eventos de anúncios até lances em tempo real e relatórios">
+                        <defs>
+                            <style>
+                                .pipe-label { font-family: 'JetBrains Mono', monospace; fill: #0c1220; }
+                                .pipe-sublabel { font-family: 'JetBrains Mono', monospace; fill: #64748b; }
+                                .pipe-caption { font-family: 'JetBrains Mono', monospace; fill: #94a3b8; font-size: 11px; }
+                                .pipe-accent { font-family: 'JetBrains Mono', monospace; fill: #c2713a; }
+                            </style>
+                            <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                                <polygon points="0 0, 8 3, 0 6" fill="#2a3a52"/>
+                            </marker>
+                            <marker id="arrowhead-up" markerWidth="8" markerHeight="6" refX="3" refY="0" orient="auto">
+                                <polygon points="0 6, 3 0, 6 6" fill="#2a3a52"/>
+                            </marker>
+                        </defs>
+
+                        <!-- Background -->
+                        <rect width="720" height="380" rx="12" fill="#fcfcfd" stroke="#e8ecf1" stroke-width="1"/>
+
+                        <!-- Scale label across top -->
+                        <text x="360" y="32" text-anchor="middle" class="pipe-accent" font-size="12" font-weight="600">Escala de Petabyte</text>
+                        <line x1="130" y1="28" x2="235" y2="28" stroke="#d4915e" stroke-width="1" stroke-opacity="0.5"/>
+                        <line x1="485" y1="28" x2="590" y2="28" stroke="#d4915e" stroke-width="1" stroke-opacity="0.5"/>
+
+                        <!-- Source node — Ad Exchange Events -->
+                        <rect x="24" y="120" width="120" height="60" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="84" y="148" text-anchor="middle" class="pipe-label" font-size="11" font-weight="500">Eventos de</text>
+                        <text x="84" y="164" text-anchor="middle" class="pipe-label" font-size="11" font-weight="500">Ad Exchange</text>
+                        <text x="84" y="200" text-anchor="middle" class="pipe-sublabel" font-size="10">1,5B / dia</text>
+
+                        <!-- Arrow: Source to Ingest -->
+                        <line x1="144" y1="150" x2="178" y2="150" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+                        <!-- Pipeline stage: Ingest -->
+                        <rect x="186" y="125" width="96" height="50" rx="8" fill="#2dd4bf" fill-opacity="0.12" stroke="#2dd4bf" stroke-width="1.5"/>
+                        <text x="234" y="155" text-anchor="middle" class="pipe-label" font-size="12" font-weight="500">Ingestão</text>
+
+                        <!-- Arrow: Ingest to Transform -->
+                        <line x1="282" y1="150" x2="308" y2="150" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+                        <!-- Pipeline stage: Transform -->
+                        <rect x="316" y="125" width="96" height="50" rx="8" fill="#2dd4bf" fill-opacity="0.12" stroke="#2dd4bf" stroke-width="1.5"/>
+                        <text x="364" y="155" text-anchor="middle" class="pipe-label" font-size="12" font-weight="500">Transformação</text>
+
+                        <!-- Arrow: Transform to Aggregate -->
+                        <line x1="412" y1="150" x2="438" y2="150" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+                        <!-- Pipeline stage: Aggregate -->
+                        <rect x="446" y="125" width="96" height="50" rx="8" fill="#2dd4bf" fill-opacity="0.12" stroke="#2dd4bf" stroke-width="1.5"/>
+                        <text x="494" y="155" text-anchor="middle" class="pipe-label" font-size="12" font-weight="500">Agregação</text>
+
+                        <!-- Arrow: Aggregate to Serve -->
+                        <line x1="542" y1="150" x2="568" y2="150" stroke="#2a3a52" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+                        <!-- Pipeline stage: Serve -->
+                        <rect x="576" y="125" width="96" height="50" rx="8" fill="#c2713a" fill-opacity="0.12" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="624" y="155" text-anchor="middle" class="pipe-label" font-size="12" font-weight="500">Entrega</text>
+
+                        <!-- ML Models node below pipeline -->
+                        <rect x="446" y="240" width="96" height="50" rx="8" fill="#f1f4f8" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="494" y="270" text-anchor="middle" class="pipe-label" font-size="11" font-weight="500">Modelos de ML</text>
+
+                        <!-- Arrow: ML Models up to Serve -->
+                        <line x1="542" y1="255" x2="610" y2="255" stroke="#2a3a52" stroke-width="1" stroke-dasharray="4,3"/>
+                        <line x1="610" y1="255" x2="610" y2="183" stroke="#2a3a52" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead-up)"/>
+
+                        <!-- Output: Real-time Bidding -->
+                        <line x1="672" y1="140" x2="672" y2="90" stroke="#2a3a52" stroke-width="1.5"/>
+                        <line x1="624" y1="125" x2="624" y2="90" stroke="#2a3a52" stroke-width="0" />
+                        <line x1="648" y1="125" x2="672" y2="90" stroke="#2a3a52" stroke-width="1.5"/>
+                        <rect x="614" y="56" width="96" height="40" rx="8" fill="#c2713a" fill-opacity="0.08" stroke="#d4915e" stroke-width="1"/>
+                        <text x="662" y="73" text-anchor="middle" class="pipe-label" font-size="10" font-weight="500">Lances em</text>
+                        <text x="662" y="87" text-anchor="middle" class="pipe-label" font-size="10" font-weight="500">Tempo Real</text>
+
+                        <!-- Output: Reporting -->
+                        <line x1="648" y1="175" x2="672" y2="210" stroke="#2a3a52" stroke-width="1.5"/>
+                        <rect x="614" y="205" width="96" height="40" rx="8" fill="#c2713a" fill-opacity="0.08" stroke="#d4915e" stroke-width="1"/>
+                        <text x="662" y="230" text-anchor="middle" class="pipe-label" font-size="10" font-weight="500">Relatórios</text>
+
+                        <!-- Caption -->
+                        <text x="360" y="345" text-anchor="middle" class="pipe-caption">Arquitetura de pipeline de dados: de eventos de anúncios a decisões de lance em tempo real</text>
+                    </svg>
+                </div>
+
+                <h3>Engenharia de Performance</h3>
+                <p>Em escala de petabyte, engenharia de performance não é opcional — é sobrevivência. Trabalhei extensivamente em:</p>
+                <ul>
+                    <li><strong>Otimização de shuffle</strong> — dimensionamento de partições, estratégias de join e otimizações de broadcast para manter os jobs Spark saudáveis e com bom custo-benefício</li>
+                    <li><strong>Gerenciamento de memória</strong> — diagnosticando e resolvendo erros de OOM, configurando comportamento de spill-to-disk e ajustando alocação de memória para grandes joins</li>
+                    <li><strong>Otimização de custo</strong> — refatorando pipelines para reduzir o tempo de execução dos clusters EMR, otimizando padrões de armazenamento no S3 e dimensionando corretamente os recursos de computação</li>
+                </ul>
+
+                <h3>Confiabilidade em Escala</h3>
+                <p>Quando seus pipelines processam 1,5 bilhão de registros diariamente, falhas têm impacto imediato no negócio — dados desatualizados significam lances de anúncio subótimos, o que significa receita perdida para milhares de clientes. Foquei em construir pipelines que não eram apenas rápidos, mas resilientes: processamento idempotente, recuperação automatizada, monitoramento abrangente e alertas que detectavam problemas antes que eles se propagassem.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Resultados</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-number">1,5B</span>
+                        <span class="result-label">Registros processados por dia, com confiabilidade</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">3+ anos</span>
+                        <span class="result-label">Operação sustentada em escala de petabyte</span>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-number">Milhares</span>
+                        <span class="result-label">Empresas alimentadas pela plataforma de dados</span>
+                    </div>
+                </div>
+                <p>A infraestrutura de dados que ajudei a construir e manter foi a fundação de todo o motor de otimização de publicidade da plataforma — cada decisão de lance, cada cálculo de atribuição, cada relatório de campanha passava por esses pipelines.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Stack Técnica</h2>
+                <div class="tech-stack-grid">
+                    <div class="tech-item"><strong>Processamento</strong>: Apache Spark em AWS EMR (Hadoop)</div>
+                    <div class="tech-item"><strong>Linguagens</strong>: Scala, Java, JavaScript, Python</div>
+                    <div class="tech-item"><strong>Armazenamento</strong>: AWS S3 (data lake em escala de petabyte)</div>
+                    <div class="tech-item"><strong>Bancos de Dados</strong>: DynamoDB, RDS</div>
+                    <div class="tech-item"><strong>Computação</strong>: AWS Batch, Lambda, EC2</div>
+                    <div class="tech-item"><strong>Domínio</strong>: Ad Tech — retargeting, prospecção, e-mail marketing</div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>Conclusão Principal</h2>
+                <p>Trabalhar nessa escala me ensinou que engenharia de dados em nível de petabyte é fundamentalmente sobre <strong>economia e confiabilidade</strong>, não apenas tecnologia. Cada decisão arquitetural — estratégia de particionamento, formato de armazenamento, cadência de processamento — tem um impacto direto em custo e confiabilidade. O melhor pipeline não é o mais sofisticado; é aquele que roda previsivelmente, se recupera de forma elegante e custa o que você espera que custe.</p>
+                <p>Essa experiência é a fundação de como abordo cada projeto de arquitetura de dados hoje: começar pelas restrições (escala, latência, custo, confiabilidade) e então trabalhar de trás para frente até o design mais simples que as atenda.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Enfrentando desafios de escala de dados similares?</h3>
+                <p>Ajudo times a projetar e construir pipelines de dados que funcionam de forma confiável em escala — sem o custo de uma contratação em tempo integral.</p>
+                <a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary">Agendar uma Conversa Inicial</a>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navegação</h4>
+                        <a href="../#about">Sobre</a>
+                        <a href="../#services">Serviços</a>
+                        <a href="../#credibility">Histórico</a>
+                        <a href="../blog/">Artigos</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Conexões</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2ef3ffda-e77e-4fbe-aff4-5d2c196cd01a"></script>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>

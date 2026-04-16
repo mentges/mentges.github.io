@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Reduzi em 40% o Custo de um Pipeline de Petabyte — Bruno Mentges</title>
+    <meta name="description"
+        content="Engenharia de performance em escala não é sobre truques inteligentes — é sobre entender economia. Um estudo de caso em otimização de Spark, estratégia de particionamento e pensar em dólares em vez de milissegundos.">
+    <meta name="author" content="Bruno Mentges">
+
+    <meta property="og:title" content="Como Reduzi em 40% o Custo de um Pipeline de Petabyte">
+    <meta property="og:description" content="Engenharia de performance em escala de petabyte é um problema de economia. Um estudo de caso em otimização de Spark, estratégia de particionamento e pensar em dólares.">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="pt_BR">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pages.css">
+
+    <!-- Alternate language -->
+    <link rel="alternate" hreflang="en" href="https://mentgesinformatica.com.br/blog/petabyte-pipeline-cost-optimization.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://mentgesinformatica.com.br/pt_br/blog/otimizacao-custo-pipeline-petabyte.html">
+    <link rel="alternate" hreflang="x-default" href="https://mentgesinformatica.com.br/blog/petabyte-pipeline-cost-optimization.html">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container nav-container">
+            <a href="../" class="logo">
+                <span class="logo-name">Bruno Mentges</span>
+                <span class="logo-separator">/</span>
+                <span class="logo-company">Mentges.AI</span>
+            </a>
+            <div class="mobile-menu-toggle" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../#services">Serviços</a></li>
+                <li><a href="../#credibility">Histórico</a></li>
+                <li><a href="./">Artigos</a></li>
+                <li class="lang-switcher"><a href="../../blog/petabyte-pipeline-cost-optimization.html" hreflang="en">EN</a><span class="lang-sep">/</span><span class="lang-active">PT</span></li>
+                <li><a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Agendar Conversa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="page-header">
+        <div class="container">
+            <a href="./" class="back-link">&larr; Voltar aos Artigos</a>
+            <div class="case-meta">
+                <span class="case-tag">Engenharia de Dados</span>
+            </div>
+            <h1>Como Reduzi em 40% o Custo de um Pipeline de Petabyte</h1>
+            <p class="page-subtitle">Engenharia de performance em escala não é sobre truques inteligentes — é sobre entender economia. Um estudo de caso em otimização de Spark, estratégia de particionamento e pensar em dólares em vez de milissegundos.</p>
+            <div class="case-quick-facts">
+                <div class="quick-fact">
+                    <span class="quick-label">Autor</span>
+                    <span class="quick-value">Bruno Mentges</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Publicado</span>
+                    <span class="quick-value">Abril 2026</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="quick-label">Tempo de leitura</span>
+                    <span class="quick-value">13 min de leitura</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <article class="page-content">
+        <div class="container content-container">
+
+            <!-- ============================================================
+                 ATO 1 — O Problema
+                 ============================================================ -->
+            <section class="content-section">
+                <p>Em uma plataforma de ad tech entre as 10 maiores, processando 1,5 bilhão de registros por dia, a conta de nuvem estava se tornando uma preocupação existencial. Não porque os pipelines estivessem quebrados — eles funcionavam. Os dados chegavam no horário, as transformações estavam corretas, os sistemas downstream eram alimentados. O problema era mais simples e mais perigoso: os custos cresciam mais rápido que a receita.</p>
+                <p>A plataforma rodava centenas de jobs Spark em dezenas de clusters EMR, processando petabytes de dados de impressões de anúncios, cliques e conversões. Todos os dias, esses pipelines ingeriam streams de eventos brutos, os enriqueciam com segmentos de audiência e metadados de campanha, computavam modelos de atribuição e produziam as tabelas de relatório que alimentavam o faturamento e os analytics. A conta de infraestrutura passava de sete dígitos anualmente — e subia 15-20% trimestre a trimestre enquanto a receita crescia 10%.</p>
+                <p>A liderança fez uma pergunta direta: "Podemos cortar 30% sem quebrar nada?"</p>
+                <p>Entreguei 40%. Não através de um único avanço, mas por meio de uma abordagem sistemática que tratava cada decisão de pipeline como uma decisão econômica. Foi assim que aconteceu.</p>
+            </section>
+
+            <!-- ============================================================
+                 ATO 2 — Pensando em Dólares
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>Pensando em dólares, não em milissegundos</h2>
+                <p>A primeira coisa que tive que desaprender — e ajudar o time a desaprender — foi o instinto de otimizar para velocidade. Na engenharia de software tradicional, performance significa latência. Mais rápido é melhor. Mas em escala de petabyte, mais rápido nem sempre é mais barato. Às vezes, o pipeline mais rápido é o mais caro, porque atinge a velocidade jogando compute no problema.</p>
+                <p>Considere um job Spark que processa um dia de dados de impressão. Você pode rodá-lo em 200 nós e terminar em 15 minutos, ou em 50 nós e terminar em 45 minutos. A primeira opção custa 4x mais em compute, mas entrega o mesmo resultado com o mesmo SLA downstream. Se o seu SLA é "dados disponíveis até as 8h" e ambas as opções terminam antes das 8h, você está pagando um prêmio de 4x por velocidade que ninguém precisa.</p>
+                <p>Essa mudança mental — de "quão rápido isso pode rodar?" para "qual é a forma mais barata de atender o SLA?" — foi a base de tudo que veio depois. Cada decisão de otimização virou uma pergunta de economia: quanto isso custa, quanto custa a alternativa e qual é a restrição real do negócio?</p>
+                <p>Construí um modelo de custo que atribuía uma cifra em dólares a cada pipeline importante. Não só a conta de compute — o custo total: compute, armazenamento, transferência de dados, desperdício de execuções falhas e o tempo de engenharia gasto babysitting jobs instáveis. Quando você vê que um único join mal particionado é responsável por US$ 14.000/mês em compute relacionado a shuffle, a prioridade de otimização fica óbvia.</p>
+            </section>
+
+            <!-- ============================================================
+                 ATO 3 — As Quatro Alavancas
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>As quatro alavancas</h2>
+                <p>Depois de fazer profiling em cada pipeline importante e mapear os custos às causas raiz, surgiram quatro alavancas de otimização. Elas não têm peso igual — a estratégia de particionamento foi a maior alavanca isolada, responsável por quase metade da economia total. Mas todas as quatro se combinam.</p>
+
+                <!-- Diagram 1: The Four Cost Levers -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quatro alavancas de otimização de custo: Estratégia de Particionamento, Otimização de Armazenamento, Dimensionamento de Cluster, Refatoração de Pipeline">
+                        <defs>
+                            <style>
+                                .lv { font-family: 'JetBrains Mono', monospace; }
+                            </style>
+                        </defs>
+                        <rect width="760" height="420" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="758" height="418" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="380" y="32" text-anchor="middle" class="lv" font-size="14" font-weight="600" fill="#fcfcfd">As Quatro Alavancas de Custo</text>
+                        <text x="380" y="50" text-anchor="middle" class="lv" font-size="10" fill="#64748b">Ordenadas por impacto — particionamento domina</text>
+
+                        <!-- Lever 1: Partition Strategy (tallest bar, copper accent) -->
+                        <rect x="55" y="80" width="150" height="290" rx="10" fill="rgba(194,113,58,0.12)" stroke="#c2713a" stroke-width="2"/>
+                        <text x="130" y="108" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#c2713a">Estratégia</text>
+                        <text x="130" y="124" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#c2713a">de Partição</text>
+                        <line x1="80" y1="136" x2="180" y2="136" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+
+                        <!-- Impact bar -->
+                        <rect x="80" y="148" width="100" height="14" rx="3" fill="rgba(194,113,58,0.15)" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <rect x="80" y="148" width="100" height="14" rx="3" fill="#c2713a" opacity="0.7"/>
+                        <text x="130" y="180" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#c2713a">~45% da economia</text>
+
+                        <text x="130" y="206" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">Chaves de partição</text>
+                        <text x="130" y="222" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">erradas causam</text>
+                        <text x="130" y="238" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">explosões de shuffle.</text>
+                        <text x="130" y="262" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">Rebalancear com base</text>
+                        <text x="130" y="278" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">na distribuição real</text>
+                        <text x="130" y="294" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">dos dados, não em</text>
+                        <text x="130" y="310" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">suposições.</text>
+
+                        <!-- Icon: shuffle arrows -->
+                        <line x1="105" y1="340" x2="130" y2="350" stroke="#c2713a" stroke-width="1.5"/>
+                        <line x1="155" y1="340" x2="130" y2="350" stroke="#c2713a" stroke-width="1.5"/>
+                        <line x1="130" y1="350" x2="105" y2="360" stroke="#c2713a" stroke-width="1.5"/>
+                        <line x1="130" y1="350" x2="155" y2="360" stroke="#c2713a" stroke-width="1.5"/>
+
+                        <!-- Lever 2: Storage Optimization -->
+                        <rect x="225" y="130" width="150" height="240" rx="10" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.5"/>
+                        <text x="300" y="158" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#2dd4bf">Otimização</text>
+                        <text x="300" y="174" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#2dd4bf">de Armazenamento</text>
+                        <line x1="250" y1="186" x2="350" y2="186" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+
+                        <rect x="250" y="198" width="100" height="14" rx="3" fill="rgba(45,212,191,0.15)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
+                        <rect x="250" y="198" width="70" height="14" rx="3" fill="#2dd4bf" opacity="0.5"/>
+                        <text x="300" y="230" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#2dd4bf">~25% da economia</text>
+
+                        <text x="300" y="256" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">Formatos colunares,</text>
+                        <text x="300" y="272" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">compressão,</text>
+                        <text x="300" y="288" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">políticas de ciclo de vida,</text>
+                        <text x="300" y="304" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">armazenamento em camadas.</text>
+
+                        <!-- Icon: layers -->
+                        <rect x="282" y="330" width="36" height="8" rx="2" fill="rgba(45,212,191,0.3)" stroke="#2dd4bf" stroke-width="0.8"/>
+                        <rect x="286" y="342" width="28" height="8" rx="2" fill="rgba(45,212,191,0.2)" stroke="#2dd4bf" stroke-width="0.8"/>
+                        <rect x="290" y="354" width="20" height="8" rx="2" fill="rgba(45,212,191,0.1)" stroke="#2dd4bf" stroke-width="0.8"/>
+
+                        <!-- Lever 3: Cluster Right-Sizing -->
+                        <rect x="395" y="170" width="150" height="200" rx="10" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="470" y="198" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#e8ecf1">Dimensionamento</text>
+                        <text x="470" y="214" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#e8ecf1">de Cluster</text>
+                        <line x1="420" y1="226" x2="520" y2="226" stroke="rgba(100,116,139,0.3)" stroke-width="1"/>
+
+                        <rect x="420" y="238" width="100" height="14" rx="3" fill="rgba(100,116,139,0.15)" stroke="#64748b" stroke-width="1"/>
+                        <rect x="420" y="238" width="50" height="14" rx="3" fill="#64748b" opacity="0.5"/>
+                        <text x="470" y="270" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#94a3b8">~20% da economia</text>
+
+                        <text x="470" y="296" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">Instâncias spot,</text>
+                        <text x="470" y="312" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">autoscaling,</text>
+                        <text x="470" y="328" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">dimensionamento correto</text>
+                        <text x="470" y="344" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">de compute vs memória.</text>
+
+                        <!-- Lever 4: Pipeline Refactoring -->
+                        <rect x="565" y="210" width="150" height="160" rx="10" fill="rgba(42,58,82,0.3)" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="640" y="238" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#94a3b8">Refatoração</text>
+                        <text x="640" y="254" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#94a3b8">de Pipeline</text>
+                        <line x1="590" y1="266" x2="690" y2="266" stroke="rgba(42,58,82,0.5)" stroke-width="1"/>
+
+                        <rect x="590" y="278" width="100" height="14" rx="3" fill="rgba(42,58,82,0.2)" stroke="#2a3a52" stroke-width="1"/>
+                        <rect x="590" y="278" width="30" height="14" rx="3" fill="#2a3a52" opacity="0.8"/>
+                        <text x="640" y="310" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#64748b">~10% da economia</text>
+
+                        <text x="640" y="336" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">Dividir monolitos</text>
+                        <text x="640" y="352" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">em estágios</text>
+                        <text x="640" y="368" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">reinicializáveis.</text>
+
+                        <!-- Caption -->
+                        <text x="380" y="403" text-anchor="middle" class="lv" font-size="10" fill="#64748b">Quatro alavancas, com pesos diferentes. Comece pela partição — é quase metade do ganho.</text>
+                    </svg>
+                </div>
+
+                <h3>Alavanca 1: Estratégia de particionamento</h3>
+                <p>Esse foi o maior ganho isolado. Os pipelines da plataforma haviam sido construídos ao longo dos anos por times diferentes, cada um escolhendo chaves de partição com base na intuição em vez de análise da distribuição dos dados. O pipeline de atribuição — o job mais caro da frota — particionava por ID do anunciante. Razoável em teoria: você quer agrupar todos os eventos de um anunciante para o cálculo de atribuição.</p>
+                <p>O problema é que a distribuição dos dados entre anunciantes seguia uma lei de potência severa. Os 50 maiores anunciantes geravam 40% de todo o volume de impressões. Isso significava que, durante a fase de shuffle, um punhado de partições era 100x maior que a mediana. Essas partições superdimensionadas afunilavam o job inteiro. O Spark terminava 95% das tasks em 10 minutos e depois gastava outros 40 minutos esperando os poucos stragglers que processavam as partições gigantes. O cluster ficava em grande parte ocioso durante essa cauda, queimando compute para nada.</p>
+                <p>A correção foi uma chave de partição composta: ID do anunciante combinado com um bucket de tempo. Para anunciantes grandes, subdividimos os dados em blocos horários. Para anunciantes pequenos, diário bastava. O volume de shuffle caiu 60%, e o runtime do job foi de 50 minutos para 18 minutos no mesmo cluster — ou, alternativamente, podíamos rodá-lo em um cluster menor em 30 minutos e cortar os custos de compute em 55%.</p>
+
+                <h3>Alavanca 2: Otimização de armazenamento</h3>
+                <p>A plataforma armazenava dados intermediários em formatos orientados a linhas em vários pipelines — um resquício de uma era em que os jobs foram originalmente escritos. Mudar para armazenamento colunar com compressão agressiva reduziu o footprint de armazenamento em 70% para esses datasets. Mas o maior ganho não foi a conta de armazenamento em si — foi a performance de leitura. Formatos colunares com partition pruning permitiam que jobs downstream lessem apenas as colunas necessárias, reduzindo o I/O em 3-5x. Menos I/O significa runtimes menores, o que significa menos compute.</p>
+                <p>Também implementamos políticas de ciclo de vida que moviam os dados por camadas de armazenamento: armazenamento quente para os últimos 7 dias (acessados com frequência para debug e reprocessamento), armazenamento morno para 8-90 dias, e arquivo frio depois disso. Só os dados brutos de eventos consumiam gasto significativo em armazenamento quente quando 95% deles nunca eram acessados depois da primeira semana.</p>
+
+                <h3>Alavanca 3: Dimensionamento de cluster</h3>
+                <p>A maioria dos times superprovisiona em 2-3x. É um comportamento racional: se um job falha porque o cluster era pequeno demais, você é paginado às 3 da manhã. Se um job tem sucesso porque o cluster era grande demais, ninguém nota o desperdício. A estrutura de incentivos recompensa o superprovisionamento.</p>
+                <p>Consertamos isso fazendo profiling da utilização real de recursos de cada job importante — CPU, memória, I/O de disco, rede — ao longo de duas semanas de execuções. Os dados eram condenatórios. O cluster mediano usava 35% da memória provisionada e 45% da CPU. Redimensionamos agressivamente, substituindo instâncias on-demand por instâncias spot (com tratamento gracioso para interrupções de spot), e implementamos políticas de autoscaling que casavam o tamanho do cluster com a carga real.</p>
+                <p>O insight chave: instâncias otimizadas para compute para jobs CPU-bound (agregações, joins), otimizadas para memória para jobs com tabelas grandes de broadcast ou requisitos de cache. A configuração anterior usava um único tipo de instância para tudo — a opção general-purpose mais cara.</p>
+
+                <h3>Alavanca 4: Refatoração de pipeline</h3>
+                <p>Vários pipelines críticos eram monolíticos: uma única aplicação Spark que lia dados brutos, aplicava uma dúzia de transformações e escrevia a saída final. Quando esses jobs falhavam no passo 10 de 12, o pipeline inteiro tinha que reiniciar do zero. Nos volumes de dados que processávamos, um único restart podia desperdiçar dezenas de milhares de dólares em compute.</p>
+                <p>Quebramos os piores ofensores em estágios discretos com saídas intermediárias com checkpoint. Cada estágio podia ser reiniciado independentemente. Isso não tornou o caminho feliz mais rápido, mas reduziu dramaticamente o desperdício com falhas. Quando um timeout de API downstream causava uma falha de job no estágio de enriquecimento, reiniciávamos do checkpoint de enriquecimento em vez de reler e reprocessar petabytes de dados brutos.</p>
+            </section>
+
+            <!-- ============================================================
+                 ATO 4 — Os Ganhos Específicos do Spark
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>Os ganhos específicos do Spark</h2>
+                <p>Além das quatro alavancas estruturais, várias otimizações específicas do Spark produziram retornos desproporcionais. Essas são as técnicas que uso primeiro em qualquer engajamento de otimização de custo em Spark.</p>
+
+                <!-- Diagram 2: Partition Strategy Before vs After -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparação antes e depois da distribuição de dados entre partições, mostrando partições desbalanceadas vs balanceadas">
+                        <defs>
+                            <style>
+                                .ps { font-family: 'JetBrains Mono', monospace; }
+                                @keyframes psflow { to { stroke-dashoffset: -14; } }
+                            </style>
+                        </defs>
+                        <rect width="760" height="380" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="758" height="378" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="380" y="32" text-anchor="middle" class="ps" font-size="14" font-weight="600" fill="#fcfcfd">Estratégia de Partição: Antes vs. Depois</text>
+
+                        <!-- === LEFT: Before (skewed) === -->
+                        <text x="185" y="62" text-anchor="middle" class="ps" font-size="12" font-weight="600" fill="rgba(180,60,50,0.8)">Antes: Partições Desbalanceadas</text>
+                        <text x="185" y="78" text-anchor="middle" class="ps" font-size="9" fill="#64748b">Particionado apenas por advertiser_id</text>
+
+                        <!-- Skewed bars (very unequal heights) -->
+                        <rect x="50" y="92" width="30" height="200" rx="3" fill="rgba(180,60,50,0.5)" stroke="rgba(180,60,50,0.4)" stroke-width="1"/>
+                        <text x="65" y="86" text-anchor="middle" class="ps" font-size="8" fill="rgba(180,60,50,0.8)">A1</text>
+
+                        <rect x="88" y="152" width="30" height="140" rx="3" fill="rgba(180,60,50,0.4)" stroke="rgba(180,60,50,0.3)" stroke-width="1"/>
+                        <text x="103" y="146" text-anchor="middle" class="ps" font-size="8" fill="rgba(180,60,50,0.7)">A2</text>
+
+                        <rect x="126" y="242" width="30" height="50" rx="3" fill="rgba(180,60,50,0.2)" stroke="rgba(180,60,50,0.2)" stroke-width="1"/>
+                        <text x="141" y="236" text-anchor="middle" class="ps" font-size="8" fill="#64748b">A3</text>
+
+                        <rect x="164" y="257" width="30" height="35" rx="3" fill="rgba(180,60,50,0.15)" stroke="rgba(180,60,50,0.15)" stroke-width="1"/>
+                        <text x="179" y="251" text-anchor="middle" class="ps" font-size="8" fill="#64748b">A4</text>
+
+                        <rect x="202" y="262" width="30" height="30" rx="3" fill="rgba(180,60,50,0.12)" stroke="rgba(180,60,50,0.12)" stroke-width="1"/>
+                        <text x="217" y="256" text-anchor="middle" class="ps" font-size="8" fill="#64748b">A5</text>
+
+                        <rect x="240" y="272" width="30" height="20" rx="3" fill="rgba(180,60,50,0.1)" stroke="rgba(180,60,50,0.1)" stroke-width="1"/>
+                        <text x="255" y="266" text-anchor="middle" class="ps" font-size="8" fill="#64748b">A6</text>
+
+                        <rect x="278" y="277" width="30" height="15" rx="3" fill="rgba(180,60,50,0.08)" stroke="rgba(180,60,50,0.08)" stroke-width="1"/>
+                        <text x="293" y="271" text-anchor="middle" class="ps" font-size="8" fill="#64748b">A7</text>
+
+                        <!-- Baseline -->
+                        <line x1="40" y1="292" x2="320" y2="292" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Straggler annotation -->
+                        <line x1="65" y1="300" x2="65" y2="320" stroke="rgba(180,60,50,0.5)" stroke-width="1" stroke-dasharray="3 3"/>
+                        <text x="65" y="336" text-anchor="middle" class="ps" font-size="9" fill="rgba(180,60,50,0.8)">Tasks stragglers</text>
+                        <text x="65" y="350" text-anchor="middle" class="ps" font-size="9" fill="rgba(180,60,50,0.8)">afunilam o job inteiro</text>
+
+                        <!-- === CENTER: Arrow === -->
+                        <line x1="340" y1="200" x2="410" y2="200" stroke="#c2713a" stroke-width="2" stroke-dasharray="6 4" style="animation: psflow 1.5s linear infinite"/>
+                        <polygon points="406,195 416,200 406,205" fill="#c2713a"/>
+                        <text x="375" y="185" text-anchor="middle" class="ps" font-size="9" fill="#c2713a">Rebalancear</text>
+
+                        <!-- === RIGHT: After (balanced) === -->
+                        <text x="575" y="62" text-anchor="middle" class="ps" font-size="12" font-weight="600" fill="#2dd4bf">Depois: Partições Balanceadas</text>
+                        <text x="575" y="78" text-anchor="middle" class="ps" font-size="9" fill="#64748b">Chave composta: advertiser_id + time_bucket</text>
+
+                        <!-- Balanced bars (roughly equal heights) -->
+                        <rect x="435" y="210" width="30" height="82" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
+                        <text x="450" y="204" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A1h1</text>
+
+                        <rect x="473" y="215" width="30" height="77" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
+                        <text x="488" y="209" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A1h2</text>
+
+                        <rect x="511" y="207" width="30" height="85" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
+                        <text x="526" y="201" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A2h1</text>
+
+                        <rect x="549" y="212" width="30" height="80" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
+                        <text x="564" y="206" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A2h2</text>
+
+                        <rect x="587" y="218" width="30" height="74" rx="3" fill="rgba(45,212,191,0.25)" stroke="rgba(45,212,191,0.25)" stroke-width="1"/>
+                        <text x="602" y="212" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A3</text>
+
+                        <rect x="625" y="222" width="30" height="70" rx="3" fill="rgba(45,212,191,0.2)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="640" y="216" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A4</text>
+
+                        <rect x="663" y="220" width="30" height="72" rx="3" fill="rgba(45,212,191,0.2)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="678" y="214" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A5+</text>
+
+                        <!-- Baseline -->
+                        <line x1="425" y1="292" x2="705" y2="292" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Annotation -->
+                        <text x="575" y="320" text-anchor="middle" class="ps" font-size="9" fill="#2dd4bf">Distribuição uniforme</text>
+                        <text x="575" y="336" text-anchor="middle" class="ps" font-size="9" fill="#2dd4bf">Sem stragglers</text>
+
+                        <!-- Stats row at bottom -->
+                        <rect x="50" y="358" width="280" height="18" rx="3" fill="rgba(180,60,50,0.06)"/>
+                        <text x="190" y="371" text-anchor="middle" class="ps" font-size="9" fill="#64748b">Shuffle: 2,4 TB &bull; Runtime: 50 min</text>
+
+                        <rect x="430" y="358" width="280" height="18" rx="3" fill="rgba(45,212,191,0.06)"/>
+                        <text x="570" y="371" text-anchor="middle" class="ps" font-size="9" fill="#2dd4bf">Shuffle: 960 GB &bull; Runtime: 18 min</text>
+                    </svg>
+                </div>
+
+                <h3>Broadcast joins para tabelas de dimensão</h3>
+                <p>O pipeline de enriquecimento fazia join do stream massivo de impressões (bilhões de linhas) com várias tabelas de dimensão: metadados de campanha (~500 mil linhas), segmentos de audiência (~2 milhões de linhas) e configuração de anunciante (~50 mil linhas). Esses joins eram implementados como shuffle joins padrão, o que significa que os dois lados do join eram redistribuídos pelo cluster. Para cada join, o dataset inteiro de impressões era shuffled — centenas de gigabytes de I/O de rede para um join contra uma tabela que cabia em memória em um único executor.</p>
+                <p>Mudar para broadcast joins nessas tabelas de dimensão eliminou o shuffle por completo. As tabelas pequenas eram transmitidas a cada executor, e o join acontecia localmente. O runtime do pipeline de enriquecimento caiu 40%, e o I/O de rede caiu mais de 70%. A economia total de compute dessa única mudança foi substancial — ela rodava a cada hora em toda a frota.</p>
+
+                <h3>Partition pruning via reestruturação no momento da escrita</h3>
+                <p>Vários jobs downstream liam de uma grande tabela de eventos, mas só precisavam dos dados para intervalos de datas e tipos de evento específicos. A tabela era particionada por data, mas não por tipo de evento. Isso significava que cada job tinha que ler todos os dados do dia e filtrar em memória — escaneando terabytes para usar gigabytes.</p>
+                <p>Reestruturamos o caminho de escrita para adicionar o tipo de evento como dimensão de partição. Jobs downstream que precisavam apenas de eventos de clique agora podiam ler só a partição de cliques, pulando completamente os dados de impressão e conversão. O volume de leitura para alguns jobs caiu 80%. O caminho de escrita ficou um pouco mais complexo, mas a economia agregada de leitura superou em muito o overhead de escrita, já que os dados eram escritos uma vez e lidos dezenas de vezes.</p>
+
+                <h3>Adaptive query execution</h3>
+                <p>O adaptive query execution (AQE) do Spark estava disponível, mas desabilitado na plataforma — o time original havia encontrado um bug em uma versão inicial e nunca reabilitou depois que foi corrigido. Habilitar o AQE com thresholds bem ajustados nos deu coalescing automático de partições (mesclagem de partições pequenas), otimização de skew join (divisão de partições superdimensionadas no momento do join) e dimensionamento dinâmico de shuffle partitions. Essas eram melhorias "de graça" — sem mudanças de código, só configuração. Elas cortaram de 8 a 12% dos runtimes em geral.</p>
+
+                <h3>Cache de resultados intermediários</h3>
+                <p>O pipeline de atribuição computava um dataset intermediário — eventos enriquecidos com pesos de atribuição — que era consumido por três computações downstream separadas: agregação de faturamento, rollups de relatórios e detecção de anomalias. Cada job downstream rederivava esse intermediário a partir dos dados brutos independentemente. Três jobs fazendo o mesmo trabalho caro.</p>
+                <p>Refatoramos isso em uma computação compartilhada: o dataset intermediário era materializado uma vez e consumido pelos três jobs downstream. A economia de compute foi próxima de 3x nessa parte do pipeline, e simplificou o debug porque havia uma versão da verdade em vez de três versões computadas independentemente.</p>
+            </section>
+
+            <!-- ============================================================
+                 ATO 5 — O Que Não Funciona
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>O que não funciona</h2>
+                <p>Nem toda otimização vale a pena. Algumas das melhorias mais tentadoras, na verdade, pioram as coisas quando você considera o custo total — incluindo complexidade, carga de manutenção e o risco de quebrar um pipeline que está funcionando.</p>
+
+                <p><strong>Micro-otimizações que economizam 2% mas adicionam complexidade.</strong> Tínhamos engenheiros ansiosos para otimizar a performance de UDFs reescrevendo lógica Python em Scala. A melhoria era real — cerca de 3% naquele estágio específico — mas introduzia um codebase multilinguagem que a maior parte do time não conseguia debugar. O custo de manutenção excedeu a economia em três meses. A regra que estabeleci: nenhuma otimização que exija conhecimento especializado para manter, a menos que a economia seja grande o suficiente para justificar ownership dedicado.</p>
+
+                <p><strong>Over-engineering de compressão que atrasa leituras.</strong> Experimentamos compressão de nível máximo em datasets intermediários. Os custos de armazenamento caíram, mas o tempo de descompressão aumentou tanto que o efeito líquido foi mais caro — o custo de compute das leituras mais lentas excedeu a economia de armazenamento. O ponto ideal era compressão moderada: redução substancial de armazenamento com overhead de descompressão desprezível.</p>
+
+                <p><strong>Cache prematuro.</strong> Cache parece uma vitória grátis, mas cada dataset em cache consome memória do executor. Faça cache das coisas erradas e você reduz a memória disponível para a computação real, causando spills para disco que atrasam tudo. Descobrimos que apenas datasets lidos mais de duas vezes dentro da mesma aplicação se beneficiavam do cache. Todo o resto era mais barato recomputar.</p>
+
+                <!-- Diagram 3: The Cost Compound Effect -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Visualização de como 5% de economia compõe ao longo de execuções horárias, 30 clusters e 365 dias em economias anuais massivas">
+                        <defs>
+                            <style>
+                                .ce { font-family: 'JetBrains Mono', monospace; }
+                                @keyframes ceflow { to { stroke-dashoffset: -14; } }
+                            </style>
+                        </defs>
+                        <rect width="760" height="360" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="758" height="358" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="380" y="32" text-anchor="middle" class="ce" font-size="14" font-weight="600" fill="#fcfcfd">O Efeito Composto do Custo</text>
+                        <text x="380" y="50" text-anchor="middle" class="ce" font-size="10" fill="#64748b">Pequenos percentuais viram números gigantes em escala</text>
+
+                        <!-- Step 1: Small saving -->
+                        <rect x="40" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="105" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">5%</text>
+                        <text x="105" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">de economia por</text>
+                        <text x="105" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">execução do job</text>
+
+                        <!-- Multiply 1 -->
+                        <text x="195" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">&times;</text>
+
+                        <!-- Step 2: Hourly runs -->
+                        <rect x="220" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="285" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">24</text>
+                        <text x="285" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">execuções/dia</text>
+                        <text x="285" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">(por hora)</text>
+
+                        <!-- Multiply 2 -->
+                        <text x="375" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">&times;</text>
+
+                        <!-- Step 3: Clusters -->
+                        <rect x="400" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="465" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">30</text>
+                        <text x="465" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">clusters</text>
+                        <text x="465" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">na frota</text>
+
+                        <!-- Multiply 3 -->
+                        <text x="555" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">&times;</text>
+
+                        <!-- Step 4: Days -->
+                        <rect x="580" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
+                        <text x="645" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">365</text>
+                        <text x="645" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">dias por</text>
+                        <text x="645" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">ano</text>
+
+                        <!-- Funnel lines converging -->
+                        <line x1="105" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <line x1="285" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.4)" stroke-width="1"/>
+                        <line x1="465" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.5)" stroke-width="1"/>
+                        <line x1="645" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.6)" stroke-width="1"/>
+
+                        <!-- Result -->
+                        <rect x="260" y="210" width="240" height="80" rx="12" fill="rgba(194,113,58,0.12)" stroke="#c2713a" stroke-width="2"/>
+                        <text x="380" y="240" text-anchor="middle" class="ce" font-size="10" fill="#d4915e">5% &times; 24 &times; 30 &times; 365 =</text>
+                        <text x="380" y="264" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">1.314.000</text>
+                        <text x="380" y="282" text-anchor="middle" class="ce" font-size="10" fill="#d4915e">execuções de job otimizadas por ano</text>
+
+                        <!-- Animated pulse -->
+                        <circle cx="380" cy="252" fill="#c2713a">
+                            <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <!-- Bottom annotation -->
+                        <text x="380" y="318" text-anchor="middle" class="ce" font-size="10" fill="#94a3b8">Se cada execução custa US$ 8, uma economia de 5% = US$ 525.600/ano</text>
+                        <text x="380" y="340" text-anchor="middle" class="ce" font-size="10" fill="#64748b">Em escala de petabyte, "só 5%" nunca é "só 5%"</text>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 ATO 6 — O Efeito Composto
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>O efeito composto</h2>
+                <p>A coisa mais importante de entender sobre otimização de custo em escala de petabyte é que pequenas melhorias se multiplicam. Uma melhoria de 5% em uma única execução de job é pouco notável. Mas quando esse job roda a cada hora, em 30 clusters, 365 dias por ano, esses 5% se compõem em mais de um milhão de execuções otimizadas — e centenas de milhares de dólares em economia anual.</p>
+                <p>Deixe eu mostrar a matemática real do engajamento. O pipeline de atribuição rodava a cada hora em 8 clusters. Antes da otimização, cada execução custava aproximadamente US$ 12 em compute. Depois do rebalanceamento de partições (redução de 40%), broadcast joins (redução de 15% além disso) e dimensionamento de cluster (outros 20%), o custo por execução caiu para cerca de US$ 5. Aquele único pipeline — um entre cerca de 40 pipelines importantes — economizou US$ 490.000 anualmente.</p>
+                <p>O pipeline de enriquecimento era parecido: execuções horárias, 12 clusters, US$ 18 por execução antes da otimização. Broadcast joins e partition pruning o levaram para US$ 9. Economia anual: mais US$ 570.000. E assim por diante em toda a frota.</p>
+                <p>A redução total de 40% veio de dezenas de otimizações individuais, cada uma modesta por si só, compondo-se através da frequência e do tamanho da frota. Nenhum truque isolado economizou 40%. O sistema economizou.</p>
+                <p>É por isso que sou cético em relação a histórias de otimização do tipo "um truque estranho". Em escala, a redução sustentável de custo vem da aplicação sistemática da alavanca certa em cada pipeline, não de encontrar uma bala de prata.</p>
+            </section>
+
+            <!-- ============================================================
+                 ATO 7 — O Framework de Decisão
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>O playbook de otimização: por onde começar</h2>
+                <p>Quando recebo uma frota de pipelines Spark caros, sigo uma ordem diagnóstica específica. A ordem importa porque é classificada por impacto — você quer consertar os problemas de maior alavancagem primeiro, e os achados de cada passo informam o próximo.</p>
+
+                <!-- Diagram 4: Optimization Decision Tree -->
+                <div class="article-diagram article-diagram-wide">
+                    <svg viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fluxograma de árvore de decisão de otimização mostrando a ordem diagnóstica: skew de partição, volume de shuffle, dimensionamento de cluster, depois estrutura de pipeline">
+                        <defs>
+                            <style>
+                                .dt { font-family: 'JetBrains Mono', monospace; }
+                                @keyframes dtflow { to { stroke-dashoffset: -14; } }
+                            </style>
+                        </defs>
+                        <rect width="760" height="520" rx="12" fill="#0c1220"/>
+                        <rect x="1" y="1" width="758" height="518" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
+
+                        <!-- Title -->
+                        <text x="380" y="32" text-anchor="middle" class="dt" font-size="14" font-weight="600" fill="#fcfcfd">Árvore de Decisão de Otimização</text>
+                        <text x="380" y="50" text-anchor="middle" class="dt" font-size="10" fill="#64748b">Siga esta ordem — comece pela alavanca de maior impacto</text>
+
+                        <!-- Step 1: Start -->
+                        <rect x="290" y="68" width="180" height="42" rx="8" fill="#2a3a52" stroke="#94a3b8" stroke-width="1.5"/>
+                        <text x="380" y="94" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#fcfcfd">Pipeline caro demais?</text>
+
+                        <!-- Arrow down -->
+                        <line x1="380" y1="110" x2="380" y2="135" stroke="#c2713a" stroke-width="1.5"/>
+                        <polygon points="375,131 380,141 385,131" fill="#c2713a"/>
+
+                        <!-- Step 2: Check partition skew -->
+                        <rect x="260" y="138" width="240" height="52" rx="8" fill="rgba(194,113,58,0.12)" stroke="#c2713a" stroke-width="2"/>
+                        <text x="380" y="160" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#c2713a">1. Verifique skew de partição</text>
+                        <text x="380" y="178" text-anchor="middle" class="dt" font-size="9" fill="#d4915e">Maior alavanca — quase metade da economia</text>
+
+                        <!-- Branch right: Skew found -->
+                        <line x1="500" y1="164" x2="560" y2="164" stroke="#c2713a" stroke-width="1.2"/>
+                        <polygon points="556,160 566,164 556,168" fill="#c2713a"/>
+                        <rect x="570" y="146" width="160" height="36" rx="6" fill="rgba(194,113,58,0.08)" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="650" y="169" text-anchor="middle" class="dt" font-size="9.5" fill="#d4915e">Rebalancear chaves de partição</text>
+                        <text x="538" y="157" class="dt" font-size="9" fill="#c2713a">Corrigir</text>
+
+                        <!-- Arrow down -->
+                        <line x1="380" y1="190" x2="380" y2="218" stroke="#c2713a" stroke-width="1.5"/>
+                        <polygon points="375,214 380,224 385,214" fill="#c2713a"/>
+
+                        <!-- Step 3: Check shuffle volume -->
+                        <rect x="260" y="222" width="240" height="52" rx="8" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.5"/>
+                        <text x="380" y="244" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#2dd4bf">2. Verifique volume de shuffle</text>
+                        <text x="380" y="262" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">Broadcast joins, partition pruning</text>
+
+                        <!-- Branch right: High shuffle -->
+                        <line x1="500" y1="248" x2="560" y2="248" stroke="#2dd4bf" stroke-width="1.2"/>
+                        <polygon points="556,244 566,248 556,252" fill="#2dd4bf"/>
+                        <rect x="570" y="230" width="160" height="36" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <text x="650" y="253" text-anchor="middle" class="dt" font-size="9.5" fill="#2dd4bf">Broadcast + pruning</text>
+                        <text x="538" y="241" class="dt" font-size="9" fill="#2dd4bf">Corrigir</text>
+
+                        <!-- Arrow down -->
+                        <line x1="380" y1="274" x2="380" y2="302" stroke="#c2713a" stroke-width="1.5"/>
+                        <polygon points="375,298 380,308 385,298" fill="#c2713a"/>
+
+                        <!-- Step 4: Check cluster sizing -->
+                        <rect x="260" y="306" width="240" height="52" rx="8" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.5"/>
+                        <text x="380" y="328" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#e8ecf1">3. Verifique dimensionamento</text>
+                        <text x="380" y="346" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">Utilização de CPU/memória, tipos de instância</text>
+
+                        <!-- Branch right -->
+                        <line x1="500" y1="332" x2="560" y2="332" stroke="#64748b" stroke-width="1.2"/>
+                        <polygon points="556,328 566,332 556,336" fill="#64748b"/>
+                        <rect x="570" y="314" width="160" height="36" rx="6" fill="rgba(42,58,82,0.4)" stroke="#64748b" stroke-width="1"/>
+                        <text x="650" y="337" text-anchor="middle" class="dt" font-size="9.5" fill="#94a3b8">Redimensionar + spot</text>
+                        <text x="538" y="325" class="dt" font-size="9" fill="#64748b">Corrigir</text>
+
+                        <!-- Arrow down -->
+                        <line x1="380" y1="358" x2="380" y2="386" stroke="#c2713a" stroke-width="1.5"/>
+                        <polygon points="375,382 380,392 385,382" fill="#c2713a"/>
+
+                        <!-- Step 5: Consider refactoring -->
+                        <rect x="260" y="390" width="240" height="52" rx="8" fill="rgba(42,58,82,0.3)" stroke="#2a3a52" stroke-width="1.5"/>
+                        <text x="380" y="412" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#94a3b8">4. Considere refatoração</text>
+                        <text x="380" y="430" text-anchor="middle" class="dt" font-size="9" fill="#64748b">Dividir monolitos, estágios com checkpoint</text>
+
+                        <!-- Branch right -->
+                        <line x1="500" y1="416" x2="560" y2="416" stroke="#2a3a52" stroke-width="1.2"/>
+                        <polygon points="556,412 566,416 556,420" fill="#2a3a52"/>
+                        <rect x="570" y="398" width="160" height="36" rx="6" fill="rgba(42,58,82,0.2)" stroke="#2a3a52" stroke-width="1"/>
+                        <text x="650" y="421" text-anchor="middle" class="dt" font-size="9.5" fill="#64748b">Estágios + checkpoint</text>
+                        <text x="538" y="409" class="dt" font-size="9" fill="#64748b">Corrigir</text>
+
+                        <!-- Left annotation: order matters -->
+                        <rect x="30" y="170" width="200" height="120" rx="8" fill="rgba(194,113,58,0.04)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
+                        <text x="130" y="196" text-anchor="middle" class="dt" font-size="10" font-weight="600" fill="#c2713a">Por que esta ordem?</text>
+                        <text x="130" y="218" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">Correções de partição</text>
+                        <text x="130" y="232" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">reduzem o shuffle,</text>
+                        <text x="130" y="246" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">o que muda as necessidades</text>
+                        <text x="130" y="260" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">de cluster e as prioridades</text>
+                        <text x="130" y="274" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">de refatoração.</text>
+
+                        <!-- Dashed connection to step 2 -->
+                        <line x1="230" y1="220" x2="260" y2="190" stroke="rgba(194,113,58,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+
+                        <!-- Caption -->
+                        <text x="380" y="475" text-anchor="middle" class="dt" font-size="10" fill="#64748b">Os achados de cada passo mudam a abordagem ideal para o próximo.</text>
+                        <text x="380" y="495" text-anchor="middle" class="dt" font-size="10" fill="#64748b">Corrija as partições primeiro — tudo downstream muda.</text>
+                    </svg>
+                </div>
+
+                <p>Essa ordem não é arbitrária. Correções de partição reduzem o volume de shuffle, o que muda o perfil de recursos do seu cluster, o que muda se a refatoração vale a pena. Se você redimensionar o cluster antes de corrigir o skew de partição, vai ter que redimensionar de novo depois. Se você refatorar o pipeline em estágios antes de corrigir os joins, pode dividir nos lugares errados. Comece no topo do funil.</p>
+            </section>
+
+            <!-- ============================================================
+                 ATO 8 — Conectando à Base de Conhecimento
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>Documentando a economia</h2>
+                <p>Aqui está a coisa que ninguém te conta sobre otimização de custo em escala: a economia é frágil. Toda decisão de otimização existe por uma razão — uma distribuição específica de dados, um padrão de acesso particular, um perfil de recursos medido. Quando essas condições mudam (e vão mudar), a otimização pode se tornar contraproducente.</p>
+                <p>A estratégia de partição que economizou 55% no pipeline de atribuição foi calibrada para uma distribuição específica de tamanhos de anunciantes. Se a plataforma onboarda três novos anunciantes massivos, os limites da chave composta precisam mudar. Os thresholds de broadcast join foram definidos com base nos tamanhos das tabelas de dimensão — se essas tabelas crescerem 10x, os broadcasts vão causar falhas de out-of-memory.</p>
+                <p>Documentei cada decisão de otimização com três coisas: <em>o que</em> mudamos, <em>por que</em> a abordagem original era cara (com dados), e <em>quando</em> a otimização deve ser revisada. Para o rebalanceamento de partições: "Revisar quando qualquer anunciante isolado exceder 8% do volume diário total." Para os broadcast joins: "Revisar se qualquer tabela de dimensão exceder 2 GB." Para o dimensionamento de cluster: "Refazer o profiling trimestralmente ou após qualquer mudança importante de carga."</p>
+                <p>Essa documentação não era verniz opcional — era uma parte crítica da própria otimização. Sem ela, o próximo engenheiro que encontrar um problema de performance não vai entender por que a chave de partição parece estranha, não vai saber os thresholds, e provavelmente vai "consertar" a otimização de volta para algo que custa 40% mais.</p>
+                <p>Desde então formalizei isso em uma abordagem estruturada de base de conhecimento — onde cada decisão de infraestrutura, sua razão e seus gatilhos de revisão são capturados em um sistema cruzado e mantido. Você pode ler sobre essa abordagem em <a href="base-de-conhecimento-como-memoria-agentica.html"><strong>A Estratégia de Base de Conhecimento</strong></a>. O princípio é o mesmo: conhecimento institucional que não é capturado é conhecimento institucional que já está sendo perdido.</p>
+            </section>
+
+            <!-- ============================================================
+                 ATO 9 — Conclusão Principal
+                 ============================================================ -->
+            <section class="content-section">
+                <h2>Conclusão Principal</h2>
+                <p>Otimização de custo em escala de petabyte é uma disciplina de engenharia, não um conjunto de truques. As ferramentas são diretas — rebalanceamento de partições, broadcast joins, dimensionamento de cluster, decomposição de pipeline. A parte difícil é abordar isso sistematicamente: medir antes de otimizar, entender a economia de cada decisão, seguir a ordem diagnóstica que maximiza o impacto e documentar tudo para que a economia persista.</p>
+                <p>Aqui está o que eu diria a qualquer time olhando para uma conta de nuvem que cresce mais rápido que a receita:</p>
+                <ul>
+                    <li><strong>Comece pelo modelo de custo.</strong> Você não pode otimizar o que não consegue medir. Associe valores em dólares a cada pipeline importante antes de tocar em qualquer código.</li>
+                    <li><strong>Corrija as partições primeiro.</strong> Em cada engajamento que fiz, skew de partição é a maior fonte isolada de desperdício. Também é a mais satisfatória de corrigir — os números de antes/depois são dramáticos.</li>
+                    <li><strong>Pense em SLAs, não em velocidade.</strong> O pipeline mais barato que atende à restrição de negócio é o pipeline certo. Mais rápido que o necessário é desperdício.</li>
+                    <li><strong>Pequenas melhorias se compõem.</strong> Não busque balas de prata. Uma melhoria sistemática de 5% em 40 pipelines rodando a cada hora produz mais economia que uma melhoria heroica de 50% em um único job.</li>
+                    <li><strong>Documente a economia.</strong> Toda otimização tem prazo de validade. Capture as premissas para que engenheiros futuros saibam quando revisar.</li>
+                </ul>
+                <p>A liderança pediu 30%. Entregamos 40%. Não porque achamos um truque inteligente, mas porque tratamos cada pipeline como um sistema econômico e otimizamos o sistema, não as partes.</p>
+            </section>
+
+            <!-- CTA -->
+            <section class="content-cta">
+                <h3>Custos de pipeline crescendo mais rápido que o seu negócio?</h3>
+                <p>Já otimizei pipelines em escala de petabyte e posso ajudar você a encontrar os ganhos escondidos na sua infraestrutura.</p>
+                <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; position: relative;">
+                    <a href="https://cal.com/bmentges/discovery-call" target="_blank" rel="noopener" class="btn btn-primary">Agendar Conversa de Descoberta</a>
+                    <a href="../case-studies/plataforma-de-publicidade-petabyte.html" class="btn btn-secondary">Leia o Estudo de Caso</a>
+                </div>
+            </section>
+
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span>
+                    <p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Navegação</h4>
+                        <a href="../#about">Sobre</a>
+                        <a href="../#services">Serviços</a>
+                        <a href="../#credibility">Histórico</a>
+                        <a href="./">Artigos</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Conexões</h4>
+                        <a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a>
+                        <a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2ef3ffda-e77e-4fbe-aff4-5d2c196cd01a"></script>
+    <script src="../../js/main.js"></script>
+</body>
+
+</html>
