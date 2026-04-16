@@ -447,41 +447,90 @@
         <div class="container">
             <div class="section-header fade-in-up">
                 <span class="section-label">Writing</span>
-                <h2>Thinking in public</h2>
-                <p>Technical articles on Data Engineering, AI integration, and building systems at scale. Coming from real experience, not theory.</p>
+                <h2>Technical articles from 28 years of building</h2>
+                <p>Data engineering, AI integration, and systems at scale. Written from production experience — not theory, not tutorials, not hype.</p>
             </div>
 
-            <div class="blog-grid">
+            <!-- Featured Article: Knowledge Base (flagship) -->
+            <a href="blog/knowledge-base-as-agentic-memory.html" class="blog-featured fade-in-up">
+                <div class="blog-featured-content">
+                    <div class="blog-featured-badge">
+                        <span class="blog-featured-label">Featured</span>
+                        <span class="blog-featured-oss">Open Source</span>
+                    </div>
+                    <h3>The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds</h3>
+                    <p>Why AI coding agents produce dramatically better development plans when they have a structured wiki about your architecture, decisions, and concepts — and an open-source template to build one yourself.</p>
+                    <div class="blog-featured-meta">
+                        <span class="blog-date">April 2026 &middot; 14 min read</span>
+                        <span class="blog-featured-cta">Read article &rarr;</span>
+                    </div>
+                </div>
+                <div class="blog-featured-visual">
+                    <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="280" height="200" rx="8" fill="#0c1220"/>
+                        <rect x="1" y="1" width="278" height="198" rx="7" fill="none" stroke="#2a3a52" stroke-width="1"/>
+                        <!-- Three layers -->
+                        <rect x="30" y="130" width="220" height="36" rx="5" fill="rgba(42,58,82,0.6)" stroke="#64748b" stroke-width="0.8"/>
+                        <text x="140" y="153" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">Raw Sources</text>
+                        <rect x="30" y="80" width="220" height="36" rx="5" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1"/>
+                        <text x="140" y="103" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#d4915e">LLM Wiki</text>
+                        <rect x="30" y="30" width="220" height="36" rx="5" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="0.8"/>
+                        <text x="140" y="53" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2dd4bf">Schema</text>
+                        <!-- Arrows -->
+                        <line x1="140" y1="130" x2="140" y2="120" stroke="#64748b" stroke-width="1" stroke-dasharray="3 2"/>
+                        <line x1="140" y1="80" x2="140" y2="70" stroke="#c2713a" stroke-width="1" stroke-dasharray="3 2"/>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Article Grid: remaining 7 articles -->
+            <div class="blog-grid-full">
                 <a href="blog/ai-agents-in-data-pipelines.html" class="blog-card fade-in-up">
                     <span class="blog-tag">AI + Data Engineering</span>
                     <h3>I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.</h3>
-                    <p>Lessons from bringing agentic AI into production data workflows at a major B2B platform — what shipped, what didn't, and what I'd do differently.</p>
-                    <span class="blog-date">April 2026 &middot; 12 min read</span>
+                    <p>The agents were good. But they hit a ceiling — and the thing that broke through it wasn't a better model.</p>
+                    <span class="blog-date">14 min read</span>
                 </a>
-                <a href="blog/building-data-platform-from-zero.html" class="blog-card fade-in-up" style="transition-delay: 0.1s">
+                <a href="blog/mcp-agentic-workflows-guardrails.html" class="blog-card fade-in-up">
+                    <span class="blog-tag">Agentic AI</span>
+                    <h3>MCP, Agentic Workflows, and Guardrails: A Production Field Guide</h3>
+                    <p>What Model Context Protocol actually looks like in a real engineering workflow.</p>
+                    <span class="blog-date">15 min read</span>
+                </a>
+                <a href="blog/building-data-platform-from-zero.html" class="blog-card fade-in-up">
                     <span class="blog-tag">Data Architecture</span>
                     <h3>Building a Data Platform From Zero: A Field Guide</h3>
-                    <p>The decisions that matter, the order that works, and the mistakes everyone makes when building a data platform from scratch.</p>
-                    <span class="blog-date">April 2026 &middot; 16 min read</span>
+                    <p>The decisions that matter, the order that works, and the mistakes everyone makes.</p>
+                    <span class="blog-date">16 min read</span>
                 </a>
-                <a href="blog/knowledge-base-as-agentic-memory.html" class="blog-card fade-in-up" style="transition-delay: 0.2s">
-                    <span class="blog-tag">Agentic AI &middot; Open Source</span>
-                    <h3>The Knowledge Base Strategy: Giving AI Agents a Memory That Compounds</h3>
-                    <p>Why AI agents produce better plans with a structured wiki about your architecture — and an open-source template to build one.</p>
-                    <span class="blog-date">April 2026 &middot; 14 min read</span>
+                <a href="blog/medallion-architecture-misunderstood.html" class="blog-card fade-in-up">
+                    <span class="blog-tag">Data Architecture</span>
+                    <h3>The Medallion Architecture Is Not What You Think It Is</h3>
+                    <p>Bronze/silver/gold layers — most implementations miss the point entirely.</p>
+                    <span class="blog-date">14 min read</span>
+                </a>
+                <a href="blog/petabyte-pipeline-cost-optimization.html" class="blog-card fade-in-up">
+                    <span class="blog-tag">Data Engineering</span>
+                    <h3>How I Reduced a Petabyte Pipeline's Cost by 40%</h3>
+                    <p>Performance engineering at scale is about economics, not clever tricks.</p>
+                    <span class="blog-date">13 min read</span>
+                </a>
+                <a href="blog/hackathon-tech-debt-bug-squash.html" class="blog-card fade-in-up">
+                    <span class="blog-tag">Leadership</span>
+                    <h3>The 70% Bug Squash: What One Hackathon Taught Me About Tech Debt</h3>
+                    <p>The real lesson isn't about hackathons — it's about permission.</p>
+                    <span class="blog-date">11 min read</span>
+                </a>
+                <a href="blog/28-year-engineering-arc.html" class="blog-card fade-in-up">
+                    <span class="blog-tag">Career</span>
+                    <h3>From 1.5 Billion Records/Day to AI Agents: My 28-Year Arc</h3>
+                    <p>What stayed the same, what changed completely, and what I wish I'd known.</p>
+                    <span class="blog-date">15 min read</span>
                 </a>
             </div>
 
             <div class="blog-see-all fade-in-up">
-                <a href="blog/" class="btn btn-secondary">See all upcoming articles &rarr;</a>
-            </div>
-
-            <div class="blog-newsletter fade-in-up">
-                <h3>Get notified when I publish</h3>
-                <p>No spam. One email when a new article drops.</p>
-                <div class="newsletter-placeholder">
-                    <span>Newsletter signup coming soon</span>
-                </div>
+                <a href="blog/" class="btn btn-secondary">Browse all articles &rarr;</a>
             </div>
         </div>
     </section>
