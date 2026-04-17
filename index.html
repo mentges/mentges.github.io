@@ -22,8 +22,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Alternate language -->
@@ -47,7 +46,7 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#about">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#credibility">Track Record</a></li>
                 <li><a href="#blog">Writing</a></li>
@@ -74,7 +73,7 @@
                     </p>
                     <div class="hero-actions fade-in-up" style="animation-delay: 0.3s">
                         <a href="#services" class="btn btn-primary">See How I Can Help</a>
-                        <a href="#about" class="btn btn-secondary">Read My Story</a>
+                        <a href="about.html" class="btn btn-secondary">Read My Story</a>
                     </div>
                     <div class="hero-proof fade-in-up" style="animation-delay: 0.4s">
                         <div class="proof-item">
@@ -94,174 +93,9 @@
                     </div>
                 </div>
 
-                <!-- Data Flow Visualization -->
-                <div class="hero-visual fade-in-up" style="animation-delay: 0.5s">
-                    <svg viewBox="0 0 420 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Connection lines (animated dashes) -->
-                        <line x1="85" y1="72" x2="210" y2="140" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 5" style="animation: dash-flow 1.5s linear infinite"/>
-                        <line x1="335" y1="65" x2="210" y2="140" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 5" style="animation: dash-flow 1.8s linear infinite"/>
-                        <line x1="210" y1="145" x2="210" y2="225" stroke="#c2713a" stroke-width="1.8" stroke-dasharray="5 5" style="animation: dash-flow 1.2s linear infinite"/>
-                        <line x1="210" y1="235" x2="110" y2="310" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 5" style="animation: dash-flow 1.6s linear infinite"/>
-                        <line x1="210" y1="235" x2="310" y2="310" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 5" style="animation: dash-flow 1.4s linear infinite"/>
-                        <line x1="210" y1="235" x2="210" y2="350" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 5" style="animation: dash-flow 1.7s linear infinite"/>
-                        <line x1="85" y1="72" x2="335" y2="65" stroke="#e8ecf1" stroke-width="0.7" stroke-dasharray="3 7"/>
-                        <line x1="110" y1="310" x2="310" y2="310" stroke="#e8ecf1" stroke-width="0.7" stroke-dasharray="3 7"/>
-
-                        <!-- Source nodes (top) -->
-                        <g style="animation: float-node 4s ease-in-out infinite">
-                            <circle cx="85" cy="72" r="26" fill="#f1f4f8" stroke="#cbd5e1" stroke-width="1.2"/>
-                            <text x="85" y="68" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748b" font-weight="600">SRC</text>
-                            <text x="85" y="82" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">api</text>
-                        </g>
-                        <g style="animation: float-node 4.5s ease-in-out infinite 0.3s">
-                            <circle cx="335" cy="65" r="26" fill="#f1f4f8" stroke="#cbd5e1" stroke-width="1.2"/>
-                            <text x="335" y="61" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748b" font-weight="600">SRC</text>
-                            <text x="335" y="75" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">stream</text>
-                        </g>
-
-                        <!-- Central processing node -->
-                        <circle cx="210" cy="190" r="50" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.2)" stroke-width="1.2"/>
-                        <circle cx="210" cy="190" r="34" fill="#fcfcfd" stroke="#c2713a" stroke-width="1.8"/>
-                        <text x="210" y="185" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" fill="#c2713a" font-weight="600">PIPE</text>
-                        <text x="210" y="200" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#d4915e">transform</text>
-
-                        <!-- AI node -->
-                        <g style="animation: float-node 5s ease-in-out infinite 0.6s">
-                            <circle cx="320" cy="178" r="20" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.3)" stroke-width="1.2"/>
-                            <text x="320" y="183" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#2dd4bf" font-weight="600">AI</text>
-                        </g>
-                        <line x1="298" y1="183" x2="248" y2="190" stroke="rgba(45,212,191,0.3)" stroke-width="1.2" stroke-dasharray="4 4" style="animation: dash-flow 2s linear infinite"/>
-
-                        <!-- Output nodes (bottom) -->
-                        <g style="animation: float-node 3.8s ease-in-out infinite 0.2s">
-                            <rect x="78" y="293" width="64" height="44" rx="8" fill="#f1f4f8" stroke="#cbd5e1" stroke-width="1.2"/>
-                            <text x="110" y="313" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748b" font-weight="600">DWH</text>
-                            <text x="110" y="327" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="#94a3b8">warehouse</text>
-                        </g>
-                        <g style="animation: float-node 4.2s ease-in-out infinite 0.5s">
-                            <rect x="278" y="293" width="64" height="44" rx="8" fill="#f1f4f8" stroke="#cbd5e1" stroke-width="1.2"/>
-                            <text x="310" y="313" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748b" font-weight="600">API</text>
-                            <text x="310" y="327" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="#94a3b8">serving</text>
-                        </g>
-                        <g style="animation: float-node 4.6s ease-in-out infinite 0.8s">
-                            <rect x="178" y="340" width="64" height="44" rx="8" fill="#f1f4f8" stroke="#cbd5e1" stroke-width="1.2"/>
-                            <text x="210" y="360" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#64748b" font-weight="600">BI</text>
-                            <text x="210" y="374" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" fill="#94a3b8">analytics</text>
-                        </g>
-
-                        <!-- Pulsing indicator dots -->
-                        <circle cx="148" cy="106" fill="#c2713a">
-                            <animate attributeName="r" values="2.5;4.5;2.5" dur="2s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="272" cy="102" fill="#c2713a">
-                            <animate attributeName="r" values="2.5;4.5;2.5" dur="2.3s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="0.4;1;0.4" dur="2.3s" repeatCount="indefinite"/>
-                        </circle>
-                        <circle cx="160" cy="272" fill="#64748b">
-                            <animate attributeName="r" values="2;3.5;2" dur="2.6s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.6s" repeatCount="indefinite"/>
-                        </circle>
-                    </svg>
-                </div>
             </div>
         </div>
     </header>
-
-    <!-- Company Logos / Social Proof -->
-    <section class="logos-section fade-in-up">
-        <div class="container">
-            <p class="logos-label">Industries I've built data systems in</p>
-            <div class="logos-grid">
-                <span class="logo-text">B2B SaaS</span>
-                <span class="logo-text">Ad Tech</span>
-                <span class="logo-text">Travel & Hospitality</span>
-                <span class="logo-text">Web Services</span>
-                <span class="logo-text">Media</span>
-                <span class="logo-text">Logistics</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="about-layout">
-                <div class="about-content fade-in-up">
-                    <span class="section-label">About</span>
-                    <h2>Engineer first. <br>Consultant second.</h2>
-                    <p class="about-lead">
-                        I'm Bruno Mentges — a Senior Data & AI Engineer based in Rio de Janeiro, Brazil. I've spent
-                        nearly three decades building production systems, from fintech payment processors to
-                        petabyte-scale ad platforms.
-                    </p>
-                    <p>
-                        At <strong>a top-10 global ad tech platform</strong>, I worked on data pipelines processing 1.5 billion
-                        records per day at petabyte scale. At <strong>a leading travel platform</strong>, I built the data lake
-                        that unblocked the ML team. At <strong>a logistics startup</strong>, I designed the entire data platform
-                        from zero — lake, warehouse, orchestration, analytics. At <strong>a major B2B data platform</strong>,
-                        I pioneered integrating AI agents directly into data engineering workflows.
-                    </p>
-                    <p>
-                        I'm not an "AI consultant" who appeared in 2023. I'm a systems engineer who's been building
-                        at scale for decades and now applies that depth to the AI integration challenge — because
-                        AI without solid data engineering is just an expensive demo.
-                    </p>
-                    <div class="about-details">
-                        <div class="detail-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            <span>Rio de Janeiro, Brazil (GMT-3)</span>
-                        </div>
-                        <div class="detail-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <line x1="2" y1="12" x2="22" y2="12" />
-                                <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-                            </svg>
-                            <span>Bilingual: English & Portuguese</span>
-                        </div>
-                        <div class="detail-item">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                                <line x1="8" y1="21" x2="16" y2="21" />
-                                <line x1="12" y1="17" x2="12" y2="21" />
-                            </svg>
-                            <span>8+ years remote with US teams</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-skills fade-in-up" style="transition-delay: 0.15s">
-                    <div class="skill-card">
-                        <h4>Data Engineering</h4>
-                        <p>Pipelines at petabyte scale. Snowflake, BigQuery, Redshift, Airflow, Prefect, dbt. From ingestion to serving.</p>
-                        <div class="skill-tags">
-                            <span>Spark</span><span>Airflow</span><span>dbt</span><span>Snowflake</span><span>BigQuery</span>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h4>AI Integration</h4>
-                        <p>LLM agents in production workflows. Claude, MCP, agentic pipelines with guardrails. Not demos — shipped systems.</p>
-                        <div class="skill-tags">
-                            <span>Claude Agents</span><span>MCP</span><span>LLM Ops</span><span>Guardrails</span>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h4>Platform Architecture</h4>
-                        <p>End-to-end data platforms built from zero. Cloud-native on AWS, GCP, Azure. Kubernetes, CI/CD, IaC.</p>
-                        <div class="skill-tags">
-                            <span>AWS</span><span>GCP</span><span>Terraform</span><span>K8s</span><span>Docker</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Services Section -->
     <section id="services" class="section section-alt">
@@ -386,64 +220,10 @@
                     <span class="track-link">Read the full story &rarr;</span>
                 </a>
 
-                <div class="track-card fade-in-up" style="transition-delay: 0.3s">
-                    <div class="track-company">Leading Global Travel Platform</div>
-                    <div class="track-role">Senior Software Engineer &middot; 2021 &ndash; 2022</div>
-                    <p>Built the company's new data pipeline and data lake on AWS — S3, EMR, Glue, Redshift, Lambda. Unblocked the ML team by giving them access to near real-time company data without impacting production.</p>
-                    <div class="track-tags">
-                        <span>AWS</span><span>Data Lake</span><span>EMR</span><span>Redshift</span><span>Lambda</span>
-                    </div>
-                </div>
             </div>
 
             <div class="track-earlier fade-in-up">
-                <p>Earlier: <strong>a major web services provider</strong> (systems migration, GDPR compliance), <strong>a Brazilian e-commerce marketplace</strong> (Kubernetes CD system, 70% bug squash hackathon), <strong>a fintech payments company</strong> (payment processing systems), <strong>a major Brazilian media conglomerate</strong> (5+ years, large-scale web engineering), <strong>a telecom software company in Germany</strong> (international experience).</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Data Sovereignty Section -->
-    <section class="section section-sovereignty">
-        <div class="container">
-            <div class="sovereignty-layout fade-in-up">
-                <div class="sovereignty-content">
-                    <span class="section-label">Philosophy</span>
-                    <h2>Your Data. Your Models. <br>Your Control.</h2>
-                    <p class="sovereignty-lead">
-                        In a world rushing to plug everything into third-party APIs, I help teams think clearly about
-                        what should be public, what should be private, and what should stay on-premise.
-                    </p>
-                    <div class="sovereignty-points">
-                        <div class="sov-point">
-                            <strong>Public AI</strong>
-                            <p>Leverage the best LLMs for research, prototyping, and general tasks where data sensitivity isn't a concern.</p>
-                        </div>
-                        <div class="sov-point">
-                            <strong>Private AI</strong>
-                            <p>On-premise or VPC-isolated models for confidential data. Your IP stays under your roof.</p>
-                        </div>
-                        <div class="sov-point">
-                            <strong>Hybrid Architecture</strong>
-                            <p>The pragmatic middle ground — route each workload to the right layer based on sensitivity, cost, and performance.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="sovereignty-visual">
-                    <div class="sov-diagram">
-                        <div class="sov-layer sov-public">
-                            <span class="sov-layer-label">Public AI</span>
-                            <span class="sov-layer-desc">General tasks</span>
-                        </div>
-                        <div class="sov-layer sov-hybrid">
-                            <span class="sov-layer-label">Hybrid Layer</span>
-                            <span class="sov-layer-desc">Smart routing</span>
-                        </div>
-                        <div class="sov-layer sov-private">
-                            <span class="sov-layer-label">Private AI</span>
-                            <span class="sov-layer-desc">Your data, your models</span>
-                        </div>
-                    </div>
-                </div>
+                <p>Plus earlier roles across travel tech, web services, e-commerce, fintech, media, and telecom. <a href="about.html">Full story &rarr;</a></p>
             </div>
         </div>
     </section>
@@ -489,7 +269,7 @@
                 </div>
             </a>
 
-            <!-- Article Grid: remaining 7 articles -->
+            <!-- Article Grid: 2 picks alongside the featured piece -->
             <div class="blog-grid-full">
                 <a href="blog/ai-agents-in-data-pipelines.html" class="blog-card fade-in-up">
                     <span class="blog-tag">AI + Data Engineering</span>
@@ -497,41 +277,11 @@
                     <p>The agents were good. But they hit a ceiling — and the thing that broke through it wasn't a better model.</p>
                     <span class="blog-date">14 min read</span>
                 </a>
-                <a href="blog/mcp-agentic-workflows-guardrails.html" class="blog-card fade-in-up">
-                    <span class="blog-tag">Agentic AI</span>
-                    <h3>MCP, Agentic Workflows, and Guardrails: A Production Field Guide</h3>
-                    <p>What Model Context Protocol actually looks like in a real engineering workflow.</p>
-                    <span class="blog-date">15 min read</span>
-                </a>
-                <a href="blog/building-data-platform-from-zero.html" class="blog-card fade-in-up">
-                    <span class="blog-tag">Data Architecture</span>
-                    <h3>Building a Data Platform From Zero: A Field Guide</h3>
-                    <p>The decisions that matter, the order that works, and the mistakes everyone makes.</p>
-                    <span class="blog-date">16 min read</span>
-                </a>
-                <a href="blog/medallion-architecture-misunderstood.html" class="blog-card fade-in-up">
-                    <span class="blog-tag">Data Architecture</span>
-                    <h3>The Medallion Architecture Is Not What You Think It Is</h3>
-                    <p>Bronze/silver/gold layers — most implementations miss the point entirely.</p>
-                    <span class="blog-date">14 min read</span>
-                </a>
                 <a href="blog/petabyte-pipeline-cost-optimization.html" class="blog-card fade-in-up">
                     <span class="blog-tag">Data Engineering</span>
                     <h3>How I Reduced a Petabyte Pipeline's Cost by 40%</h3>
                     <p>Performance engineering at scale is about economics, not clever tricks.</p>
                     <span class="blog-date">13 min read</span>
-                </a>
-                <a href="blog/hackathon-tech-debt-bug-squash.html" class="blog-card fade-in-up">
-                    <span class="blog-tag">Leadership</span>
-                    <h3>The 70% Bug Squash: What One Hackathon Taught Me About Tech Debt</h3>
-                    <p>The real lesson isn't about hackathons — it's about permission.</p>
-                    <span class="blog-date">11 min read</span>
-                </a>
-                <a href="blog/28-year-engineering-arc.html" class="blog-card fade-in-up">
-                    <span class="blog-tag">Career</span>
-                    <h3>From 1.5 Billion Records/Day to AI Agents: My 28-Year Arc</h3>
-                    <p>What stayed the same, what changed completely, and what I wish I'd known.</p>
-                    <span class="blog-date">15 min read</span>
                 </a>
             </div>
 
@@ -577,7 +327,7 @@
                 <div class="footer-links-group">
                     <div class="footer-col">
                         <h4>Navigate</h4>
-                        <a href="#about">About</a>
+                        <a href="about.html">About</a>
                         <a href="#services">Services</a>
                         <a href="#credibility">Track Record</a>
                         <a href="#blog">Writing</a>

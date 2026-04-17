@@ -4,9 +4,8 @@
    ========================================================================== */
 
 /* ---- Fonts (loaded via HTML <link>) ----
-   Heading:  Instrument Serif — editorial, warm, authoritative
-   Body:     Switzer — geometric humanist, distinctive but readable
-   Mono:     JetBrains Mono — for tags and technical labels
+   Primary:  Geist / Geist Mono — modern, precise, technical (Option A direction)
+   Fallbacks keep the v1 look on pages still importing Instrument Serif / Switzer.
    ========================================================================== */
 
 :root {
@@ -14,7 +13,7 @@
     --ink:          #0c1220;
     --ink-soft:     #151d2e;
     --ink-muted:    #1e2a3e;
-    --slate:        #2a3a52;
+    --slate:        #1a2536;
     --steel:        #64748b;
     --silver:       #94a3b8;
     --mist:         #cbd5e1;
@@ -44,9 +43,9 @@
     --color-border-light:  #eef1f5;
 
     /* Typography */
-    --font-heading:  'Instrument Serif', Georgia, serif;
-    --font-body:     'Switzer', system-ui, -apple-system, sans-serif;
-    --font-mono:     'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    --font-heading:  'Geist', 'Instrument Serif', ui-sans-serif, system-ui, sans-serif;
+    --font-body:     'Geist', 'Switzer', system-ui, -apple-system, sans-serif;
+    --font-mono:     'Geist Mono', 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
 
     /* Shadows — layered for depth */
     --shadow-xs:  0 1px 2px rgba(12, 18, 32, 0.04);
@@ -87,22 +86,9 @@ body {
     background: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-body);
-    font-size: 1.08rem;
-    line-height: 1.75;
+    font-size: 1.125rem;
+    line-height: 1.65;
     overflow-x: hidden;
-}
-
-/* Subtle noise texture overlay */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0.018;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 200px 200px;
 }
 
 ::selection {
@@ -115,15 +101,16 @@ body::before {
    ========================================================================== */
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
-    font-weight: 400; /* Instrument Serif is beautiful at normal weight */
+    font-weight: 600;
     line-height: 1.15;
     color: var(--color-text);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     margin-bottom: 1rem;
+    letter-spacing: -0.025em;
 }
 
 h3 {
@@ -174,9 +161,9 @@ strong {
 }
 
 .section-header p {
-    font-size: 1.1rem;
+    font-size: 1.1875rem;
     margin-top: 0.75rem;
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
 .section-label {
@@ -351,21 +338,9 @@ strong {
         linear-gradient(180deg, var(--paper) 0%, var(--fog) 100%);
 }
 
-/* Dot grid pattern */
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, var(--mist) 1px, transparent 1px);
-    background-size: 28px 28px;
-    opacity: 0.5;
-    mask-image: radial-gradient(ellipse 70% 70% at 60% 45%, black 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 45%, black 20%, transparent 70%);
-}
-
 .hero-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 4rem;
     align-items: center;
     position: relative;
@@ -399,10 +374,10 @@ strong {
 }
 
 .hero-subtitle {
-    font-size: 1.15rem;
+    font-size: 1.3125rem;
     color: var(--slate);
     margin-bottom: 2.25rem;
-    line-height: 1.75;
+    line-height: 1.6;
 }
 
 .hero-actions {
@@ -554,7 +529,7 @@ strong {
     align-items: center;
     gap: 0.75rem;
     color: var(--slate);
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .detail-item svg {
@@ -585,16 +560,16 @@ strong {
 }
 
 .skill-card h4 {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1.05rem;
-    letter-spacing: 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.1875rem;
+    letter-spacing: -0.01em;
 }
 
 .skill-card p {
-    font-size: 0.92rem;
-    line-height: 1.65;
-    margin-bottom: 0.75rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 0.85rem;
 }
 
 .skill-tags {
@@ -689,17 +664,17 @@ strong {
 }
 
 .service-card h3 {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1.15rem;
-    margin-bottom: 0.75rem;
-    letter-spacing: 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.01em;
 }
 
 .service-card > p {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin-bottom: 1.25rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
 }
 
 .service-includes {
@@ -712,16 +687,17 @@ strong {
 .service-includes li {
     position: relative;
     padding-left: 1.35rem;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.55rem;
     color: var(--slate);
-    font-size: 0.92rem;
+    font-size: 1.0625rem;
+    line-height: 1.5;
 }
 
 .service-includes li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 8px;
+    top: 10px;
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -795,10 +771,11 @@ a.track-card:hover .track-company {
 
 .track-company {
     font-family: var(--font-heading);
-    font-size: 1.35rem;
-    font-weight: 400;
+    font-size: 1.3rem;
+    font-weight: 600;
     color: var(--ink);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.01em;
     transition: color var(--duration) var(--ease-out);
 }
 
@@ -811,9 +788,9 @@ a.track-card:hover .track-company {
 }
 
 .track-card p {
-    font-size: 0.95rem;
-    line-height: 1.65;
-    margin-bottom: 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 1.15rem;
 }
 
 .track-tags {
@@ -857,8 +834,8 @@ a.track-card:hover .track-link {
 }
 
 .track-earlier p {
-    font-size: 0.9rem;
-    line-height: 1.75;
+    font-size: 1rem;
+    line-height: 1.65;
     color: var(--steel);
 }
 
@@ -1087,10 +1064,10 @@ a.track-card:hover .track-link {
 }
 
 .blog-featured p {
-    font-size: 1rem;
+    font-size: 1.0625rem;
     color: var(--silver);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
 }
 
 .blog-featured-meta {
@@ -1180,19 +1157,19 @@ a.blog-card:hover h3 {
 }
 
 .blog-card h3 {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-    letter-spacing: 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
     transition: color var(--duration) var(--ease-out);
 }
 
 .blog-card p {
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    margin-bottom: 1.15rem;
     flex-grow: 1;
 }
 
@@ -1265,7 +1242,7 @@ a.blog-card:hover h3 {
 }
 
 .cta-layout h2 {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     margin-bottom: 1rem;
 }
 
@@ -1419,21 +1396,6 @@ a.blog-card:hover h3 {
 .blog-grid-full .fade-in-up:nth-child(5) { transition-delay: 0.2s; }
 .blog-grid-full .fade-in-up:nth-child(6) { transition-delay: 0.25s; }
 .blog-grid-full .fade-in-up:nth-child(7) { transition-delay: 0.3s; }
-
-/* Node pulse animation for hero SVG */
-@keyframes pulse-node {
-    0%, 100% { r: 3; opacity: 0.6; }
-    50% { r: 4.5; opacity: 1; }
-}
-
-@keyframes dash-flow {
-    to { stroke-dashoffset: -12; }
-}
-
-@keyframes float-node {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
 
 /* ==========================================================================
    Responsive
