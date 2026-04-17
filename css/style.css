@@ -94,12 +94,17 @@ html {
 }
 
 body {
-    background: var(--color-bg);
+    background:
+        radial-gradient(ellipse 70% 40% at 100% 0%, rgba(37, 99, 235, 0.045), transparent 60%),
+        radial-gradient(ellipse 50% 30% at 0% 100%, rgba(37, 99, 235, 0.025), transparent 60%),
+        linear-gradient(180deg, #fafbfc 0%, #f5f7fa 100%);
+    background-attachment: fixed;
     color: var(--color-text);
     font-family: var(--font-body);
     font-size: 1.125rem;
     line-height: 1.65;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 ::selection {
@@ -343,13 +348,13 @@ strong {
     padding-top: 5rem;
     position: relative;
     overflow: hidden;
-    background: var(--paper);
+    background: transparent;
 }
 
 .hero-layout {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 4rem;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 3rem;
     align-items: center;
     position: relative;
     z-index: 1;
@@ -443,6 +448,137 @@ strong {
     width: 100%;
     max-width: 480px;
     height: auto;
+}
+
+/* ==========================================================================
+   Hero Animation — client → data → AI → knowledge
+   Static SVG with CSS-driven loops. Pure HTML/CSS, no JS.
+   ========================================================================== */
+
+.hero-animation-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-animation {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 16px 40px rgba(37, 99, 235, 0.08));
+}
+
+/* Pipeline flow dashes — subtle ongoing signal of movement */
+@keyframes ha-flow-dashes {
+    to { stroke-dashoffset: -16; }
+}
+.ha-flow-line {
+    animation: ha-flow-dashes 1.4s linear infinite;
+}
+
+/* Data items travelling client → AI through the pipeline */
+@keyframes ha-flow-item {
+    0%   { transform: translateX(0)     scale(0.9); opacity: 0; }
+    8%   { transform: translateX(12px)  scale(1);   opacity: 1; }
+    72%  { transform: translateX(210px) scale(1);   opacity: 1; }
+    88%  { transform: translateX(234px) scale(0.6); opacity: 0.3; }
+    100% { transform: translateX(246px) scale(0.2); opacity: 0; }
+}
+.ha-item {
+    animation: ha-flow-item 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+.ha-item-1 { animation-delay: 0s; }
+.ha-item-2 { animation-delay: -0.6s; }
+.ha-item-3 { animation-delay: -1.2s; }
+.ha-item-4 { animation-delay: -1.8s; }
+.ha-item-5 { animation-delay: -2.4s; }
+.ha-item-6 { animation-delay: -3.0s; }
+
+/* AI processor — expanding pulse ring */
+@keyframes ha-ai-pulse {
+    0%   { r: 50; stroke-opacity: 0;    }
+    15%  { r: 53; stroke-opacity: 0.55; }
+    100% { r: 78; stroke-opacity: 0;    }
+}
+.ha-ai-pulse {
+    animation: ha-ai-pulse 2.8s ease-out infinite;
+    transform-origin: center;
+}
+.ha-ai-pulse-2 { animation-delay: -1.4s; }
+
+/* AI processor — core breathing */
+@keyframes ha-ai-breathe {
+    0%, 100% { filter: brightness(1);    stroke-opacity: 0.9; }
+    50%      { filter: brightness(1.15); stroke-opacity: 1;   }
+}
+.ha-ai-core {
+    animation: ha-ai-breathe 2.8s ease-in-out infinite;
+}
+
+/* Neural-activity dots inside the AI processor */
+@keyframes ha-neural-blink {
+    0%, 100% { opacity: 0.25; }
+    50%      { opacity: 1;    }
+}
+.ha-neural {
+    animation: ha-neural-blink 1.8s ease-in-out infinite;
+}
+.ha-neural-1 { animation-delay: 0s;   }
+.ha-neural-2 { animation-delay: 0.3s; }
+.ha-neural-3 { animation-delay: 0.6s; }
+.ha-neural-4 { animation-delay: 0.9s; }
+.ha-neural-5 { animation-delay: 1.2s; }
+
+/* Lightbulbs of knowledge — rise, brighten, fade */
+@keyframes ha-bulb-rise {
+    0%   { transform: translate(0, 0)      scale(0.2); opacity: 0;   }
+    15%  { transform: translate(0, -20px)  scale(0.7); opacity: 0.7; }
+    45%  { transform: translate(0, -70px)  scale(1);   opacity: 1;   }
+    75%  { transform: translate(0, -115px) scale(1);   opacity: 0.85;}
+    100% { transform: translate(0, -145px) scale(0.85);opacity: 0;   }
+}
+.ha-bulb {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: ha-bulb-rise 4.2s ease-out infinite;
+}
+.ha-bulb-1 { animation-delay: 0s;   }
+.ha-bulb-2 { animation-delay: -1.4s;}
+.ha-bulb-3 { animation-delay: -2.8s;}
+
+/* Client-side data icons — gentle breathing as they get "surfaced" */
+@keyframes ha-client-glow {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 0.95; }
+}
+.ha-client-icon {
+    animation: ha-client-glow 4s ease-in-out infinite;
+    transform-origin: center;
+}
+.ha-client-icon-1 { animation-delay: 0s;   }
+.ha-client-icon-2 { animation-delay: 0.5s; }
+.ha-client-icon-3 { animation-delay: 1s;   }
+.ha-client-icon-4 { animation-delay: 1.5s; }
+.ha-client-icon-5 { animation-delay: 2s;   }
+
+@media (prefers-reduced-motion: reduce) {
+    .ha-item,
+    .ha-bulb,
+    .ha-ai-pulse,
+    .ha-ai-core,
+    .ha-neural,
+    .ha-flow-line,
+    .ha-client-icon {
+        animation: none;
+    }
+    .ha-bulb {
+        opacity: 1;
+        transform: translate(0, -80px);
+    }
 }
 
 /* ==========================================================================
@@ -623,11 +759,17 @@ strong {
 
 .service-card-featured {
     border-color: var(--ink);
-    box-shadow: var(--shadow-sm);
+    box-shadow:
+        0 0 0 1px var(--ink),
+        0 24px 50px -18px rgba(37, 99, 235, 0.3),
+        0 8px 20px -8px rgba(37, 99, 235, 0.12);
 }
 
 .service-card-featured:hover {
-    box-shadow: var(--shadow-xl);
+    box-shadow:
+        0 0 0 1px var(--ink),
+        0 32px 64px -20px rgba(37, 99, 235, 0.4),
+        0 10px 24px -8px rgba(37, 99, 235, 0.2);
     border-color: var(--ink);
 }
 
@@ -1226,7 +1368,9 @@ a.blog-card:hover h3 {
 .section-cta {
     padding: 7rem 0;
     position: relative;
-    background: var(--fog);
+    background:
+        radial-gradient(ellipse 55% 60% at 50% 55%, rgba(37, 99, 235, 0.07), transparent 70%),
+        var(--fog);
     border-top: 1px solid var(--color-border);
 }
 
@@ -1401,7 +1545,8 @@ a.blog-card:hover h3 {
         gap: 2rem;
     }
 
-    .hero-visual {
+    .hero-visual,
+    .hero-animation-wrapper {
         display: none;
     }
 
