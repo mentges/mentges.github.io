@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='70' font-family='sans-serif' font-size='56' font-weight='600' fill='%232563eb' text-anchor='middle'>M</text></svg>">
     <title>A Arquitetura Medallion Não É o Que Você Pensa que É — Bruno Mentges</title>
     <meta name="description"
         content="Todo mundo fala sobre as camadas bronze/prata/ouro. A maioria das implementações não entende o ponto. Aqui está para o que o padrão realmente serve — e quando quebrar as regras.">
@@ -16,8 +17,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages.css">
 
@@ -42,7 +42,7 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../sobre.html">Sobre</a></li>
                 <li><a href="../#services">Serviços</a></li>
                 <li><a href="../#credibility">Histórico</a></li>
                 <li><a href="./">Artigos</a></li>
@@ -122,7 +122,7 @@
                                 @keyframes md1flow { to { stroke-dashoffset: -14; } }
                             </style>
                         </defs>
-                        <rect width="760" height="520" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="520" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="518" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -153,63 +153,63 @@
                         <text x="420" y="176" class="md1" font-size="9" fill="#64748b">Limpar, validar, desduplicar</text>
 
                         <!-- === SILVER LAYER === -->
-                        <rect x="80" y="190" width="600" height="90" rx="10" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="130" y="218" class="md1" font-size="14" font-weight="600" fill="#2dd4bf">PRATA</text>
+                        <rect x="80" y="190" width="600" height="90" rx="10" fill="rgba(82,91,109,0.06)" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="130" y="218" class="md1" font-size="14" font-weight="600" fill="#525b6d">PRATA</text>
                         <text x="130" y="238" class="md1" font-size="10" fill="#94a3b8">Garantia: Estruturalmente correto</text>
 
                         <!-- Silver sub-labels -->
-                        <rect x="340" y="202" width="100" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.3)" stroke-width="0.8"/>
-                        <text x="390" y="219" text-anchor="middle" class="md1" font-size="9" fill="#2dd4bf">Tipado</text>
+                        <rect x="340" y="202" width="100" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.3)" stroke-width="0.8"/>
+                        <text x="390" y="219" text-anchor="middle" class="md1" font-size="9" fill="#525b6d">Tipado</text>
 
-                        <rect x="450" y="202" width="100" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.3)" stroke-width="0.8"/>
-                        <text x="500" y="219" text-anchor="middle" class="md1" font-size="9" fill="#2dd4bf">Desduplicado</text>
+                        <rect x="450" y="202" width="100" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.3)" stroke-width="0.8"/>
+                        <text x="500" y="219" text-anchor="middle" class="md1" font-size="9" fill="#525b6d">Desduplicado</text>
 
-                        <rect x="340" y="236" width="100" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.3)" stroke-width="0.8"/>
-                        <text x="390" y="253" text-anchor="middle" class="md1" font-size="9" fill="#2dd4bf">Validado</text>
+                        <rect x="340" y="236" width="100" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.3)" stroke-width="0.8"/>
+                        <text x="390" y="253" text-anchor="middle" class="md1" font-size="9" fill="#525b6d">Validado</text>
 
-                        <rect x="450" y="236" width="100" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.3)" stroke-width="0.8"/>
-                        <text x="500" y="253" text-anchor="middle" class="md1" font-size="9" fill="#2dd4bf">Conformado</text>
+                        <rect x="450" y="236" width="100" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.3)" stroke-width="0.8"/>
+                        <text x="500" y="253" text-anchor="middle" class="md1" font-size="9" fill="#525b6d">Conformado</text>
 
                         <!-- Arrow: Silver -> Gold (branching into multiple) -->
                         <line x1="380" y1="280" x2="380" y2="310" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: md1flow 2s linear infinite"/>
                         <text x="420" y="300" class="md1" font-size="9" fill="#64748b">Modelar, agregar, calcular</text>
 
                         <!-- Branch lines from center to multiple gold outputs -->
-                        <line x1="380" y1="310" x2="150" y2="340" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3"/>
-                        <line x1="380" y1="310" x2="340" y2="340" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3"/>
-                        <line x1="380" y1="310" x2="530" y2="340" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3"/>
+                        <line x1="380" y1="310" x2="150" y2="340" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3"/>
+                        <line x1="380" y1="310" x2="340" y2="340" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3"/>
+                        <line x1="380" y1="310" x2="530" y2="340" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3"/>
 
                         <!-- === GOLD LAYERS (multiple) === -->
-                        <text x="380" y="332" text-anchor="middle" class="md1" font-size="14" font-weight="600" fill="#c2713a">OURO</text>
+                        <text x="380" y="332" text-anchor="middle" class="md1" font-size="14" font-weight="600" fill="#2563eb">OURO</text>
 
                         <!-- Gold 1: Finance -->
-                        <rect x="60" y="346" width="180" height="80" rx="10" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.8"/>
-                        <text x="150" y="372" text-anchor="middle" class="md1" font-size="11" font-weight="600" fill="#c2713a">Mart Financeiro</text>
-                        <text x="150" y="390" text-anchor="middle" class="md1" font-size="9" fill="#d4915e">Reconhecimento de receita</text>
-                        <text x="150" y="406" text-anchor="middle" class="md1" font-size="9" fill="#d4915e">Períodos contábeis</text>
+                        <rect x="60" y="346" width="180" height="80" rx="10" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.8"/>
+                        <text x="150" y="372" text-anchor="middle" class="md1" font-size="11" font-weight="600" fill="#2563eb">Mart Financeiro</text>
+                        <text x="150" y="390" text-anchor="middle" class="md1" font-size="9" fill="#3b82f6">Reconhecimento de receita</text>
+                        <text x="150" y="406" text-anchor="middle" class="md1" font-size="9" fill="#3b82f6">Períodos contábeis</text>
                         <text x="150" y="420" text-anchor="middle" class="md1" font-size="8" fill="#64748b">Consumidor: Time Financeiro</text>
 
                         <!-- Gold 2: Marketing -->
-                        <rect x="260" y="346" width="180" height="80" rx="10" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.8"/>
-                        <text x="350" y="372" text-anchor="middle" class="md1" font-size="11" font-weight="600" fill="#c2713a">Mart de Marketing</text>
-                        <text x="350" y="390" text-anchor="middle" class="md1" font-size="9" fill="#d4915e">Atribuição de campanha</text>
-                        <text x="350" y="406" text-anchor="middle" class="md1" font-size="9" fill="#d4915e">Métricas de funil</text>
+                        <rect x="260" y="346" width="180" height="80" rx="10" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.8"/>
+                        <text x="350" y="372" text-anchor="middle" class="md1" font-size="11" font-weight="600" fill="#2563eb">Mart de Marketing</text>
+                        <text x="350" y="390" text-anchor="middle" class="md1" font-size="9" fill="#3b82f6">Atribuição de campanha</text>
+                        <text x="350" y="406" text-anchor="middle" class="md1" font-size="9" fill="#3b82f6">Métricas de funil</text>
                         <text x="350" y="420" text-anchor="middle" class="md1" font-size="8" fill="#64748b">Consumidor: Time de Marketing</text>
 
                         <!-- Gold 3: ML Features -->
-                        <rect x="460" y="346" width="180" height="80" rx="10" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.8"/>
-                        <text x="550" y="372" text-anchor="middle" class="md1" font-size="11" font-weight="600" fill="#c2713a">Features de ML</text>
-                        <text x="550" y="390" text-anchor="middle" class="md1" font-size="9" fill="#d4915e">Engenharia de features</text>
-                        <text x="550" y="406" text-anchor="middle" class="md1" font-size="9" fill="#d4915e">Point-in-time correto</text>
+                        <rect x="460" y="346" width="180" height="80" rx="10" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.8"/>
+                        <text x="550" y="372" text-anchor="middle" class="md1" font-size="11" font-weight="600" fill="#2563eb">Features de ML</text>
+                        <text x="550" y="390" text-anchor="middle" class="md1" font-size="9" fill="#3b82f6">Engenharia de features</text>
+                        <text x="550" y="406" text-anchor="middle" class="md1" font-size="9" fill="#3b82f6">Point-in-time correto</text>
                         <text x="550" y="420" text-anchor="middle" class="md1" font-size="8" fill="#64748b">Consumidor: Time de ML</text>
 
                         <!-- Gold guarantee label -->
-                        <text x="380" y="454" text-anchor="middle" class="md1" font-size="10" fill="#d4915e">Garantia: Responde uma pergunta de negócio específica corretamente</text>
+                        <text x="380" y="454" text-anchor="middle" class="md1" font-size="10" fill="#3b82f6">Garantia: Responde uma pergunta de negócio específica corretamente</text>
 
                         <!-- Left side annotation -->
-                        <line x1="48" y1="100" x2="48" y2="400" stroke="#c2713a" stroke-width="1.5" stroke-dasharray="6 4" style="animation: md1flow 2s linear infinite"/>
-                        <polygon points="43,396 48,408 53,396" fill="#c2713a"/>
-                        <text x="36" y="250" class="md1" font-size="9" fill="#d4915e" transform="rotate(-90, 36, 250)">Qualidade aumenta</text>
+                        <line x1="48" y1="100" x2="48" y2="400" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6 4" style="animation: md1flow 2s linear infinite"/>
+                        <polygon points="43,396 48,408 53,396" fill="#2563eb"/>
+                        <text x="36" y="250" class="md1" font-size="9" fill="#3b82f6" transform="rotate(-90, 36, 250)">Qualidade aumenta</text>
 
                         <!-- Caption -->
                         <text x="380" y="488" text-anchor="middle" class="md1" font-size="10" fill="#64748b">Cada camada faz uma garantia. Bronze: idêntico à origem. Prata: estruturalmente correto.</text>
@@ -235,7 +235,7 @@
                                 .md2 { font-family: 'JetBrains Mono', monospace; }
                             </style>
                         </defs>
-                        <rect width="760" height="480" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="480" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="478" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -331,50 +331,50 @@
                                 .md4 { font-family: 'JetBrains Mono', monospace; }
                             </style>
                         </defs>
-                        <rect width="760" height="440" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="440" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="438" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
                         <text x="380" y="32" text-anchor="middle" class="md4" font-size="13" font-weight="600" fill="#fcfcfd">Quando Usar Medallion vs. Quando Não Usar</text>
 
                         <!-- === LEFT: Good Fit === -->
-                        <rect x="30" y="54" width="340" height="360" rx="10" fill="rgba(45,212,191,0.04)" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="200" y="80" text-anchor="middle" class="md4" font-size="12" font-weight="600" fill="#2dd4bf">Bom Encaixe</text>
+                        <rect x="30" y="54" width="340" height="360" rx="10" fill="rgba(82,91,109,0.04)" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="200" y="80" text-anchor="middle" class="md4" font-size="12" font-weight="600" fill="#525b6d">Bom Encaixe</text>
 
                         <!-- Check icon function: circle + checkmark -->
                         <!-- Item 1 -->
-                        <circle cx="65" cy="112" r="12" fill="rgba(45,212,191,0.12)" stroke="rgba(45,212,191,0.4)" stroke-width="1.2"/>
-                        <polyline points="58,112 63,118 73,106" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="65" cy="112" r="12" fill="rgba(82,91,109,0.12)" stroke="rgba(82,91,109,0.4)" stroke-width="1.2"/>
+                        <polyline points="58,112 63,118 73,106" fill="none" stroke="#525b6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <text x="86" y="108" class="md4" font-size="11" font-weight="600" fill="#e8ecf1">Pipelines em batch</text>
                         <text x="86" y="122" class="md4" font-size="9" fill="#94a3b8">ETL/ELT agendado com cadência clara de execução</text>
 
                         <!-- Item 2 -->
-                        <circle cx="65" cy="160" r="12" fill="rgba(45,212,191,0.12)" stroke="rgba(45,212,191,0.4)" stroke-width="1.2"/>
-                        <polyline points="58,160 63,166 73,154" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="65" cy="160" r="12" fill="rgba(82,91,109,0.12)" stroke="rgba(82,91,109,0.4)" stroke-width="1.2"/>
+                        <polyline points="58,160 63,166 73,154" fill="none" stroke="#525b6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <text x="86" y="156" class="md4" font-size="11" font-weight="600" fill="#e8ecf1">Múltiplas fontes de dados</text>
                         <text x="86" y="170" class="md4" font-size="9" fill="#94a3b8">3+ fontes precisando de conformidade</text>
 
                         <!-- Item 3 -->
-                        <circle cx="65" cy="208" r="12" fill="rgba(45,212,191,0.12)" stroke="rgba(45,212,191,0.4)" stroke-width="1.2"/>
-                        <polyline points="58,208 63,214 73,202" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="65" cy="208" r="12" fill="rgba(82,91,109,0.12)" stroke="rgba(82,91,109,0.4)" stroke-width="1.2"/>
+                        <polyline points="58,208 63,214 73,202" fill="none" stroke="#525b6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <text x="86" y="204" class="md4" font-size="11" font-weight="600" fill="#e8ecf1">Múltiplos times consumidores</text>
                         <text x="86" y="218" class="md4" font-size="9" fill="#94a3b8">Finanças, marketing, operações, ML precisam de dados</text>
 
                         <!-- Item 4 -->
-                        <circle cx="65" cy="256" r="12" fill="rgba(45,212,191,0.12)" stroke="rgba(45,212,191,0.4)" stroke-width="1.2"/>
-                        <polyline points="58,256 63,262 73,250" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="65" cy="256" r="12" fill="rgba(82,91,109,0.12)" stroke="rgba(82,91,109,0.4)" stroke-width="1.2"/>
+                        <polyline points="58,256 63,262 73,250" fill="none" stroke="#525b6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <text x="86" y="252" class="md4" font-size="11" font-weight="600" fill="#e8ecf1">Necessidade de auditoria e compliance</text>
                         <text x="86" y="266" class="md4" font-size="9" fill="#94a3b8">Rastreamento de linhagem e reprodutibilidade requeridos</text>
 
                         <!-- Item 5 -->
-                        <circle cx="65" cy="304" r="12" fill="rgba(45,212,191,0.12)" stroke="rgba(45,212,191,0.4)" stroke-width="1.2"/>
-                        <polyline points="58,304 63,310 73,298" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="65" cy="304" r="12" fill="rgba(82,91,109,0.12)" stroke="rgba(82,91,109,0.4)" stroke-width="1.2"/>
+                        <polyline points="58,304 63,310 73,298" fill="none" stroke="#525b6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <text x="86" y="300" class="md4" font-size="11" font-weight="600" fill="#e8ecf1">Cenários de transição de time</text>
                         <text x="86" y="314" class="md4" font-size="9" fill="#94a3b8">Consultores constroem, time mantém</text>
 
                         <!-- Item 6 -->
-                        <circle cx="65" cy="352" r="12" fill="rgba(45,212,191,0.12)" stroke="rgba(45,212,191,0.4)" stroke-width="1.2"/>
-                        <polyline points="58,352 63,358 73,346" fill="none" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="65" cy="352" r="12" fill="rgba(82,91,109,0.12)" stroke="rgba(82,91,109,0.4)" stroke-width="1.2"/>
+                        <polyline points="58,352 63,358 73,346" fill="none" stroke="#525b6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <text x="86" y="348" class="md4" font-size="11" font-weight="600" fill="#e8ecf1">Volume de dados crescente</text>
                         <text x="86" y="362" class="md4" font-size="9" fill="#94a3b8">Reprocessamento é caro, imutabilidade compensa</text>
 
@@ -459,7 +459,7 @@
                                 @keyframes md3flow { to { stroke-dashoffset: -14; } }
                             </style>
                         </defs>
-                        <rect width="760" height="380" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="380" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="378" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -485,56 +485,56 @@
                         <polygon points="206,185 216,190 206,195" fill="#64748b"/>
 
                         <!-- === FACTORY FLOOR (Silver) === -->
-                        <rect x="220" y="80" width="180" height="220" rx="10" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.8"/>
-                        <text x="310" y="106" text-anchor="middle" class="md3" font-size="12" font-weight="600" fill="#2dd4bf">Chão de Fábrica</text>
+                        <rect x="220" y="80" width="180" height="220" rx="10" fill="rgba(82,91,109,0.06)" stroke="#525b6d" stroke-width="1.8"/>
+                        <text x="310" y="106" text-anchor="middle" class="md3" font-size="12" font-weight="600" fill="#525b6d">Chão de Fábrica</text>
                         <text x="310" y="122" text-anchor="middle" class="md3" font-size="10" fill="#94a3b8">(Prata)</text>
 
                         <!-- Factory operations -->
-                        <rect x="236" y="138" width="148" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.25)" stroke-width="0.8"/>
-                        <text x="310" y="155" text-anchor="middle" class="md3" font-size="9" fill="#2dd4bf">Inspeção de qualidade</text>
+                        <rect x="236" y="138" width="148" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.25)" stroke-width="0.8"/>
+                        <text x="310" y="155" text-anchor="middle" class="md3" font-size="9" fill="#525b6d">Inspeção de qualidade</text>
 
-                        <rect x="236" y="172" width="148" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.25)" stroke-width="0.8"/>
-                        <text x="310" y="189" text-anchor="middle" class="md3" font-size="9" fill="#2dd4bf">Padronizar peças</text>
+                        <rect x="236" y="172" width="148" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.25)" stroke-width="0.8"/>
+                        <text x="310" y="189" text-anchor="middle" class="md3" font-size="9" fill="#525b6d">Padronizar peças</text>
 
-                        <rect x="236" y="206" width="148" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.25)" stroke-width="0.8"/>
-                        <text x="310" y="223" text-anchor="middle" class="md3" font-size="9" fill="#2dd4bf">Remover defeitos</text>
+                        <rect x="236" y="206" width="148" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.25)" stroke-width="0.8"/>
+                        <text x="310" y="223" text-anchor="middle" class="md3" font-size="9" fill="#525b6d">Remover defeitos</text>
 
-                        <rect x="236" y="240" width="148" height="26" rx="6" fill="rgba(45,212,191,0.08)" stroke="rgba(45,212,191,0.25)" stroke-width="0.8"/>
-                        <text x="310" y="257" text-anchor="middle" class="md3" font-size="9" fill="#2dd4bf">Aplicar especificações</text>
+                        <rect x="236" y="240" width="148" height="26" rx="6" fill="rgba(82,91,109,0.08)" stroke="rgba(82,91,109,0.25)" stroke-width="0.8"/>
+                        <text x="310" y="257" text-anchor="middle" class="md3" font-size="9" fill="#525b6d">Aplicar especificações</text>
 
                         <text x="310" y="288" text-anchor="middle" class="md3" font-size="9" fill="#64748b">Infraestrutura compartilhada</text>
 
                         <!-- Arrows: Factory -> Products (branching) -->
-                        <line x1="400" y1="150" x2="460" y2="100" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: md3flow 1.8s linear infinite"/>
-                        <polygon points="456,104 464,96 460,108" fill="#c2713a"/>
+                        <line x1="400" y1="150" x2="460" y2="100" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: md3flow 1.8s linear infinite"/>
+                        <polygon points="456,104 464,96 460,108" fill="#2563eb"/>
 
-                        <line x1="400" y1="190" x2="460" y2="190" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: md3flow 2s linear infinite"/>
-                        <polygon points="456,185 466,190 456,195" fill="#c2713a"/>
+                        <line x1="400" y1="190" x2="460" y2="190" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: md3flow 2s linear infinite"/>
+                        <polygon points="456,185 466,190 456,195" fill="#2563eb"/>
 
-                        <line x1="400" y1="230" x2="460" y2="280" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: md3flow 2.2s linear infinite"/>
-                        <polygon points="460,272 464,284 456,278" fill="#c2713a"/>
+                        <line x1="400" y1="230" x2="460" y2="280" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: md3flow 2.2s linear infinite"/>
+                        <polygon points="460,272 464,284 456,278" fill="#2563eb"/>
 
                         <!-- === FINISHED PRODUCTS (Gold) === -->
-                        <text x="600" y="56" text-anchor="middle" class="md3" font-size="12" font-weight="600" fill="#c2713a">Produtos Acabados (Ouro)</text>
+                        <text x="600" y="56" text-anchor="middle" class="md3" font-size="12" font-weight="600" fill="#2563eb">Produtos Acabados (Ouro)</text>
 
                         <!-- Product 1: Analytics Dashboards -->
-                        <rect x="470" y="72" width="270" height="56" rx="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="530" y="96" class="md3" font-size="11" font-weight="600" fill="#c2713a">Analytics</text>
-                        <text x="530" y="112" class="md3" font-size="9" fill="#d4915e">Dashboards de KPI</text>
+                        <rect x="470" y="72" width="270" height="56" rx="8" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="530" y="96" class="md3" font-size="11" font-weight="600" fill="#2563eb">Analytics</text>
+                        <text x="530" y="112" class="md3" font-size="9" fill="#3b82f6">Dashboards de KPI</text>
                         <rect x="640" y="84" width="86" height="30" rx="6" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="0.8"/>
                         <text x="683" y="103" text-anchor="middle" class="md3" font-size="8" fill="#94a3b8">Executivos</text>
 
                         <!-- Product 2: ML Features -->
-                        <rect x="470" y="162" width="270" height="56" rx="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="530" y="186" class="md3" font-size="11" font-weight="600" fill="#c2713a">Features de ML</text>
-                        <text x="530" y="202" class="md3" font-size="9" fill="#d4915e">Datasets de treino</text>
+                        <rect x="470" y="162" width="270" height="56" rx="8" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="530" y="186" class="md3" font-size="11" font-weight="600" fill="#2563eb">Features de ML</text>
+                        <text x="530" y="202" class="md3" font-size="9" fill="#3b82f6">Datasets de treino</text>
                         <rect x="640" y="174" width="86" height="30" rx="6" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="0.8"/>
                         <text x="683" y="193" text-anchor="middle" class="md3" font-size="8" fill="#94a3b8">Data Science</text>
 
                         <!-- Product 3: Reporting -->
-                        <rect x="470" y="252" width="270" height="56" rx="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="530" y="276" class="md3" font-size="11" font-weight="600" fill="#c2713a">Relatórios</text>
-                        <text x="530" y="292" class="md3" font-size="9" fill="#d4915e">Relatórios de compliance</text>
+                        <rect x="470" y="252" width="270" height="56" rx="8" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="530" y="276" class="md3" font-size="11" font-weight="600" fill="#2563eb">Relatórios</text>
+                        <text x="530" y="292" class="md3" font-size="9" fill="#3b82f6">Relatórios de compliance</text>
                         <rect x="640" y="264" width="86" height="30" rx="6" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="0.8"/>
                         <text x="683" y="283" text-anchor="middle" class="md3" font-size="8" fill="#94a3b8">Financeiro</text>
 
@@ -652,7 +652,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container"><div class="footer-layout"><div class="footer-brand"><span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span><p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p></div><div class="footer-links-group"><div class="footer-col"><h4>Navegação</h4><a href="../#about">Sobre</a><a href="../#services">Serviços</a><a href="../#credibility">Histórico</a><a href="./">Artigos</a></div><div class="footer-col"><h4>Conexões</h4><a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a><a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p></div></div>
+        <div class="container"><div class="footer-layout"><div class="footer-brand"><span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span><p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p></div><div class="footer-links-group"><div class="footer-col"><h4>Navegação</h4><a href="../sobre.html">Sobre</a><a href="../#services">Serviços</a><a href="../#credibility">Histórico</a><a href="./">Artigos</a></div><div class="footer-col"><h4>Conexões</h4><a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a><a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p></div></div>
     </footer>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="2ef3ffda-e77e-4fbe-aff4-5d2c196cd01a"></script>
     <script src="../../js/main.js"></script>

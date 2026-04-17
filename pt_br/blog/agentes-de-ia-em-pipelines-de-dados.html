@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='70' font-family='sans-serif' font-size='56' font-weight='600' fill='%232563eb' text-anchor='middle'>M</text></svg>">
     <title>Integrei Agentes de IA em Nossos Pipelines de Dados. Aqui Está o Que de Fato Funcionou. — Bruno Mentges</title>
     <meta name="description"
         content="Como uma base de conhecimento persistente transformou a performance de agentes de IA em engenharia de dados em produção — de ferramentas genéricas a sistemas que entendem sua arquitetura.">
@@ -16,8 +17,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages.css">
 
@@ -42,7 +42,7 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../sobre.html">Sobre</a></li>
                 <li><a href="../#services">Serviços</a></li>
                 <li><a href="../#credibility">Histórico</a></li>
                 <li><a href="./">Artigos</a></li>
@@ -115,7 +115,7 @@
                                 @keyframes d1flow { to { stroke-dashoffset: -16; } }
                             </style>
                         </defs>
-                        <rect width="740" height="300" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="300" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="298" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Source nodes -->
@@ -135,18 +135,18 @@
                         <line x1="200" y1="221" x2="300" y2="158" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.8s linear infinite"/>
 
                         <!-- MCP Hub -->
-                        <rect x="300" y="112" width="160" height="60" rx="10" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <rect x="300" y="112" width="160" height="60" rx="10" fill="#2563eb" stroke="#3b82f6" stroke-width="1.5"/>
                         <text x="380" y="140" text-anchor="middle" class="d1" font-size="13" font-weight="600" fill="#fcfcfd">Camada MCP</text>
                         <text x="380" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="rgba(252,252,253,0.7)">infraestrutura viva</text>
 
                         <!-- Arrow to Agent -->
-                        <line x1="460" y1="142" x2="530" y2="142" stroke="#c2713a" stroke-width="2" stroke-dasharray="6 4" style="animation: d1flow 1.2s linear infinite"/>
-                        <polygon points="526,137 536,142 526,147" fill="#c2713a"/>
+                        <line x1="460" y1="142" x2="530" y2="142" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" style="animation: d1flow 1.2s linear infinite"/>
+                        <polygon points="526,137 536,142 526,147" fill="#2563eb"/>
 
                         <!-- Agent -->
-                        <rect x="540" y="110" width="165" height="64" rx="10" fill="#2a3a52" stroke="#2dd4bf" stroke-width="1.8"/>
+                        <rect x="540" y="110" width="165" height="64" rx="10" fill="#2a3a52" stroke="#525b6d" stroke-width="1.8"/>
                         <text x="622" y="140" text-anchor="middle" class="d1" font-size="12" font-weight="600" fill="#fcfcfd">Agente LLM</text>
-                        <text x="622" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="#2dd4bf">ciente de contexto</text>
+                        <text x="622" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="#525b6d">ciente de contexto</text>
 
                         <text x="370" y="280" text-anchor="middle" class="d1" font-size="10" fill="#64748b">MCP dá aos agentes acesso estruturado à infraestrutura viva — o "o quê" do seu sistema</text>
                     </svg>
@@ -161,7 +161,7 @@
                 <div class="article-diagram article-diagram-wide">
                     <svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d2 { font-family: 'JetBrains Mono', monospace; } @keyframes d2flow { to { stroke-dashoffset: -14; } }</style></defs>
-                        <rect width="740" height="260" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="260" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="258" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Lifecycle row -->
@@ -186,33 +186,33 @@
 
                         <!-- Agent row -->
                         <line x1="85" y1="72" x2="85" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="20" y="95" width="130" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="85" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Scaffolder</text>
+                        <rect x="20" y="95" width="130" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="85" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Scaffolder</text>
 
                         <line x1="220" y1="72" x2="220" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="165" y="95" width="110" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="220" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Gerador de Código</text>
+                        <rect x="165" y="95" width="110" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="220" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Gerador de Código</text>
 
                         <line x1="347" y1="72" x2="347" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="290" y="95" width="115" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="347" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Revisor de Código</text>
+                        <rect x="290" y="95" width="115" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="347" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Revisor de Código</text>
 
                         <line x1="480" y1="72" x2="480" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="420" y="95" width="120" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="480" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Resp. Incidente</text>
+                        <rect x="420" y="95" width="120" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="480" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Resp. Incidente</text>
 
                         <line x1="637" y1="72" x2="637" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="555" y="95" width="165" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="637" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Documentação</text>
+                        <rect x="555" y="95" width="165" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="637" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Documentação</text>
 
                         <!-- MCP feeding all -->
-                        <rect x="280" y="175" width="180" height="45" rx="9" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <rect x="280" y="175" width="180" height="45" rx="9" fill="#2563eb" stroke="#3b82f6" stroke-width="1.5"/>
                         <text x="370" y="203" text-anchor="middle" class="d2" font-size="12" font-weight="600" fill="#fcfcfd">Camada de Contexto MCP</text>
-                        <line x1="85" y1="133" x2="300" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.5s linear infinite"/>
-                        <line x1="220" y1="133" x2="330" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.6s linear infinite"/>
-                        <line x1="347" y1="133" x2="370" y2="175" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.7s linear infinite"/>
-                        <line x1="480" y1="133" x2="410" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.8s linear infinite"/>
-                        <line x1="637" y1="133" x2="440" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.9s linear infinite"/>
+                        <line x1="85" y1="133" x2="300" y2="180" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.5s linear infinite"/>
+                        <line x1="220" y1="133" x2="330" y2="178" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.6s linear infinite"/>
+                        <line x1="347" y1="133" x2="370" y2="175" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.7s linear infinite"/>
+                        <line x1="480" y1="133" x2="410" y2="178" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.8s linear infinite"/>
+                        <line x1="637" y1="133" x2="440" y2="180" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.9s linear infinite"/>
 
                         <text x="370" y="245" text-anchor="middle" class="d2" font-size="10" fill="#64748b">Cinco agentes, uma camada de contexto — cada um integrado a uma etapa de fluxo existente</text>
                     </svg>
@@ -251,39 +251,39 @@
                 <div class="article-diagram article-diagram-wide">
                     <svg viewBox="0 0 740 360" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d3 { font-family: 'JetBrains Mono', monospace; }</style></defs>
-                        <rect width="740" height="360" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="360" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="358" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Left: What MCP sees (teal) -->
-                        <text x="190" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#2dd4bf">O que o MCP enxerga</text>
+                        <text x="190" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#525b6d">O que o MCP enxerga</text>
                         <text x="190" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Dados de infraestrutura viva</text>
 
-                        <rect x="40" y="62" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Esquemas de tabelas, tipos, lineage</text>
-                        <rect x="40" y="108" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Definições de DAGs, agendamentos, deps</text>
-                        <rect x="40" y="154" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Históricos, falhas recentes</text>
-                        <rect x="40" y="200" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">SQL de modelos, definições de testes</text>
+                        <rect x="40" y="62" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">Esquemas de tabelas, tipos, lineage</text>
+                        <rect x="40" y="108" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">Definições de DAGs, agendamentos, deps</text>
+                        <rect x="40" y="154" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">Históricos, falhas recentes</text>
+                        <rect x="40" y="200" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">SQL de modelos, definições de testes</text>
 
                         <!-- Divider -->
                         <line x1="370" y1="25" x2="370" y2="295" stroke="#2a3a52" stroke-width="1.5" stroke-dasharray="6 4"/>
-                        <rect x="358" y="148" width="24" height="24" rx="4" fill="#0c1220"/>
+                        <rect x="358" y="148" width="24" height="24" rx="4" fill="#0a0a0a"/>
                         <text x="370" y="165" text-anchor="middle" class="d3" font-size="10" font-weight="600" fill="#64748b">vs</text>
 
                         <!-- Right: What agents couldn't access (copper / dim) -->
-                        <text x="550" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#c2713a">O que os agentes não acessavam</text>
+                        <text x="550" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#2563eb">O que os agentes não acessavam</text>
                         <text x="550" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Conhecimento institucional</text>
 
-                        <rect x="400" y="62" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Por que esta arquitetura foi escolhida</text>
-                        <rect x="400" y="108" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Falhas &amp; lições de migrações passadas</text>
-                        <rect x="400" y="154" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Padrões sazonais &amp; riscos conhecidos</text>
-                        <rect x="400" y="200" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Decisões do time, projetos em andamento</text>
+                        <rect x="400" y="62" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Por que esta arquitetura foi escolhida</text>
+                        <rect x="400" y="108" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Falhas &amp; lições de migrações passadas</text>
+                        <rect x="400" y="154" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Padrões sazonais &amp; riscos conhecidos</text>
+                        <rect x="400" y="200" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Decisões do time, projetos em andamento</text>
 
                         <!-- Result -->
                         <rect x="160" y="260" width="420" height="40" rx="8" fill="rgba(100,116,139,0.15)" stroke="#64748b" stroke-width="1"/>
@@ -315,7 +315,7 @@
                                 @keyframes d4flow { to { stroke-dashoffset: -16; } }
                             </style>
                         </defs>
-                        <rect width="760" height="620" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="620" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="618" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -323,38 +323,38 @@
                         <text x="380" y="52" text-anchor="middle" class="d4" font-size="10" fill="#64748b">Dois sistemas, um agente, saída dramaticamente melhor</text>
 
                         <!-- LEFT: MCP Column -->
-                        <rect x="35" y="75" width="240" height="280" rx="12" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.2)" stroke-width="1.2"/>
-                        <text x="155" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#2dd4bf">Camada MCP</text>
+                        <rect x="35" y="75" width="240" height="280" rx="12" fill="rgba(82,91,109,0.04)" stroke="rgba(82,91,109,0.2)" stroke-width="1.2"/>
+                        <text x="155" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#525b6d">Camada MCP</text>
                         <text x="155" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Infraestrutura viva — o "o quê"</text>
 
-                        <rect x="55" y="138" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="159" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Esquemas &amp; lineage</text>
-                        <rect x="55" y="178" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="199" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Definições de DAGs</text>
-                        <rect x="55" y="218" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="239" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Históricos de execução</text>
-                        <rect x="55" y="258" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="279" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Convenções &amp; padrões</text>
+                        <rect x="55" y="138" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="159" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Esquemas &amp; lineage</text>
+                        <rect x="55" y="178" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="199" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Definições de DAGs</text>
+                        <rect x="55" y="218" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="239" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Históricos de execução</text>
+                        <rect x="55" y="258" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="279" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Convenções &amp; padrões</text>
 
-                        <text x="155" y="318" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Tempo real · Preciso</text>
-                        <text x="155" y="336" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Escopo de infraestrutura</text>
+                        <text x="155" y="318" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Tempo real · Preciso</text>
+                        <text x="155" y="336" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Escopo de infraestrutura</text>
 
                         <!-- RIGHT: Knowledge Base Column -->
-                        <rect x="485" y="75" width="240" height="280" rx="12" fill="rgba(194,113,58,0.04)" stroke="rgba(194,113,58,0.2)" stroke-width="1.2"/>
-                        <text x="605" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#c2713a">Base de Conhecimento</text>
+                        <rect x="485" y="75" width="240" height="280" rx="12" fill="rgba(37,99,235,0.04)" stroke="rgba(37,99,235,0.2)" stroke-width="1.2"/>
+                        <text x="605" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#2563eb">Base de Conhecimento</text>
                         <text x="605" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Memória institucional — o "porquê"</text>
 
-                        <rect x="505" y="138" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="159" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Decisões de arquitetura</text>
-                        <rect x="505" y="178" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="199" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Postmortems &amp; padrões</text>
-                        <rect x="505" y="218" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="239" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Regras de domínio &amp; contexto</text>
-                        <rect x="505" y="258" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="279" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Projetos em andamento &amp; planos</text>
+                        <rect x="505" y="138" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="159" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Decisões de arquitetura</text>
+                        <rect x="505" y="178" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="199" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Postmortems &amp; padrões</text>
+                        <rect x="505" y="218" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="239" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Regras de domínio &amp; contexto</text>
+                        <rect x="505" y="258" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="279" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Projetos em andamento &amp; planos</text>
 
-                        <text x="605" y="318" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Acumulativa · Sintetizada</text>
-                        <text x="605" y="336" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Escopo da organização</text>
+                        <text x="605" y="318" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Acumulativa · Sintetizada</text>
+                        <text x="605" y="336" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Escopo da organização</text>
 
                         <!-- CENTER: Agent -->
                         <rect x="310" y="170" width="140" height="80" rx="10" fill="#2a3a52" stroke="#94a3b8" stroke-width="1.5"/>
@@ -362,21 +362,21 @@
                         <text x="380" y="225" text-anchor="middle" class="d4" font-size="9.5" fill="#94a3b8">contexto completo</text>
 
                         <!-- Flow: MCP → Agent -->
-                        <line x1="275" y1="210" x2="310" y2="210" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
-                        <polygon points="306,206 314,210 306,214" fill="#2dd4bf"/>
-                        <text x="292" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#2dd4bf">olhos</text>
+                        <line x1="275" y1="210" x2="310" y2="210" stroke="#525b6d" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="306,206 314,210 306,214" fill="#525b6d"/>
+                        <text x="292" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#525b6d">olhos</text>
 
                         <!-- Flow: KB → Agent -->
-                        <line x1="485" y1="210" x2="450" y2="210" stroke="#c2713a" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
-                        <polygon points="454,206 446,210 454,214" fill="#c2713a"/>
-                        <text x="468" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#d4915e">memória</text>
+                        <line x1="485" y1="210" x2="450" y2="210" stroke="#2563eb" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="454,206 446,210 454,214" fill="#2563eb"/>
+                        <text x="468" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#3b82f6">memória</text>
 
                         <!-- Animated pulse dots -->
-                        <circle cx="292" cy="210" fill="#2dd4bf">
+                        <circle cx="292" cy="210" fill="#525b6d">
                             <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
                             <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
                         </circle>
-                        <circle cx="468" cy="210" fill="#c2713a">
+                        <circle cx="468" cy="210" fill="#2563eb">
                             <animate attributeName="r" values="2;4;2" dur="2.3s" repeatCount="indefinite"/>
                             <animate attributeName="opacity" values="0.5;1;0.5" dur="2.3s" repeatCount="indefinite"/>
                         </circle>
@@ -387,7 +387,7 @@
 
                         <!-- Fork lines to the two output boxes -->
                         <line x1="380" y1="306" x2="190" y2="380" stroke="#64748b" stroke-width="1"/>
-                        <line x1="380" y1="306" x2="570" y2="380" stroke="#c2713a" stroke-width="1.5"/>
+                        <line x1="380" y1="306" x2="570" y2="380" stroke="#2563eb" stroke-width="1.5"/>
 
                         <!-- Output box: MCP only (left, dimmer) -->
                         <rect x="65" y="380" width="250" height="60" rx="8" fill="rgba(100,116,139,0.1)" stroke="#64748b" stroke-width="1" stroke-dasharray="4 3"/>
@@ -395,18 +395,18 @@
                         <text x="190" y="426" text-anchor="middle" class="d4" font-size="11.5" fill="#94a3b8">Tecnicamente correto</text>
 
                         <!-- Output box: MCP + KB (right, bright) -->
-                        <rect x="445" y="380" width="250" height="60" rx="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="570" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#c2713a">MCP + Base de Conhecimento</text>
-                        <text x="570" y="426" text-anchor="middle" class="d4" font-size="11.5" font-weight="600" fill="#d4915e">Arquiteturalmente informado</text>
+                        <rect x="445" y="380" width="250" height="60" rx="8" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="570" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#2563eb">MCP + Base de Conhecimento</text>
+                        <text x="570" y="426" text-anchor="middle" class="d4" font-size="11.5" font-weight="600" fill="#3b82f6">Arquiteturalmente informado</text>
 
                         <!-- Impact section -->
                         <line x1="100" y1="470" x2="660" y2="470" stroke="#2a3a52" stroke-width="1"/>
                         <text x="380" y="495" text-anchor="middle" class="d4" font-size="10.5" fill="#64748b">Impacto em cada agente:</text>
 
-                        <text x="380" y="520" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Scaffolder evita padrões depreciados</text>
-                        <text x="380" y="540" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Revisor sinaliza contradições com decisões</text>
-                        <text x="380" y="560" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Agente de incidente conhece histórico de falhas</text>
-                        <text x="380" y="580" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Documentação captura o "porquê", não só o "o quê"</text>
+                        <text x="380" y="520" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Scaffolder evita padrões depreciados</text>
+                        <text x="380" y="540" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Revisor sinaliza contradições com decisões</text>
+                        <text x="380" y="560" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Agente de incidente conhece histórico de falhas</text>
+                        <text x="380" y="580" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Documentação captura o "porquê", não só o "o quê"</text>
 
                         <!-- Caption -->
                         <text x="380" y="608" text-anchor="middle" class="d4" font-size="10" fill="#64748b">MCP dá olhos aos agentes. Uma base de conhecimento dá memória. Juntos: a camada de contexto completa.</text>
@@ -441,25 +441,25 @@
                 <div class="article-diagram">
                     <svg viewBox="0 0 740 280" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d5 { font-family: 'JetBrains Mono', monospace; } @keyframes d5flow { to { stroke-dashoffset: -14; } }</style></defs>
-                        <rect width="740" height="280" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="280" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="278" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <text x="370" y="32" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#fcfcfd">Sequência Recomendada</text>
 
                         <!-- Phase 1: Knowledge Base -->
-                        <rect x="30" y="55" width="155" height="90" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="107" y="78" text-anchor="middle" class="d5" font-size="10" fill="#c2713a">SEMANAS 1-2</text>
-                        <text x="107" y="98" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Base de</text>
-                        <text x="107" y="115" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Conhecimento</text>
+                        <rect x="30" y="55" width="155" height="90" rx="9" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="107" y="78" text-anchor="middle" class="d5" font-size="10" fill="#2563eb">SEMANAS 1-2</text>
+                        <text x="107" y="98" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#3b82f6">Base de</text>
+                        <text x="107" y="115" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#3b82f6">Conhecimento</text>
                         <text x="107" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">ADRs, postmortems</text>
 
                         <line x1="185" y1="100" x2="215" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="212,96 220,100 212,104" fill="#64748b"/>
 
                         <!-- Phase 2: MCP -->
-                        <rect x="220" y="55" width="135" height="90" rx="9" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="287" y="78" text-anchor="middle" class="d5" font-size="10" fill="#2dd4bf">SEMANAS 2-3</text>
-                        <text x="287" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">Camada</text>
-                        <text x="287" y="117" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">MCP</text>
+                        <rect x="220" y="55" width="135" height="90" rx="9" fill="rgba(82,91,109,0.06)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="287" y="78" text-anchor="middle" class="d5" font-size="10" fill="#525b6d">SEMANAS 2-3</text>
+                        <text x="287" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#525b6d">Camada</text>
+                        <text x="287" y="117" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#525b6d">MCP</text>
                         <text x="287" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Esquemas, DAGs, runs</text>
 
                         <line x1="355" y1="100" x2="385" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="382,96 390,100 382,104" fill="#64748b"/>
@@ -481,10 +481,10 @@
                         <text x="640" y="133" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">documentação</text>
 
                         <!-- Knowledge Base compounding arrow underneath -->
-                        <line x1="107" y1="155" x2="107" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="30" y="185" width="680" height="40" rx="7" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="370" y="210" text-anchor="middle" class="d5" font-size="11" fill="#d4915e">Base de conhecimento se acumula desde a semana 1 — cada agente construído em cima se beneficia imediatamente</text>
-                        <line x1="107" y1="185" x2="680" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="4 4" style="animation: d5flow 3s linear infinite"/>
+                        <line x1="107" y1="155" x2="107" y2="185" stroke="#2563eb" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="30" y="185" width="680" height="40" rx="7" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="370" y="210" text-anchor="middle" class="d5" font-size="11" fill="#3b82f6">Base de conhecimento se acumula desde a semana 1 — cada agente construído em cima se beneficia imediatamente</text>
+                        <line x1="107" y1="185" x2="680" y2="185" stroke="#2563eb" stroke-width="1" stroke-dasharray="4 4" style="animation: d5flow 3s linear infinite"/>
 
                         <text x="370" y="255" text-anchor="middle" class="d5" font-size="10" fill="#64748b">Comece com memória, adicione olhos, depois construa agentes. Inverte a ordem usual — e produz melhores resultados.</text>
                     </svg>
@@ -504,13 +504,13 @@
                 <div class="article-diagram">
                     <svg viewBox="0 0 740 220" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d6 { font-family: 'JetBrains Mono', monospace; }</style></defs>
-                        <rect width="740" height="220" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="220" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="218" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Col 1 -->
                         <rect x="25" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
-                        <text x="135" y="65" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Guardrails Primeiro</text>
-                        <line x1="75" y1="78" x2="195" y2="78" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="135" y="65" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Guardrails Primeiro</text>
+                        <line x1="75" y1="78" x2="195" y2="78" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
                         <text x="135" y="100" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Defina o que os agentes</text>
                         <text x="135" y="116" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">não podem fazer antes do</text>
                         <text x="135" y="132" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">que podem. Raio de dano</text>
@@ -518,9 +518,9 @@
 
                         <!-- Col 2 -->
                         <rect x="260" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
-                        <text x="370" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Memória Antes da</text>
-                        <text x="370" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Inteligência</text>
-                        <line x1="310" y1="82" x2="430" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="370" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Memória Antes da</text>
+                        <text x="370" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Inteligência</text>
+                        <line x1="310" y1="82" x2="430" y2="82" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
                         <text x="370" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Uma base de conhecimento</text>
                         <text x="370" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">+ MCP importa mais do que</text>
                         <text x="370" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">qual modelo você escolhe.</text>
@@ -528,9 +528,9 @@
 
                         <!-- Col 3 -->
                         <rect x="495" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
-                        <text x="605" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Integração ao</text>
-                        <text x="605" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Fluxo</text>
-                        <line x1="545" y1="82" x2="665" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="605" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Integração ao</text>
+                        <text x="605" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Fluxo</text>
+                        <line x1="545" y1="82" x2="665" y2="82" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
                         <text x="605" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Agentes devem encontrar</text>
                         <text x="605" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">engenheiros onde eles já</text>
                         <text x="605" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">trabalham. Novas interfaces</text>
@@ -577,7 +577,7 @@
                 <div class="footer-links-group">
                     <div class="footer-col">
                         <h4>Navegação</h4>
-                        <a href="../#about">Sobre</a>
+                        <a href="../sobre.html">Sobre</a>
                         <a href="../#services">Serviços</a>
                         <a href="../#credibility">Histórico</a>
                         <a href="./">Artigos</a>

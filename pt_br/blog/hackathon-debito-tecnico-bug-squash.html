@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='70' font-family='sans-serif' font-size='56' font-weight='600' fill='%232563eb' text-anchor='middle'>M</text></svg>">
     <title>O Bug Squash de 70%: O Que um Hackathon Me Ensinou Sobre Débito Técnico — Bruno Mentges</title>
     <meta name="description"
         content="Como um hackathon de 2 dias em uma empresa brasileira de e-commerce eliminou 70% dos bugs em aberto e melhorou o uptime de 92% para 99%. A verdadeira lição não é sobre hackathons — é sobre permissão.">
@@ -16,8 +17,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/pages.css">
 
@@ -42,7 +42,7 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../#about">Sobre</a></li>
+                <li><a href="../sobre.html">Sobre</a></li>
                 <li><a href="../#services">Serviços</a></li>
                 <li><a href="../#credibility">Histórico</a></li>
                 <li><a href="./">Artigos</a></li>
@@ -101,7 +101,7 @@
                 <div class="article-diagram article-diagram-wide">
                     <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Gráfico de barras mostrando a distribuição do backlog de bugs: 70% bugs pequenos abaixo de 2 horas, 20% bugs médios de 2 a 8 horas, 10% bugs grandes acima de 1 dia">
                         <!-- Background -->
-                        <rect width="720" height="360" fill="#0c1220" rx="8" ry="8"/>
+                        <rect width="720" height="360" fill="#0a0a0a" rx="8" ry="8"/>
                         <rect x="1" y="1" width="718" height="358" rx="8" ry="8" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -118,14 +118,14 @@
                         <line x1="130" y1="250" x2="680" y2="250" stroke="#2a3a52" stroke-width="0.5"/>
 
                         <!-- Bar 1: Small bugs — 70% (140 bugs) -->
-                        <rect x="130" y="68" width="490" height="36" rx="4" ry="4" fill="#c2713a" opacity="0.9"/>
-                        <text x="632" y="92" text-anchor="start" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#c2713a" dx="6">70%</text>
-                        <text x="145" y="92" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#0c1220">~140 bugs</text>
+                        <rect x="130" y="68" width="490" height="36" rx="4" ry="4" fill="#2563eb" opacity="0.9"/>
+                        <text x="632" y="92" text-anchor="start" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#2563eb" dx="6">70%</text>
+                        <text x="145" y="92" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#0a0a0a">~140 bugs</text>
 
                         <!-- Bar 2: Medium bugs — 20% (40 bugs) -->
-                        <rect x="130" y="153" width="140" height="36" rx="4" ry="4" fill="#2dd4bf" opacity="0.8"/>
-                        <text x="282" y="177" text-anchor="start" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#2dd4bf" dx="6">20%</text>
-                        <text x="145" y="177" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#0c1220">~40 bugs</text>
+                        <rect x="130" y="153" width="140" height="36" rx="4" ry="4" fill="#525b6d" opacity="0.8"/>
+                        <text x="282" y="177" text-anchor="start" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#525b6d" dx="6">20%</text>
+                        <text x="145" y="177" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#0a0a0a">~40 bugs</text>
 
                         <!-- Bar 3: Large bugs — 10% (20 bugs) -->
                         <rect x="130" y="238" width="70" height="36" rx="4" ry="4" fill="#64748b" opacity="0.8"/>
@@ -133,9 +133,9 @@
                         <text x="145" y="262" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="500" fill="#f1f4f8">~20</text>
 
                         <!-- Annotation -->
-                        <rect x="340" y="296" width="280" height="40" rx="6" ry="6" fill="none" stroke="#c2713a" stroke-width="1" stroke-dasharray="4,3"/>
-                        <text x="480" y="314" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#c2713a">A maior parte do débito é pequena e corrigível.</text>
-                        <text x="480" y="328" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#c2713a">Só nunca recebe permissão para ser corrigida.</text>
+                        <rect x="340" y="296" width="280" height="40" rx="6" ry="6" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="4,3"/>
+                        <text x="480" y="314" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2563eb">A maior parte do débito é pequena e corrigível.</text>
+                        <text x="480" y="328" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2563eb">Só nunca recebe permissão para ser corrigida.</text>
                     </svg>
                 </div>
 
@@ -170,7 +170,7 @@
                 <div class="article-diagram article-diagram-wide">
                     <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparação antes e depois mostrando o backlog de bugs reduzido de 200+ para 60, uptime melhorado de 92% para 99%, e a moral do time de baixa para alta">
                         <!-- Background -->
-                        <rect width="720" height="320" fill="#0c1220" rx="8" ry="8"/>
+                        <rect width="720" height="320" fill="#0a0a0a" rx="8" ry="8"/>
                         <rect x="1" y="1" width="718" height="318" rx="8" ry="8" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -178,7 +178,7 @@
 
                         <!-- Column headers -->
                         <text x="240" y="68" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#64748b">ANTES</text>
-                        <text x="480" y="68" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">DEPOIS</text>
+                        <text x="480" y="68" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">DEPOIS</text>
 
                         <!-- Divider line -->
                         <line x1="360" y1="56" x2="360" y2="280" stroke="#2a3a52" stroke-width="1" stroke-dasharray="6,4"/>
@@ -188,34 +188,34 @@
                         <rect x="170" y="96" width="140" height="40" rx="6" ry="6" fill="none" stroke="#64748b" stroke-width="1.5"/>
                         <text x="240" y="122" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#94a3b8">200+</text>
                         <!-- Arrow -->
-                        <line x1="330" y1="116" x2="390" y2="116" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <polygon points="396,116 386,110 386,122" fill="#2dd4bf"/>
-                        <rect x="410" y="96" width="140" height="40" rx="6" ry="6" fill="none" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="480" y="122" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#2dd4bf">~60</text>
+                        <line x1="330" y1="116" x2="390" y2="116" stroke="#525b6d" stroke-width="1.5"/>
+                        <polygon points="396,116 386,110 386,122" fill="#525b6d"/>
+                        <rect x="410" y="96" width="140" height="40" rx="6" ry="6" fill="none" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="480" y="122" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#525b6d">~60</text>
 
                         <!-- Row 2: Uptime -->
                         <text x="80" y="190" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Uptime</text>
                         <rect x="170" y="166" width="140" height="40" rx="6" ry="6" fill="none" stroke="#64748b" stroke-width="1.5"/>
                         <text x="240" y="192" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#94a3b8">92%</text>
                         <!-- Arrow -->
-                        <line x1="330" y1="186" x2="390" y2="186" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <polygon points="396,186 386,180 386,192" fill="#2dd4bf"/>
-                        <rect x="410" y="166" width="140" height="40" rx="6" ry="6" fill="none" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="480" y="192" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#2dd4bf">99%</text>
+                        <line x1="330" y1="186" x2="390" y2="186" stroke="#525b6d" stroke-width="1.5"/>
+                        <polygon points="396,186 386,180 386,192" fill="#525b6d"/>
+                        <rect x="410" y="166" width="140" height="40" rx="6" ry="6" fill="none" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="480" y="192" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#525b6d">99%</text>
 
                         <!-- Row 3: Team Morale -->
                         <text x="80" y="260" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">Moral do Time</text>
                         <rect x="170" y="236" width="140" height="40" rx="6" ry="6" fill="none" stroke="#64748b" stroke-width="1.5"/>
                         <text x="240" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#94a3b8">Baixa</text>
                         <!-- Arrow -->
-                        <line x1="330" y1="256" x2="390" y2="256" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <polygon points="396,256 386,250 386,262" fill="#2dd4bf"/>
-                        <rect x="410" y="236" width="140" height="40" rx="6" ry="6" fill="none" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="480" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#2dd4bf">Alta</text>
+                        <line x1="330" y1="256" x2="390" y2="256" stroke="#525b6d" stroke-width="1.5"/>
+                        <polygon points="396,256 386,250 386,262" fill="#525b6d"/>
+                        <rect x="410" y="236" width="140" height="40" rx="6" ry="6" fill="none" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="480" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="600" fill="#525b6d">Alta</text>
 
                         <!-- Percentage labels -->
-                        <text x="620" y="122" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c2713a">-70%</text>
-                        <text x="620" y="192" font-family="'JetBrains Mono', monospace" font-size="11" fill="#c2713a">+7pp</text>
+                        <text x="620" y="122" font-family="'JetBrains Mono', monospace" font-size="11" fill="#2563eb">-70%</text>
+                        <text x="620" y="192" font-family="'JetBrains Mono', monospace" font-size="11" fill="#2563eb">+7pp</text>
 
                         <!-- Caption -->
                         <text x="360" y="304" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Melhoria de uptime medida ao longo do mês seguinte</text>
@@ -238,19 +238,19 @@
                 <div class="article-diagram">
                     <svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Framework de permissão mostrando três camadas: Habilidades na base (engenheiros têm isso), Tempo no meio (precisa de alocação) e Permissão no topo (o verdadeiro gargalo)">
                         <!-- Background -->
-                        <rect width="620" height="380" fill="#0c1220" rx="8" ry="8"/>
+                        <rect width="620" height="380" fill="#0a0a0a" rx="8" ry="8"/>
                         <rect x="1" y="1" width="618" height="378" rx="8" ry="8" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
                         <text x="310" y="36" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#94a3b8">Por Que o Débito Técnico Persiste</text>
 
                         <!-- Layer 1 (bottom): Skills -->
-                        <rect x="60" y="260" width="380" height="70" rx="8" ry="8" fill="none" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="250" y="290" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#2dd4bf">Habilidades</text>
+                        <rect x="60" y="260" width="380" height="70" rx="8" ry="8" fill="none" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="250" y="290" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#525b6d">Habilidades</text>
                         <text x="250" y="316" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Engenheiros sabem como corrigir os bugs</text>
                         <!-- Checkmark -->
-                        <rect x="398" y="274" width="28" height="20" rx="4" ry="4" fill="rgba(45,212,191,0.15)"/>
-                        <text x="412" y="290" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#2dd4bf">OK</text>
+                        <rect x="398" y="274" width="28" height="20" rx="4" ry="4" fill="rgba(82,91,109,0.15)"/>
+                        <text x="412" y="290" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#525b6d">OK</text>
 
                         <!-- Layer 2 (middle): Time -->
                         <rect x="90" y="170" width="320" height="70" rx="8" ry="8" fill="none" stroke="#64748b" stroke-width="1.5"/>
@@ -261,15 +261,15 @@
                         <text x="382" y="200" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">?</text>
 
                         <!-- Layer 3 (top): Permission — THE BOTTLENECK -->
-                        <rect x="120" y="76" width="260" height="74" rx="8" ry="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="2.5"/>
-                        <text x="250" y="106" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="600" fill="#c2713a">Permissão</text>
-                        <text x="250" y="128" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#c2713a">O verdadeiro gargalo</text>
+                        <rect x="120" y="76" width="260" height="74" rx="8" ry="8" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="2.5"/>
+                        <text x="250" y="106" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="600" fill="#2563eb">Permissão</text>
+                        <text x="250" y="128" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2563eb">O verdadeiro gargalo</text>
                         <text x="250" y="142" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Pare de entregar features. Conserte as coisas.</text>
 
                         <!-- Arrow pointing to Permission -->
-                        <line x1="470" y1="113" x2="392" y2="113" stroke="#c2713a" stroke-width="2" stroke-dasharray="6,4"/>
-                        <polygon points="392,113 402,107 402,119" fill="#c2713a"/>
-                        <text x="484" y="106" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#c2713a">DESBLOQUEIE</text>
+                        <line x1="470" y1="113" x2="392" y2="113" stroke="#2563eb" stroke-width="2" stroke-dasharray="6,4"/>
+                        <polygon points="392,113 402,107 402,119" fill="#2563eb"/>
+                        <text x="484" y="106" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2563eb">DESBLOQUEIE</text>
                         <text x="484" y="122" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">ISTO</text>
 
                         <!-- Thin upward arrows between layers -->
@@ -298,7 +298,7 @@
                 <div class="article-diagram article-diagram-wide">
                     <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Linha do tempo mostrando a progressão da explosão do hackathon para práticas sustentadas: política de code review, requisitos de teste, Fix-it Fridays e sistema de CD">
                         <!-- Background -->
-                        <rect width="720" height="260" fill="#0c1220" rx="8" ry="8"/>
+                        <rect width="720" height="260" fill="#0a0a0a" rx="8" ry="8"/>
                         <rect x="1" y="1" width="718" height="258" rx="8" ry="8" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -308,40 +308,40 @@
                         <line x1="60" y1="130" x2="660" y2="130" stroke="#2a3a52" stroke-width="2"/>
 
                         <!-- Node 1: Hackathon (burst) -->
-                        <circle cx="100" cy="130" r="18" fill="#c2713a" stroke="#c2713a" stroke-width="2"/>
-                        <text x="100" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#0c1220">1</text>
-                        <text x="100" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#c2713a">Hackathon</text>
+                        <circle cx="100" cy="130" r="18" fill="#2563eb" stroke="#2563eb" stroke-width="2"/>
+                        <text x="100" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#0a0a0a">1</text>
+                        <text x="100" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2563eb">Hackathon</text>
                         <text x="100" y="96" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Explosão de 2 dias</text>
                         <text x="100" y="168" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">-70% bugs</text>
 
                         <!-- Node 2: Code Review Policy -->
-                        <circle cx="240" cy="130" r="18" fill="rgba(45,212,191,0.2)" stroke="#2dd4bf" stroke-width="2"/>
-                        <text x="240" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">2</text>
-                        <text x="240" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">Code Review</text>
+                        <circle cx="240" cy="130" r="18" fill="rgba(82,91,109,0.2)" stroke="#525b6d" stroke-width="2"/>
+                        <text x="240" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">2</text>
+                        <text x="240" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">Code Review</text>
                         <text x="240" y="96" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Política</text>
                         <text x="240" y="168" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Testes em</text>
                         <text x="240" y="182" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">todos os PRs</text>
 
                         <!-- Node 3: Intern Training -->
-                        <circle cx="380" cy="130" r="18" fill="rgba(45,212,191,0.2)" stroke="#2dd4bf" stroke-width="2"/>
-                        <text x="380" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">3</text>
-                        <text x="380" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">Treinamento</text>
+                        <circle cx="380" cy="130" r="18" fill="rgba(82,91,109,0.2)" stroke="#525b6d" stroke-width="2"/>
+                        <text x="380" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">3</text>
+                        <text x="380" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">Treinamento</text>
                         <text x="380" y="96" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">de Estagiários</text>
                         <text x="380" y="168" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Práticas de dev</text>
                         <text x="380" y="182" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">com mentoria</text>
 
                         <!-- Node 4: Fix-it Fridays -->
-                        <circle cx="520" cy="130" r="18" fill="rgba(45,212,191,0.2)" stroke="#2dd4bf" stroke-width="2"/>
-                        <text x="520" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">4</text>
-                        <text x="520" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">Fix-it</text>
+                        <circle cx="520" cy="130" r="18" fill="rgba(82,91,109,0.2)" stroke="#525b6d" stroke-width="2"/>
+                        <text x="520" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">4</text>
+                        <text x="520" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">Fix-it</text>
                         <text x="520" y="96" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Fridays</text>
                         <text x="520" y="168" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Permissão</text>
                         <text x="520" y="182" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">recorrente</text>
 
                         <!-- Node 5: CD on K8s -->
-                        <circle cx="620" cy="130" r="18" fill="rgba(45,212,191,0.2)" stroke="#2dd4bf" stroke-width="2"/>
-                        <text x="620" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">5</text>
-                        <text x="620" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#2dd4bf">Sistema CD</text>
+                        <circle cx="620" cy="130" r="18" fill="rgba(82,91,109,0.2)" stroke="#525b6d" stroke-width="2"/>
+                        <text x="620" y="135" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">5</text>
+                        <text x="620" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#525b6d">Sistema CD</text>
                         <text x="620" y="96" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Kubernetes</text>
                         <text x="620" y="168" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">Deploys rápidos</text>
                         <text x="620" y="182" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">e seguros</text>
@@ -353,9 +353,9 @@
                         <line x1="538" y1="130" x2="602" y2="130" stroke="#2a3a52" stroke-width="1.5"/>
 
                         <!-- Bottom label -->
-                        <text x="100" y="218" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#c2713a">Explosão</text>
-                        <line x1="155" y1="214" x2="620" y2="214" stroke="#2dd4bf" stroke-width="1" stroke-dasharray="4,3"/>
-                        <text x="400" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#2dd4bf">Prática Sustentada</text>
+                        <text x="100" y="218" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#2563eb">Explosão</text>
+                        <line x1="155" y1="214" x2="620" y2="214" stroke="#525b6d" stroke-width="1" stroke-dasharray="4,3"/>
+                        <text x="400" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" fill="#525b6d">Prática Sustentada</text>
                     </svg>
                 </div>
 
@@ -429,7 +429,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container"><div class="footer-layout"><div class="footer-brand"><span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span><p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p></div><div class="footer-links-group"><div class="footer-col"><h4>Navegação</h4><a href="../#about">Sobre</a><a href="../#services">Serviços</a><a href="../#credibility">Histórico</a><a href="./">Artigos</a></div><div class="footer-col"><h4>Conexões</h4><a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a><a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p></div></div>
+        <div class="container"><div class="footer-layout"><div class="footer-brand"><span class="footer-logo">Bruno Mentges <span class="footer-sep">/</span> Mentges.AI</span><p>Engenheiro Sênior de Dados & IA. Construindo sistemas de produção desde 1998.</p></div><div class="footer-links-group"><div class="footer-col"><h4>Navegação</h4><a href="../sobre.html">Sobre</a><a href="../#services">Serviços</a><a href="../#credibility">Histórico</a><a href="./">Artigos</a></div><div class="footer-col"><h4>Conexões</h4><a href="mailto:bruno@mentgesinformatica.com.br">E-mail</a><a href="https://www.linkedin.com/in/brunomentgesdecarvalho/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/mentges" target="_blank" rel="noopener">GitHub</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Mentges AI Enablement (Mentges e Valentim Informatica Ltda). Todos os direitos reservados.</p></div></div>
     </footer>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="2ef3ffda-e77e-4fbe-aff4-5d2c196cd01a"></script>
     <script src="../../js/main.js"></script>
