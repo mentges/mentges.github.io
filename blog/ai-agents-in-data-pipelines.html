@@ -8,6 +8,7 @@
     <meta name="description"
         content="How a persistent knowledge base transformed AI agent performance in production data engineering — from generic tools to systems that understand your architecture.">
     <meta name="author" content="Bruno Mentges">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='70' font-family='sans-serif' font-size='56' font-weight='600' fill='%232563eb' text-anchor='middle'>M</text></svg>">
 
     <meta property="og:title" content="I Integrated AI Agents Into Our Data Pipelines. Here's What Actually Worked.">
     <meta property="og:description" content="How a persistent knowledge base transformed AI agent performance in production data engineering.">
@@ -15,8 +16,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/pages.css">
 
@@ -114,7 +114,7 @@
                                 @keyframes d1flow { to { stroke-dashoffset: -16; } }
                             </style>
                         </defs>
-                        <rect width="740" height="300" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="300" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="298" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Source nodes -->
@@ -134,18 +134,18 @@
                         <line x1="200" y1="221" x2="300" y2="158" stroke="#64748b" stroke-width="1.2" stroke-dasharray="5 4" style="animation: d1flow 1.8s linear infinite"/>
 
                         <!-- MCP Hub -->
-                        <rect x="300" y="112" width="160" height="60" rx="10" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <rect x="300" y="112" width="160" height="60" rx="10" fill="#2563eb" stroke="#3b82f6" stroke-width="1.5"/>
                         <text x="380" y="140" text-anchor="middle" class="d1" font-size="13" font-weight="600" fill="#fcfcfd">MCP Layer</text>
                         <text x="380" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="rgba(252,252,253,0.7)">live infrastructure</text>
 
                         <!-- Arrow to Agent -->
-                        <line x1="460" y1="142" x2="530" y2="142" stroke="#c2713a" stroke-width="2" stroke-dasharray="6 4" style="animation: d1flow 1.2s linear infinite"/>
-                        <polygon points="526,137 536,142 526,147" fill="#c2713a"/>
+                        <line x1="460" y1="142" x2="530" y2="142" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" style="animation: d1flow 1.2s linear infinite"/>
+                        <polygon points="526,137 536,142 526,147" fill="#2563eb"/>
 
                         <!-- Agent -->
-                        <rect x="540" y="110" width="165" height="64" rx="10" fill="#2a3a52" stroke="#2dd4bf" stroke-width="1.8"/>
+                        <rect x="540" y="110" width="165" height="64" rx="10" fill="#2a3a52" stroke="#525b6d" stroke-width="1.8"/>
                         <text x="622" y="140" text-anchor="middle" class="d1" font-size="12" font-weight="600" fill="#fcfcfd">LLM Agent</text>
-                        <text x="622" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="#2dd4bf">context-aware</text>
+                        <text x="622" y="157" text-anchor="middle" class="d1" font-size="9.5" fill="#525b6d">context-aware</text>
 
                         <text x="370" y="280" text-anchor="middle" class="d1" font-size="10" fill="#64748b">MCP gives agents structured access to live infrastructure — the "what" of your system</text>
                     </svg>
@@ -160,7 +160,7 @@
                 <div class="article-diagram article-diagram-wide">
                     <svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d2 { font-family: 'JetBrains Mono', monospace; } @keyframes d2flow { to { stroke-dashoffset: -14; } }</style></defs>
-                        <rect width="740" height="260" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="260" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="258" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Lifecycle row -->
@@ -185,33 +185,33 @@
 
                         <!-- Agent row -->
                         <line x1="85" y1="72" x2="85" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="20" y="95" width="130" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="85" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Scaffolder</text>
+                        <rect x="20" y="95" width="130" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="85" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Scaffolder</text>
 
                         <line x1="220" y1="72" x2="220" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="165" y="95" width="110" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="220" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Code Gen</text>
+                        <rect x="165" y="95" width="110" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="220" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Code Gen</text>
 
                         <line x1="347" y1="72" x2="347" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="290" y="95" width="115" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="347" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Code Review</text>
+                        <rect x="290" y="95" width="115" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="347" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Code Review</text>
 
                         <line x1="480" y1="72" x2="480" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="420" y="95" width="120" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="480" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Incident Resp.</text>
+                        <rect x="420" y="95" width="120" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="480" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Incident Resp.</text>
 
                         <line x1="637" y1="72" x2="637" y2="95" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="555" y="95" width="165" height="38" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="637" y="119" text-anchor="middle" class="d2" font-size="10" fill="#2dd4bf">Documentation</text>
+                        <rect x="555" y="95" width="165" height="38" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="637" y="119" text-anchor="middle" class="d2" font-size="10" fill="#525b6d">Documentation</text>
 
                         <!-- MCP feeding all -->
-                        <rect x="280" y="175" width="180" height="45" rx="9" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <rect x="280" y="175" width="180" height="45" rx="9" fill="#2563eb" stroke="#3b82f6" stroke-width="1.5"/>
                         <text x="370" y="203" text-anchor="middle" class="d2" font-size="12" font-weight="600" fill="#fcfcfd">MCP Context Layer</text>
-                        <line x1="85" y1="133" x2="300" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.5s linear infinite"/>
-                        <line x1="220" y1="133" x2="330" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.6s linear infinite"/>
-                        <line x1="347" y1="133" x2="370" y2="175" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.7s linear infinite"/>
-                        <line x1="480" y1="133" x2="410" y2="178" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.8s linear infinite"/>
-                        <line x1="637" y1="133" x2="440" y2="180" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.9s linear infinite"/>
+                        <line x1="85" y1="133" x2="300" y2="180" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.5s linear infinite"/>
+                        <line x1="220" y1="133" x2="330" y2="178" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.6s linear infinite"/>
+                        <line x1="347" y1="133" x2="370" y2="175" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.7s linear infinite"/>
+                        <line x1="480" y1="133" x2="410" y2="178" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.8s linear infinite"/>
+                        <line x1="637" y1="133" x2="440" y2="180" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: d2flow 1.9s linear infinite"/>
 
                         <text x="370" y="245" text-anchor="middle" class="d2" font-size="10" fill="#64748b">Five agents, one context layer — each integrated into an existing workflow step</text>
                     </svg>
@@ -250,39 +250,39 @@
                 <div class="article-diagram article-diagram-wide">
                     <svg viewBox="0 0 740 360" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d3 { font-family: 'JetBrains Mono', monospace; }</style></defs>
-                        <rect width="740" height="360" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="360" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="358" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Left: What MCP sees (teal) -->
-                        <text x="190" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#2dd4bf">What MCP sees</text>
+                        <text x="190" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#525b6d">What MCP sees</text>
                         <text x="190" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Live infrastructure data</text>
 
-                        <rect x="40" y="62" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Table schemas, column types, lineage</text>
-                        <rect x="40" y="108" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">DAG definitions, schedules, deps</text>
-                        <rect x="40" y="154" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Run histories, recent failures</text>
-                        <rect x="40" y="200" width="300" height="38" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="190" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#2dd4bf">Model SQL, test definitions</text>
+                        <rect x="40" y="62" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">Table schemas, column types, lineage</text>
+                        <rect x="40" y="108" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">DAG definitions, schedules, deps</text>
+                        <rect x="40" y="154" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">Run histories, recent failures</text>
+                        <rect x="40" y="200" width="300" height="38" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="190" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#525b6d">Model SQL, test definitions</text>
 
                         <!-- Divider -->
                         <line x1="370" y1="25" x2="370" y2="295" stroke="#2a3a52" stroke-width="1.5" stroke-dasharray="6 4"/>
-                        <rect x="358" y="148" width="24" height="24" rx="4" fill="#0c1220"/>
+                        <rect x="358" y="148" width="24" height="24" rx="4" fill="#0a0a0a"/>
                         <text x="370" y="165" text-anchor="middle" class="d3" font-size="10" font-weight="600" fill="#64748b">vs</text>
 
                         <!-- Right: What agents couldn't access (copper / dim) -->
-                        <text x="550" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#c2713a">What agents couldn't access</text>
+                        <text x="550" y="32" text-anchor="middle" class="d3" font-size="12" font-weight="600" fill="#2563eb">What agents couldn't access</text>
                         <text x="550" y="48" text-anchor="middle" class="d3" font-size="9" fill="#64748b">Institutional knowledge</text>
 
-                        <rect x="400" y="62" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Why this architecture was chosen</text>
-                        <rect x="400" y="108" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Past migration failures &amp; lessons</text>
-                        <rect x="400" y="154" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Seasonal patterns &amp; known risks</text>
-                        <rect x="400" y="200" width="300" height="38" rx="6" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="550" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#d4915e">Team decisions, in-flight projects</text>
+                        <rect x="400" y="62" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="86" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Why this architecture was chosen</text>
+                        <rect x="400" y="108" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="132" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Past migration failures &amp; lessons</text>
+                        <rect x="400" y="154" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="178" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Seasonal patterns &amp; known risks</text>
+                        <rect x="400" y="200" width="300" height="38" rx="6" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="550" y="224" text-anchor="middle" class="d3" font-size="10.5" fill="#3b82f6">Team decisions, in-flight projects</text>
 
                         <!-- Result -->
                         <rect x="160" y="260" width="420" height="40" rx="8" fill="rgba(100,116,139,0.15)" stroke="#64748b" stroke-width="1"/>
@@ -314,7 +314,7 @@
                                 @keyframes d4flow { to { stroke-dashoffset: -16; } }
                             </style>
                         </defs>
-                        <rect width="760" height="620" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="620" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="618" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -322,38 +322,38 @@
                         <text x="380" y="52" text-anchor="middle" class="d4" font-size="10" fill="#64748b">Two systems, one agent, dramatically better output</text>
 
                         <!-- LEFT: MCP Column -->
-                        <rect x="35" y="75" width="240" height="280" rx="12" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.2)" stroke-width="1.2"/>
-                        <text x="155" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#2dd4bf">MCP Layer</text>
+                        <rect x="35" y="75" width="240" height="280" rx="12" fill="rgba(82,91,109,0.04)" stroke="rgba(82,91,109,0.2)" stroke-width="1.2"/>
+                        <text x="155" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#525b6d">MCP Layer</text>
                         <text x="155" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Live infrastructure — the "what"</text>
 
-                        <rect x="55" y="138" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="159" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Schemas &amp; lineage</text>
-                        <rect x="55" y="178" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="199" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">DAG definitions</text>
-                        <rect x="55" y="218" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="239" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Run histories</text>
-                        <rect x="55" y="258" width="200" height="32" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="155" y="279" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Conventions &amp; patterns</text>
+                        <rect x="55" y="138" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="159" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Schemas &amp; lineage</text>
+                        <rect x="55" y="178" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="199" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">DAG definitions</text>
+                        <rect x="55" y="218" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="239" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Run histories</text>
+                        <rect x="55" y="258" width="200" height="32" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="155" y="279" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Conventions &amp; patterns</text>
 
-                        <text x="155" y="318" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Real-time · Precise</text>
-                        <text x="155" y="336" text-anchor="middle" class="d4" font-size="10" fill="#2dd4bf">Infrastructure-scoped</text>
+                        <text x="155" y="318" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Real-time · Precise</text>
+                        <text x="155" y="336" text-anchor="middle" class="d4" font-size="10" fill="#525b6d">Infrastructure-scoped</text>
 
                         <!-- RIGHT: Knowledge Base Column -->
-                        <rect x="485" y="75" width="240" height="280" rx="12" fill="rgba(194,113,58,0.04)" stroke="rgba(194,113,58,0.2)" stroke-width="1.2"/>
-                        <text x="605" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#c2713a">Knowledge Base</text>
+                        <rect x="485" y="75" width="240" height="280" rx="12" fill="rgba(37,99,235,0.04)" stroke="rgba(37,99,235,0.2)" stroke-width="1.2"/>
+                        <text x="605" y="102" text-anchor="middle" class="d4" font-size="13" font-weight="600" fill="#2563eb">Knowledge Base</text>
                         <text x="605" y="120" text-anchor="middle" class="d4" font-size="9.5" fill="#64748b">Institutional memory — the "why"</text>
 
-                        <rect x="505" y="138" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="159" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Architecture decisions</text>
-                        <rect x="505" y="178" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="199" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Postmortems &amp; patterns</text>
-                        <rect x="505" y="218" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="239" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Domain rules &amp; context</text>
-                        <rect x="505" y="258" width="200" height="32" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="605" y="279" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">In-flight projects &amp; plans</text>
+                        <rect x="505" y="138" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="159" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Architecture decisions</text>
+                        <rect x="505" y="178" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="199" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Postmortems &amp; patterns</text>
+                        <rect x="505" y="218" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="239" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Domain rules &amp; context</text>
+                        <rect x="505" y="258" width="200" height="32" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="605" y="279" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">In-flight projects &amp; plans</text>
 
-                        <text x="605" y="318" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Compounding · Synthesized</text>
-                        <text x="605" y="336" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Organization-scoped</text>
+                        <text x="605" y="318" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Compounding · Synthesized</text>
+                        <text x="605" y="336" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Organization-scoped</text>
 
                         <!-- CENTER: Agent -->
                         <rect x="310" y="170" width="140" height="80" rx="10" fill="#2a3a52" stroke="#94a3b8" stroke-width="1.5"/>
@@ -361,21 +361,21 @@
                         <text x="380" y="225" text-anchor="middle" class="d4" font-size="9.5" fill="#94a3b8">full context</text>
 
                         <!-- Flow: MCP → Agent -->
-                        <line x1="275" y1="210" x2="310" y2="210" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
-                        <polygon points="306,206 314,210 306,214" fill="#2dd4bf"/>
-                        <text x="292" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#2dd4bf">eyes</text>
+                        <line x1="275" y1="210" x2="310" y2="210" stroke="#525b6d" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="306,206 314,210 306,214" fill="#525b6d"/>
+                        <text x="292" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#525b6d">eyes</text>
 
                         <!-- Flow: KB → Agent -->
-                        <line x1="485" y1="210" x2="450" y2="210" stroke="#c2713a" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
-                        <polygon points="454,206 446,210 454,214" fill="#c2713a"/>
-                        <text x="468" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#d4915e">memory</text>
+                        <line x1="485" y1="210" x2="450" y2="210" stroke="#2563eb" stroke-width="2" stroke-dasharray="5 4" style="animation: d4flow 1.4s linear infinite"/>
+                        <polygon points="454,206 446,210 454,214" fill="#2563eb"/>
+                        <text x="468" y="196" text-anchor="middle" class="d4" font-size="9.5" fill="#3b82f6">memory</text>
 
                         <!-- Animated pulse dots -->
-                        <circle cx="292" cy="210" fill="#2dd4bf">
+                        <circle cx="292" cy="210" fill="#525b6d">
                             <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
                             <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
                         </circle>
-                        <circle cx="468" cy="210" fill="#c2713a">
+                        <circle cx="468" cy="210" fill="#2563eb">
                             <animate attributeName="r" values="2;4;2" dur="2.3s" repeatCount="indefinite"/>
                             <animate attributeName="opacity" values="0.5;1;0.5" dur="2.3s" repeatCount="indefinite"/>
                         </circle>
@@ -386,7 +386,7 @@
 
                         <!-- Fork lines to the two output boxes -->
                         <line x1="380" y1="306" x2="190" y2="380" stroke="#64748b" stroke-width="1"/>
-                        <line x1="380" y1="306" x2="570" y2="380" stroke="#c2713a" stroke-width="1.5"/>
+                        <line x1="380" y1="306" x2="570" y2="380" stroke="#2563eb" stroke-width="1.5"/>
 
                         <!-- Output box: MCP only (left, dimmer) -->
                         <rect x="65" y="380" width="250" height="60" rx="8" fill="rgba(100,116,139,0.1)" stroke="#64748b" stroke-width="1" stroke-dasharray="4 3"/>
@@ -394,18 +394,18 @@
                         <text x="190" y="426" text-anchor="middle" class="d4" font-size="11.5" fill="#94a3b8">Technically correct</text>
 
                         <!-- Output box: MCP + KB (right, bright) -->
-                        <rect x="445" y="380" width="250" height="60" rx="8" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="570" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#c2713a">MCP + Knowledge Base</text>
-                        <text x="570" y="426" text-anchor="middle" class="d4" font-size="11.5" font-weight="600" fill="#d4915e">Architecturally informed</text>
+                        <rect x="445" y="380" width="250" height="60" rx="8" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="570" y="406" text-anchor="middle" class="d4" font-size="10.5" fill="#2563eb">MCP + Knowledge Base</text>
+                        <text x="570" y="426" text-anchor="middle" class="d4" font-size="11.5" font-weight="600" fill="#3b82f6">Architecturally informed</text>
 
                         <!-- Impact section -->
                         <line x1="100" y1="470" x2="660" y2="470" stroke="#2a3a52" stroke-width="1"/>
                         <text x="380" y="495" text-anchor="middle" class="d4" font-size="10.5" fill="#64748b">Impact on every agent:</text>
 
-                        <text x="380" y="520" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Scaffolder avoids deprecated patterns</text>
-                        <text x="380" y="540" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Reviewer flags decision contradictions</text>
-                        <text x="380" y="560" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Incident agent knows failure history</text>
-                        <text x="380" y="580" text-anchor="middle" class="d4" font-size="10" fill="#d4915e">Documentation captures the "why", not just the "what"</text>
+                        <text x="380" y="520" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Scaffolder avoids deprecated patterns</text>
+                        <text x="380" y="540" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Reviewer flags decision contradictions</text>
+                        <text x="380" y="560" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Incident agent knows failure history</text>
+                        <text x="380" y="580" text-anchor="middle" class="d4" font-size="10" fill="#3b82f6">Documentation captures the "why", not just the "what"</text>
 
                         <!-- Caption -->
                         <text x="380" y="608" text-anchor="middle" class="d4" font-size="10" fill="#64748b">MCP gives agents eyes. A knowledge base gives them memory. Together: the full context layer.</text>
@@ -440,25 +440,25 @@
                 <div class="article-diagram">
                     <svg viewBox="0 0 740 280" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d5 { font-family: 'JetBrains Mono', monospace; } @keyframes d5flow { to { stroke-dashoffset: -14; } }</style></defs>
-                        <rect width="740" height="280" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="280" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="278" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <text x="370" y="32" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#fcfcfd">Recommended Sequence</text>
 
                         <!-- Phase 1: Knowledge Base -->
-                        <rect x="30" y="55" width="155" height="90" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="107" y="78" text-anchor="middle" class="d5" font-size="10" fill="#c2713a">WEEK 1-2</text>
-                        <text x="107" y="98" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Knowledge</text>
-                        <text x="107" y="115" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#d4915e">Base</text>
+                        <rect x="30" y="55" width="155" height="90" rx="9" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="107" y="78" text-anchor="middle" class="d5" font-size="10" fill="#2563eb">WEEK 1-2</text>
+                        <text x="107" y="98" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#3b82f6">Knowledge</text>
+                        <text x="107" y="115" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#3b82f6">Base</text>
                         <text x="107" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">ADRs, postmortems</text>
 
                         <line x1="185" y1="100" x2="215" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="212,96 220,100 212,104" fill="#64748b"/>
 
                         <!-- Phase 2: MCP -->
-                        <rect x="220" y="55" width="135" height="90" rx="9" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="287" y="78" text-anchor="middle" class="d5" font-size="10" fill="#2dd4bf">WEEK 2-3</text>
-                        <text x="287" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">MCP</text>
-                        <text x="287" y="117" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#2dd4bf">Layer</text>
+                        <rect x="220" y="55" width="135" height="90" rx="9" fill="rgba(82,91,109,0.06)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="287" y="78" text-anchor="middle" class="d5" font-size="10" fill="#525b6d">WEEK 2-3</text>
+                        <text x="287" y="100" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#525b6d">MCP</text>
+                        <text x="287" y="117" text-anchor="middle" class="d5" font-size="12" font-weight="600" fill="#525b6d">Layer</text>
                         <text x="287" y="135" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">Schemas, DAGs, runs</text>
 
                         <line x1="355" y1="100" x2="385" y2="100" stroke="#64748b" stroke-width="1.5"/><polygon points="382,96 390,100 382,104" fill="#64748b"/>
@@ -480,10 +480,10 @@
                         <text x="640" y="133" text-anchor="middle" class="d5" font-size="9" fill="#94a3b8">documentation</text>
 
                         <!-- Knowledge Base compounding arrow underneath -->
-                        <line x1="107" y1="155" x2="107" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="30" y="185" width="680" height="40" rx="7" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="370" y="210" text-anchor="middle" class="d5" font-size="11" fill="#d4915e">Knowledge base compounds from week 1 — every agent built on top benefits immediately</text>
-                        <line x1="107" y1="185" x2="680" y2="185" stroke="#c2713a" stroke-width="1" stroke-dasharray="4 4" style="animation: d5flow 3s linear infinite"/>
+                        <line x1="107" y1="155" x2="107" y2="185" stroke="#2563eb" stroke-width="1" stroke-dasharray="3 3"/>
+                        <rect x="30" y="185" width="680" height="40" rx="7" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="370" y="210" text-anchor="middle" class="d5" font-size="11" fill="#3b82f6">Knowledge base compounds from week 1 — every agent built on top benefits immediately</text>
+                        <line x1="107" y1="185" x2="680" y2="185" stroke="#2563eb" stroke-width="1" stroke-dasharray="4 4" style="animation: d5flow 3s linear infinite"/>
 
                         <text x="370" y="255" text-anchor="middle" class="d5" font-size="10" fill="#64748b">Start with memory, add eyes, then build agents. Inverts the usual order — and produces better results.</text>
                     </svg>
@@ -503,13 +503,13 @@
                 <div class="article-diagram">
                     <svg viewBox="0 0 740 220" xmlns="http://www.w3.org/2000/svg">
                         <defs><style>.d6 { font-family: 'JetBrains Mono', monospace; }</style></defs>
-                        <rect width="740" height="220" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="220" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="218" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Col 1 -->
                         <rect x="25" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
-                        <text x="135" y="65" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Guardrails First</text>
-                        <line x1="75" y1="78" x2="195" y2="78" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="135" y="65" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Guardrails First</text>
+                        <line x1="75" y1="78" x2="195" y2="78" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
                         <text x="135" y="100" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Define what agents</text>
                         <text x="135" y="116" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">cannot do before what</text>
                         <text x="135" y="132" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">they can. Zero blast</text>
@@ -517,9 +517,9 @@
 
                         <!-- Col 2 -->
                         <rect x="260" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
-                        <text x="370" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Memory Before</text>
-                        <text x="370" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Intelligence</text>
-                        <line x1="310" y1="82" x2="430" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="370" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Memory Before</text>
+                        <text x="370" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Intelligence</text>
+                        <line x1="310" y1="82" x2="430" y2="82" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
                         <text x="370" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">A knowledge base +</text>
                         <text x="370" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">MCP matters more than</text>
                         <text x="370" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">which model you pick.</text>
@@ -527,9 +527,9 @@
 
                         <!-- Col 3 -->
                         <rect x="495" y="25" width="220" height="160" rx="9" fill="rgba(42,58,82,0.4)" stroke="#2a3a52" stroke-width="1"/>
-                        <text x="605" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Workflow</text>
-                        <text x="605" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#c2713a">Integration</text>
-                        <line x1="545" y1="82" x2="665" y2="82" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <text x="605" y="55" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Workflow</text>
+                        <text x="605" y="72" text-anchor="middle" class="d6" font-size="13" font-weight="600" fill="#2563eb">Integration</text>
+                        <line x1="545" y1="82" x2="665" y2="82" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
                         <text x="605" y="104" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">Agents must meet</text>
                         <text x="605" y="120" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">engineers where they</text>
                         <text x="605" y="136" text-anchor="middle" class="d6" font-size="10" fill="#94a3b8">already work. New</text>

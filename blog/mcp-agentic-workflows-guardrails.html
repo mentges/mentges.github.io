@@ -8,6 +8,7 @@
     <meta name="description"
         content="What Model Context Protocol actually looks like in a real engineering workflow — how to set up context servers, build guardrails that earn trust, and integrate agents where they matter.">
     <meta name="author" content="Bruno Mentges">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='70' font-family='sans-serif' font-size='56' font-weight='600' fill='%232563eb' text-anchor='middle'>M</text></svg>">
 
     <meta property="og:title" content="MCP, Agentic Workflows, and Guardrails: A Production Field Guide">
     <meta property="og:description" content="How to set up MCP context servers, build guardrails that earn trust, and integrate agents where they matter in production.">
@@ -15,8 +16,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/pages.css">
 
@@ -111,31 +111,31 @@
                                 @keyframes dm1flow { to { stroke-dashoffset: -16; } }
                             </style>
                         </defs>
-                        <rect width="740" height="310" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="310" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="308" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
                         <text x="370" y="30" text-anchor="middle" class="dm1" font-size="12" font-weight="600" fill="#fcfcfd">MCP Client-Server Model</text>
 
                         <!-- LLM Agent (Client) -->
-                        <rect x="30" y="90" width="170" height="120" rx="10" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.8"/>
+                        <rect x="30" y="90" width="170" height="120" rx="10" fill="rgba(82,91,109,0.06)" stroke="#525b6d" stroke-width="1.8"/>
                         <text x="115" y="82" text-anchor="middle" class="dm1" font-size="10" fill="#64748b">CLIENT</text>
                         <text x="115" y="140" text-anchor="middle" class="dm1" font-size="13" font-weight="600" fill="#fcfcfd">LLM Agent</text>
-                        <text x="115" y="162" text-anchor="middle" class="dm1" font-size="10" fill="#2dd4bf">Claude Code</text>
-                        <text x="115" y="178" text-anchor="middle" class="dm1" font-size="10" fill="#2dd4bf">Cursor / Codex</text>
+                        <text x="115" y="162" text-anchor="middle" class="dm1" font-size="10" fill="#525b6d">Claude Code</text>
+                        <text x="115" y="178" text-anchor="middle" class="dm1" font-size="10" fill="#525b6d">Cursor / Codex</text>
                         <text x="115" y="194" text-anchor="middle" class="dm1" font-size="10" fill="#64748b">any MCP client</text>
 
                         <!-- MCP Protocol Channel -->
-                        <rect x="255" y="110" width="210" height="80" rx="10" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="360" y="145" text-anchor="middle" class="dm1" font-size="12" font-weight="600" fill="#d4915e">MCP Protocol</text>
+                        <rect x="255" y="110" width="210" height="80" rx="10" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="360" y="145" text-anchor="middle" class="dm1" font-size="12" font-weight="600" fill="#3b82f6">MCP Protocol</text>
                         <text x="360" y="165" text-anchor="middle" class="dm1" font-size="10" fill="#94a3b8">structured queries</text>
                         <text x="360" y="180" text-anchor="middle" class="dm1" font-size="10" fill="#94a3b8">+ context responses</text>
 
                         <!-- Arrows: Agent <-> Protocol -->
-                        <line x1="200" y1="140" x2="255" y2="140" stroke="#2dd4bf" stroke-width="1.5" stroke-dasharray="5 4" style="animation: dm1flow 1.4s linear infinite"/>
-                        <polygon points="251,136 259,140 251,144" fill="#2dd4bf"/>
-                        <line x1="255" y1="160" x2="200" y2="160" stroke="#c2713a" stroke-width="1.5" stroke-dasharray="5 4" style="animation: dm1flow 1.4s linear infinite"/>
-                        <polygon points="204,156 196,160 204,164" fill="#c2713a"/>
+                        <line x1="200" y1="140" x2="255" y2="140" stroke="#525b6d" stroke-width="1.5" stroke-dasharray="5 4" style="animation: dm1flow 1.4s linear infinite"/>
+                        <polygon points="251,136 259,140 251,144" fill="#525b6d"/>
+                        <line x1="255" y1="160" x2="200" y2="160" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5 4" style="animation: dm1flow 1.4s linear infinite"/>
+                        <polygon points="204,156 196,160 204,164" fill="#2563eb"/>
 
                         <!-- Context Servers -->
                         <text x="610" y="62" text-anchor="middle" class="dm1" font-size="10" fill="#64748b">SERVERS</text>
@@ -196,73 +196,73 @@
                                 @keyframes dm2flow { to { stroke-dashoffset: -14; } }
                             </style>
                         </defs>
-                        <rect width="740" height="420" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="420" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="418" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
                         <text x="370" y="30" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#fcfcfd">Four Context Servers for Data Engineering</text>
 
                         <!-- Server 1: Pipeline -->
-                        <rect x="30" y="52" width="330" height="130" rx="9" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.25)" stroke-width="1.2"/>
-                        <text x="195" y="76" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#2dd4bf">Pipeline Server</text>
-                        <rect x="50" y="90" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="120" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">DAG definitions</text>
-                        <rect x="200" y="90" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="270" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Schedules</text>
-                        <rect x="50" y="124" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="120" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Run history</text>
-                        <rect x="200" y="124" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="270" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Failure rates</text>
+                        <rect x="30" y="52" width="330" height="130" rx="9" fill="rgba(82,91,109,0.04)" stroke="rgba(82,91,109,0.25)" stroke-width="1.2"/>
+                        <text x="195" y="76" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#525b6d">Pipeline Server</text>
+                        <rect x="50" y="90" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="120" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">DAG definitions</text>
+                        <rect x="200" y="90" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="270" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Schedules</text>
+                        <rect x="50" y="124" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="120" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Run history</text>
+                        <rect x="200" y="124" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="270" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Failure rates</text>
                         <text x="195" y="170" text-anchor="middle" class="dm2" font-size="9" fill="#64748b">Operational view of workflow orchestration</text>
 
                         <!-- Server 2: Schema -->
-                        <rect x="380" y="52" width="330" height="130" rx="9" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.25)" stroke-width="1.2"/>
-                        <text x="545" y="76" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#2dd4bf">Schema Server</text>
-                        <rect x="400" y="90" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="470" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Tables &amp; columns</text>
-                        <rect x="550" y="90" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="620" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Lineage</text>
-                        <rect x="400" y="124" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="470" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Freshness</text>
-                        <rect x="550" y="124" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="620" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Partitions</text>
+                        <rect x="380" y="52" width="330" height="130" rx="9" fill="rgba(82,91,109,0.04)" stroke="rgba(82,91,109,0.25)" stroke-width="1.2"/>
+                        <text x="545" y="76" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#525b6d">Schema Server</text>
+                        <rect x="400" y="90" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="470" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Tables &amp; columns</text>
+                        <rect x="550" y="90" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="620" y="108" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Lineage</text>
+                        <rect x="400" y="124" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="470" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Freshness</text>
+                        <rect x="550" y="124" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="620" y="142" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Partitions</text>
                         <text x="545" y="170" text-anchor="middle" class="dm2" font-size="9" fill="#64748b">Warehouse structure, types, and data health</text>
 
                         <!-- Server 3: Code -->
-                        <rect x="30" y="198" width="330" height="130" rx="9" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.25)" stroke-width="1.2"/>
-                        <text x="195" y="222" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#2dd4bf">Code Server</text>
-                        <rect x="50" y="236" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="120" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Repo structure</text>
-                        <rect x="200" y="236" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="270" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Recent changes</text>
-                        <rect x="50" y="270" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="120" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Active branches</text>
-                        <rect x="200" y="270" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="270" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Conventions</text>
+                        <rect x="30" y="198" width="330" height="130" rx="9" fill="rgba(82,91,109,0.04)" stroke="rgba(82,91,109,0.25)" stroke-width="1.2"/>
+                        <text x="195" y="222" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#525b6d">Code Server</text>
+                        <rect x="50" y="236" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="120" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Repo structure</text>
+                        <rect x="200" y="236" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="270" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Recent changes</text>
+                        <rect x="50" y="270" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="120" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Active branches</text>
+                        <rect x="200" y="270" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="270" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Conventions</text>
                         <text x="195" y="316" text-anchor="middle" class="dm2" font-size="9" fill="#64748b">Codebase metadata and change velocity</text>
 
                         <!-- Server 4: Docs -->
-                        <rect x="380" y="198" width="330" height="130" rx="9" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.25)" stroke-width="1.2"/>
-                        <text x="545" y="222" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#2dd4bf">Docs Server</text>
-                        <rect x="400" y="236" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="470" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">ADRs</text>
-                        <rect x="550" y="236" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="620" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Onboarding</text>
-                        <rect x="400" y="270" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="470" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Runbooks</text>
-                        <rect x="550" y="270" width="140" height="26" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="620" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#2dd4bf">Style guides</text>
+                        <rect x="380" y="198" width="330" height="130" rx="9" fill="rgba(82,91,109,0.04)" stroke="rgba(82,91,109,0.25)" stroke-width="1.2"/>
+                        <text x="545" y="222" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#525b6d">Docs Server</text>
+                        <rect x="400" y="236" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="470" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">ADRs</text>
+                        <rect x="550" y="236" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="620" y="254" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Onboarding</text>
+                        <rect x="400" y="270" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="470" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Runbooks</text>
+                        <rect x="550" y="270" width="140" height="26" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="620" y="288" text-anchor="middle" class="dm2" font-size="9.5" fill="#525b6d">Style guides</text>
                         <text x="545" y="316" text-anchor="middle" class="dm2" font-size="9" fill="#64748b">Team standards and institutional documentation</text>
 
                         <!-- Central Agent Context node -->
-                        <rect x="270" y="350" width="200" height="40" rx="9" fill="#c2713a" stroke="#d4915e" stroke-width="1.5"/>
+                        <rect x="270" y="350" width="200" height="40" rx="9" fill="#2563eb" stroke="#3b82f6" stroke-width="1.5"/>
                         <text x="370" y="375" text-anchor="middle" class="dm2" font-size="12" font-weight="600" fill="#fcfcfd">Agent Context</text>
 
                         <!-- Spokes to center -->
-                        <line x1="195" y1="182" x2="310" y2="355" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.5s linear infinite"/>
-                        <line x1="545" y1="182" x2="430" y2="355" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.6s linear infinite"/>
-                        <line x1="195" y1="328" x2="310" y2="365" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.7s linear infinite"/>
-                        <line x1="545" y1="328" x2="430" y2="365" stroke="#c2713a" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.8s linear infinite"/>
+                        <line x1="195" y1="182" x2="310" y2="355" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.5s linear infinite"/>
+                        <line x1="545" y1="182" x2="430" y2="355" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.6s linear infinite"/>
+                        <line x1="195" y1="328" x2="310" y2="365" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.7s linear infinite"/>
+                        <line x1="545" y1="328" x2="430" y2="365" stroke="#2563eb" stroke-width="1.2" stroke-dasharray="4 3" style="animation: dm2flow 1.8s linear infinite"/>
 
                         <!-- Caption -->
                         <text x="370" y="408" text-anchor="middle" class="dm2" font-size="10" fill="#64748b">Four servers, one unified context. Each exposes a different slice of your infrastructure.</text>
@@ -312,41 +312,41 @@
                         <defs>
                             <style>.dm3 { font-family: 'JetBrains Mono', monospace; }</style>
                         </defs>
-                        <rect width="740" height="330" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="330" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="328" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
                         <text x="370" y="30" text-anchor="middle" class="dm3" font-size="12" font-weight="600" fill="#fcfcfd">Guardrails Framework: Three Trust Zones</text>
 
                         <!-- Zone 1: CAN DO (teal) -->
-                        <rect x="25" y="50" width="220" height="240" rx="10" fill="rgba(45,212,191,0.05)" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="135" y="76" text-anchor="middle" class="dm3" font-size="12" font-weight="600" fill="#2dd4bf">CAN DO</text>
+                        <rect x="25" y="50" width="220" height="240" rx="10" fill="rgba(82,91,109,0.05)" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="135" y="76" text-anchor="middle" class="dm3" font-size="12" font-weight="600" fill="#525b6d">CAN DO</text>
                         <text x="135" y="94" text-anchor="middle" class="dm3" font-size="9" fill="#64748b">Autonomous</text>
 
-                        <rect x="40" y="112" width="190" height="30" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.15)" stroke-width="1"/>
-                        <text x="135" y="132" text-anchor="middle" class="dm3" font-size="10" fill="#2dd4bf">Read data &amp; metadata</text>
-                        <rect x="40" y="150" width="190" height="30" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.15)" stroke-width="1"/>
-                        <text x="135" y="170" text-anchor="middle" class="dm3" font-size="10" fill="#2dd4bf">Generate code</text>
-                        <rect x="40" y="188" width="190" height="30" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.15)" stroke-width="1"/>
-                        <text x="135" y="208" text-anchor="middle" class="dm3" font-size="10" fill="#2dd4bf">Suggest changes</text>
-                        <rect x="40" y="226" width="190" height="30" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.15)" stroke-width="1"/>
-                        <text x="135" y="246" text-anchor="middle" class="dm3" font-size="10" fill="#2dd4bf">Review PRs</text>
+                        <rect x="40" y="112" width="190" height="30" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.15)" stroke-width="1"/>
+                        <text x="135" y="132" text-anchor="middle" class="dm3" font-size="10" fill="#525b6d">Read data &amp; metadata</text>
+                        <rect x="40" y="150" width="190" height="30" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.15)" stroke-width="1"/>
+                        <text x="135" y="170" text-anchor="middle" class="dm3" font-size="10" fill="#525b6d">Generate code</text>
+                        <rect x="40" y="188" width="190" height="30" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.15)" stroke-width="1"/>
+                        <text x="135" y="208" text-anchor="middle" class="dm3" font-size="10" fill="#525b6d">Suggest changes</text>
+                        <rect x="40" y="226" width="190" height="30" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.15)" stroke-width="1"/>
+                        <text x="135" y="246" text-anchor="middle" class="dm3" font-size="10" fill="#525b6d">Review PRs</text>
 
-                        <text x="135" y="278" text-anchor="middle" class="dm3" font-size="9.5" fill="#2dd4bf">Zero blast radius</text>
+                        <text x="135" y="278" text-anchor="middle" class="dm3" font-size="9.5" fill="#525b6d">Zero blast radius</text>
 
                         <!-- Zone 2: WITH REVIEW (copper) -->
-                        <rect x="260" y="50" width="220" height="240" rx="10" fill="rgba(194,113,58,0.05)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="370" y="76" text-anchor="middle" class="dm3" font-size="12" font-weight="600" fill="#c2713a">WITH REVIEW</text>
+                        <rect x="260" y="50" width="220" height="240" rx="10" fill="rgba(37,99,235,0.05)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="370" y="76" text-anchor="middle" class="dm3" font-size="12" font-weight="600" fill="#2563eb">WITH REVIEW</text>
                         <text x="370" y="94" text-anchor="middle" class="dm3" font-size="9" fill="#64748b">Supervised</text>
 
-                        <rect x="275" y="112" width="190" height="30" rx="5" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="370" y="132" text-anchor="middle" class="dm3" font-size="10" fill="#d4915e">Deploy suggestions</text>
-                        <rect x="275" y="150" width="190" height="30" rx="5" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="370" y="170" text-anchor="middle" class="dm3" font-size="10" fill="#d4915e">Modify configs</text>
-                        <rect x="275" y="188" width="190" height="30" rx="5" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="370" y="208" text-anchor="middle" class="dm3" font-size="10" fill="#d4915e">Create tickets</text>
+                        <rect x="275" y="112" width="190" height="30" rx="5" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="370" y="132" text-anchor="middle" class="dm3" font-size="10" fill="#3b82f6">Deploy suggestions</text>
+                        <rect x="275" y="150" width="190" height="30" rx="5" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="370" y="170" text-anchor="middle" class="dm3" font-size="10" fill="#3b82f6">Modify configs</text>
+                        <rect x="275" y="188" width="190" height="30" rx="5" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="370" y="208" text-anchor="middle" class="dm3" font-size="10" fill="#3b82f6">Create tickets</text>
 
-                        <text x="370" y="278" text-anchor="middle" class="dm3" font-size="9.5" fill="#d4915e">Human approves</text>
+                        <text x="370" y="278" text-anchor="middle" class="dm3" font-size="9.5" fill="#3b82f6">Human approves</text>
 
                         <!-- Zone 3: CANNOT (steel) -->
                         <rect x="495" y="50" width="220" height="240" rx="10" fill="rgba(100,116,139,0.08)" stroke="#64748b" stroke-width="1.5"/>
@@ -410,7 +410,7 @@
                                 @keyframes dm4flow { to { stroke-dashoffset: -14; } }
                             </style>
                         </defs>
-                        <rect width="740" height="300" rx="12" fill="#0c1220"/>
+                        <rect width="740" height="300" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="738" height="298" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -448,43 +448,43 @@
                         <!-- Agent integration connectors -->
                         <!-- 1. Plan -> Architecture Planning -->
                         <line x1="60" y1="94" x2="60" y2="170" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="5" y="170" width="110" height="46" rx="6" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.2"/>
-                        <text x="60" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#d4915e">Architecture</text>
-                        <text x="60" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#d4915e">Planning</text>
-                        <text x="60" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#c2713a">WITH REVIEW</text>
+                        <rect x="5" y="170" width="110" height="46" rx="6" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.2"/>
+                        <text x="60" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#3b82f6">Architecture</text>
+                        <text x="60" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#3b82f6">Planning</text>
+                        <text x="60" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#2563eb">WITH REVIEW</text>
 
                         <!-- 2. Scaffold -> Pipeline Scaffolding -->
                         <line x1="180" y1="94" x2="180" y2="170" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="130" y="170" width="100" height="46" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="180" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#2dd4bf">Pipeline</text>
-                        <text x="180" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#2dd4bf">Scaffolding</text>
-                        <text x="180" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#2dd4bf">CAN DO</text>
+                        <rect x="130" y="170" width="100" height="46" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="180" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#525b6d">Pipeline</text>
+                        <text x="180" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#525b6d">Scaffolding</text>
+                        <text x="180" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#525b6d">CAN DO</text>
 
                         <!-- 3. Review -> Pre-review Checks -->
                         <line x1="412" y1="94" x2="412" y2="170" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="358" y="170" width="108" height="46" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="412" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#2dd4bf">Pre-review</text>
-                        <text x="412" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#2dd4bf">Checks</text>
-                        <text x="412" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#2dd4bf">CAN DO</text>
+                        <rect x="358" y="170" width="108" height="46" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="412" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#525b6d">Pre-review</text>
+                        <text x="412" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#525b6d">Checks</text>
+                        <text x="412" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#525b6d">CAN DO</text>
 
                         <!-- 4. Operate -> Incident Context -->
                         <line x1="647" y1="94" x2="560" y2="170" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="505" y="170" width="110" height="46" rx="6" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <text x="560" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#2dd4bf">Incident</text>
-                        <text x="560" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#2dd4bf">Context</text>
-                        <text x="560" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#2dd4bf">CAN DO</text>
+                        <rect x="505" y="170" width="110" height="46" rx="6" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.2"/>
+                        <text x="560" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#525b6d">Incident</text>
+                        <text x="560" y="204" text-anchor="middle" class="dm4" font-size="9.5" fill="#525b6d">Context</text>
+                        <text x="560" y="226" text-anchor="middle" class="dm4" font-size="8.5" fill="#525b6d">CAN DO</text>
 
                         <!-- 5. Document -> Documentation Sync -->
                         <line x1="647" y1="148" x2="695" y2="170" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
-                        <rect x="640" y="170" width="90" height="46" rx="6" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.2"/>
-                        <text x="685" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#d4915e">Doc Sync</text>
-                        <text x="685" y="208" text-anchor="middle" class="dm4" font-size="8.5" fill="#c2713a">WITH REVIEW</text>
+                        <rect x="640" y="170" width="90" height="46" rx="6" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.2"/>
+                        <text x="685" y="190" text-anchor="middle" class="dm4" font-size="9.5" fill="#3b82f6">Doc Sync</text>
+                        <text x="685" y="208" text-anchor="middle" class="dm4" font-size="8.5" fill="#2563eb">WITH REVIEW</text>
 
                         <!-- Legend -->
-                        <rect x="180" y="258" width="10" height="10" rx="2" fill="rgba(45,212,191,0.15)" stroke="#2dd4bf" stroke-width="1"/>
-                        <text x="196" y="267" class="dm4" font-size="9" fill="#2dd4bf">CAN DO (autonomous)</text>
-                        <rect x="340" y="258" width="10" height="10" rx="2" fill="rgba(194,113,58,0.15)" stroke="#c2713a" stroke-width="1"/>
-                        <text x="356" y="267" class="dm4" font-size="9" fill="#d4915e">WITH REVIEW (supervised)</text>
+                        <rect x="180" y="258" width="10" height="10" rx="2" fill="rgba(82,91,109,0.15)" stroke="#525b6d" stroke-width="1"/>
+                        <text x="196" y="267" class="dm4" font-size="9" fill="#525b6d">CAN DO (autonomous)</text>
+                        <rect x="340" y="258" width="10" height="10" rx="2" fill="rgba(37,99,235,0.15)" stroke="#2563eb" stroke-width="1"/>
+                        <text x="356" y="267" class="dm4" font-size="9" fill="#3b82f6">WITH REVIEW (supervised)</text>
 
                         <!-- Caption -->
                         <text x="370" y="288" text-anchor="middle" class="dm4" font-size="10" fill="#64748b">Agents plug into existing steps. Each has explicit guardrail zones. No new interfaces to learn.</text>
@@ -535,7 +535,7 @@
                                 @keyframes dm5flow { to { stroke-dashoffset: -16; } }
                             </style>
                         </defs>
-                        <rect width="760" height="620" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="620" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="618" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -543,50 +543,50 @@
                         <text x="380" y="52" text-anchor="middle" class="dm5" font-size="10" fill="#64748b">Eyes + Memory + Boundaries = Production-Grade AI Integration</text>
 
                         <!-- ===== LEFT COLUMN: MCP (teal) ===== -->
-                        <rect x="30" y="75" width="210" height="290" rx="12" fill="rgba(45,212,191,0.04)" stroke="rgba(45,212,191,0.25)" stroke-width="1.2"/>
-                        <text x="135" y="100" text-anchor="middle" class="dm5" font-size="13" font-weight="600" fill="#2dd4bf">MCP</text>
+                        <rect x="30" y="75" width="210" height="290" rx="12" fill="rgba(82,91,109,0.04)" stroke="rgba(82,91,109,0.25)" stroke-width="1.2"/>
+                        <text x="135" y="100" text-anchor="middle" class="dm5" font-size="13" font-weight="600" fill="#525b6d">MCP</text>
                         <text x="135" y="118" text-anchor="middle" class="dm5" font-size="10" fill="#64748b">Eyes</text>
 
-                        <rect x="48" y="138" width="174" height="28" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="135" y="157" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">Pipeline metadata</text>
-                        <rect x="48" y="174" width="174" height="28" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="135" y="193" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">Schema &amp; lineage</text>
-                        <rect x="48" y="210" width="174" height="28" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="135" y="229" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">Code context</text>
-                        <rect x="48" y="246" width="174" height="28" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.12)" stroke-width="1"/>
-                        <text x="135" y="265" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">Docs &amp; conventions</text>
+                        <rect x="48" y="138" width="174" height="28" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="135" y="157" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">Pipeline metadata</text>
+                        <rect x="48" y="174" width="174" height="28" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="135" y="193" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">Schema &amp; lineage</text>
+                        <rect x="48" y="210" width="174" height="28" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="135" y="229" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">Code context</text>
+                        <rect x="48" y="246" width="174" height="28" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.12)" stroke-width="1"/>
+                        <text x="135" y="265" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">Docs &amp; conventions</text>
 
-                        <text x="135" y="302" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">Real-time</text>
-                        <text x="135" y="318" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">Precise</text>
-                        <text x="135" y="334" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">Infrastructure-scoped</text>
+                        <text x="135" y="302" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">Real-time</text>
+                        <text x="135" y="318" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">Precise</text>
+                        <text x="135" y="334" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">Infrastructure-scoped</text>
 
                         <!-- ===== CENTER COLUMN: Knowledge Base (copper) ===== -->
-                        <rect x="275" y="75" width="210" height="290" rx="12" fill="rgba(194,113,58,0.04)" stroke="rgba(194,113,58,0.25)" stroke-width="1.2"/>
-                        <text x="380" y="100" text-anchor="middle" class="dm5" font-size="13" font-weight="600" fill="#c2713a">Knowledge Base</text>
+                        <rect x="275" y="75" width="210" height="290" rx="12" fill="rgba(37,99,235,0.04)" stroke="rgba(37,99,235,0.25)" stroke-width="1.2"/>
+                        <text x="380" y="100" text-anchor="middle" class="dm5" font-size="13" font-weight="600" fill="#2563eb">Knowledge Base</text>
                         <text x="380" y="118" text-anchor="middle" class="dm5" font-size="10" fill="#64748b">Memory</text>
 
-                        <rect x="293" y="138" width="174" height="28" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="380" y="157" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">Architecture decisions</text>
-                        <rect x="293" y="174" width="174" height="28" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="380" y="193" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">Postmortem lessons</text>
-                        <rect x="293" y="210" width="174" height="28" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="380" y="229" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">Domain rules</text>
-                        <rect x="293" y="246" width="174" height="28" rx="5" fill="rgba(194,113,58,0.05)" stroke="rgba(194,113,58,0.12)" stroke-width="1"/>
-                        <text x="380" y="265" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">In-flight projects</text>
+                        <rect x="293" y="138" width="174" height="28" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="380" y="157" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">Architecture decisions</text>
+                        <rect x="293" y="174" width="174" height="28" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="380" y="193" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">Postmortem lessons</text>
+                        <rect x="293" y="210" width="174" height="28" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="380" y="229" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">Domain rules</text>
+                        <rect x="293" y="246" width="174" height="28" rx="5" fill="rgba(37,99,235,0.05)" stroke="rgba(37,99,235,0.12)" stroke-width="1"/>
+                        <text x="380" y="265" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">In-flight projects</text>
 
-                        <text x="380" y="302" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">Compounding</text>
-                        <text x="380" y="318" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">Synthesized</text>
-                        <text x="380" y="334" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">Organization-scoped</text>
+                        <text x="380" y="302" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">Compounding</text>
+                        <text x="380" y="318" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">Synthesized</text>
+                        <text x="380" y="334" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">Organization-scoped</text>
 
                         <!-- ===== RIGHT COLUMN: Guardrails (steel) ===== -->
                         <rect x="520" y="75" width="210" height="290" rx="12" fill="rgba(100,116,139,0.06)" stroke="rgba(100,116,139,0.3)" stroke-width="1.2"/>
                         <text x="625" y="100" text-anchor="middle" class="dm5" font-size="13" font-weight="600" fill="#94a3b8">Guardrails</text>
                         <text x="625" y="118" text-anchor="middle" class="dm5" font-size="10" fill="#64748b">Boundaries</text>
 
-                        <rect x="538" y="138" width="174" height="28" rx="5" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.15)" stroke-width="1"/>
-                        <text x="625" y="157" text-anchor="middle" class="dm5" font-size="9.5" fill="#2dd4bf">CAN DO: read, generate</text>
-                        <rect x="538" y="174" width="174" height="28" rx="5" fill="rgba(194,113,58,0.06)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="625" y="193" text-anchor="middle" class="dm5" font-size="9.5" fill="#d4915e">REVIEW: deploy, config</text>
+                        <rect x="538" y="138" width="174" height="28" rx="5" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.15)" stroke-width="1"/>
+                        <text x="625" y="157" text-anchor="middle" class="dm5" font-size="9.5" fill="#525b6d">CAN DO: read, generate</text>
+                        <rect x="538" y="174" width="174" height="28" rx="5" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="625" y="193" text-anchor="middle" class="dm5" font-size="9.5" fill="#3b82f6">REVIEW: deploy, config</text>
                         <rect x="538" y="210" width="174" height="28" rx="5" fill="rgba(100,116,139,0.08)" stroke="rgba(100,116,139,0.2)" stroke-width="1"/>
                         <text x="625" y="229" text-anchor="middle" class="dm5" font-size="9.5" fill="#64748b">CANNOT: prod, merge</text>
 
@@ -600,23 +600,23 @@
                         <text x="380" y="452" text-anchor="middle" class="dm5" font-size="10" fill="#94a3b8">full context</text>
 
                         <!-- Flow: MCP -> Agent -->
-                        <line x1="135" y1="365" x2="320" y2="420" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="5 4" style="animation: dm5flow 1.4s linear infinite"/>
-                        <polygon points="317,416 325,423 319,426" fill="#2dd4bf"/>
-                        <text x="190" y="404" class="dm5" font-size="10" fill="#2dd4bf">eyes</text>
+                        <line x1="135" y1="365" x2="320" y2="420" stroke="#525b6d" stroke-width="2" stroke-dasharray="5 4" style="animation: dm5flow 1.4s linear infinite"/>
+                        <polygon points="317,416 325,423 319,426" fill="#525b6d"/>
+                        <text x="190" y="404" class="dm5" font-size="10" fill="#525b6d">eyes</text>
 
                         <!-- Animated pulse on MCP line -->
-                        <circle cx="228" cy="393" fill="#2dd4bf">
+                        <circle cx="228" cy="393" fill="#525b6d">
                             <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
                             <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
                         </circle>
 
                         <!-- Flow: KB -> Agent -->
-                        <line x1="380" y1="365" x2="380" y2="400" stroke="#c2713a" stroke-width="2" stroke-dasharray="5 4" style="animation: dm5flow 1.4s linear infinite"/>
-                        <polygon points="375,396 380,404 385,396" fill="#c2713a"/>
-                        <text x="405" y="388" class="dm5" font-size="10" fill="#d4915e">memory</text>
+                        <line x1="380" y1="365" x2="380" y2="400" stroke="#2563eb" stroke-width="2" stroke-dasharray="5 4" style="animation: dm5flow 1.4s linear infinite"/>
+                        <polygon points="375,396 380,404 385,396" fill="#2563eb"/>
+                        <text x="405" y="388" class="dm5" font-size="10" fill="#3b82f6">memory</text>
 
                         <!-- Animated pulse on KB line -->
-                        <circle cx="380" cy="383" fill="#c2713a">
+                        <circle cx="380" cy="383" fill="#2563eb">
                             <animate attributeName="r" values="2;4;2" dur="2.2s" repeatCount="indefinite"/>
                             <animate attributeName="opacity" values="0.4;1;0.4" dur="2.2s" repeatCount="indefinite"/>
                         </circle>
@@ -637,9 +637,9 @@
                         <polygon points="375,506 380,516 385,506" fill="#fcfcfd"/>
 
                         <!-- Output box -->
-                        <rect x="220" y="520" width="320" height="55" rx="10" fill="rgba(194,113,58,0.1)" stroke="#c2713a" stroke-width="1.8"/>
-                        <text x="380" y="546" text-anchor="middle" class="dm5" font-size="12" font-weight="600" fill="#d4915e">Production-Grade</text>
-                        <text x="380" y="564" text-anchor="middle" class="dm5" font-size="12" font-weight="600" fill="#d4915e">AI Integration</text>
+                        <rect x="220" y="520" width="320" height="55" rx="10" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="1.8"/>
+                        <text x="380" y="546" text-anchor="middle" class="dm5" font-size="12" font-weight="600" fill="#3b82f6">Production-Grade</text>
+                        <text x="380" y="564" text-anchor="middle" class="dm5" font-size="12" font-weight="600" fill="#3b82f6">AI Integration</text>
 
                         <!-- Caption -->
                         <text x="380" y="604" text-anchor="middle" class="dm5" font-size="10" fill="#64748b">Three layers, one agent. MCP gives eyes. KB gives memory. Guardrails give trust. Together: the complete stack.</text>

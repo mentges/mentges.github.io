@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='70' font-family='sans-serif' font-size='56' font-weight='600' fill='%232563eb' text-anchor='middle'>M</text></svg>">
     <title>Case Study: Integrating AI Agents Into Data Engineering — Bruno Mentges / Mentges.AI</title>
     <meta name="description"
         content="How I pioneered integrating AI agents, MCP, and agentic workflows into production data engineering at a major B2B data platform.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/pages.css">
 
@@ -109,7 +109,7 @@
                     <svg viewBox="0 0 620 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agent Guardrails Framework: concentric capability zones for LLM agents">
                         <defs>
                             <style>
-                                .diagram-label { font-family: 'JetBrains Mono', monospace; fill: #0c1220; }
+                                .diagram-label { font-family: 'JetBrains Mono', monospace; fill: #0a0a0a; }
                                 .diagram-label-light { font-family: 'JetBrains Mono', monospace; fill: #64748b; }
                                 .diagram-caption { font-family: 'JetBrains Mono', monospace; fill: #94a3b8; font-size: 11px; }
                             </style>
@@ -122,34 +122,34 @@
                         <text x="310" y="36" text-anchor="middle" class="diagram-label" font-size="13" font-weight="600">Agent Guardrails Framework</text>
 
                         <!-- Outer zone — CAN DO (teal tint) -->
-                        <ellipse cx="310" cy="235" rx="270" ry="185" fill="#2dd4bf" fill-opacity="0.1" stroke="#2dd4bf" stroke-width="1.5" stroke-opacity="0.5"/>
-                        <text x="310" y="72" text-anchor="middle" class="diagram-label" font-size="12" font-weight="600" fill="#2dd4bf">CAN DO</text>
+                        <ellipse cx="310" cy="235" rx="270" ry="185" fill="#525b6d" fill-opacity="0.1" stroke="#525b6d" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="310" y="72" text-anchor="middle" class="diagram-label" font-size="12" font-weight="600" fill="#525b6d">CAN DO</text>
 
                         <!-- CAN DO items -->
-                        <rect x="50" y="100" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <rect x="50" y="100" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#525b6d" stroke-width="1"/>
                         <text x="120" y="121" text-anchor="middle" class="diagram-label" font-size="10">Read prod data</text>
 
-                        <rect x="430" y="100" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <rect x="430" y="100" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#525b6d" stroke-width="1"/>
                         <text x="500" y="121" text-anchor="middle" class="diagram-label" font-size="10">Suggest changes</text>
 
-                        <rect x="50" y="365" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <rect x="50" y="365" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#525b6d" stroke-width="1"/>
                         <text x="120" y="386" text-anchor="middle" class="diagram-label" font-size="10">Generate code</text>
 
-                        <rect x="430" y="365" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#2dd4bf" stroke-width="1"/>
+                        <rect x="430" y="365" width="140" height="32" rx="6" fill="#fcfcfd" stroke="#525b6d" stroke-width="1"/>
                         <text x="500" y="386" text-anchor="middle" class="diagram-label" font-size="10">Review PRs</text>
 
                         <!-- Middle zone — WITH REVIEW (copper tint) -->
-                        <ellipse cx="310" cy="235" rx="180" ry="125" fill="#c2713a" fill-opacity="0.08" stroke="#c2713a" stroke-width="1.5" stroke-opacity="0.5"/>
-                        <text x="310" y="128" text-anchor="middle" class="diagram-label" font-size="12" font-weight="600" fill="#c2713a">WITH REVIEW</text>
+                        <ellipse cx="310" cy="235" rx="180" ry="125" fill="#2563eb" fill-opacity="0.08" stroke="#2563eb" stroke-width="1.5" stroke-opacity="0.5"/>
+                        <text x="310" y="128" text-anchor="middle" class="diagram-label" font-size="12" font-weight="600" fill="#2563eb">WITH REVIEW</text>
 
                         <!-- WITH REVIEW items -->
-                        <rect x="130" y="155" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#d4915e" stroke-width="1"/>
+                        <rect x="130" y="155" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#3b82f6" stroke-width="1"/>
                         <text x="205" y="176" text-anchor="middle" class="diagram-label" font-size="10">Deploy suggestions</text>
 
-                        <rect x="340" y="155" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#d4915e" stroke-width="1"/>
+                        <rect x="340" y="155" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#3b82f6" stroke-width="1"/>
                         <text x="415" y="176" text-anchor="middle" class="diagram-label" font-size="10">Modify configs</text>
 
-                        <rect x="235" y="325" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#d4915e" stroke-width="1"/>
+                        <rect x="235" y="325" width="150" height="32" rx="6" fill="#fcfcfd" stroke="#3b82f6" stroke-width="1"/>
                         <text x="310" y="346" text-anchor="middle" class="diagram-label" font-size="10">Update docs</text>
 
                         <!-- Inner zone — CANNOT (subtle steel) -->

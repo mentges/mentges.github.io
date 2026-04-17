@@ -8,6 +8,7 @@
     <meta name="description"
         content="Performance engineering at scale isn't about clever tricks — it's about understanding economics. A case study in Spark optimization, partition strategy, and thinking in dollars instead of milliseconds.">
     <meta name="author" content="Bruno Mentges">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='70' font-family='sans-serif' font-size='56' font-weight='600' fill='%232563eb' text-anchor='middle'>M</text></svg>">
 
     <meta property="og:title" content="How I Reduced a Petabyte Pipeline's Cost by 40%">
     <meta property="og:description" content="Performance engineering at petabyte scale is an economics problem. A case study in Spark optimization, partition strategy, and thinking in dollars.">
@@ -15,8 +16,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/pages.css">
 
@@ -117,7 +117,7 @@
                                 .lv { font-family: 'JetBrains Mono', monospace; }
                             </style>
                         </defs>
-                        <rect width="760" height="420" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="420" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="418" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -125,15 +125,15 @@
                         <text x="380" y="50" text-anchor="middle" class="lv" font-size="10" fill="#64748b">Ranked by impact — partition strategy dominates</text>
 
                         <!-- Lever 1: Partition Strategy (tallest bar, copper accent) -->
-                        <rect x="55" y="80" width="150" height="290" rx="10" fill="rgba(194,113,58,0.12)" stroke="#c2713a" stroke-width="2"/>
-                        <text x="130" y="108" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#c2713a">Partition</text>
-                        <text x="130" y="124" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#c2713a">Strategy</text>
-                        <line x1="80" y1="136" x2="180" y2="136" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
+                        <rect x="55" y="80" width="150" height="290" rx="10" fill="rgba(37,99,235,0.12)" stroke="#2563eb" stroke-width="2"/>
+                        <text x="130" y="108" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#2563eb">Partition</text>
+                        <text x="130" y="124" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#2563eb">Strategy</text>
+                        <line x1="80" y1="136" x2="180" y2="136" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
 
                         <!-- Impact bar -->
-                        <rect x="80" y="148" width="100" height="14" rx="3" fill="rgba(194,113,58,0.15)" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
-                        <rect x="80" y="148" width="100" height="14" rx="3" fill="#c2713a" opacity="0.7"/>
-                        <text x="130" y="180" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#c2713a">~45% of savings</text>
+                        <rect x="80" y="148" width="100" height="14" rx="3" fill="rgba(37,99,235,0.15)" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
+                        <rect x="80" y="148" width="100" height="14" rx="3" fill="#2563eb" opacity="0.7"/>
+                        <text x="130" y="180" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#2563eb">~45% of savings</text>
 
                         <text x="130" y="206" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">Wrong partition keys</text>
                         <text x="130" y="222" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">cause shuffle</text>
@@ -144,20 +144,20 @@
                         <text x="130" y="310" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">assumptions.</text>
 
                         <!-- Icon: shuffle arrows -->
-                        <line x1="105" y1="340" x2="130" y2="350" stroke="#c2713a" stroke-width="1.5"/>
-                        <line x1="155" y1="340" x2="130" y2="350" stroke="#c2713a" stroke-width="1.5"/>
-                        <line x1="130" y1="350" x2="105" y2="360" stroke="#c2713a" stroke-width="1.5"/>
-                        <line x1="130" y1="350" x2="155" y2="360" stroke="#c2713a" stroke-width="1.5"/>
+                        <line x1="105" y1="340" x2="130" y2="350" stroke="#2563eb" stroke-width="1.5"/>
+                        <line x1="155" y1="340" x2="130" y2="350" stroke="#2563eb" stroke-width="1.5"/>
+                        <line x1="130" y1="350" x2="105" y2="360" stroke="#2563eb" stroke-width="1.5"/>
+                        <line x1="130" y1="350" x2="155" y2="360" stroke="#2563eb" stroke-width="1.5"/>
 
                         <!-- Lever 2: Storage Optimization -->
-                        <rect x="225" y="130" width="150" height="240" rx="10" fill="rgba(45,212,191,0.06)" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="300" y="158" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#2dd4bf">Storage</text>
-                        <text x="300" y="174" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#2dd4bf">Optimization</text>
-                        <line x1="250" y1="186" x2="350" y2="186" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
+                        <rect x="225" y="130" width="150" height="240" rx="10" fill="rgba(82,91,109,0.06)" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="300" y="158" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#525b6d">Storage</text>
+                        <text x="300" y="174" text-anchor="middle" class="lv" font-size="12" font-weight="600" fill="#525b6d">Optimization</text>
+                        <line x1="250" y1="186" x2="350" y2="186" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
 
-                        <rect x="250" y="198" width="100" height="14" rx="3" fill="rgba(45,212,191,0.15)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
-                        <rect x="250" y="198" width="70" height="14" rx="3" fill="#2dd4bf" opacity="0.5"/>
-                        <text x="300" y="230" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#2dd4bf">~25% of savings</text>
+                        <rect x="250" y="198" width="100" height="14" rx="3" fill="rgba(82,91,109,0.15)" stroke="rgba(82,91,109,0.3)" stroke-width="1"/>
+                        <rect x="250" y="198" width="70" height="14" rx="3" fill="#525b6d" opacity="0.5"/>
+                        <text x="300" y="230" text-anchor="middle" class="lv" font-size="9" font-weight="600" fill="#525b6d">~25% of savings</text>
 
                         <text x="300" y="256" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">Columnar formats,</text>
                         <text x="300" y="272" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">compression,</text>
@@ -165,9 +165,9 @@
                         <text x="300" y="304" text-anchor="middle" class="lv" font-size="9.5" fill="#94a3b8">tiered storage.</text>
 
                         <!-- Icon: layers -->
-                        <rect x="282" y="330" width="36" height="8" rx="2" fill="rgba(45,212,191,0.3)" stroke="#2dd4bf" stroke-width="0.8"/>
-                        <rect x="286" y="342" width="28" height="8" rx="2" fill="rgba(45,212,191,0.2)" stroke="#2dd4bf" stroke-width="0.8"/>
-                        <rect x="290" y="354" width="20" height="8" rx="2" fill="rgba(45,212,191,0.1)" stroke="#2dd4bf" stroke-width="0.8"/>
+                        <rect x="282" y="330" width="36" height="8" rx="2" fill="rgba(82,91,109,0.3)" stroke="#525b6d" stroke-width="0.8"/>
+                        <rect x="286" y="342" width="28" height="8" rx="2" fill="rgba(82,91,109,0.2)" stroke="#525b6d" stroke-width="0.8"/>
+                        <rect x="290" y="354" width="20" height="8" rx="2" fill="rgba(82,91,109,0.1)" stroke="#525b6d" stroke-width="0.8"/>
 
                         <!-- Lever 3: Cluster Right-Sizing -->
                         <rect x="395" y="170" width="150" height="200" rx="10" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.5"/>
@@ -238,7 +238,7 @@
                                 @keyframes psflow { to { stroke-dashoffset: -14; } }
                             </style>
                         </defs>
-                        <rect width="760" height="380" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="380" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="378" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -279,49 +279,49 @@
                         <text x="65" y="350" text-anchor="middle" class="ps" font-size="9" fill="rgba(180,60,50,0.8)">bottleneck entire job</text>
 
                         <!-- === CENTER: Arrow === -->
-                        <line x1="340" y1="200" x2="410" y2="200" stroke="#c2713a" stroke-width="2" stroke-dasharray="6 4" style="animation: psflow 1.5s linear infinite"/>
-                        <polygon points="406,195 416,200 406,205" fill="#c2713a"/>
-                        <text x="375" y="185" text-anchor="middle" class="ps" font-size="9" fill="#c2713a">Rebalance</text>
+                        <line x1="340" y1="200" x2="410" y2="200" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" style="animation: psflow 1.5s linear infinite"/>
+                        <polygon points="406,195 416,200 406,205" fill="#2563eb"/>
+                        <text x="375" y="185" text-anchor="middle" class="ps" font-size="9" fill="#2563eb">Rebalance</text>
 
                         <!-- === RIGHT: After (balanced) === -->
-                        <text x="575" y="62" text-anchor="middle" class="ps" font-size="12" font-weight="600" fill="#2dd4bf">After: Balanced Partitions</text>
+                        <text x="575" y="62" text-anchor="middle" class="ps" font-size="12" font-weight="600" fill="#525b6d">After: Balanced Partitions</text>
                         <text x="575" y="78" text-anchor="middle" class="ps" font-size="9" fill="#64748b">Composite key: advertiser_id + time_bucket</text>
 
                         <!-- Balanced bars (roughly equal heights) -->
-                        <rect x="435" y="210" width="30" height="82" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
-                        <text x="450" y="204" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A1h1</text>
+                        <rect x="435" y="210" width="30" height="82" rx="3" fill="rgba(82,91,109,0.3)" stroke="rgba(82,91,109,0.3)" stroke-width="1"/>
+                        <text x="450" y="204" text-anchor="middle" class="ps" font-size="8" fill="#525b6d">A1h1</text>
 
-                        <rect x="473" y="215" width="30" height="77" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
-                        <text x="488" y="209" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A1h2</text>
+                        <rect x="473" y="215" width="30" height="77" rx="3" fill="rgba(82,91,109,0.3)" stroke="rgba(82,91,109,0.3)" stroke-width="1"/>
+                        <text x="488" y="209" text-anchor="middle" class="ps" font-size="8" fill="#525b6d">A1h2</text>
 
-                        <rect x="511" y="207" width="30" height="85" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
-                        <text x="526" y="201" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A2h1</text>
+                        <rect x="511" y="207" width="30" height="85" rx="3" fill="rgba(82,91,109,0.3)" stroke="rgba(82,91,109,0.3)" stroke-width="1"/>
+                        <text x="526" y="201" text-anchor="middle" class="ps" font-size="8" fill="#525b6d">A2h1</text>
 
-                        <rect x="549" y="212" width="30" height="80" rx="3" fill="rgba(45,212,191,0.3)" stroke="rgba(45,212,191,0.3)" stroke-width="1"/>
-                        <text x="564" y="206" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A2h2</text>
+                        <rect x="549" y="212" width="30" height="80" rx="3" fill="rgba(82,91,109,0.3)" stroke="rgba(82,91,109,0.3)" stroke-width="1"/>
+                        <text x="564" y="206" text-anchor="middle" class="ps" font-size="8" fill="#525b6d">A2h2</text>
 
-                        <rect x="587" y="218" width="30" height="74" rx="3" fill="rgba(45,212,191,0.25)" stroke="rgba(45,212,191,0.25)" stroke-width="1"/>
-                        <text x="602" y="212" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A3</text>
+                        <rect x="587" y="218" width="30" height="74" rx="3" fill="rgba(82,91,109,0.25)" stroke="rgba(82,91,109,0.25)" stroke-width="1"/>
+                        <text x="602" y="212" text-anchor="middle" class="ps" font-size="8" fill="#525b6d">A3</text>
 
-                        <rect x="625" y="222" width="30" height="70" rx="3" fill="rgba(45,212,191,0.2)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="640" y="216" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A4</text>
+                        <rect x="625" y="222" width="30" height="70" rx="3" fill="rgba(82,91,109,0.2)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="640" y="216" text-anchor="middle" class="ps" font-size="8" fill="#525b6d">A4</text>
 
-                        <rect x="663" y="220" width="30" height="72" rx="3" fill="rgba(45,212,191,0.2)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="678" y="214" text-anchor="middle" class="ps" font-size="8" fill="#2dd4bf">A5+</text>
+                        <rect x="663" y="220" width="30" height="72" rx="3" fill="rgba(82,91,109,0.2)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="678" y="214" text-anchor="middle" class="ps" font-size="8" fill="#525b6d">A5+</text>
 
                         <!-- Baseline -->
                         <line x1="425" y1="292" x2="705" y2="292" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Annotation -->
-                        <text x="575" y="320" text-anchor="middle" class="ps" font-size="9" fill="#2dd4bf">Even distribution</text>
-                        <text x="575" y="336" text-anchor="middle" class="ps" font-size="9" fill="#2dd4bf">No stragglers</text>
+                        <text x="575" y="320" text-anchor="middle" class="ps" font-size="9" fill="#525b6d">Even distribution</text>
+                        <text x="575" y="336" text-anchor="middle" class="ps" font-size="9" fill="#525b6d">No stragglers</text>
 
                         <!-- Stats row at bottom -->
                         <rect x="50" y="358" width="280" height="18" rx="3" fill="rgba(180,60,50,0.06)"/>
                         <text x="190" y="371" text-anchor="middle" class="ps" font-size="9" fill="#64748b">Shuffle: 2.4 TB &bull; Runtime: 50 min</text>
 
-                        <rect x="430" y="358" width="280" height="18" rx="3" fill="rgba(45,212,191,0.06)"/>
-                        <text x="570" y="371" text-anchor="middle" class="ps" font-size="9" fill="#2dd4bf">Shuffle: 960 GB &bull; Runtime: 18 min</text>
+                        <rect x="430" y="358" width="280" height="18" rx="3" fill="rgba(82,91,109,0.06)"/>
+                        <text x="570" y="371" text-anchor="middle" class="ps" font-size="9" fill="#525b6d">Shuffle: 960 GB &bull; Runtime: 18 min</text>
                     </svg>
                 </div>
 
@@ -363,7 +363,7 @@
                                 @keyframes ceflow { to { stroke-dashoffset: -14; } }
                             </style>
                         </defs>
-                        <rect width="760" height="360" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="360" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="358" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -371,52 +371,52 @@
                         <text x="380" y="50" text-anchor="middle" class="ce" font-size="10" fill="#64748b">Small percentages become massive numbers at scale</text>
 
                         <!-- Step 1: Small saving -->
-                        <rect x="40" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="105" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">5%</text>
+                        <rect x="40" y="80" width="130" height="70" rx="9" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="105" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#2563eb">5%</text>
                         <text x="105" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">savings per job</text>
                         <text x="105" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">run</text>
 
                         <!-- Multiply 1 -->
-                        <text x="195" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">&times;</text>
+                        <text x="195" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#2563eb">&times;</text>
 
                         <!-- Step 2: Hourly runs -->
-                        <rect x="220" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="285" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">24</text>
+                        <rect x="220" y="80" width="130" height="70" rx="9" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="285" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#2563eb">24</text>
                         <text x="285" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">runs per day</text>
                         <text x="285" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">(hourly)</text>
 
                         <!-- Multiply 2 -->
-                        <text x="375" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">&times;</text>
+                        <text x="375" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#2563eb">&times;</text>
 
                         <!-- Step 3: Clusters -->
-                        <rect x="400" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="465" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">30</text>
+                        <rect x="400" y="80" width="130" height="70" rx="9" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="465" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#2563eb">30</text>
                         <text x="465" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">clusters</text>
                         <text x="465" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">in fleet</text>
 
                         <!-- Multiply 3 -->
-                        <text x="555" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">&times;</text>
+                        <text x="555" y="120" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#2563eb">&times;</text>
 
                         <!-- Step 4: Days -->
-                        <rect x="580" y="80" width="130" height="70" rx="9" fill="rgba(194,113,58,0.08)" stroke="#c2713a" stroke-width="1.5"/>
-                        <text x="645" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#c2713a">365</text>
+                        <rect x="580" y="80" width="130" height="70" rx="9" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="1.5"/>
+                        <text x="645" y="105" text-anchor="middle" class="ce" font-size="11" font-weight="600" fill="#2563eb">365</text>
                         <text x="645" y="122" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">days per</text>
                         <text x="645" y="138" text-anchor="middle" class="ce" font-size="9" fill="#94a3b8">year</text>
 
                         <!-- Funnel lines converging -->
-                        <line x1="105" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
-                        <line x1="285" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.4)" stroke-width="1"/>
-                        <line x1="465" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.5)" stroke-width="1"/>
-                        <line x1="645" y1="150" x2="380" y2="210" stroke="rgba(194,113,58,0.6)" stroke-width="1"/>
+                        <line x1="105" y1="150" x2="380" y2="210" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
+                        <line x1="285" y1="150" x2="380" y2="210" stroke="rgba(37,99,235,0.4)" stroke-width="1"/>
+                        <line x1="465" y1="150" x2="380" y2="210" stroke="rgba(37,99,235,0.5)" stroke-width="1"/>
+                        <line x1="645" y1="150" x2="380" y2="210" stroke="rgba(37,99,235,0.6)" stroke-width="1"/>
 
                         <!-- Result -->
-                        <rect x="260" y="210" width="240" height="80" rx="12" fill="rgba(194,113,58,0.12)" stroke="#c2713a" stroke-width="2"/>
-                        <text x="380" y="240" text-anchor="middle" class="ce" font-size="10" fill="#d4915e">5% &times; 24 &times; 30 &times; 365 =</text>
-                        <text x="380" y="264" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#c2713a">1,314,000</text>
-                        <text x="380" y="282" text-anchor="middle" class="ce" font-size="10" fill="#d4915e">optimized job-runs per year</text>
+                        <rect x="260" y="210" width="240" height="80" rx="12" fill="rgba(37,99,235,0.12)" stroke="#2563eb" stroke-width="2"/>
+                        <text x="380" y="240" text-anchor="middle" class="ce" font-size="10" fill="#3b82f6">5% &times; 24 &times; 30 &times; 365 =</text>
+                        <text x="380" y="264" text-anchor="middle" class="ce" font-size="18" font-weight="600" fill="#2563eb">1,314,000</text>
+                        <text x="380" y="282" text-anchor="middle" class="ce" font-size="10" fill="#3b82f6">optimized job-runs per year</text>
 
                         <!-- Animated pulse -->
-                        <circle cx="380" cy="252" fill="#c2713a">
+                        <circle cx="380" cy="252" fill="#2563eb">
                             <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
                             <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
                         </circle>
@@ -456,7 +456,7 @@
                                 @keyframes dtflow { to { stroke-dashoffset: -14; } }
                             </style>
                         </defs>
-                        <rect width="760" height="520" rx="12" fill="#0c1220"/>
+                        <rect width="760" height="520" rx="12" fill="#0a0a0a"/>
                         <rect x="1" y="1" width="758" height="518" rx="11" fill="none" stroke="#2a3a52" stroke-width="1"/>
 
                         <!-- Title -->
@@ -468,40 +468,40 @@
                         <text x="380" y="94" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#fcfcfd">Pipeline too expensive?</text>
 
                         <!-- Arrow down -->
-                        <line x1="380" y1="110" x2="380" y2="135" stroke="#c2713a" stroke-width="1.5"/>
-                        <polygon points="375,131 380,141 385,131" fill="#c2713a"/>
+                        <line x1="380" y1="110" x2="380" y2="135" stroke="#2563eb" stroke-width="1.5"/>
+                        <polygon points="375,131 380,141 385,131" fill="#2563eb"/>
 
                         <!-- Step 2: Check partition skew -->
-                        <rect x="260" y="138" width="240" height="52" rx="8" fill="rgba(194,113,58,0.12)" stroke="#c2713a" stroke-width="2"/>
-                        <text x="380" y="160" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#c2713a">1. Check partition skew</text>
-                        <text x="380" y="178" text-anchor="middle" class="dt" font-size="9" fill="#d4915e">Biggest lever — nearly half of all savings</text>
+                        <rect x="260" y="138" width="240" height="52" rx="8" fill="rgba(37,99,235,0.12)" stroke="#2563eb" stroke-width="2"/>
+                        <text x="380" y="160" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#2563eb">1. Check partition skew</text>
+                        <text x="380" y="178" text-anchor="middle" class="dt" font-size="9" fill="#3b82f6">Biggest lever — nearly half of all savings</text>
 
                         <!-- Branch right: Skew found -->
-                        <line x1="500" y1="164" x2="560" y2="164" stroke="#c2713a" stroke-width="1.2"/>
-                        <polygon points="556,160 566,164 556,168" fill="#c2713a"/>
-                        <rect x="570" y="146" width="160" height="36" rx="6" fill="rgba(194,113,58,0.08)" stroke="rgba(194,113,58,0.3)" stroke-width="1"/>
-                        <text x="650" y="169" text-anchor="middle" class="dt" font-size="9.5" fill="#d4915e">Rebalance partition keys</text>
-                        <text x="538" y="157" class="dt" font-size="9" fill="#c2713a">Fix</text>
+                        <line x1="500" y1="164" x2="560" y2="164" stroke="#2563eb" stroke-width="1.2"/>
+                        <polygon points="556,160 566,164 556,168" fill="#2563eb"/>
+                        <rect x="570" y="146" width="160" height="36" rx="6" fill="rgba(37,99,235,0.08)" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
+                        <text x="650" y="169" text-anchor="middle" class="dt" font-size="9.5" fill="#3b82f6">Rebalance partition keys</text>
+                        <text x="538" y="157" class="dt" font-size="9" fill="#2563eb">Fix</text>
 
                         <!-- Arrow down -->
-                        <line x1="380" y1="190" x2="380" y2="218" stroke="#c2713a" stroke-width="1.5"/>
-                        <polygon points="375,214 380,224 385,214" fill="#c2713a"/>
+                        <line x1="380" y1="190" x2="380" y2="218" stroke="#2563eb" stroke-width="1.5"/>
+                        <polygon points="375,214 380,224 385,214" fill="#2563eb"/>
 
                         <!-- Step 3: Check shuffle volume -->
-                        <rect x="260" y="222" width="240" height="52" rx="8" fill="rgba(45,212,191,0.08)" stroke="#2dd4bf" stroke-width="1.5"/>
-                        <text x="380" y="244" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#2dd4bf">2. Check shuffle volume</text>
+                        <rect x="260" y="222" width="240" height="52" rx="8" fill="rgba(82,91,109,0.08)" stroke="#525b6d" stroke-width="1.5"/>
+                        <text x="380" y="244" text-anchor="middle" class="dt" font-size="11" font-weight="600" fill="#525b6d">2. Check shuffle volume</text>
                         <text x="380" y="262" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">Broadcast joins, partition pruning</text>
 
                         <!-- Branch right: High shuffle -->
-                        <line x1="500" y1="248" x2="560" y2="248" stroke="#2dd4bf" stroke-width="1.2"/>
-                        <polygon points="556,244 566,248 556,252" fill="#2dd4bf"/>
-                        <rect x="570" y="230" width="160" height="36" rx="6" fill="rgba(45,212,191,0.06)" stroke="rgba(45,212,191,0.2)" stroke-width="1"/>
-                        <text x="650" y="253" text-anchor="middle" class="dt" font-size="9.5" fill="#2dd4bf">Broadcast + prune</text>
-                        <text x="538" y="241" class="dt" font-size="9" fill="#2dd4bf">Fix</text>
+                        <line x1="500" y1="248" x2="560" y2="248" stroke="#525b6d" stroke-width="1.2"/>
+                        <polygon points="556,244 566,248 556,252" fill="#525b6d"/>
+                        <rect x="570" y="230" width="160" height="36" rx="6" fill="rgba(82,91,109,0.06)" stroke="rgba(82,91,109,0.2)" stroke-width="1"/>
+                        <text x="650" y="253" text-anchor="middle" class="dt" font-size="9.5" fill="#525b6d">Broadcast + prune</text>
+                        <text x="538" y="241" class="dt" font-size="9" fill="#525b6d">Fix</text>
 
                         <!-- Arrow down -->
-                        <line x1="380" y1="274" x2="380" y2="302" stroke="#c2713a" stroke-width="1.5"/>
-                        <polygon points="375,298 380,308 385,298" fill="#c2713a"/>
+                        <line x1="380" y1="274" x2="380" y2="302" stroke="#2563eb" stroke-width="1.5"/>
+                        <polygon points="375,298 380,308 385,298" fill="#2563eb"/>
 
                         <!-- Step 4: Check cluster sizing -->
                         <rect x="260" y="306" width="240" height="52" rx="8" fill="rgba(42,58,82,0.5)" stroke="#64748b" stroke-width="1.5"/>
@@ -516,8 +516,8 @@
                         <text x="538" y="325" class="dt" font-size="9" fill="#64748b">Fix</text>
 
                         <!-- Arrow down -->
-                        <line x1="380" y1="358" x2="380" y2="386" stroke="#c2713a" stroke-width="1.5"/>
-                        <polygon points="375,382 380,392 385,382" fill="#c2713a"/>
+                        <line x1="380" y1="358" x2="380" y2="386" stroke="#2563eb" stroke-width="1.5"/>
+                        <polygon points="375,382 380,392 385,382" fill="#2563eb"/>
 
                         <!-- Step 5: Consider refactoring -->
                         <rect x="260" y="390" width="240" height="52" rx="8" fill="rgba(42,58,82,0.3)" stroke="#2a3a52" stroke-width="1.5"/>
@@ -532,8 +532,8 @@
                         <text x="538" y="409" class="dt" font-size="9" fill="#64748b">Fix</text>
 
                         <!-- Left annotation: order matters -->
-                        <rect x="30" y="170" width="200" height="120" rx="8" fill="rgba(194,113,58,0.04)" stroke="rgba(194,113,58,0.15)" stroke-width="1"/>
-                        <text x="130" y="196" text-anchor="middle" class="dt" font-size="10" font-weight="600" fill="#c2713a">Why this order?</text>
+                        <rect x="30" y="170" width="200" height="120" rx="8" fill="rgba(37,99,235,0.04)" stroke="rgba(37,99,235,0.15)" stroke-width="1"/>
+                        <text x="130" y="196" text-anchor="middle" class="dt" font-size="10" font-weight="600" fill="#2563eb">Why this order?</text>
                         <text x="130" y="218" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">Partition fixes reduce</text>
                         <text x="130" y="232" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">shuffle volume, which</text>
                         <text x="130" y="246" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">changes cluster needs,</text>
@@ -541,7 +541,7 @@
                         <text x="130" y="274" text-anchor="middle" class="dt" font-size="9" fill="#94a3b8">priorities.</text>
 
                         <!-- Dashed connection to step 2 -->
-                        <line x1="230" y1="220" x2="260" y2="190" stroke="rgba(194,113,58,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
+                        <line x1="230" y1="220" x2="260" y2="190" stroke="rgba(37,99,235,0.2)" stroke-width="1" stroke-dasharray="3 3"/>
 
                         <!-- Caption -->
                         <text x="380" y="475" text-anchor="middle" class="dt" font-size="10" fill="#64748b">Each step's findings change the optimal approach for the next step.</text>
