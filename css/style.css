@@ -9,56 +9,67 @@
    ========================================================================== */
 
 :root {
-    /* Palette: Ink & Copper */
-    --ink:          #0c1220;
-    --ink-soft:     #151d2e;
-    --ink-muted:    #1e2a3e;
-    --slate:        #1a2536;
-    --steel:        #64748b;
-    --silver:       #94a3b8;
-    --mist:         #cbd5e1;
-    --cloud:        #e8ecf1;
-    --fog:          #f1f4f8;
-    --cream:        #f8f9fc;
-    --paper:        #fcfcfd;
+    /* Palette: Engineering Precision (Option A) */
+    --ink:           #0a0a0a;
+    --ink-soft:      #1a1a1a;
+    --ink-muted:     #262626;
+    --slate:         #1a2536;
+    --steel:         #525b6d;
+    --silver:        #a1a1aa;
+    --mist:          #d4d4d8;
+    --cloud:         #e5e7eb;
+    --fog:           #fafafa;
+    --cream:         #f5f5f5;
+    --paper:         #ffffff;
 
-    --copper:       #c2713a;
-    --copper-light: #d4915e;
-    --copper-glow:  rgba(194, 113, 58, 0.12);
-    --copper-faint: rgba(194, 113, 58, 0.06);
-    --teal:         #2dd4bf;
-    --teal-dim:     rgba(45, 212, 191, 0.15);
+    /* Single accent: electric blue. Legacy --copper-* names kept as aliases
+       so existing rules compile unchanged; preferred name is --accent-*. */
+    --accent:        #2563eb;
+    --accent-light:  #3b82f6;
+    --accent-glow:   rgba(37, 99, 235, 0.12);
+    --accent-faint:  rgba(37, 99, 235, 0.06);
+    --copper:        var(--accent);
+    --copper-light:  var(--accent-light);
+    --copper-glow:   var(--accent-glow);
+    --copper-faint:  var(--accent-faint);
+
+    /* Neutral gray used for secondary "open source" style labels.
+       Legacy --teal-* names kept as aliases. */
+    --neutral-mid:     #525b6d;
+    --neutral-mid-dim: rgba(82, 91, 109, 0.1);
+    --teal:            var(--neutral-mid);
+    --teal-dim:        var(--neutral-mid-dim);
 
     /* Semantic */
-    --color-bg:            var(--paper);
-    --color-bg-alt:        var(--fog);
-    --color-surface:       #ffffff;
-    --color-text:          var(--ink);
+    --color-bg:             var(--paper);
+    --color-bg-alt:         var(--fog);
+    --color-surface:        #ffffff;
+    --color-text:           var(--ink);
     --color-text-secondary: var(--slate);
-    --color-text-muted:    var(--steel);
-    --color-accent:        var(--copper);
-    --color-accent-light:  var(--copper-glow);
-    --color-accent-dark:   #a85d2e;
-    --color-border:        var(--cloud);
-    --color-border-light:  #eef1f5;
+    --color-text-muted:     var(--steel);
+    --color-accent:         var(--accent);
+    --color-accent-light:   var(--accent-glow);
+    --color-accent-dark:    #1d4ed8;
+    --color-border:         var(--cloud);
+    --color-border-light:   #f1f3f5;
 
     /* Typography */
     --font-heading:  'Geist', 'Instrument Serif', ui-sans-serif, system-ui, sans-serif;
     --font-body:     'Geist', 'Switzer', system-ui, -apple-system, sans-serif;
     --font-mono:     'Geist Mono', 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
 
-    /* Shadows — layered for depth */
-    --shadow-xs:  0 1px 2px rgba(12, 18, 32, 0.04);
-    --shadow-sm:  0 1px 3px rgba(12, 18, 32, 0.06), 0 1px 2px rgba(12, 18, 32, 0.04);
-    --shadow-md:  0 4px 12px rgba(12, 18, 32, 0.07), 0 1px 3px rgba(12, 18, 32, 0.05);
-    --shadow-lg:  0 10px 30px rgba(12, 18, 32, 0.08), 0 4px 12px rgba(12, 18, 32, 0.04);
-    --shadow-xl:  0 20px 50px rgba(12, 18, 32, 0.12), 0 8px 20px rgba(12, 18, 32, 0.06);
+    /* Shadows — single-layer, restrained */
+    --shadow-xs:  0 1px 2px rgba(10, 10, 10, 0.04);
+    --shadow-sm:  0 1px 3px rgba(10, 10, 10, 0.06);
+    --shadow-md:  0 4px 12px rgba(10, 10, 10, 0.06);
+    --shadow-lg:  0 8px 24px rgba(10, 10, 10, 0.08);
+    --shadow-xl:  0 16px 40px rgba(10, 10, 10, 0.1);
 
-    /* Radii */
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-xl: 20px;
+    /* Radii — sharper, more technical */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
 
     /* Transitions */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -188,7 +199,7 @@ strong {
     width: 100%;
     z-index: 100;
     padding: 1.1rem 0;
-    background: rgba(252, 252, 253, 0.8);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(16px) saturate(1.8);
     -webkit-backdrop-filter: blur(16px) saturate(1.8);
     border-bottom: 1px solid transparent;
@@ -332,10 +343,7 @@ strong {
     padding-top: 5rem;
     position: relative;
     overflow: hidden;
-    background:
-        radial-gradient(ellipse 80% 60% at 65% 40%, rgba(194, 113, 58, 0.04), transparent),
-        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(45, 212, 191, 0.03), transparent),
-        linear-gradient(180deg, var(--paper) 0%, var(--fog) 100%);
+    background: var(--paper);
 }
 
 .hero-layout {
@@ -355,7 +363,7 @@ strong {
     display: inline-block;
     padding: 0.4rem 1rem;
     background: var(--copper-faint);
-    border: 1px solid rgba(194, 113, 58, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.15);
     border-radius: var(--radius-sm);
     color: var(--copper);
     font-family: var(--font-mono);
@@ -644,7 +652,7 @@ strong {
     width: 48px;
     height: 48px;
     background: var(--copper-faint);
-    border: 1px solid rgba(194, 113, 58, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.1);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
@@ -879,7 +887,7 @@ a.track-card:hover .track-link {
 
 .sovereignty-content .section-label {
     color: var(--copper-light);
-    border-bottom-color: rgba(194, 113, 58, 0.2);
+    border-bottom-color: rgba(37, 99, 235, 0.2);
 }
 
 .sovereignty-content h2 {
@@ -955,14 +963,14 @@ a.track-card:hover .track-link {
 }
 
 .sov-public {
-    background: rgba(45, 212, 191, 0.08);
-    border: 1px solid rgba(45, 212, 191, 0.2);
+    background: rgba(82, 91, 109, 0.08);
+    border: 1px solid rgba(82, 91, 109, 0.2);
     color: var(--teal);
 }
 
 .sov-hybrid {
-    background: rgba(194, 113, 58, 0.1);
-    border: 1px solid rgba(194, 113, 58, 0.2);
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
     color: var(--copper-light);
 }
 
@@ -993,18 +1001,6 @@ a.track-card:hover .track-link {
     transition: all var(--duration) var(--ease-out);
 }
 
-.blog-featured::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(ellipse 60% 80% at 80% 50%, black 10%, transparent 60%);
-    -webkit-mask-image: radial-gradient(ellipse 60% 80% at 80% 50%, black 10%, transparent 60%);
-}
-
 .blog-featured:hover {
     border-color: var(--copper);
     box-shadow: var(--shadow-xl);
@@ -1031,8 +1027,8 @@ a.track-card:hover .track-link {
     letter-spacing: 1.5px;
     color: var(--copper);
     padding: 0.3rem 0.75rem;
-    background: rgba(194, 113, 58, 0.12);
-    border: 1px solid rgba(194, 113, 58, 0.25);
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.25);
     border-radius: 4px;
 }
 
@@ -1044,8 +1040,8 @@ a.track-card:hover .track-link {
     letter-spacing: 1.5px;
     color: var(--teal);
     padding: 0.3rem 0.75rem;
-    background: rgba(45, 212, 191, 0.1);
-    border: 1px solid rgba(45, 212, 191, 0.2);
+    background: rgba(82, 91, 109, 0.1);
+    border: 1px solid rgba(82, 91, 109, 0.2);
     border-radius: 4px;
 }
 
@@ -1230,9 +1226,8 @@ a.blog-card:hover h3 {
 .section-cta {
     padding: 7rem 0;
     position: relative;
-    background:
-        radial-gradient(ellipse 60% 50% at 50% 60%, var(--copper-faint), transparent),
-        linear-gradient(180deg, var(--color-bg) 0%, var(--fog) 100%);
+    background: var(--fog);
+    border-top: 1px solid var(--color-border);
 }
 
 .cta-layout {
@@ -1440,7 +1435,7 @@ a.blog-card:hover h3 {
         right: -100%;
         width: 100vw;
         height: 100vh;
-        background: rgba(252, 252, 253, 0.98);
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
         flex-direction: column;
         justify-content: center;

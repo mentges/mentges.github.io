@@ -6,9 +6,8 @@
 /* Page Header */
 .page-header {
     padding: 8.5rem 0 3.5rem;
-    background:
-        radial-gradient(ellipse 60% 40% at 30% 60%, rgba(194, 113, 58, 0.03), transparent),
-        linear-gradient(180deg, var(--paper) 0%, var(--fog) 100%);
+    background: var(--paper);
+    border-bottom: 1px solid var(--color-border);
     position: relative;
 }
 
@@ -48,7 +47,7 @@
     border-radius: 3px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 1px solid rgba(194, 113, 58, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .page-header h1 {
@@ -137,7 +136,7 @@
 .content-section a {
     color: var(--copper);
     text-decoration: underline;
-    text-decoration-color: rgba(194, 113, 58, 0.3);
+    text-decoration-color: rgba(37, 99, 235, 0.3);
     text-underline-offset: 3px;
     transition: all var(--duration) var(--ease-out);
 }
@@ -187,7 +186,7 @@
 
 .result-card {
     background: var(--copper-faint);
-    border: 1px solid rgba(194, 113, 58, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.1);
     border-radius: var(--radius-md);
     padding: 1.5rem 1rem;
     text-align: center;
@@ -280,18 +279,6 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-}
-
-.content-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 32px 32px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
 }
 
 .content-cta h3 {
