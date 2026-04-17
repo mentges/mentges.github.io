@@ -451,7 +451,7 @@ strong {
 }
 
 /* ==========================================================================
-   Hero Animation — client → data → AI → knowledge
+   Hero Animation — 6 data pipes converge on a black-hole AI → lightbulbs
    Static SVG with CSS-driven loops. Pure HTML/CSS, no JS.
    ========================================================================== */
 
@@ -467,10 +467,10 @@ strong {
     max-width: 520px;
     height: auto;
     display: block;
-    filter: drop-shadow(0 16px 40px rgba(37, 99, 235, 0.08));
+    filter: drop-shadow(0 16px 40px rgba(37, 99, 235, 0.1));
 }
 
-/* Pipeline flow dashes — subtle ongoing signal of movement */
+/* Pipe lines — animated dashes indicate continuous flow */
 @keyframes ha-flow-dashes {
     to { stroke-dashoffset: -16; }
 }
@@ -478,62 +478,64 @@ strong {
     animation: ha-flow-dashes 1.4s linear infinite;
 }
 
-/* Data items travelling client → AI through the pipeline */
-@keyframes ha-flow-item {
-    0%   { transform: translateX(0)     scale(0.9); opacity: 0; }
-    8%   { transform: translateX(12px)  scale(1);   opacity: 1; }
-    72%  { transform: translateX(210px) scale(1);   opacity: 1; }
-    88%  { transform: translateX(234px) scale(0.6); opacity: 0.3; }
-    100% { transform: translateX(246px) scale(0.2); opacity: 0; }
+/* Data pills travelling along each pipe toward the black hole.
+   Custom properties (--dx/--dy) give each pipe its direction. */
+@keyframes ha-pipe-flow {
+    0%   { transform: translate(0, 0) scale(0.8); opacity: 0; }
+    12%  { transform: translate(0, 0) scale(1);   opacity: 1; }
+    70%  { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 1; }
+    88%  { transform: translate(calc(var(--dx) * 1.05), calc(var(--dy) * 1.05)) scale(0.35); opacity: 0.25; }
+    100% { transform: translate(calc(var(--dx) * 1.1),  calc(var(--dy) * 1.1))  scale(0);    opacity: 0; }
 }
-.ha-item {
-    animation: ha-flow-item 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+.ha-pipe-item {
+    animation: ha-pipe-flow 3.6s cubic-bezier(0.4, 0, 0.7, 1) infinite;
     transform-origin: center;
     transform-box: fill-box;
 }
-.ha-item-1 { animation-delay: 0s; }
-.ha-item-2 { animation-delay: -0.6s; }
-.ha-item-3 { animation-delay: -1.2s; }
-.ha-item-4 { animation-delay: -1.8s; }
-.ha-item-5 { animation-delay: -2.4s; }
-.ha-item-6 { animation-delay: -3.0s; }
+/* W  — docs  */ .ha-p1 { --dx:  160px; --dy:   0px; animation-delay:  0s;   }
+/* NW — code  */ .ha-p2 { --dx:  129px; --dy:  92px; animation-delay: -0.6s; }
+/* NE — srt   */ .ha-p3 { --dx: -138px; --dy:  92px; animation-delay: -1.2s; }
+/* E  — pdfs  */ .ha-p4 { --dx: -160px; --dy:   0px; animation-delay: -1.8s; }
+/* SE — video */ .ha-p5 { --dx: -138px; --dy: -92px; animation-delay: -2.4s; }
+/* SW — audio */ .ha-p6 { --dx:  129px; --dy: -91px; animation-delay: -3.0s; }
 
-/* AI processor — expanding pulse ring */
-@keyframes ha-ai-pulse {
-    0%   { r: 50; stroke-opacity: 0;    }
-    15%  { r: 53; stroke-opacity: 0.55; }
-    100% { r: 78; stroke-opacity: 0;    }
+/* Black hole accretion disk — three tilted ellipses with dashes swirling around.
+   The ellipses themselves are tilted via an outer group's attribute rotate;
+   stroke-dashoffset animation gives the impression of material flowing around. */
+@keyframes ha-swirl-1 { to { stroke-dashoffset: -24; } }
+@keyframes ha-swirl-2 { to { stroke-dashoffset: -33; } }
+@keyframes ha-swirl-3 { to { stroke-dashoffset: -27; } }
+.ha-accretion-1 { animation: ha-swirl-1 8s linear infinite; }
+.ha-accretion-2 { animation: ha-swirl-2 5s linear infinite; }
+.ha-accretion-3 { animation: ha-swirl-3 3.2s linear infinite; }
+
+/* Event-horizon ring — breathes brighter/wider to hint at gravity */
+@keyframes ha-horizon-pulse {
+    0%, 100% { stroke-opacity: 0.55; stroke-width: 1.6; }
+    50%      { stroke-opacity: 1;    stroke-width: 2.2; }
 }
-.ha-ai-pulse {
-    animation: ha-ai-pulse 2.8s ease-out infinite;
+.ha-event-horizon {
+    animation: ha-horizon-pulse 3.5s ease-in-out infinite;
+}
+
+/* Source pills — gentle breathing so they feel "alive" */
+@keyframes ha-source-pulse {
+    0%, 100% { opacity: 0.9; }
+    50%      { opacity: 1;   }
+}
+.ha-source {
+    animation: ha-source-pulse 4s ease-in-out infinite;
     transform-origin: center;
+    transform-box: fill-box;
 }
-.ha-ai-pulse-2 { animation-delay: -1.4s; }
+.ha-source-1 { animation-delay: 0s;   }
+.ha-source-2 { animation-delay: 0.5s; }
+.ha-source-3 { animation-delay: 1s;   }
+.ha-source-4 { animation-delay: 1.5s; }
+.ha-source-5 { animation-delay: 2s;   }
+.ha-source-6 { animation-delay: 2.5s; }
 
-/* AI processor — core breathing */
-@keyframes ha-ai-breathe {
-    0%, 100% { filter: brightness(1);    stroke-opacity: 0.9; }
-    50%      { filter: brightness(1.15); stroke-opacity: 1;   }
-}
-.ha-ai-core {
-    animation: ha-ai-breathe 2.8s ease-in-out infinite;
-}
-
-/* Neural-activity dots inside the AI processor */
-@keyframes ha-neural-blink {
-    0%, 100% { opacity: 0.25; }
-    50%      { opacity: 1;    }
-}
-.ha-neural {
-    animation: ha-neural-blink 1.8s ease-in-out infinite;
-}
-.ha-neural-1 { animation-delay: 0s;   }
-.ha-neural-2 { animation-delay: 0.3s; }
-.ha-neural-3 { animation-delay: 0.6s; }
-.ha-neural-4 { animation-delay: 0.9s; }
-.ha-neural-5 { animation-delay: 1.2s; }
-
-/* Lightbulbs of knowledge — rise, brighten, fade */
+/* Lightbulbs of knowledge — rise from the black hole, brighten, fade */
 @keyframes ha-bulb-rise {
     0%   { transform: translate(0, 0)      scale(0.2); opacity: 0;   }
     15%  { transform: translate(0, -20px)  scale(0.7); opacity: 0.7; }
@@ -550,29 +552,15 @@ strong {
 .ha-bulb-2 { animation-delay: -1.4s;}
 .ha-bulb-3 { animation-delay: -2.8s;}
 
-/* Client-side data icons — gentle breathing as they get "surfaced" */
-@keyframes ha-client-glow {
-    0%, 100% { opacity: 0.55; }
-    50%      { opacity: 0.95; }
-}
-.ha-client-icon {
-    animation: ha-client-glow 4s ease-in-out infinite;
-    transform-origin: center;
-}
-.ha-client-icon-1 { animation-delay: 0s;   }
-.ha-client-icon-2 { animation-delay: 0.5s; }
-.ha-client-icon-3 { animation-delay: 1s;   }
-.ha-client-icon-4 { animation-delay: 1.5s; }
-.ha-client-icon-5 { animation-delay: 2s;   }
-
 @media (prefers-reduced-motion: reduce) {
-    .ha-item,
+    .ha-pipe-item,
     .ha-bulb,
-    .ha-ai-pulse,
-    .ha-ai-core,
-    .ha-neural,
+    .ha-accretion-1,
+    .ha-accretion-2,
+    .ha-accretion-3,
+    .ha-event-horizon,
     .ha-flow-line,
-    .ha-client-icon {
+    .ha-source {
         animation: none;
     }
     .ha-bulb {
