@@ -90,12 +90,13 @@
                     </div>
                 </div>
 
-                <!-- Hero Animation: seis fluxos de dados convergindo no buraco negro Mentges.AI → lâmpadas de conhecimento -->
+                <!-- Hero Animation: dois planetas-cliente enviam 3 tubos de dados cada para o buraco negro
+                     Mentges.AI, gerando +valor e emitindo lâmpadas de conhecimento. Puro HTML + CSS, zero JS. -->
                 <div class="hero-animation-wrapper fade-in-up" style="animation-delay: 0.4s">
-                    <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" class="hero-animation" role="img" aria-label="Ilustração: seis fluxos de dados de direções diferentes convergindo em um Mentges.AI em forma de buraco negro e emergindo como lâmpadas de conhecimento">
+                    <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" class="hero-animation" role="img" aria-label="Ilustração: dois planetas-cliente no fundo enviam seis tubos de dados coloridos ao buraco negro Mentges.AI, que gera +valor e emite lâmpadas de conhecimento">
                         <defs>
                             <radialGradient id="ha-hole-halo">
-                                <stop offset="0%"   stop-color="#3b82f6" stop-opacity="0.25"/>
+                                <stop offset="0%"   stop-color="#3b82f6" stop-opacity="0.28"/>
                                 <stop offset="40%"  stop-color="#1e3a8a" stop-opacity="0.12"/>
                                 <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0"/>
                             </radialGradient>
@@ -104,90 +105,118 @@
                                 <stop offset="45%"  stop-color="#fde68a" stop-opacity="0.65"/>
                                 <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
                             </radialGradient>
+                            <!-- Sua Empresa (verde esmeralda) -->
+                            <radialGradient id="ha-planet-a" cx="28%" cy="28%">
+                                <stop offset="0%"   stop-color="#d1fae5"/>
+                                <stop offset="55%"  stop-color="#6ee7b7"/>
+                                <stop offset="100%" stop-color="#059669"/>
+                            </radialGradient>
+                            <!-- Seu Time (violeta) -->
+                            <radialGradient id="ha-planet-b" cx="72%" cy="28%">
+                                <stop offset="0%"   stop-color="#f3e8ff"/>
+                                <stop offset="55%"  stop-color="#c4b5fd"/>
+                                <stop offset="100%" stop-color="#7c3aed"/>
+                            </radialGradient>
                         </defs>
 
-                        <!-- Halo externo (dica de campo gravitacional) -->
-                        <circle cx="260" cy="240" r="140" fill="url(#ha-hole-halo)"/>
-
-                        <!-- 6 tubos desenhados atrás de tudo -->
-                        <line class="ha-flow-line" x1="50"  y1="240" x2="210" y2="240" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
-                        <line class="ha-flow-line" x1="90"  y1="120" x2="219" y2="212" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
-                        <line class="ha-flow-line" x1="440" y1="120" x2="302" y2="212" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
-                        <line class="ha-flow-line" x1="470" y1="240" x2="310" y2="240" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
-                        <line class="ha-flow-line" x1="440" y1="360" x2="302" y2="268" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
-                        <line class="ha-flow-line" x1="90"  y1="360" x2="219" y2="268" stroke="#2563eb" stroke-width="1" stroke-dasharray="2 6" opacity="0.4"/>
-
-                        <!-- 6 fontes rotuladas por tipo de dado -->
-                        <g class="ha-source ha-source-1">
-                            <rect x="30"  y="229" width="40" height="22" rx="4" fill="#ffffff" stroke="#d4d4d8" stroke-width="1"/>
-                            <text x="50"  y="244" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#525b6d" font-weight="600">docs</text>
-                        </g>
-                        <g class="ha-source ha-source-2">
-                            <rect x="68"  y="109" width="44" height="22" rx="4" fill="#ffffff" stroke="#d4d4d8" stroke-width="1"/>
-                            <text x="90"  y="124" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#525b6d" font-weight="600">código</text>
-                        </g>
-                        <g class="ha-source ha-source-3">
-                            <rect x="402" y="109" width="76" height="22" rx="4" fill="#ffffff" stroke="#d4d4d8" stroke-width="1"/>
-                            <text x="440" y="124" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#525b6d" font-weight="600">transcrições</text>
-                        </g>
-                        <g class="ha-source ha-source-4">
-                            <rect x="450" y="229" width="40" height="22" rx="4" fill="#ffffff" stroke="#d4d4d8" stroke-width="1"/>
-                            <text x="470" y="244" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#525b6d" font-weight="600">pdfs</text>
-                        </g>
-                        <g class="ha-source ha-source-5">
-                            <rect x="418" y="349" width="44" height="22" rx="4" fill="#ffffff" stroke="#d4d4d8" stroke-width="1"/>
-                            <text x="440" y="364" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#525b6d" font-weight="600">vídeo</text>
-                        </g>
-                        <g class="ha-source ha-source-6">
-                            <rect x="68"  y="349" width="44" height="22" rx="4" fill="#ffffff" stroke="#d4d4d8" stroke-width="1"/>
-                            <text x="90"  y="364" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#525b6d" font-weight="600">áudio</text>
+                        <!-- Estrelas tênues (atmosfera espacial) -->
+                        <g opacity="0.55">
+                            <circle cx="70"  cy="48" r="0.8" fill="#94a3b8"/>
+                            <circle cx="125" cy="25" r="0.6" fill="#94a3b8"/>
+                            <circle cx="175" cy="62" r="0.7" fill="#94a3b8"/>
+                            <circle cx="210" cy="32" r="0.5" fill="#94a3b8"/>
+                            <circle cx="345" cy="50" r="0.8" fill="#94a3b8"/>
+                            <circle cx="395" cy="20" r="0.6" fill="#94a3b8"/>
+                            <circle cx="445" cy="70" r="0.7" fill="#94a3b8"/>
+                            <circle cx="490" cy="38" r="0.5" fill="#94a3b8"/>
+                            <circle cx="30"  cy="95" r="0.6" fill="#94a3b8"/>
+                            <circle cx="480" cy="110" r="0.6" fill="#94a3b8"/>
                         </g>
 
-                        <!-- 6 arquivos fluindo (um por tubo, direção via --dx/--dy em CSS) -->
+                        <!-- Halo gravitacional ao redor do buraco negro -->
+                        <circle cx="260" cy="160" r="130" fill="url(#ha-hole-halo)"/>
+
+                        <!-- Sua Empresa (inferior-esquerdo, verde). ViewBox corta o resto da esfera -->
+                        <circle cx="40" cy="520" r="206" fill="none" stroke="#34d399" stroke-width="0.8" opacity="0.3"/>
+                        <circle cx="40" cy="520" r="200" fill="url(#ha-planet-a)" stroke="#065f46" stroke-width="1.3" opacity="0.95"/>
+                        <text x="80" y="345" text-anchor="start" font-family="'Geist Mono', monospace" font-size="9" fill="#064e3b" font-weight="600" letter-spacing="1.5">SUA EMPRESA</text>
+
+                        <!-- Seu Time (inferior-direito, roxo) -->
+                        <circle cx="480" cy="520" r="206" fill="none" stroke="#a78bfa" stroke-width="0.8" opacity="0.3"/>
+                        <circle cx="480" cy="520" r="200" fill="url(#ha-planet-b)" stroke="#5b21b6" stroke-width="1.3" opacity="0.95"/>
+                        <text x="440" y="345" text-anchor="end" font-family="'Geist Mono', monospace" font-size="9" fill="#5b21b6" font-weight="600" letter-spacing="1.5">SEU TIME</text>
+
+                        <!-- 6 tubos agrupados — Sua Empresa (esmeralda) e Seu Time (violeta) -->
+                        <line class="ha-flow-line" x1="140" y1="347" x2="233" y2="202" stroke="#6ee7b7" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+                        <line class="ha-flow-line" x1="181" y1="379" x2="243" y2="207" stroke="#10b981" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+                        <line class="ha-flow-line" x1="204" y1="405" x2="249" y2="209" stroke="#047857" stroke-width="1" stroke-dasharray="2 6" opacity="0.65"/>
+                        <line class="ha-flow-line" x1="380" y1="347" x2="287" y2="202" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+                        <line class="ha-flow-line" x1="339" y1="379" x2="277" y2="207" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="2 6" opacity="0.7"/>
+                        <line class="ha-flow-line" x1="316" y1="405" x2="271" y2="209" stroke="#6d28d9" stroke-width="1" stroke-dasharray="2 6" opacity="0.65"/>
+
+                        <!-- 6 arquivos fluindo (coloridos por tubo) -->
                         <g class="ha-pipe-item ha-p1">
-                            <rect x="40" y="233" width="22" height="14" rx="3" fill="#0a0a0a"/>
-                            <text x="51" y="243" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.doc</text>
+                            <rect x="129" y="340" width="22" height="14" rx="3" fill="#6ee7b7"/>
+                            <text x="140" y="350" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#064e3b" font-weight="700">.doc</text>
                         </g>
                         <g class="ha-pipe-item ha-p2">
-                            <rect x="80" y="113" width="22" height="14" rx="3" fill="#0a0a0a"/>
-                            <text x="91" y="123" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.py</text>
+                            <rect x="170" y="372" width="22" height="14" rx="3" fill="#10b981"/>
+                            <text x="181" y="382" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.py</text>
                         </g>
                         <g class="ha-pipe-item ha-p3">
-                            <rect x="430" y="113" width="20" height="14" rx="3" fill="#2563eb"/>
-                            <text x="440" y="123" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.srt</text>
+                            <rect x="192" y="398" width="24" height="14" rx="3" fill="#047857"/>
+                            <text x="204" y="408" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.srt</text>
                         </g>
                         <g class="ha-pipe-item ha-p4">
-                            <rect x="460" y="233" width="20" height="14" rx="3" fill="#2563eb"/>
-                            <text x="470" y="243" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.pdf</text>
+                            <rect x="369" y="340" width="22" height="14" rx="3" fill="#c4b5fd"/>
+                            <text x="380" y="350" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#3730a3" font-weight="700">.pdf</text>
                         </g>
                         <g class="ha-pipe-item ha-p5">
-                            <rect x="430" y="353" width="22" height="14" rx="3" fill="#0a0a0a"/>
-                            <text x="441" y="363" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.mp4</text>
+                            <rect x="328" y="372" width="22" height="14" rx="3" fill="#8b5cf6"/>
+                            <text x="339" y="382" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.mp4</text>
                         </g>
                         <g class="ha-pipe-item ha-p6">
-                            <rect x="80" y="353" width="22" height="14" rx="3" fill="#2563eb"/>
-                            <text x="91" y="363" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.mp3</text>
+                            <rect x="304" y="398" width="24" height="14" rx="3" fill="#6d28d9"/>
+                            <text x="316" y="408" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="7" fill="#ffffff" font-weight="600">.mp3</text>
                         </g>
 
-                        <!-- Buraco negro Mentges.AI -->
-                        <!-- Disco de acreção: 3 anéis inclinados com tracejado girando -->
-                        <g transform="rotate(-20 260 240)">
-                            <ellipse class="ha-accretion-1" cx="260" cy="240" rx="92" ry="24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.55"/>
-                            <ellipse class="ha-accretion-2" cx="260" cy="240" rx="78" ry="18" fill="none" stroke="#3b82f6" stroke-width="2"   stroke-dasharray="6 5" opacity="0.8"/>
-                            <ellipse class="ha-accretion-3" cx="260" cy="240" rx="64" ry="13" fill="none" stroke="#60a5fa" stroke-width="1.2" stroke-dasharray="3 6" opacity="0.65"/>
+                        <!-- +valor pops — um por arquivo processado, aparecendo acima do rótulo do cliente -->
+                        <g class="ha-value ha-value-1">
+                            <text x="100" y="328" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#16a34a" font-weight="700">+valor</text>
                         </g>
-                        <!-- Horizonte de eventos (pulsando) -->
-                        <circle class="ha-event-horizon" cx="260" cy="240" r="52" fill="none" stroke="#60a5fa" stroke-width="1.8"/>
-                        <!-- Núcleo escuro (absorve toda a luz) -->
-                        <circle cx="260" cy="240" r="50" fill="#000000"/>
-                        <!-- Anel de fóton interno -->
-                        <circle cx="260" cy="240" r="46" fill="none" stroke="#1e40af" stroke-width="0.6" opacity="0.5"/>
+                        <g class="ha-value ha-value-2">
+                            <text x="120" y="320" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#16a34a" font-weight="700">+valor</text>
+                        </g>
+                        <g class="ha-value ha-value-3">
+                            <text x="140" y="328" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#16a34a" font-weight="700">+valor</text>
+                        </g>
+                        <g class="ha-value ha-value-4">
+                            <text x="390" y="328" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#16a34a" font-weight="700">+valor</text>
+                        </g>
+                        <g class="ha-value ha-value-5">
+                            <text x="410" y="320" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#16a34a" font-weight="700">+valor</text>
+                        </g>
+                        <g class="ha-value ha-value-6">
+                            <text x="430" y="328" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#16a34a" font-weight="700">+valor</text>
+                        </g>
 
-                        <!-- Rótulo abaixo do buraco negro -->
-                        <text x="260" y="316" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="9" fill="#525b6d" font-weight="600" letter-spacing="1.5">MENTGES.AI</text>
+                        <!-- Buraco negro Mentges.AI (deslocado para cima para dar espaço aos planetas) -->
+                        <g transform="rotate(-20 260 160)">
+                            <ellipse class="ha-accretion-1" cx="260" cy="160" rx="92" ry="24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.55"/>
+                            <ellipse class="ha-accretion-2" cx="260" cy="160" rx="78" ry="18" fill="none" stroke="#3b82f6" stroke-width="2"   stroke-dasharray="6 5" opacity="0.8"/>
+                            <ellipse class="ha-accretion-3" cx="260" cy="160" rx="64" ry="13" fill="none" stroke="#60a5fa" stroke-width="1.2" stroke-dasharray="3 6" opacity="0.65"/>
+                        </g>
+                        <circle class="ha-event-horizon" cx="260" cy="160" r="52" fill="none" stroke="#60a5fa" stroke-width="1.8"/>
+                        <circle cx="260" cy="160" r="50" fill="#000000"/>
+                        <circle cx="260" cy="160" r="46" fill="none" stroke="#1e40af" stroke-width="0.6" opacity="0.5"/>
 
-                        <!-- Lâmpadas de conhecimento emergindo sobre o buraco negro (grupo externo posiciona, interno anima) -->
-                        <g transform="translate(260 190)">
+                        <!-- Placa Mentges.AI: pequenos traços flanqueando um rótulo claro do buraco negro -->
+                        <line x1="196" y1="283" x2="216" y2="283" stroke="#525b6d" stroke-width="0.8" opacity="0.55"/>
+                        <line x1="304" y1="283" x2="324" y2="283" stroke="#525b6d" stroke-width="0.8" opacity="0.55"/>
+                        <text x="260" y="286" text-anchor="middle" font-family="'Geist Mono', monospace" font-size="12" fill="#0a0a0a" font-weight="700" letter-spacing="2.5">MENTGES.AI</text>
+
+                        <!-- Lâmpadas de conhecimento emergindo sobre o buraco negro (subida menor, pois o buraco subiu) -->
+                        <g transform="translate(260 110)">
                             <g class="ha-bulb ha-bulb-1">
                                 <circle cx="0" cy="0" r="22" fill="url(#ha-bulb-glow)"/>
                                 <ellipse cx="0" cy="-3" rx="7" ry="8" fill="#fde68a" stroke="#d97706" stroke-width="1.2"/>
@@ -197,7 +226,7 @@
                                 <line x1="-2.5" y1="12" x2="2.5" y2="12" stroke="#525b6d" stroke-width="1"/>
                             </g>
                         </g>
-                        <g transform="translate(236 190)">
+                        <g transform="translate(236 110)">
                             <g class="ha-bulb ha-bulb-2">
                                 <circle cx="0" cy="0" r="18" fill="url(#ha-bulb-glow)"/>
                                 <ellipse cx="0" cy="-3" rx="6" ry="7" fill="#fde68a" stroke="#d97706" stroke-width="1.1"/>
@@ -207,7 +236,7 @@
                                 <line x1="-2"   y1="11" x2="2"   y2="11" stroke="#525b6d" stroke-width="0.9"/>
                             </g>
                         </g>
-                        <g transform="translate(284 190)">
+                        <g transform="translate(284 110)">
                             <g class="ha-bulb ha-bulb-3">
                                 <circle cx="0" cy="0" r="20" fill="url(#ha-bulb-glow)"/>
                                 <ellipse cx="0" cy="-3" rx="6.5" ry="7.5" fill="#fde68a" stroke="#d97706" stroke-width="1.1"/>

@@ -203,8 +203,8 @@ strong {
     top: 0;
     width: 100%;
     z-index: 100;
-    padding: 1.1rem 0;
-    background: rgba(255, 255, 255, 0.8);
+    padding: 1.25rem 0;
+    background: rgba(255, 255, 255, 0.82);
     backdrop-filter: blur(16px) saturate(1.8);
     -webkit-backdrop-filter: blur(16px) saturate(1.8);
     border-bottom: 1px solid transparent;
@@ -212,7 +212,7 @@ strong {
 }
 
 .navbar.scrolled {
-    padding: 0.75rem 0;
+    padding: 0.85rem 0;
     border-bottom-color: var(--color-border);
     box-shadow: var(--shadow-xs);
 }
@@ -227,26 +227,27 @@ strong {
     text-decoration: none;
     display: flex;
     align-items: baseline;
-    gap: 0.5rem;
+    gap: 0.55rem;
 }
 
 .logo-name {
     font-family: var(--font-heading);
-    font-size: 1.35rem;
-    font-weight: 400;
+    font-size: 1.55rem;
+    font-weight: 600;
     color: var(--ink);
+    letter-spacing: -0.015em;
 }
 
 .logo-separator {
     color: var(--mist);
-    font-weight: 200;
-    font-size: 1.2rem;
+    font-weight: 300;
+    font-size: 1.4rem;
 }
 
 .logo-company {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--copper);
     letter-spacing: 0.5px;
 }
@@ -254,14 +255,17 @@ strong {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2.25rem;
+    gap: 2.5rem;
     align-items: center;
 }
 
-.nav-links a {
+/* Non-button nav links: colour + hover. The :not(.btn) is load-bearing —
+   without it this rule beats .btn-primary's white text and the CTA button
+   ends up as dark steel on dark ink, unreadable. */
+.nav-links a:not(.btn) {
     color: var(--steel);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.01em;
     transition: color var(--duration) var(--ease-out);
@@ -305,8 +309,8 @@ strong {
 }
 
 .btn-sm {
-    padding: 0.5rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 0.55rem 1.4rem;
+    font-size: 0.9rem;
 }
 
 .btn-lg {
@@ -317,12 +321,20 @@ strong {
 .btn-primary {
     background: var(--ink);
     color: var(--paper);
-    box-shadow: var(--shadow-sm);
+    box-shadow:
+        0 1px 2px rgba(10, 10, 10, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
+/* Hover: flip to accent-blue with a coloured shadow lift.
+   Keeps text white (explicit) so the nav-links cascade can't steal the colour. */
 .btn-primary:hover {
-    background: var(--ink-soft);
-    box-shadow: var(--shadow-md);
+    background: var(--accent);
+    color: var(--paper);
+    box-shadow:
+        0 12px 28px -6px rgba(37, 99, 235, 0.4),
+        0 4px 8px -2px rgba(37, 99, 235, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
     transform: translateY(-1px);
 }
 
@@ -492,12 +504,14 @@ strong {
     transform-origin: center;
     transform-box: fill-box;
 }
-/* W  — docs  */ .ha-p1 { --dx:  160px; --dy:   0px; animation-delay:  0s;   }
-/* NW — code  */ .ha-p2 { --dx:  129px; --dy:  92px; animation-delay: -0.6s; }
-/* NE — srt   */ .ha-p3 { --dx: -138px; --dy:  92px; animation-delay: -1.2s; }
-/* E  — pdfs  */ .ha-p4 { --dx: -160px; --dy:   0px; animation-delay: -1.8s; }
-/* SE — video */ .ha-p5 { --dx: -138px; --dy: -92px; animation-delay: -2.4s; }
-/* SW — audio */ .ha-p6 { --dx:  129px; --dy: -91px; animation-delay: -3.0s; }
+/* Client A (bottom-left planet) → docs / code / transcripts */
+.ha-p1 { --dx:  93px; --dy: -145px; animation-delay:  0s;   }
+.ha-p2 { --dx:  62px; --dy: -172px; animation-delay: -0.6s; }
+.ha-p3 { --dx:  45px; --dy: -196px; animation-delay: -1.2s; }
+/* Client B (bottom-right planet) → pdfs / video / audio */
+.ha-p4 { --dx: -93px; --dy: -145px; animation-delay: -1.8s; }
+.ha-p5 { --dx: -62px; --dy: -172px; animation-delay: -2.4s; }
+.ha-p6 { --dx: -45px; --dy: -196px; animation-delay: -3.0s; }
 
 /* Black hole accretion disk — three tilted ellipses with dashes swirling around.
    The ellipses themselves are tilted via an outer group's attribute rotate;
@@ -535,13 +549,14 @@ strong {
 .ha-source-5 { animation-delay: 2s;   }
 .ha-source-6 { animation-delay: 2.5s; }
 
-/* Lightbulbs of knowledge — rise from the black hole, brighten, fade */
+/* Lightbulbs of knowledge — rise from the black hole, brighten, fade.
+   Shorter rise than before because the black hole moved up to make room for planets. */
 @keyframes ha-bulb-rise {
-    0%   { transform: translate(0, 0)      scale(0.2); opacity: 0;   }
-    15%  { transform: translate(0, -20px)  scale(0.7); opacity: 0.7; }
-    45%  { transform: translate(0, -70px)  scale(1);   opacity: 1;   }
-    75%  { transform: translate(0, -115px) scale(1);   opacity: 0.85;}
-    100% { transform: translate(0, -145px) scale(0.85);opacity: 0;   }
+    0%   { transform: translate(0, 0)     scale(0.2); opacity: 0;   }
+    15%  { transform: translate(0, -14px) scale(0.7); opacity: 0.7; }
+    45%  { transform: translate(0, -50px) scale(1);   opacity: 1;   }
+    75%  { transform: translate(0, -80px) scale(1);   opacity: 0.85;}
+    100% { transform: translate(0, -100px) scale(0.85);opacity: 0;   }
 }
 .ha-bulb {
     transform-origin: center;
@@ -552,6 +567,30 @@ strong {
 .ha-bulb-2 { animation-delay: -1.4s;}
 .ha-bulb-3 { animation-delay: -2.8s;}
 
+/* +value pops — appear as each file crosses the event horizon, arc up and out,
+   fade. Direction varies per pipe via --vx / --vy so they fan outward naturally. */
+@keyframes ha-value-arc {
+    0%, 68%  { opacity: 0; transform: translate(0, 0) scale(0.3); }
+    72%      { opacity: 0.4; transform: translate(calc(var(--vx) * 0.15), calc(var(--vy) * 0.25)) scale(0.7); }
+    82%      { opacity: 1; transform: translate(calc(var(--vx) * 0.55), calc(var(--vy) * 0.7)) scale(1.02); }
+    94%      { opacity: 0.6; transform: translate(var(--vx), var(--vy)) scale(1); }
+    100%     { opacity: 0; transform: translate(calc(var(--vx) * 1.1), calc(var(--vy) * 1.08)) scale(0.9); }
+}
+.ha-value {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: ha-value-arc 3.6s ease-out infinite;
+}
+/* Left fan (Your Company, green planet): V1/V2/V3 cluster above the label.
+   Right fan (Your Team, purple planet): V4/V5/V6 mirror cluster.
+   Each fan: leftmost arcs up-left, middle arcs straight up, rightmost arcs up-right. */
+.ha-value-1 { --vx: -10px; --vy: -26px; animation-delay:  0s;   }
+.ha-value-2 { --vx:   0px; --vy: -30px; animation-delay: -0.6s; }
+.ha-value-3 { --vx:  10px; --vy: -26px; animation-delay: -1.2s; }
+.ha-value-4 { --vx: -10px; --vy: -26px; animation-delay: -1.8s; }
+.ha-value-5 { --vx:   0px; --vy: -30px; animation-delay: -2.4s; }
+.ha-value-6 { --vx:  10px; --vy: -26px; animation-delay: -3.0s; }
+
 @media (prefers-reduced-motion: reduce) {
     .ha-pipe-item,
     .ha-bulb,
@@ -560,12 +599,16 @@ strong {
     .ha-accretion-3,
     .ha-event-horizon,
     .ha-flow-line,
-    .ha-source {
+    .ha-source,
+    .ha-value {
         animation: none;
     }
     .ha-bulb {
         opacity: 1;
-        transform: translate(0, -80px);
+        transform: translate(0, -60px);
+    }
+    .ha-value {
+        opacity: 0;
     }
 }
 
@@ -1597,7 +1640,7 @@ a.blog-card:hover h3 {
     .nav-links.active li:nth-child(4) { transition-delay: 0.2s; }
     .nav-links.active li:nth-child(5) { transition-delay: 0.24s; }
 
-    .nav-links a {
+    .nav-links a:not(.btn) {
         font-size: 1.15rem;
     }
 
