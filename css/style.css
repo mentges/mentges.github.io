@@ -463,8 +463,10 @@ strong {
 }
 
 /* ==========================================================================
-   Hero Animation — 6 data pipes converge on a black-hole AI → lightbulbs
-   Static SVG with CSS-driven loops. Pure HTML/CSS, no JS.
+   Hero Animation v4 — ETL/DAG data pipeline
+   Two source cards (Your Company, Your Team) -> Mentges.AI engine
+   -> four output chips (Patterns, Decisions, Insights, Actions).
+   Pure HTML + CSS, no JS. Feels like a live Airflow/dbt graph.
    ========================================================================== */
 
 .hero-animation-wrapper {
@@ -479,135 +481,137 @@ strong {
     max-width: 520px;
     height: auto;
     display: block;
-    filter: drop-shadow(0 16px 40px rgba(37, 99, 235, 0.1));
+    filter: drop-shadow(0 16px 40px rgba(10, 10, 10, 0.08));
 }
 
-/* Pipe lines — animated dashes indicate continuous flow */
-@keyframes ha-flow-dashes {
-    to { stroke-dashoffset: -16; }
-}
-.ha-flow-line {
-    animation: ha-flow-dashes 1.4s linear infinite;
-}
+/* Channel flow dashes — tiny dashes travel along each connector line */
+@keyframes ha-flow-dashes { to { stroke-dashoffset: -16; } }
+.ha-channel { animation: ha-flow-dashes 1.4s linear infinite; }
 
-/* Data pills travelling along each pipe toward the black hole.
-   Custom properties (--dx/--dy) give each pipe its direction. */
-@keyframes ha-pipe-flow {
-    0%   { transform: translate(0, 0) scale(0.8); opacity: 0; }
-    12%  { transform: translate(0, 0) scale(1);   opacity: 1; }
-    70%  { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 1; }
-    88%  { transform: translate(calc(var(--dx) * 1.05), calc(var(--dy) * 1.05)) scale(0.35); opacity: 0.25; }
-    100% { transform: translate(calc(var(--dx) * 1.1),  calc(var(--dy) * 1.1))  scale(0);    opacity: 0; }
+/* Input packets: each file-type pill travels from its source pill
+   to the Mentges.AI engine input port. Per-packet direction via --dx / --dy. */
+@keyframes ha-in-flow {
+    0%   { transform: translate(0, 0)                                        scale(0.8); opacity: 0; }
+    8%   { transform: translate(0, 0)                                        scale(1);   opacity: 1; }
+    78%  { transform: translate(var(--dx), var(--dy))                        scale(1);   opacity: 1; }
+    92%  { transform: translate(calc(var(--dx) * 1.04), calc(var(--dy) * 1.04)) scale(0.45); opacity: 0.3; }
+    100% { transform: translate(calc(var(--dx) * 1.08), calc(var(--dy) * 1.08)) scale(0);   opacity: 0; }
 }
-.ha-pipe-item {
-    animation: ha-pipe-flow 3.6s cubic-bezier(0.4, 0, 0.7, 1) infinite;
+.ha-in-packet {
+    animation: ha-in-flow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     transform-origin: center;
     transform-box: fill-box;
 }
-/* Client A (bottom-left planet) → docs / code / transcripts */
-.ha-p1 { --dx:  93px; --dy: -145px; animation-delay:  0s;   }
-.ha-p2 { --dx:  62px; --dy: -172px; animation-delay: -0.6s; }
-.ha-p3 { --dx:  45px; --dy: -196px; animation-delay: -1.2s; }
-/* Client B (bottom-right planet) → pdfs / video / audio */
-.ha-p4 { --dx: -93px; --dy: -145px; animation-delay: -1.8s; }
-.ha-p5 { --dx: -62px; --dy: -172px; animation-delay: -2.4s; }
-.ha-p6 { --dx: -45px; --dy: -196px; animation-delay: -3.0s; }
+/* Company source (green) → engine top-left input */
+.ha-in-p1 { --dx: 152px; --dy:  49px; animation-delay:  0s;   }  /* docs */
+.ha-in-p2 { --dx: 152px; --dy:  23px; animation-delay: -0.4s; }  /* pdfs */
+.ha-in-p3 { --dx: 139px; --dy:  -3px; animation-delay: -0.8s; }  /* transcripts */
+/* Team source (violet) → engine bottom-left input */
+.ha-in-p4 { --dx: 152px; --dy: -26px; animation-delay: -1.2s; }  /* code */
+.ha-in-p5 { --dx: 152px; --dy: -52px; animation-delay: -1.6s; }  /* audio */
+.ha-in-p6 { --dx: 139px; --dy: -78px; animation-delay: -2.0s; }  /* video */
 
-/* Black hole accretion disk — three tilted ellipses with dashes swirling around.
-   The ellipses themselves are tilted via an outer group's attribute rotate;
-   stroke-dashoffset animation gives the impression of material flowing around. */
-@keyframes ha-swirl-1 { to { stroke-dashoffset: -24; } }
-@keyframes ha-swirl-2 { to { stroke-dashoffset: -33; } }
-@keyframes ha-swirl-3 { to { stroke-dashoffset: -27; } }
-.ha-accretion-1 { animation: ha-swirl-1 8s linear infinite; }
-.ha-accretion-2 { animation: ha-swirl-2 5s linear infinite; }
-.ha-accretion-3 { animation: ha-swirl-3 3.2s linear infinite; }
-
-/* Event-horizon ring — breathes brighter/wider to hint at gravity */
-@keyframes ha-horizon-pulse {
-    0%, 100% { stroke-opacity: 0.55; stroke-width: 1.6; }
-    50%      { stroke-opacity: 1;    stroke-width: 2.2; }
+/* Output packets: emerge from the engine's right side, travel to their chip. */
+@keyframes ha-out-flow {
+    0%, 8%  { transform: translate(0, 0)                                   scale(0.3); opacity: 0; }
+    18%     { transform: translate(0, 0)                                   scale(1);   opacity: 1; }
+    78%     { transform: translate(var(--dx), var(--dy))                   scale(1);   opacity: 1; }
+    92%     { transform: translate(var(--dx), var(--dy))                   scale(0.4); opacity: 0.3; }
+    100%    { transform: translate(var(--dx), var(--dy))                   scale(0);   opacity: 0; }
 }
-.ha-event-horizon {
-    animation: ha-horizon-pulse 3.5s ease-in-out infinite;
+.ha-out-packet {
+    animation: ha-out-flow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+/* Each output packet emerges from its own engine exit port (different y)
+   and travels to its corresponding chip. Delays staggered. */
+.ha-out-p1 { --dx: 40px; --dy: -45px; animation-delay: -2.4s; }  /* Patterns  */
+.ha-out-p2 { --dx: 40px; --dy: -10px; animation-delay: -2.7s; }  /* Decisions */
+.ha-out-p3 { --dx: 40px; --dy:  15px; animation-delay: -3.0s; }  /* Insights  */
+.ha-out-p4 { --dx: 40px; --dy:  50px; animation-delay: -3.3s; }  /* Actions   */
+
+/* Engine core — a gentle breathing blue orb */
+@keyframes ha-engine-breathe {
+    0%, 100% { transform: scale(1);    opacity: 0.7; }
+    50%      { transform: scale(1.18); opacity: 1;   }
+}
+.ha-engine-core {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: ha-engine-breathe 2.4s ease-in-out infinite;
 }
 
-/* Source pills — gentle breathing so they feel "alive" */
-@keyframes ha-source-pulse {
-    0%, 100% { opacity: 0.9; }
+/* Engine neural nodes — quick blink cycle */
+@keyframes ha-node-blink {
+    0%, 100% { opacity: 0.3; }
     50%      { opacity: 1;   }
 }
-.ha-source {
-    animation: ha-source-pulse 4s ease-in-out infinite;
-    transform-origin: center;
-    transform-box: fill-box;
+.ha-engine-node {
+    animation: ha-node-blink 1.8s ease-in-out infinite;
 }
-.ha-source-1 { animation-delay: 0s;   }
-.ha-source-2 { animation-delay: 0.5s; }
-.ha-source-3 { animation-delay: 1s;   }
-.ha-source-4 { animation-delay: 1.5s; }
-.ha-source-5 { animation-delay: 2s;   }
-.ha-source-6 { animation-delay: 2.5s; }
+.ha-engine-node-2 { animation-delay: 0.3s; }
+.ha-engine-node-3 { animation-delay: 0.6s; }
+.ha-engine-node-4 { animation-delay: 0.9s; }
 
-/* Lightbulbs of knowledge — rise from the black hole, brighten, fade.
-   Shorter rise than before because the black hole moved up to make room for planets. */
-@keyframes ha-bulb-rise {
-    0%   { transform: translate(0, 0)     scale(0.2); opacity: 0;   }
-    15%  { transform: translate(0, -14px) scale(0.7); opacity: 0.7; }
-    45%  { transform: translate(0, -50px) scale(1);   opacity: 1;   }
-    75%  { transform: translate(0, -80px) scale(1);   opacity: 0.85;}
-    100% { transform: translate(0, -100px) scale(0.85);opacity: 0;   }
+/* Engine status LEDs — run in sequence like a processor pipeline (ingest → transform → serve) */
+@keyframes ha-led-cycle {
+    0%, 70%, 100% { opacity: 0.2; }
+    20%, 50%      { opacity: 1;   }
 }
-.ha-bulb {
-    transform-origin: center;
-    transform-box: fill-box;
-    animation: ha-bulb-rise 4.2s ease-out infinite;
-}
-.ha-bulb-1 { animation-delay: 0s;   }
-.ha-bulb-2 { animation-delay: -1.4s;}
-.ha-bulb-3 { animation-delay: -2.8s;}
+.ha-led-1 { animation: ha-led-cycle 2.4s ease-in-out infinite;        }
+.ha-led-2 { animation: ha-led-cycle 2.4s ease-in-out infinite -0.8s;  }
+.ha-led-3 { animation: ha-led-cycle 2.4s ease-in-out infinite -1.6s;  }
 
-/* +value pops — appear as each file crosses the event horizon, arc up and out,
-   fade. Direction varies per pipe via --vx / --vy so they fan outward naturally. */
-@keyframes ha-value-arc {
-    0%, 68%  { opacity: 0; transform: translate(0, 0) scale(0.3); }
-    72%      { opacity: 0.4; transform: translate(calc(var(--vx) * 0.15), calc(var(--vy) * 0.25)) scale(0.7); }
-    82%      { opacity: 1; transform: translate(calc(var(--vx) * 0.55), calc(var(--vy) * 0.7)) scale(1.02); }
-    94%      { opacity: 0.6; transform: translate(var(--vx), var(--vy)) scale(1); }
-    100%     { opacity: 0; transform: translate(calc(var(--vx) * 1.1), calc(var(--vy) * 1.08)) scale(0.9); }
+/* Source "live" dots — top-right of each card */
+@keyframes ha-source-led {
+    0%, 100% { opacity: 0.4; transform: scale(0.85); }
+    50%      { opacity: 1;   transform: scale(1.1); }
 }
-.ha-value {
+.ha-source-led {
     transform-origin: center;
     transform-box: fill-box;
-    animation: ha-value-arc 3.6s ease-out infinite;
+    animation: ha-source-led 2s ease-in-out infinite;
 }
-/* Left fan (Your Company, green planet): V1/V2/V3 cluster above the label.
-   Right fan (Your Team, purple planet): V4/V5/V6 mirror cluster.
-   Each fan: leftmost arcs up-left, middle arcs straight up, rightmost arcs up-right. */
-.ha-value-1 { --vx: -10px; --vy: -26px; animation-delay:  0s;   }
-.ha-value-2 { --vx:   0px; --vy: -30px; animation-delay: -0.6s; }
-.ha-value-3 { --vx:  10px; --vy: -26px; animation-delay: -1.2s; }
-.ha-value-4 { --vx: -10px; --vy: -26px; animation-delay: -1.8s; }
-.ha-value-5 { --vx:   0px; --vy: -30px; animation-delay: -2.4s; }
-.ha-value-6 { --vx:  10px; --vy: -26px; animation-delay: -3.0s; }
+
+/* Output chips receive pulse — chip flashes when its output packet arrives */
+@keyframes ha-chip-receive {
+    0%, 65%, 100% {
+        filter: brightness(1);
+    }
+    72% {
+        filter: brightness(1.08) drop-shadow(0 0 8px rgba(37, 99, 235, 0.4));
+    }
+    85% {
+        filter: brightness(1.18) drop-shadow(0 0 14px rgba(37, 99, 235, 0.55));
+    }
+    95% {
+        filter: brightness(1.05);
+    }
+}
+.ha-chip {
+    animation: ha-chip-receive 4s ease-out infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+.ha-chip-1 { animation-delay: -2.4s; }
+.ha-chip-2 { animation-delay: -2.7s; }
+.ha-chip-3 { animation-delay: -3.0s; }
+.ha-chip-4 { animation-delay: -3.3s; }
 
 @media (prefers-reduced-motion: reduce) {
-    .ha-pipe-item,
-    .ha-bulb,
-    .ha-accretion-1,
-    .ha-accretion-2,
-    .ha-accretion-3,
-    .ha-event-horizon,
-    .ha-flow-line,
-    .ha-source,
-    .ha-value {
+    .ha-channel,
+    .ha-in-packet,
+    .ha-out-packet,
+    .ha-engine-core,
+    .ha-engine-node,
+    .ha-led-1, .ha-led-2, .ha-led-3,
+    .ha-source-led,
+    .ha-chip {
         animation: none;
     }
-    .ha-bulb {
-        opacity: 1;
-        transform: translate(0, -60px);
-    }
-    .ha-value {
+    .ha-in-packet,
+    .ha-out-packet {
         opacity: 0;
     }
 }
